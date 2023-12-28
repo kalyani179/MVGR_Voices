@@ -10,7 +10,8 @@ module.exports = {
       'red': '#FF4E4E',
       'transparent': 'transparent',
       'twitter': '#1DA1F2',
-      'purple': '#660066'
+      'purple': '#660066',
+      'icons' : '#999999'
     },
     screens: {
       'sm': {'max': '767px'},
@@ -35,7 +36,12 @@ module.exports = {
       // 'sm': {'max': '576px'},
       // // => @media (max-width: 639px) { ... }
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["'Inter'", "sans-serif"],
+        gelasio: ["'Gelasio'", "serif"]
+      },
+  },
   },
   plugins: [],
 }

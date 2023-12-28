@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Gelasio&family=Inter:wght@400;500&display=swap");
 @import "@flaticon/flaticon-uicons/css/all/all";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components {
     * {
-        @apply m-0 p-0 box-border text-base duration-100;
+        @apply m-0 p-0 box-border text-base;
+    }
+    h1 {
+        @apply font-gelasio text-4xl
     }
     .btn-purple {
         @apply whitespace-nowrap text-white bg-purple rounded-full py-2 px-5 text-lg capitalize hover:bg-opacity-80;
@@ -16,6 +17,12 @@
         @apply z-10 sticky top-0 flex items-center w-full px-[5vw] py-5 h-[80px] border-b border-grey bg-white;
     }
     .center {
-        @apply block mx-auto;
+        @apply flex justify-center items-center
+    }
+    input{
+        @apply border-2 border-b-purple border-t-transparent border-l-transparent border-r-transparent w-72 m-3 p-0.5 text-lg font-inter focus:outline-none;
+    }
+    i{
+        @apply text-icons
     }
 }

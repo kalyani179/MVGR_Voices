@@ -1,16 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import Signup from './Signup';
+import Signin from './Signin';
+
 
 const Navbar = () => {
+  const [showSignup,setShowSignup] = useState(false);
+  const [showSignin,setShowSignin] = useState(false);
+  
   return (
     <div className="navbar flex">
-        <div className="flex gap-4 center">
-            <Link className="btn-purple" to="/signup">SignUp</Link>
-            <Link className="btn-purple" to="/signin">SignIn</Link>
+        <div>
+            <button onClick={()=>setShowSignup(true)} className="btn-purple">SignUp</button>
+            <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button>
         </div>
-       
+      {showSignup && <Signup closeSignup={()=>setShowSignup(false)} />}
+      {showSignin && <Signin closeSignin={()=>setShowSignin(false)} />}
     </div>
   )
 }
 
-export default Navbar
+export default Navbar;
