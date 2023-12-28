@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import {Toaster,toast} from "react-hot-toast";
+import Fade from "react-reveal/Fade";
 
 const Signup = ({closeSignup}) => {
 
@@ -25,7 +26,7 @@ const Signup = ({closeSignup}) => {
         <>
             <Toaster />
             <div className="fixed inset-0 bg-black bg-opacity-50 center">
-                
+            <Fade top duration={1000}>
                 <div className="bg-white relative p-5 pt-8 rounded-md">
                     <button className="absolute top-2 right-2" onClick={closeSignup}><i className="fi fi-bs-cross-small text-xl text-dark-grey"></i></button>
                     <div className="center">
@@ -50,6 +51,7 @@ const Signup = ({closeSignup}) => {
                     </div>
                 
                 </div>
+                </Fade>
             </div>
         </>
     )
