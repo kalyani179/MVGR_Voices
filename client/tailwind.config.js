@@ -6,6 +6,7 @@ module.exports = {
       'white': '#FFFFFF',
       'black': '#242424',
       'grey': '#F3F3F3',
+      'input' : '#d9d9d9',
       'dark-grey': '#6B6B6B',
       'red': '#FF4E4E',
       'transparent': 'transparent',

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Gelasio&family=Inter:wght@400;500&display=swap");
 @import "@flaticon/flaticon-uicons/css/all/all";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -19,10 +20,28 @@
     .center {
         @apply flex justify-center items-center
     }
-    input{
-        @apply border-2 border-b-purple border-t-transparent border-l-transparent border-r-transparent w-72 m-3 p-0.5 text-lg font-inter focus:outline-none;
+    input {
+        @apply border-2 border-b-input border-t-transparent border-l-transparent border-r-transparent w-80 my-3 p-0.5 pl-7 text-lg font-inter focus:outline-none bg-white;
     }
-    i{
-        @apply text-icons
+    i {
+        @apply text-dark-grey
     }
+    .input-icon{
+        @apply absolute left-11
+    }
+    h5{
+        @apply absolute left-16 p-2 text-dark-grey transition-transform duration-300 ease-in-out transform
+    }
+}
+
+/** To remove the blue background color when autofilled by chrome **/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+    border-top: 1px solid #ffffff !important;
+    border-left: 1px solid #ffffff !important;
+    border-right: 1px solid #ffffff !important;
 }

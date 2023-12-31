@@ -4,11 +4,20 @@ import 'dotenv/config'
 import jwt from "jsonwebtoken";
 import cors from "cors";
 
+//firebase
+import admin from "firebase-admin";
+import {getAuth} from "firebase-admin/auth";
+import serviceAccountKey from "./utilities/mvgr-voices-firebase-adminsdk-r95ai-dee2c54534.json" assert { type: "json" };
+
 //Models
 import User from "./models/UserSchema.js";
 
 const server = express();
 let PORT = 3000;
+
+admin.initializeApp({
+    credential : admin.credential.cert(serviceAccountKey)
+})
 
 server.use(express.json());
 server.use(cors({origin:"*"}));
@@ -71,6 +80,51 @@ server.post("/signin", async (req,res)=>{
         return res.status(500).json({"error":"Internal Server Error"});
     }
     
+})
+
+server.post("/google-auth", async (req,res) => {
+
+    let {access_token} = req.body;
+
+    getAuth().verifyIdToken(access_token)
+    .then(async (decodedUser) =>{
+
+        let {email,name,picture} = decodedUser;
+
+        picture = picture.replace("s96-c","s384-c");
+
+        let user = await User.findOne({"personal_info.email" : email}).select("personal_info.fullname personal_info.username personal_info.profile_img google_auth");
+
+        if(user){
+            if(!user.google_auth){
+                return res.status(403).json({"error" : "This email is already signed up without google.please login with password to access the account."});
+            }
+            else{
+                return res.status(403).json({"error" : "This email has already signed up"})
+            }
+        }
+        else{
+            let username = await generateUsername(email);
+
+            let newUser = new User({
+                personal_info :{fullname : name,email,username},
+                google_auth:true
+            })
+
+            await newUser.save().then((u)=>{
+                user = u;
+            })
+            .catch((err)=>{
+                return res.status(500).json({"error":err.message});
+            })
+        }
+
+        // return res.status(200).json(formatDatatoSend(user));
+        return res.status(200).json({"status":"User has Signed Up Successfully!"})
+    })
+    .catch(err=>{
+        return res.status(500).json({"error":"Failed to Authenticate with google..Try some other google account"});
+    })
 })
 
 server.listen(PORT,()=>{

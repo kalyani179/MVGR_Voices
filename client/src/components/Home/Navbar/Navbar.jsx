@@ -9,7 +9,7 @@ const Navbar = () => {
   
   return (
     <div className="navbar flex">
-        <div>
+        <div className="absolute right-0 space-x-3 mr-5">
             <button onClick={()=>setShowSignup(true)} className="btn-purple">SignUp</button>
             <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button>
         </div>
