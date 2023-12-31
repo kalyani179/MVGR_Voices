@@ -67,13 +67,17 @@ server.post("/signin", async (req,res)=>{
         let {email,password} = req.body;
         let user = await User.findOne({"personal_info.email":email});
         console.log(user);
+        if(user.google_auth){
+            return res.status(403).json({"error":"Account was created with google. Try Sign in with google"});
+        }
         if(!user){
             return res.status(400).json({"error":"User has not signed up yet! Sign up to continue"})
         }
         if(user.personal_info.password !== password){
             return res.status(400).json({"error":"Incorrect Password!"});
         }
-        return res.status(200).json(formatDatatoSend(user));
+        // return res.status(200).json(formatDatatoSend(user));
+        return res.status(200).json({"status":"User has Signed In Successfully!"})
     }
     catch(err){
         console.log(err.message);
@@ -98,9 +102,6 @@ server.post("/google-auth", async (req,res) => {
         if(user){
             if(!user.google_auth){
                 return res.status(403).json({"error" : "This email is already signed up without google.please login with password to access the account."});
-            }
-            else{
-                return res.status(403).json({"error" : "This email has already signed up"})
             }
         }
         else{

@@ -2,8 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import toast,{Toaster} from "react-hot-toast";
 import Fade from "react-reveal/Fade";
-import { authWithGoogle } from '../../../common/firebase';
-import google from "../../../assets/images/Icons/search.png";
+import GoogleAuth from '../../../common/GoogleAuth';
 
 const Signup = ({closeSignup}) => {
 
@@ -55,29 +54,6 @@ const Signup = ({closeSignup}) => {
             setData({fullname:"",email:"",password:""}); })
         .catch(({response})=>{
             return toast.error(response.data.error);
-        })
-    }
-    const handleGoogleAuth = (e) =>{
-        e.preventDefault();
-
-        authWithGoogle()
-        .then((user) => {
-            let formData = {
-                access_token : user.accessToken
-            }
-            axios.post("http://localhost:3000/google-auth",formData)
-            .then(({data})=>{console.log(data);
-                if(data.status) return toast.success(data.status);
-            })
-            .catch(({response})=>{
-                return toast.error(response.data.error);
-            })
-            
-            console.log(user);
-        })
-        .catch(err=>{
-            toast.err("There is some error in sigin with google");
-            return console.log(err);
         })
     }
     return (
@@ -135,10 +111,7 @@ const Signup = ({closeSignup}) => {
                     </div>
 
                     {/* continue with google button */}
-                    <div className="m-3 center space-x-3 font-inter border border-black rounded-md w-80 p-2 hover:bg-grey">
-                        <img className="w-5 h-5" src={google} alt="" />
-                        <button onClick={handleGoogleAuth}>Continue with Google</button>
-                    </div>
+                    <GoogleAuth />
                 
                 </div>
                 </div>
