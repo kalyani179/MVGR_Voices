@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Signup from './Signup';
-import Signin from './Signin';
+import UserAuth from '../../../common/UserAuth';
 
 
 const Navbar = () => {
@@ -13,8 +12,8 @@ const Navbar = () => {
             <button onClick={()=>setShowSignup(true)} className="btn-purple">SignUp</button>
             <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button>
         </div>
-      {showSignup && <Signup closeSignup={()=>setShowSignup(false)} />}
-      {showSignin && <Signin closeSignin={()=>setShowSignin(false)} />}
+      {showSignup && <UserAuth type="signup" close={()=>setShowSignup(false)} />}
+      {showSignin && <UserAuth type="signin" close={()=>setShowSignin(false)} />}
     </div>
   )
 }
