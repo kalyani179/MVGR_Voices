@@ -12,8 +12,8 @@ const Navbar = () => {
             <button onClick={()=>setShowSignup(true)} className="btn-purple">SignUp</button>
             <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button>
         </div>
-      {showSignup && <UserAuth type="signup" close={()=>setShowSignup(false)} />}
-      {showSignin && <UserAuth type="signin" close={()=>setShowSignin(false)} />}
+        {showSignup && <UserAuth type="signup" close={()=>setShowSignup(false)} open={()=>{setShowSignup(false);setShowSignin(true);}}/>}
+        {showSignin && <UserAuth type="signin" close={()=>setShowSignin(false)} open={()=>{setShowSignin(false);setShowSignup(true);}}/>}
     </div>
   )
 }

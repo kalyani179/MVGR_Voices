@@ -4,7 +4,7 @@ import toast,{Toaster} from "react-hot-toast";
 import Fade from "react-reveal/Fade";
 import GoogleAuth from './GoogleAuth';
 
-const UserAuth = ({type,close}) => {
+const UserAuth = ({type,close,open}) => {
 
     /* To Translate the h5,change colors when clicked on the input */
     
@@ -63,7 +63,7 @@ const UserAuth = ({type,close}) => {
             <div>
 
                 {/* SignUp Heading */}
-                <div className="bg-white relative p-8 pb-5 rounded-md">
+                <div className="bg-white relative p-8 pb-4 rounded-md">
                     <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
                     <div className="center">
                         <h1 className="text-center mb-5">{type==="signup" ? "Sign Up" : "Sign In"}</h1>
@@ -72,14 +72,14 @@ const UserAuth = ({type,close}) => {
                     {/* Form */}
                     <div className="m-3">
                         <form className="h-cover flex flex-col gap-5 items-center justify-center">
-                        {
-                            type === "signup" ?
-                            <div className="flex justify-start items-center">
-                                <i className={`fas fa-user input-icon ${isNameFocused || inputNameValue ? 'text-purple' : ''}`}></i>
-                                <h5 className={`${isNameFocused || inputNameValue ? '-translate-y-7 text-purple font-medium' : 'translate-y-0'}`}>Full Name</h5>
-                                <input onFocus={translateName} onBlur={()=>setNameTranslated(false)} onChange={handleChange} className={`${isNameFocused || inputNameValue ? "border-b-purple" : ""}`} type="text" name="fullname" />
-                            </div> : ""
-                        }
+                            {
+                                type === "signup" ?
+                                <div className="flex justify-start items-center">
+                                    <i className={`fas fa-user input-icon ${isNameFocused || inputNameValue ? 'text-purple' : ''}`}></i>
+                                    <h5 className={`${isNameFocused || inputNameValue ? '-translate-y-7 text-purple font-medium' : 'translate-y-0'}`}>Full Name</h5>
+                                    <input onFocus={translateName} onBlur={()=>setNameTranslated(false)} onChange={handleChange} className={`${isNameFocused || inputNameValue ? "border-b-purple" : ""}`} type="text" name="fullname" />
+                                </div> : ""
+                            }
                             <div className="flex justify-start items-center">
                                 <i class={`fas fa-envelope input-icon ${isEmailFocused || inputEmailValue ? 'text-purple' : ''}`}></i>
                                 <h5  className={`${isEmailFocused || inputEmailValue ? '-translate-y-7 text-purple font-medium' : 'translate-y-0'}`}>Email</h5>
@@ -96,13 +96,12 @@ const UserAuth = ({type,close}) => {
                     </div>
 
                     {/* signin option */}
-                    <div className="m-3 font-inter">
+                    <div className="m-3">
                     {
                         type==="signup"
-                        ? <p>Already have an account? <a className="text-purple" href="/signin">SignIn</a></p>
-                        : <p>New user ? <a className="text-purple" href="/signup">SignUp</a></p>
+                        ? <p>Already have an account? <button onClick={open} className="text-purple underline">Sign In Here</button> </p>
+                        : <p>Don't have an account ? <button onClick={open} className="text-purple underline">Sign Up</button></p>
                     }
-                        
                     </div>
 
                     {/* OR */}
@@ -119,7 +118,7 @@ const UserAuth = ({type,close}) => {
                 </div>
                 </Fade>
             </div>
-        <Toaster/>
+            <Toaster/>
         </>
     )
 }
