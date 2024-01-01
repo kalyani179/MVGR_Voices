@@ -118,7 +118,16 @@ const UserAuth = ({type,close,open}) => {
                 </div>
                 </Fade>
             </div>
-            <Toaster/>
+            <Toaster
+                toastOptions={{
+                    success:{
+                        duration: 1500
+                    },
+                    error: {
+                        duration: 2000
+                    }
+                }}
+            />
         </>
     )
 }
