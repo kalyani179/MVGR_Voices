@@ -121,10 +121,10 @@ const UserAuth = ({type,close,open}) => {
             <Toaster
                 toastOptions={{
                     success:{
-                        duration: 1500
+                        duration: 1700
                     },
                     error: {
-                        duration: 2000
+                        duration: 2500
                     }
                 }}
             />
