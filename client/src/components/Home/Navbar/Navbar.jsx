@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import UserAuth from '../../../common/UserAuth';
+import UserAuth from '../../Authentication/UserAuth';
 
 
 const Navbar = () => {

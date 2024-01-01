@@ -1,6 +1,6 @@
 import React from 'react'
-import { authWithGoogle } from '../common/firebase';
-import google from "../assets/images/Icons/search.png";
+import { authWithGoogle } from '../../common/firebase';
+import google from "../../assets/images/Icons/search.png";
 import toast from "react-hot-toast";
 import axios from 'axios';
 
@@ -25,7 +25,7 @@ const GoogleAuth = () => {
             console.log(user);
         })
         .catch(err=>{
-            toast.err("There is some error in signing with google,Please try with Email");
+            toast.error("There is some error in signing with google,Please try with Email");
             return console.log(err);
         })
     }
