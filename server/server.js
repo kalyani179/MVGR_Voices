@@ -53,7 +53,8 @@ server.post("/signup",async (req,res)=>{
             personal_info:{fullname,email,password,username}
         })
         await newUser.save();
-        return res.status(200).json({"status":"User has Signed Up Successfully!"})
+        return res.status(200).json(formatDatatoSend(newUser));
+        // return res.status(200).json({"status":"User has Signed Up Successfully!"})
     }
     catch(err){
         console.log(err.message);
@@ -76,8 +77,8 @@ server.post("/signin", async (req,res)=>{
         if(user.personal_info.password !== password){
             return res.status(400).json({"error":"Incorrect Password!"});
         }
-        // return res.status(200).json(formatDatatoSend(user));
-        return res.status(200).json({"status":"User has Signed In Successfully!"})
+        return res.status(200).json(formatDatatoSend(user));
+        // return res.status(200).json({"status":"User has Signed In Successfully!"})
     }
     catch(err){
         console.log(err.message);
@@ -120,8 +121,8 @@ server.post("/google-auth", async (req,res) => {
             })
         }
 
-        // return res.status(200).json(formatDatatoSend(user));
-        return res.status(200).json({"status":"User has Signed Up Successfully!"})
+        return res.status(200).json(formatDatatoSend(user));
+        // return res.status(200).json({"status":"User has Signed Up Successfully!"})
     })
     .catch(err=>{
         return res.status(500).json({"error":"Failed to Authenticate with google..Try some other google account"});
