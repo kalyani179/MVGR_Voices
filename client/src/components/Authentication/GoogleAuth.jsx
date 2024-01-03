@@ -1,8 +1,6 @@
-import React from 'react'
-import { authWithGoogle } from '../../common/firebase';
+import React from 'react';
 import google from "../../assets/images/Icons/search.png";
-import toast from "react-hot-toast";
-import axios from 'axios';
+
 
 const GoogleAuth = ({handleGoogleAuth}) => {
     return (
@@ -13,4 +11,4 @@ const GoogleAuth = ({handleGoogleAuth}) => {
     )
 }
 
-export default GoogleAuth
+export default GoogleAuth;

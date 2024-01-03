@@ -8,7 +8,7 @@ import GoogleAuth from './GoogleAuth';
 
 import {storeInSession} from "../../common/session";
 import { UserContext } from '../../App';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 
 const UserAuth = ({type,close,open}) => {
 
@@ -64,6 +64,7 @@ const UserAuth = ({type,close,open}) => {
             storeInSession("user",JSON.stringify(data));
             setUserAuth(data);
             setData({fullname:"",email:"",password:""});
+            // window.location.reload(); // To make animation
             setCloseTab(true);
             // return toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully");
             })

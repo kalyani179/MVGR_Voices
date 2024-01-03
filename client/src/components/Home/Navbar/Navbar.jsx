@@ -12,6 +12,7 @@ const Navbar = () => {
   const [showSignin,setShowSignin] = useState(false);
 
   const signOut = () => {
+    // window.location.reload();
     removeFromSession("user");
     setUserAuth({access_token:null});
   }
