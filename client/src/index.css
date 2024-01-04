@@ -35,6 +35,35 @@
     h5{
         @apply absolute left-16 p-2 text-dark-grey transition-transform duration-300 ease-in-out transform
     }
+    /* Blogs */
+    #textEditor *,
+    .blog-page-content * {
+        @apply font-gelasio px-0 mx-0 text-xl leading-10 md:text-2xl;
+    }
+    #textEditor h2,
+    h2 {
+        @apply font-inter text-4xl leading-normal font-bold md:text-3xl md:leading-snug !important;
+    }
+    #textEditor h3,
+    h3 {
+        @apply font-inter text-3xl leading-loose md:text-2xl md:leading-normal !important;
+    }
+
+    .input-box {
+        @apply w-[100%] rounded-md p-4 bg-grey pl-12 border border-grey focus:bg-transparent placeholder:text-black;
+    }
+    .tag {
+        @apply p-3 bg-grey rounded-full px-6 capitalize;
+    }
+    
+    .blog-title {
+        @apply text-2xl font-medium leading-7 line-clamp-3 sm:line-clamp-2;
+    }
+    
+    .blog-index {
+        @apply text-4xl sm:text-3xl lg:text-5xl font-bold text-grey leading-none;
+    }
+
 }
 
 /** To remove the blue background color when autofilled by chrome **/
