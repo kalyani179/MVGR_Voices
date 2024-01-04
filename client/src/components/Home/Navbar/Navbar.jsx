@@ -6,7 +6,7 @@ import Animation from "../../../common/Animation";
 
 
 const Navbar = () => {
-  const {userAuth,userAuth:{access_token},setUserAuth} = useContext(UserContext);
+  const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
 
   const [showSignup,setShowSignup] = useState(false);
   const [showSignin,setShowSignin] = useState(false);

@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
 
-//Models
+// Models
 import User from "../models/UserSchema.js";
 
-//firebase
+// Firebase
 import admin from "firebase-admin";
 import {getAuth} from "firebase-admin/auth";
 import serviceAccountKey from "../utilities/mvgr-voices-firebase-adminsdk-r95ai-dee2c54534.json" assert { type: "json" };
