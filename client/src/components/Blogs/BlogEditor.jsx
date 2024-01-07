@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { Link } from "react-router-dom";
 import defaultBanner from "../../assets/images/Blogs/default_banner.png"
+import Animation from "../../common/Animation";
 
 import { EditorContext } from "./Editor";
 import EditorJS from "@editorjs/editorjs";
@@ -75,11 +76,12 @@ const BlogEditor = () => {
           <button className="btn-purple py-2">Save Draft</button>
         </div>
       </nav>
+      <Animation>
       <section>
         <div className="mx-auto max-w-[900px] w-full">
           <div className="relative aspect-video hover:opacity-80 bg-white border-4 border-grey">
               <label htmlFor="uploadBanner">
-                  <img src={defaultBanner} className="z-20" alt="default blog banner"/>
+                  <img src={defaultBanner} className="z-20" alt="Default Banner"/>
                   <input
                     id="uploadBanner"
                     type="file"
@@ -91,20 +93,19 @@ const BlogEditor = () => {
           </div>
           <textarea
             defaultValue={title}
-            placeholder="blog-title"
-            className="w-full h-20 text-4xl font-medium outline-none resize-none mt-10 leading-tight placeholder:opacity-40"
+            placeholder="Blog Title"
+            className="w-full h-20 text-4xl font-medium outline-none resize-none mt-10 leading-tight placeholder:opacity-60"
             onKeyDown={handleTitleKeyDown}
             onChange={handleTitleChange}
           ></textarea>
 
           <hr className="w-full opacity-10 mb-5"/>
 
-          <div id="textEditor" className="font-gelasio px-0 mx-0">
+          <div id="textEditor" className="font-gelasio"></div>
 
-          </div>
         </div>
-        
       </section>
+      </Animation>
     </>
   )
 }

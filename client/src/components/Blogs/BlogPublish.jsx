@@ -1,9 +1,15 @@
-import React, { useContext } from 'react'
-import { EditorContext } from './Editor';
-import toast,{Toaster } from 'react-hot-toast';
+import React, { useContext } from "react"
+import { EditorContext } from "./Editor";
+import {Toaster,toast} from "react-hot-toast";
+import defaultBanner from "../../assets/images/Blogs/default_banner.png";
+import BlogTags from "./BlogTags";
+
+import Animation from "../../common/Animation";
+
 const BlogPublish = () => {
 
     let characterLimit = 200;
+    let tagsLimit = 10;
 
     let {blog,blog:{banner,title,tags,desc},setEditorState,setBlog} = useContext(EditorContext);
 
@@ -23,62 +29,96 @@ const BlogPublish = () => {
 
     const handleTitleKeyDown = (e) =>{
         if(e.keyCode === 13){ // Enter key
-        e.preventDefault();
+            e.preventDefault();
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if(e.keyCode === 13 || e.keyCode === 188){ // Enter key or Comma key
+            e.preventDefault();
+
+            let tag = e.target.value;
+
+            if(tags.length < tagsLimit){
+                if(!tags.includes(tag) && tag.length){
+                    console.log(tags);
+                    setBlog({...blog,tags:[...tags,tag]})
+                }
+            }else{
+                toast.error(`You Can add max ${tagsLimit} Tags`)
+            }
+
+            e.target.value = "";
         }
     }
 
     return (
-        <section className='w-screen grid items-center lg:grid-cols-2 py-16 lg:gap-4'>
-        <Toaster />
-        <button className='w-12 h-12 absolute right-[5vw] z-10 top-[1%]' onClick={handleCloseEvent}>
-            <i class="fi fi-br-cross-small"></i>
-        </button>
+        <Animation>
+            <section className="min-h-screen grid mx-10 items-center lg:grid-cols-2 py-16">
+            <Toaster />
+            <button className="w-12 h-12 absolute right-[2vw] z-10 top-[5%]" onClick={handleCloseEvent}>
+                <i class="fi fi-br-cross"></i>
+            </button>
 
-        <div className='maxw-[550px] center'>
-            <p className='text-dark-grey mb-1'>Preview</p>
+            <div className="max-w-[550px] block mx-auto">
+                <p className="text-dark-grey mb-1">Preview</p>
 
-            <div className='w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4'>
-            {/* <img src={banner}/> */}
+                <div className="w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4">
+                    <img src={defaultBanner} alt="Blog Banner"/> {/* remove later */}
+                </div>
+
+                <h1 className="text-4xl font-medium mt-2 leading-tight line-clamp-2">{title}</h1>
+
+                <p className="font-gelasio line-clamp-2 text-xl leading-7 mt-4">{desc}</p>
+
             </div>
 
-            <h1 className='text-4xl font-medium mt-2 leading-tight line-clamp-2'>{title}</h1>
+            <div className="border-grey lg:border-1 lg:pl-8">
 
-            <p className='font-gelasio line-clamp-2 leading-7 mt-4'>{desc}</p>
-
-        </div>
-
-        <div className="border-grey lg:border-1 lg:pl-8">
-            <h3 className='text-dark-grey mt-9 mb-2'>Blog Title</h3>
-            <input type="text"  placeholder='Blog Title' 
-                defaultValue={title} className='input-box'
-                onChange={handleBlogTitleChange}
-            />
-
-            <h3 className='text-dark-grey mt-9 mb-2'>Short Description about your Blog</h3>
-            <textarea
-                maxLength={characterLimit}
-                defaultValue={desc}
-                className="h-40 resize-none input-box pl-4 leading-7"
-                onChange={handleBlogDescChange}
-                onKeyDown={handleTitleKeyDown}
-            ></textarea>
-
-            <p className='mt-1 text-dark-grey text-sm text-right'>{characterLimit - desc.length} characters left</p>
-
-            <p>
-                Topics - (Helps in searching and ranking your blog post)
-            </p>
-
-            <div className="relative input-box pl-2 py-2 pb-4">
-                <input type="text" placeholder="Topic"
-                className="sticky input-box bg-white top-0 left-0 pl-4 mb-3 focus:bg-white"
+                <p className="blog-label">Blog Title</p>
+                <input type="text"  placeholder="Blog Title" 
+                    defaultValue={title} className="input-box"
+                    onChange={handleBlogTitleChange}
                 />
-                {/* <Tag /> */}
+
+                <p className="blog-label">Short Description about your Blog</p>
+
+                <textarea
+                    maxLength={characterLimit}
+                    defaultValue={desc}
+                    className="h-40 resize-none input-box pl-4 leading-7"
+                    onChange={handleBlogDescChange}
+                    onKeyDown={handleTitleKeyDown}
+                ></textarea>
+
+                <p className="mt-1 text-dark-grey text-sm text-right">{characterLimit - desc.length} characters left</p>
+
+                <p className="blog-label">
+                    Topics - (Helps in searching and ranking your blog post)
+                </p>
+
+                <div className="relative input-box pl-2 py-2 pb-4">
+                    <input type="text" placeholder="Topic"
+                    className="sticky input-box bg-white top-0 left-0 pl-4 mb-3 focus:bg-white"
+                    onKeyDown={handleKeyDown}
+                    />
+
+                    {
+                        tags.map((tag,i)=>{
+                            return <BlogTags key={i} tagIndex={i} tag={tag}/>
+                        })
+                    }
+
+                </div>
+
+                <p className="mt-1 mb-4 text-dark-grey text-sm text-right">{tagsLimit-tags.length} Tags left</p>
+
+                <button className="btn-purple px-8">Publish</button>
+
             </div>
 
-        </div>
-
-        </section>
+            </section>
+        </Animation>
     )
 }
 

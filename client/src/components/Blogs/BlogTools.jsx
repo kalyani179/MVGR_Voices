@@ -7,10 +7,17 @@ import Marker from "@editorjs/marker";
 import InlineCode from "@editorjs/inline-code";
 
 const uploadImageByFile = (e) => {
-
+//     return link.then( url => {
+//         if(url){
+//             return {
+//                 success : 1,
+//                 file : {url}
+//             }
+//         }
+//     })
 }
 
-const uploadImageByUrl = async (e) => {
+const uploadImageByUrl = (e) => {
     let link = new Promise((resolve,reject) => {
         try{
             resolve(e)

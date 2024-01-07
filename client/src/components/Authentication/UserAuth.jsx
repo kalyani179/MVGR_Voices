@@ -136,18 +136,18 @@ const UserAuth = ({type,close,open}) => {
                                 <div className="flex justify-start items-center">
                                     <i className={`fas fa-user input-icon ${isNameFocused || inputNameValue ? 'text-purple' : ''}`}></i>
                                     <h5 className={`${isNameFocused || inputNameValue ? '-translate-y-7 text-purple font-medium' : 'translate-y-0'}`}>Full Name</h5>
-                                    <input onFocus={translateName} onBlur={()=>setNameTranslated(false)} onChange={handleChange} className={`${isNameFocused || inputNameValue ? "border-b-purple" : ""}`} type="text" name="fullname" value={inputNameValue}/>
+                                    <input onFocus={translateName} onBlur={()=>setNameTranslated(false)} onChange={handleChange} className={`auth-input ${isNameFocused || inputNameValue ? "border-b-purple" : ""}`} type="text" name="fullname" value={inputNameValue}/>
                                 </div> : ""
                             }
                             <div className="flex justify-start items-center">
                                 <i class={`fas fa-envelope input-icon ${isEmailFocused || inputEmailValue ? 'text-purple' : ''}`}></i>
                                 <h5  className={`${isEmailFocused || inputEmailValue ? '-translate-y-7 text-purple font-medium' : 'translate-y-0'}`}>Email</h5>
-                                <input onClick={translateEmail} onBlur={()=>setEmailTranslated(false)} onChange={handleChange} className={`${isEmailFocused || inputEmailValue ? "border-b-purple" : ""}`} type="email" name="email" value={inputEmailValue}/>
+                                <input onClick={translateEmail} onBlur={()=>setEmailTranslated(false)} onChange={handleChange} className={`auth-input ${isEmailFocused || inputEmailValue ? "border-b-purple" : ""}`} type="email" name="email" value={inputEmailValue}/>
                             </div>
                             <div className="flex justify-start items-center">
                                 <i className={`fas fa-lock input-icon ${isPasswordFocused || inputPasswordValue ? 'text-purple' : ''}`}></i>
                                 <h5  className={`${isPasswordFocused || inputPasswordValue ? '-translate-y-7 text-purple font-medium' : 'translate-y-0'}`}>Password</h5>
-                                <input onClick={translatePassword} onBlur={()=>setPasswordTranslated(false)} onChange={handleChange} className={`${isPasswordFocused || inputPasswordValue ? "border-b-purple" : ""}`} type={`${passwordVisible ? "text" : "password"}`} name="password" value={inputPasswordValue}/>
+                                <input onClick={translatePassword} onBlur={()=>setPasswordTranslated(false)} onChange={handleChange} className={`auth-input ${isPasswordFocused || inputPasswordValue ? "border-b-purple" : ""}`} type={`${passwordVisible ? "text" : "password"}`} name="password" value={inputPasswordValue}/>
                                 <i onClick={()=>setPasswordVisible(!passwordVisible)} className={`fi fi-rr-eye${passwordVisible ? "" : "-crossed"} absolute right-11`}></i>
                             </div>
                             <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 rounded-md">{type==="signup" ? "Create Account" : "Sign In"}</button>

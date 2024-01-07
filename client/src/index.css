@@ -20,7 +20,7 @@
     .center {
         @apply flex justify-center items-center
     }
-    input {
+    .auth-input {
         @apply border-2 border-b-input border-t-transparent border-l-transparent border-r-transparent w-80 my-3 p-0.5 pl-7 text-base font-inter focus:outline-none bg-white;
     }
     i {
@@ -38,7 +38,7 @@
     /* Blogs */
     #textEditor *,
     .blog-page-content * {
-        @apply font-gelasio px-0 mx-0 text-xl leading-10 md:text-2xl;
+        @apply font-gelasio mx-0 text-xl max-w-[900px] leading-10 md:text-2xl;
     }
     #textEditor h2,
     h2 {
@@ -50,7 +50,11 @@
     }
 
     .input-box {
-        @apply w-[100%] rounded-md p-4 bg-grey pl-12 border border-grey focus:bg-transparent placeholder:text-black;
+        @apply w-[100%] rounded-md p-4 bg-grey border border-grey focus:bg-transparent placeholder:text-black;
+    }
+    /* blog publish */
+    .blog-label{
+        @apply text-dark-grey mt-9 mb-2
     }
     .tag {
         @apply p-3 bg-grey rounded-full px-6 capitalize;
