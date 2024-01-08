@@ -65,9 +65,11 @@ const UserAuth = ({type,close,open}) => {
             setUserAuth(data);
             setData({fullname:"",email:"",password:""});
             // window.location.reload(); // To make animation
-            setCloseTab(true);
-            // return toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully");
-            })
+            toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully");
+            setTimeout(()=>{
+                setCloseTab(true);
+            },1000);
+        })
         .catch(({response})=>{
             // To clear the input fields in the case of error
             setInputNameValue('');
