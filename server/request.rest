@@ -1,0 +1,22 @@
+
+# POST http://localhost:3000/signin
+# Content-Type: application/json
+
+# {
+#     "email": "dantulurikalyani999@gmail.com",
+#     "password" : "kalyani"
+# }
+
+POST http://localhost:3000/create-blog
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OTFjMDMzZjhkZWNmNDIwMzZmZGY2OSIsImlhdCI6MTcwNDcyNjkwNn0.JuDpWodOPLVCMkYZdZRYtAstB-7VqIKK0Bue_oN6DmQ
+
+{
+    "title":"test @@@ 434 @ title",
+    "banner":"dufio",
+    "desc":"dkfjklf",
+    "content":{
+        "blocks":[1,2]
+    },
+    "tags":["dd","tags"]
+}

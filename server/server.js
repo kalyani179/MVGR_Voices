@@ -5,6 +5,7 @@ import cors from "cors";
 
 // Routers
 import userAuthentication from "./routers/userAuthRouter.js";
+import blogsRouter from "./routers/blogsRouter.js";
 
 
 const server = express();
@@ -17,6 +18,7 @@ mongoose.connect(process.env.DB_LOCATION,{autoIndex:true});
 server.use(express.json());
 server.use(cors({origin:"*"}));
 server.use("/",userAuthentication);
+server.use("/",blogsRouter);
 
 server.listen(PORT,()=>{
     console.log("Server is listening on port 3000");
