@@ -11,19 +11,21 @@ const createBlog = async (req, res) => {
         if(!title.length){
             return res.status(403).json({error:"You Must Provide a Title to publish the blog"});
         }
-        if(!desc.length || desc.length>200){
-            return res.status(403).json({error:"You Must Provide a Blog Description Under 200 Characters"});
+        if(!draft){
+            if(!desc.length || desc.length>200){
+                return res.status(403).json({error:"You Must Provide a Blog Description Under 200 Characters"});
+            }
+            if(!banner.length){
+                return res.status(403).json({error:"You Must Provide a Blog Banner to publish the blog"})
+            }
+            if(!content.blocks.length){
+                return res.status(403).json({error:"You Must Write Something To Publish it!"})
+            }
+            if(!tags.length || tags.length>10){
+                return res.status(403).json({error:"Provide tags in order to publish the blog, Maximum 10"});
+            }
         }
-        if(!banner.length){
-            return res.status(403).json({error:"You Must Provide a Blog Banner to publish the blog"})
-        }
-        if(!content.blocks.length){
-            return res.status(403).json({error:"You Must Write Something To Publish it!"})
-        }
-        if(!tags.length || tags.length>10){
-            return res.status(403).json({error:"Provide tags in order to publish the blog, Maximum 10"});
-        }
-    
+        
         tags = tags.map(tag => tag.toLowerCase());
     
         let blog_id = title.replace(/[^a-zA-z0-9]/g,' ').replace(/\s+/g,"-").trim()+nanoid();

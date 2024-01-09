@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import defaultBanner from "../../assets/images/Blogs/default_banner.png"
 import Animation from "../../common/Animation";
 
@@ -7,18 +7,26 @@ import { EditorContext } from "./Editor";
 import EditorJS from "@editorjs/editorjs";
 import { tools } from "./BlogTools";
 import {Toaster,toast} from "react-hot-toast";
+import axios from "axios";
+import { UserContext } from "../../App";
 
 const BlogEditor = () => {
 
   let {blog,blog:{title,banner,content,tags,desc},setBlog,textEditor,setTextEditor,setEditorState} = useContext(EditorContext);
 
+  let {userAuth:{access_token}} = useContext(UserContext);
+
+  let navigate = useNavigate();
+
   useEffect(() => {
-    setTextEditor(new EditorJS({
-      holder : "textEditor",
-      data : content,
-      tools: tools,
-      placeholder : "Let's write an awesome story"
-    }))
+    if(!textEditor.isReady){
+      setTextEditor(new EditorJS({
+        holder : "textEditor",
+        data : content,
+        tools: tools,
+        placeholder : "Let's write an awesome story"
+      }))
+    }
   }, [])
 
   const handleBannerUpload = (e) =>{
@@ -61,6 +69,46 @@ const BlogEditor = () => {
       })
     }
   }
+  const handleSaveDraft = (e) =>{
+            // To prevent user submitting the blog more than once
+          if(e.target.className.includes('disable')){ 
+              return;
+          }
+          if(!title.length){
+              return toast.error("You Must Provide a Title before saving it as a draft!");
+          }
+
+          let loadingToast = toast.loading("saving draft...");
+  
+          e.target.classList.add('disable');
+  
+          
+          if(textEditor.isReady){
+            textEditor.save().then(content => {
+              let blogObj = {
+                title, banner, desc, content, tags, draft:true
+              }
+              textEditor.save().then(content => {
+                axios.post("http://localhost:3000/create-blog",blogObj,{
+                  headers:{
+                      'Authorization' : `Bearer ${access_token}`
+                  }
+              }).then(()=>{
+                  e.target.classList.remove('disable');
+                  toast.dismiss(loadingToast);
+                  toast.success("Blog Saved Successfully...");
+                  setTimeout(()=>{
+                      navigate("/");
+                  },500);
+              }).catch(({response})=>{
+                  e.target.classList.remove('disable');
+                  toast.dismiss(loadingToast);
+                  return toast.error(response.data.error);
+              })
+              })
+            })
+            
+  }}
   return (
     <>
       <nav className="navbar">
@@ -73,7 +121,7 @@ const BlogEditor = () => {
         </p>
         <div className="flex gap-4 ml-auto">
           <button className="btn-purple py-2" onClick={handlePublishEvent}>Publish</button>
-          <button className="btn-purple py-2">Save Draft</button>
+          <button className="btn-purple py-2" onClick={handleSaveDraft}>Save Draft</button>
         </div>
       </nav>
       <Animation>
