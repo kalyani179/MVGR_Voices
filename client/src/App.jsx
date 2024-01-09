@@ -1,8 +1,8 @@
 import React,{createContext, useEffect, useState} from 'react'
 import {Routes,Route,BrowserRouter} from "react-router-dom"; 
-import Navbar from './components/Home/Navbar/Navbar';
 import { lookInSession } from './common/session';
 import Editor from './components/Blogs/Editor';
+import Home from './pages/Home';
 
 export const UserContext = createContext({});
 
@@ -18,7 +18,7 @@ const App = () => {
     <UserContext.Provider value={{userAuth,setUserAuth}}>
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Navbar />} />
+            <Route path="/" element={<Home />} />
             <Route path="/blogs" exact element={<Editor />} />
         </Routes>
       </BrowserRouter>

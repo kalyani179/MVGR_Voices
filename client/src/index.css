@@ -12,10 +12,10 @@
         @apply font-gelasio text-4xl
     }
     .btn-purple {
-        @apply whitespace-nowrap text-white bg-purple rounded-full py-2 px-5 text-lg capitalize hover:bg-opacity-80;
+        @apply whitespace-nowrap text-white bg-primary rounded-full py-2 px-5 text-lg capitalize hover:bg-opacity-80;
     }
     .navbar {
-        @apply z-10 sticky top-0 flex items-center w-full px-[5vw] py-5 h-[80px] border-b border-grey bg-white;
+        @apply z-10 sticky top-0 flex items-center w-full px-[5vw] py-5 h-[80px];
     }
     .center {
         @apply flex justify-center items-center

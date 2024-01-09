@@ -28,8 +28,8 @@ const Navbar = () => {
               </>
               : 
               <>
-                <button onClick={()=>setShowSignup(true)} className="btn-purple">SignUp</button>
-                <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button>
+                <button onClick={()=>setShowSignup(true)} className="btn-purple">Sign Up</button>
+                {/* <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button> */}
               </>
             }
               
