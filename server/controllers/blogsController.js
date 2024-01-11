@@ -3,6 +3,20 @@ import { nanoid } from "nanoid";
 import Blog from "../models/BlogSchema.js";
 import User from "../models/UserSchema.js"
 
+const latestBlogs = async (req,res) =>{
+
+    let maxLimit = 3;
+
+    await Blog.find({draft:false})
+    .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
+    .sort({"publishedAt":-1})
+    .select("blog_id title desc banner activity tags publishedAt -_id")
+    .limit(maxLimit)
+    .then( blogs => {
+        return res.status(200).json({blogs});
+    })
+}
+
 const createBlog = async (req, res) => {
     try{
         let authorID = req.user;
@@ -15,9 +29,9 @@ const createBlog = async (req, res) => {
             if(!desc.length || desc.length>200){
                 return res.status(403).json({error:"You Must Provide a Blog Description Under 200 Characters"});
             }
-            if(!banner.length){
-                return res.status(403).json({error:"You Must Provide a Blog Banner to publish the blog"})
-            }
+            // if(!banner.length){
+            //     return res.status(403).json({error:"You Must Provide a Blog Banner to publish the blog"})
+            // }
             if(!content.blocks.length){
                 return res.status(403).json({error:"You Must Write Something To Publish it!"})
             }
@@ -51,4 +65,4 @@ const createBlog = async (req, res) => {
     
 }
 
-export default createBlog;
+export { latestBlogs,createBlog };

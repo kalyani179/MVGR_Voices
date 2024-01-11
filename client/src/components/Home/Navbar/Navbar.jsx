@@ -32,7 +32,6 @@ const Navbar = () => {
                 {/* <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button> */}
               </>
             }
-              
           </div>
           {showSignup && <UserAuth type="signup" close={()=>setShowSignup(false)} open={()=>{setShowSignup(false);setShowSignin(true);}}/>}
           {showSignin && <UserAuth type="signin" close={()=>setShowSignin(false)} open={()=>{setShowSignin(false);setShowSignup(true);}}/>}

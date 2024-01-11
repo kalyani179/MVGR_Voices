@@ -3,6 +3,7 @@ import {Routes,Route,BrowserRouter} from "react-router-dom";
 import { lookInSession } from './common/session';
 import Editor from './components/Blogs/Editor';
 import Home from './pages/Home';
+import BlogsHome from './components/Blogs/BlogsHome';
 
 export const UserContext = createContext({});
 
@@ -19,7 +20,8 @@ const App = () => {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blogs" exact element={<Editor />} />
+            <Route path="/blogs" element={<BlogsHome />} />
+            <Route path="/editor" exact element={<Editor />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
