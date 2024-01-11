@@ -8,7 +8,7 @@
     * {
         @apply m-0 p-0 box-border text-base;
     }
-    h1 {
+    .heading {
         @apply font-gelasio text-4xl
     }
     .btn-purple {
@@ -61,7 +61,7 @@
     }
     
     .blog-title {
-        @apply text-2xl font-medium leading-7 line-clamp-3 sm:line-clamp-2;
+        @apply text-xl font-medium leading-7 line-clamp-3 sm:line-clamp-2;
     }
     
     .blog-index {

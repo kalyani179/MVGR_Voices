@@ -1,6 +1,7 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
+import axios from 'axios';
 
-const InPageNavigation = ({routes}) => {
+const InPageNavigation = ({routes,children}) => {
     const [activeTab,setActiveTab] = useState("home");
     return (
         <>
@@ -8,19 +9,20 @@ const InPageNavigation = ({routes}) => {
                 {
                     routes.map((route,index)=>{
                         return(
-                            <button onClick={()=>setActiveTab(route)} key={index} className={`p-4 px-5 capitalize text-dark-grey text-lg ${activeTab===route ?"text-black border-b border-black":"" } ${route==="trending blogs" ? "md:hidden" : ""}`}>{route}</button>
+                            <button onClick={()=>setActiveTab(route)} key={index} className={`p-4 px-5 capitalize text-lg ${activeTab===route ?"border-b border-black text-black":"text-dark-grey" } ${route==="trending blogs" ? "md:hidden" : ""}`}>{route}</button>
                         ) 
                     })
                 }
             </div>
-            <div>
+            {children}
+            {/* <div>
                 {
                     activeTab==="home" && <h1>This is Home</h1>
                 }
                 {
                     activeTab === "trending blogs" && <h1>This is Trending Blogs</h1>
                 }
-            </div>
+            </div> */}
         </>
     )
 }

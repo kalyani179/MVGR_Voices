@@ -14,6 +14,8 @@ const latestBlogs = async (req,res) =>{
     .limit(maxLimit)
     .then( blogs => {
         return res.status(200).json({blogs});
+    }).catch(err =>{
+        return res.status(500).json({error:"Internal Server Error"});
     })
 }
 
