@@ -119,15 +119,14 @@ const UserAuth = ({type,close,open}) => {
                     }
                 }}
             />
-            <div className="fixed inset-0 bg-black bg-opacity-50 center">
+            <div className="fixed inset-0 bg-black bg-opacity-50 center" onClick={close}>
             <Fade top duration={1000}>
-            <div>
-
+            
                 {/* SignUp Heading */}
-                <div className="bg-white relative p-8 pb-4 rounded-md">
-                    <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
+                <div className="bg-white relative p-8 pb-4 rounded-md" onClick={(e) => e.stopPropagation()}>
+                    <button onClick={(e) => { e.stopPropagation(); close(); }}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
                     <div className="center">
-                        <h1 className="text-center mb-5">{type==="signup" ? "Sign Up" : "Sign In"}</h1>
+                        <h1 className="text-center mb-5 heading">{type==="signup" ? "Sign Up" : "Sign In"}</h1>
                     </div>
 
                     {/* Form */}
@@ -176,7 +175,7 @@ const UserAuth = ({type,close,open}) => {
                     <GoogleAuth handleGoogleAuth={handleGoogleAuth} />
                 
                 </div>
-                </div>
+                
                 </Fade>
             </div>
         </>

@@ -67,7 +67,6 @@
     .blog-index {
         @apply text-4xl sm:text-3xl lg:text-5xl font-bold text-grey leading-none;
     }
-
 }
 
 /** To remove the blue background color when autofilled by chrome **/
@@ -80,4 +79,12 @@ input:-webkit-autofill:active{
     border-top: 1px solid #ffffff !important;
     border-left: 1px solid #ffffff !important;
     border-right: 1px solid #ffffff !important;
+}
+/* Styles for hiding scrollbar on modal content */
+.modal-content::-webkit-scrollbar {
+    width: 0 !important;
+    display: none; /* Safari and Chrome */
+}
+.modal-content {
+    scrollbar-width: none; /* Firefox */
 }
