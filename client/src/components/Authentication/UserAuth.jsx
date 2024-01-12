@@ -123,8 +123,8 @@ const UserAuth = ({type,close,open}) => {
             <Fade top duration={1000}>
             
                 {/* SignUp Heading */}
-                <div className="bg-white relative p-8 pb-4 rounded-md" onClick={(e) => e.stopPropagation()}>
-                    <button onClick={(e) => { e.stopPropagation(); close(); }}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
+                <div className="bg-white relative p-8 pb-4 rounded-md z-50" onClick={(e) => e.stopPropagation()}>
+                    <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
                     <div className="center">
                         <h1 className="text-center mb-5 heading">{type==="signup" ? "Sign Up" : "Sign In"}</h1>
                     </div>

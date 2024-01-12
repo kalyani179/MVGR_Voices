@@ -4,6 +4,7 @@ import InPageNavigation from './InPageNavigation'
 import axios from 'axios';
 import Loader from '../../common/Loader';
 import BlogPostCard from './BlogPostCard';
+import { Outlet } from 'react-router-dom';
 
 const BlogsHome = () => {
     let [blogs,setBlog] = useState(null);
@@ -39,7 +40,6 @@ const BlogsHome = () => {
                 </div>
                 {/* filters and trending blogs */}
                 <div>
-
                 </div>
             </section>
         </Animation>
