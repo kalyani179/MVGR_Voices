@@ -56,6 +56,7 @@ const BlogEditor = () => {
       return toast.error("Write Blog Title To Publish IT!");
     }
 
+    
     if(textEditor.isReady){
       textEditor.save().then(data => {
         if(data.blocks.length){
