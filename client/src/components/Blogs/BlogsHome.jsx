@@ -86,7 +86,7 @@ const BlogsHome = () => {
             >
                 <div>
                 {
-                    blogs===null ? "" : 
+                    blogs===null ? <Loader /> : 
                     (
                         !blogs.length ? 
                         <NoBlogsDataMessage message={"No Blogs Published"}/>
