@@ -1,7 +1,10 @@
-import React,{useEffect, useState} from 'react'
-import axios from 'axios';
+import React,{useState} from 'react'
+import Animation from '../../common/Animation';
+import Loader from '../../common/Loader';
+import TrendingBlogPostCard from './TrendingBlogPostCard';
+import BlogPostCard from './HomeBlogPostCard';
 
-const InPageNavigation = ({routes,children}) => {
+const InPageNavigation = ({routes,trendingBlogs,blogs}) => {
     const [activeTab,setActiveTab] = useState("home");
     return (
         <>
@@ -14,15 +17,38 @@ const InPageNavigation = ({routes,children}) => {
                     })
                 }
             </div>
-            {children}
-            {/* <div>
+            <div>
                 {
-                    activeTab==="home" && <h1>This is Home</h1>
+                    activeTab==="home" && 
+                    <div>
+                    {
+                        blogs===null ? <Loader /> : 
+                        blogs.map((blog,index)=>{
+                            return(
+                                <Animation transition={{duration:1,delay:index*0.1}}>
+                                    <BlogPostCard content={blog} author={blog.author.personal_info}/>
+                                </Animation>
+                            )
+                        })
+                        }
+                    </div>
                 }
                 {
-                    activeTab === "trending blogs" && <h1>This is Trending Blogs</h1>
+                    activeTab === "trending blogs" &&
+                    <div>
+                    {
+                                trendingBlogs===null ? <Loader /> : 
+                                trendingBlogs.map((blog,index)=>{
+                                    return(
+                                        <Animation transition={{duration:1,delay:index*0.1}}>
+                                            <TrendingBlogPostCard blog={blog} index={index}/>
+                                        </Animation>
+                                    )
+                                })
+                    }
+                    </div>
                 }
-            </div> */}
+            </div>
         </>
     )
 }

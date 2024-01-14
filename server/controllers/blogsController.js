@@ -5,13 +5,26 @@ import User from "../models/UserSchema.js"
 
 const latestBlogs = async (req,res) =>{
 
-    let maxLimit = 3;
+    let maxLimit = 5;
 
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
     .select("blog_id title desc banner activity tags publishedAt -_id")
     .limit(maxLimit)
+    .then( blogs => {
+        return res.status(200).json({blogs});
+    }).catch(err =>{
+        return res.status(500).json({error:"Internal Server Error"});
+    })
+}
+
+const trendingBlogs = async (req,res) => {
+    await Blog.find({draft:false})
+    .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
+    .sort({"activity.total_read":-1,"activity.total_likes":-1,"publishedAt":-1})
+    .select("blog_id title publishedAt -_id")
+    .limit(5)
     .then( blogs => {
         return res.status(200).json({blogs});
     }).catch(err =>{
