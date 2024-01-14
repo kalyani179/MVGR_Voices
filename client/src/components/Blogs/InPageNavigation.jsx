@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React from 'react'
 import Animation from '../../common/Animation';
 import Loader from '../../common/Loader';
 import TrendingBlogPostCard from './TrendingBlogPostCard';
 import BlogPostCard from './HomeBlogPostCard';
 
-const InPageNavigation = ({routes,trendingBlogs,blogs}) => {
-    const [activeTab,setActiveTab] = useState("home");
+const InPageNavigation = ({routes,trendingBlogs,blogs,setActiveTab,activeTab}) => {
+
     return (
         <>
             <div className="relative mb-8 bg-white border-b border-grey flex flex-nowrap overflow-x-auto">
@@ -19,7 +19,7 @@ const InPageNavigation = ({routes,trendingBlogs,blogs}) => {
             </div>
             <div>
                 {
-                    activeTab==="home" && 
+                    activeTab!=="trending blogs" && 
                     <div>
                     {
                         blogs===null ? <Loader /> : 

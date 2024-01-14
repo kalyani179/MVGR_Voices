@@ -32,6 +32,24 @@ const trendingBlogs = async (req,res) => {
     })
 }
 
+const searchBlogs = async (req,res) => {
+    
+    let {tag} = req.body;
+    let findQuery = {tags:tag,draft:false};
+    let maxLimit = 5;
+    Blog.find(findQuery)
+    .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
+    .sort({"publishedAt":-1})
+    .select("blog_id title desc banner activity tags publishedAt -_id")
+    .limit(maxLimit)
+    .then( blogs => {
+        return res.status(200).json({blogs});
+    }).catch(err =>{
+        return res.status(500).json({error:"Internal Server Error"});
+    })
+    
+}
+
 const createBlog = async (req, res) => {
     try{
         let authorID = req.user;
@@ -80,4 +98,4 @@ const createBlog = async (req, res) => {
     
 }
 
-export { latestBlogs,createBlog };
+export { latestBlogs,trendingBlogs,searchBlogs,createBlog };

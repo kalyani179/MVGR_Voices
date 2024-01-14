@@ -4,6 +4,7 @@ import InPageNavigation from "./InPageNavigation";
 import axios from "axios";
 import Loader from "../../common/Loader";
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
+import { activeTabRef } from "./InPageNavigation";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
@@ -30,9 +31,19 @@ const BlogsHome = () => {
             console.log(err);
         });
     };
+    const fetchBlogsByCategory = () => {
+        axios
+        .post("http://localhost:3000/search-blogs",{tag:pageState})
+        .then(({ data }) => {
+            setBlog(data.blogs);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
     const fetchTrendingBlogs = () => {
         axios
-        .get("http://localhost:3000/latest-blogs")
+        .get("http://localhost:3000/trending-blogs")
         .then(({ data }) => {
             setTrendingBlog(data.blogs);
         })
@@ -50,8 +61,11 @@ const BlogsHome = () => {
         setPageState(category);
     }
     useEffect(() => {
+
         if(pageState==="home"){
             fetchLatestBlogs();
+        }else{
+            fetchBlogsByCategory();
         }
         if(!trendingBlogs){
             fetchTrendingBlogs();
@@ -67,6 +81,8 @@ const BlogsHome = () => {
                 routes={[pageState, "trending blogs"]}
                 blogs={blogs}
                 trendingBlogs={trendingBlogs}
+                setActiveTab={setPageState}
+                activeTab={pageState}
             />
             </div>
             {/* filters and trending blogs */}
