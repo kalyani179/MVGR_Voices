@@ -3,8 +3,10 @@ import Animation from "../../common/Animation";
 import InPageNavigation from "./InPageNavigation";
 import axios from "axios";
 import Loader from "../../common/Loader";
+import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
-import { activeTabRef } from "./InPageNavigation";
+import NoBlogsDataMessage from "./NoBlogsDataMessage";
+import BlogsNavbar from "./BlogsNavbar";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
@@ -67,23 +69,59 @@ const BlogsHome = () => {
         }else{
             fetchBlogsByCategory();
         }
-        if(!trendingBlogs){
+        if (!trendingBlogs) {
             fetchTrendingBlogs();
         }
-        
     }, [pageState]);
+
     return (
         <Animation>
-        <section className="h-cover flex justify-center gap-10 m-10">
+        <BlogsNavbar />
+        <section className="h-cover flex justify-center gap-10">
             {/* latest blogs */}
             <div className="w-full">
             <InPageNavigation
-                routes={[pageState, "trending blogs"]}
-                blogs={blogs}
-                trendingBlogs={trendingBlogs}
-                setActiveTab={setPageState}
-                activeTab={pageState}
-            />
+                routes={[pageState,"trending blogs"]}
+                defaultHidden={["trending blogs"]}
+            >
+                <div>
+                {
+                    blogs===null ? "" : 
+                    (
+                        !blogs.length ? 
+                        <NoBlogsDataMessage message={"No Blogs Published"}/>
+                        :
+                        blogs.map((blog,index)=>{
+                            return(
+                                <Animation transition={{duration:1,delay:index*0.1}}>
+                                    <BlogPostCard content={blog} author={blog.author.personal_info}/>
+                                </Animation>
+                            )
+                        })
+                    )
+                }
+                </div>
+                
+                <div>
+                {
+                    trendingBlogs===null ? <Loader /> : 
+                    (
+                        !trendingBlogs.length ? 
+                        <NoBlogsDataMessage message={"No Blogs Published"}/>
+                        :
+                        trendingBlogs.map((blog,index)=>{
+                            return(
+                                <Animation transition={{duration:1,delay:index*0.1}}>
+                                    <TrendingBlogPostCard blog={blog} index={index}/>
+                                </Animation>
+                            )
+                        })
+                    )
+                }
+                </div>
+            
+            </InPageNavigation>
+            
             </div>
             {/* filters and trending blogs */}
             <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-grey pl-8 pt-3 sm:hidden">
@@ -109,13 +147,18 @@ const BlogsHome = () => {
                     {trendingBlogs === null ? 
                         <Loader />
                         : 
-                        trendingBlogs.map((blog, index) => {
-                        return (
-                            <Animation transition={{ duration: 1, delay: index * 0.1 }}>
-                                <TrendingBlogPostCard blog={blog} index={index} />
-                            </Animation>
-                        );
-                        })
+                        (
+                            !trendingBlogs.length ? 
+                            <NoBlogsDataMessage message={"No Blogs Published"}/>
+                            :
+                            trendingBlogs.map((blog, index) => {
+                            return (
+                                <Animation transition={{ duration: 1, delay: index * 0.1 }}>
+                                    <TrendingBlogPostCard blog={blog} index={index} />
+                                </Animation>
+                            );
+                            })
+                        )
                     }
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { lookInSession } from './common/session';
 import Editor from './components/Blogs/Editor';
 import Home from './pages/Home';
 import BlogsHome from './components/Blogs/BlogsHome';
+import BlogsSearchPage from './pages/BlogsSearchPage';
 
 export const UserContext = createContext({});
 
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="blogs" element={<BlogsHome />} />
             <Route path="/editor" exact element={<Editor />} />
+            <Route path="/search/:query" element={<BlogsSearchPage />}/>
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
