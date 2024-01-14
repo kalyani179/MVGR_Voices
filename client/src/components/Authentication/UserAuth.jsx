@@ -8,7 +8,7 @@ import GoogleAuth from './GoogleAuth';
 
 import {storeInSession} from "../../common/session";
 import { UserContext } from '../../App';
-// import { Navigate } from 'react-router-dom';
+
 
 const UserAuth = ({type,close,open}) => {
 
@@ -58,8 +58,7 @@ const UserAuth = ({type,close,open}) => {
     }
 
     const userAuthThroughServer = (route,formData) =>{
-
-        axios.post("http://localhost:3000/"+route,formData)
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/"+route,formData)
         .then(({data})=>{console.log(data);
             storeInSession("user",JSON.stringify(data));
             setUserAuth(data);

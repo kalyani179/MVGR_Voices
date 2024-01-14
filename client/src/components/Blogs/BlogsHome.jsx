@@ -25,7 +25,7 @@ const BlogsHome = () => {
 
     const fetchLatestBlogs = () => {
         axios
-        .get("http://localhost:3000/latest-blogs")
+        .get(process.env.REACT_APP_SERVER_DOMAIN+"/latest-blogs")
         .then(({ data }) => {
             setBlog(data.blogs);
         })
@@ -35,7 +35,7 @@ const BlogsHome = () => {
     };
     const fetchBlogsByCategory = () => {
         axios
-        .post("http://localhost:3000/search-blogs",{tag:pageState})
+        .post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{tag:pageState})
         .then(({ data }) => {
             setBlog(data.blogs);
         })
@@ -45,7 +45,7 @@ const BlogsHome = () => {
     }
     const fetchTrendingBlogs = () => {
         axios
-        .get("http://localhost:3000/trending-blogs")
+        .get(process.env.REACT_APP_SERVER_DOMAIN+"/trending-blogs")
         .then(({ data }) => {
             setTrendingBlog(data.blogs);
         })

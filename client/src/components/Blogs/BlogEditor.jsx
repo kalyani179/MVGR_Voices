@@ -90,7 +90,7 @@ const BlogEditor = () => {
                 title, banner, desc, content, tags, draft:true
               }
               textEditor.save().then(content => {
-                axios.post("http://localhost:3000/create-blog",blogObj,{
+                axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/create-blog",blogObj,{
                   headers:{
                       'Authorization' : `Bearer ${access_token}`
                   }
