@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react'
 import toast,{Toaster} from "react-hot-toast";
+import { Fade, Slide } from "react-awesome-reveal";
 
 import { authWithGoogle } from '../../common/firebase';
 import GoogleAuth from './GoogleAuth';
@@ -118,7 +119,7 @@ const UserAuth = ({type,close,open}) => {
                 }}
             />
             <div className="fixed inset-0 bg-black bg-opacity-50 center" onClick={close}>
-            
+                <Slide direction="down" duration={1500}>
                 {/* SignUp Heading */}
                 <div className="bg-white relative p-8 pb-4 rounded-md z-50" onClick={(e) => e.stopPropagation()}>
                     <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
@@ -172,7 +173,7 @@ const UserAuth = ({type,close,open}) => {
                     <GoogleAuth handleGoogleAuth={handleGoogleAuth} />
                 
                 </div>
-                
+                </Slide>
             </div>
         </>
     )
