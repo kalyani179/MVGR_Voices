@@ -17,6 +17,9 @@
     .navbar {
         @apply z-10 sticky top-0 flex items-center w-full px-[5vw] py-5 h-[80px];
     }
+    section {
+        @apply py-4 px-[5vw] md:px-[7vw] lg:px-[10vw];
+    }
     .center {
         @apply flex justify-center items-center
     }
@@ -48,7 +51,15 @@
     h3 {
         @apply font-inter text-3xl leading-loose md:text-2xl md:leading-normal !important;
     }
+    #textEditor *,
+    .blog-page-content * {
+        @apply font-gelasio text-xl leading-10 md:text-2xl;
+    }
 
+    #textEditor a,
+    .blog-page-content a {
+        @apply text-purple underline hover:opacity-50;
+    }
     .input-box {
         @apply w-[100%] rounded-md p-4 bg-grey border border-grey focus:bg-transparent placeholder:text-black;
     }

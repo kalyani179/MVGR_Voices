@@ -100,7 +100,7 @@ const BlogPublish = () => {
 
     return (
         <Animation>
-            <section className="min-h-screen grid mx-10 items-center lg:grid-cols-2 py-16">
+            <section className="min-h-screen grid items-center lg:grid-cols-2 py-16 lg:gap-10">
             <Toaster />
             <button className="w-12 h-12 absolute right-[2vw] z-10 top-[5%]" onClick={handleCloseEvent}>
                 <i class="fi fi-br-cross"></i>
