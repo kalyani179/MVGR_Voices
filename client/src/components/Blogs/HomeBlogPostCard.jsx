@@ -17,7 +17,7 @@ const BlogPostCard = ({content,author}) => {
             <p className="my-3 text-lg font-gelasio leading-7 sm:hidden md:max-[1100px]:hidden line-clamp-2">{desc}</p>
 
             <div className="flex gap-4 mt-7">
-                <span className="btn-purple bg-dark-grey bg-opacity-25 text-black py-1 px-4">{tags[0]}</span>
+                <span className="btn-purple bg-dark-grey bg-opacity-20 text-black py-1 px-4">{tags[0]}</span>
                 <span className="flex items-center gap-2 text-dark-grey">
                         <i className="fi fi-rr-heart text-md"></i>
                         <p>{total_likes}</p>
