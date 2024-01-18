@@ -6,7 +6,7 @@
 @tailwind utilities;
 @layer components {
     * {
-        @apply m-0 p-0 box-border text-base;
+        @apply m-0 p-0 box-border text-base font-inter;
     }
     .heading {
         @apply font-gelasio text-4xl
@@ -16,6 +16,15 @@
     }
     .navbar {
         @apply z-10 sticky top-0 flex items-center w-full px-[5vw] py-5 h-[80px];
+    }
+    .hide {
+        @apply opacity-0 pointer-events-none duration-100;
+    }
+    .show {
+        @apply opacity-100 pointer-events-auto;
+    }
+    .link {
+        @apply hover:text-black hover:bg-grey p-3 px-4 pl-8 py-4 block opacity-75;
     }
     section {
         @apply py-4 px-[5vw] md:px-[7vw] lg:px-[10vw];
@@ -68,7 +77,7 @@
         @apply text-dark-grey mt-9 mb-2
     }
     .tag {
-        @apply p-3 bg-grey rounded-full px-6 capitalize;
+        @apply p-2.5 bg-grey rounded-full px-6 capitalize;
     }
     
     .blog-title {

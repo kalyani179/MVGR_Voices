@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Animation from "../../common/Animation";
 import InPageNavigation from "./InPageNavigation";
 import axios from "axios";
@@ -6,12 +6,16 @@ import Loader from "../../common/Loader";
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
 import NoBlogsDataMessage from "./NoBlogsDataMessage";
-import BlogsNavbar from "./BlogsNavbar";
+import BlogsNavbar from "./Blogs Navbar/BlogsNavbar";
+import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
     let [trendingBlogs, setTrendingBlog] = useState(null);
     let [pageState,setPageState] = useState("home");
+    let {userAuth:{access_token}} = useContext(UserContext);
+    let navigate = useNavigate();
 
     let categories = [
         "Programming",
@@ -75,6 +79,9 @@ const BlogsHome = () => {
     }, [pageState]);
 
     return (
+        !access_token 
+        ? navigate("/") 
+        : 
         <Animation>
         <BlogsNavbar />
         <section className="h-cover flex justify-center gap-10">
