@@ -9,6 +9,8 @@ import NoBlogsDataMessage from "./NoBlogsDataMessage";
 import BlogsNavbar from "./Blogs Navbar/BlogsNavbar";
 import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import FilterPaginationData from "../../common/FilterPaginationData";
+import LoadMoreDataBtn from "../../common/LoadMoreDataBtn";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
@@ -16,6 +18,8 @@ const BlogsHome = () => {
     let [pageState,setPageState] = useState("home");
     let {userAuth:{access_token}} = useContext(UserContext);
     let navigate = useNavigate();
+
+
 
     let categories = [
         "Programming",
@@ -27,21 +31,37 @@ const BlogsHome = () => {
         "Interviews",
     ];
 
-    const fetchLatestBlogs = () => {
+    const fetchLatestBlogs = ({page = 1}) => {
         axios
-        .get(process.env.REACT_APP_SERVER_DOMAIN+"/latest-blogs")
-        .then(({ data }) => {
-            setBlog(data.blogs);
+        .post(process.env.REACT_APP_SERVER_DOMAIN+"/latest-blogs",{page})
+        .then( async ({ data }) => {
+        
+            let formatedData = await FilterPaginationData({
+                state:blogs,
+                data:data.blogs,
+                page,
+                countRoute:"/all-latest-blogs-count"
+            })
+        
+            setBlog(formatedData);
         })
         .catch((err) => {
             console.log(err);
         });
     };
-    const fetchBlogsByCategory = () => {
+    const fetchBlogsByCategory = ({page=1}) => {
         axios
-        .post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{tag:pageState})
-        .then(({ data }) => {
-            setBlog(data.blogs);
+        .post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{tag:pageState,page})
+        .then(async ({ data }) => {
+            let formatedData = await FilterPaginationData({
+                state:blogs,
+                data:data.blogs,
+                page,
+                countRoute:"/search-blogs-count",
+                data_to_send:{tag:pageState}
+            })
+        
+            setBlog(formatedData);
         })
         .catch((err) => {
             console.log(err);
@@ -69,9 +89,9 @@ const BlogsHome = () => {
     useEffect(() => {
 
         if(pageState==="home"){
-            fetchLatestBlogs();
+            fetchLatestBlogs({page:1});
         }else{
-            fetchBlogsByCategory();
+            fetchBlogsByCategory({page:1});
         }
         if (!trendingBlogs) {
             fetchTrendingBlogs();
@@ -95,10 +115,10 @@ const BlogsHome = () => {
                 {
                     blogs===null ? <Loader /> : 
                     (
-                        !blogs.length ? 
+                        !blogs.results.length ? 
                         <NoBlogsDataMessage message={"No Blogs Published"}/>
                         :
-                        blogs.map((blog,index)=>{
+                        blogs.results.map((blog,index)=>{
                             return(
                                 <Animation transition={{duration:1,delay:index*0.1}}>
                                     <BlogPostCard content={blog} author={blog.author.personal_info}/>
@@ -107,6 +127,7 @@ const BlogsHome = () => {
                         })
                     )
                 }
+                <LoadMoreDataBtn state={blogs} fetchDataFunc={(pageState==="home"? fetchLatestBlogs : fetchBlogsByCategory)}/>
                 </div>
                 
                 <div>

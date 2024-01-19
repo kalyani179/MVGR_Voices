@@ -4,18 +4,39 @@ import Blog from "../models/BlogSchema.js";
 import User from "../models/UserSchema.js"
 
 const latestBlogs = async (req,res) =>{
-
+    let {page} = req.body;
     let maxLimit = 5;
 
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
     .select("blog_id title desc banner activity tags publishedAt -_id")
+    .skip((page-1)*maxLimit)
     .limit(maxLimit)
     .then( blogs => {
         return res.status(200).json({blogs});
     }).catch(err =>{
         return res.status(500).json({error:"Internal Server Error"});
+    })
+}
+
+const allLatestBlogsCount = async (req,res) => {
+    Blog.countDocuments({draft:false})
+    .then(count => {
+        return res.status(200).json({totalDocs:count});
+    }).catch(err =>{
+        return res.status(500).json({error:err.message});
+    })
+}
+
+const searchBlogsCount = async(req,res) =>{
+    let {tag,page} = req.body;
+    let findQuery = {tags:tag,draft:false};
+    Blog.countDocuments(findQuery)
+    .then(count => {
+        return res.status(200).json({totalDocs:count});
+    }).catch(err =>{
+        return res.status(500).json({error:err.message});
     })
 }
 
@@ -34,13 +55,14 @@ const trendingBlogs = async (req,res) => {
 
 const searchBlogs = async (req,res) => {
     
-    let {tag} = req.body;
+    let {tag,page} = req.body;
     let findQuery = {tags:tag,draft:false};
-    let maxLimit = 5;
+    let maxLimit = 1;
     Blog.find(findQuery)
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
     .select("blog_id title desc banner activity tags publishedAt -_id")
+    .skip((page-1)*maxLimit)
     .limit(maxLimit)
     .then( blogs => {
         return res.status(200).json({blogs});
@@ -98,4 +120,4 @@ const createBlog = async (req, res) => {
     
 }
 
-export { latestBlogs,trendingBlogs,searchBlogs,createBlog };
+export { latestBlogs,allLatestBlogsCount,searchBlogsCount,trendingBlogs,searchBlogs,createBlog };
