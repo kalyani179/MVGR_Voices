@@ -29,17 +29,6 @@ const allLatestBlogsCount = async (req,res) => {
     })
 }
 
-const searchBlogsCount = async(req,res) =>{
-    let {tag,page} = req.body;
-    let findQuery = {tags:tag,draft:false};
-    Blog.countDocuments(findQuery)
-    .then(count => {
-        return res.status(200).json({totalDocs:count});
-    }).catch(err =>{
-        return res.status(500).json({error:err.message});
-    })
-}
-
 const trendingBlogs = async (req,res) => {
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
@@ -55,8 +44,13 @@ const trendingBlogs = async (req,res) => {
 
 const searchBlogs = async (req,res) => {
     
-    let {tag,page} = req.body;
-    let findQuery = {tags:tag,draft:false};
+    let {tag,query,page} = req.body;
+    let findQuery;
+    if(tag){
+        findQuery = {tags:tag,draft:false};
+    }else if(query){
+        findQuery = {draft:false,title:new RegExp(query,'i')}
+    }
     let maxLimit = 1;
     Blog.find(findQuery)
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
@@ -70,6 +64,22 @@ const searchBlogs = async (req,res) => {
         return res.status(500).json({error:"Internal Server Error"});
     })
     
+}
+
+const searchBlogsCount = async(req,res) =>{
+    let {tag,query} = req.body;
+    let findQuery;
+    if(tag){
+        findQuery = {tags:tag,draft:false};
+    }else if(query){
+        findQuery = {draft:false,title:new RegExp(query,'i')}
+    }
+    Blog.countDocuments(findQuery)
+    .then(count => {
+        return res.status(200).json({totalDocs:count});
+    }).catch(err =>{
+        return res.status(500).json({error:err.message});
+    })
 }
 
 const createBlog = async (req, res) => {

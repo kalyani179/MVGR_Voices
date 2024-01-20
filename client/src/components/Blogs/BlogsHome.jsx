@@ -19,8 +19,6 @@ const BlogsHome = () => {
     let {userAuth:{access_token}} = useContext(UserContext);
     let navigate = useNavigate();
 
-
-
     let categories = [
         "Programming",
         "Social Media",
