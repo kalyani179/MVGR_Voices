@@ -23,6 +23,7 @@ const BlogsHome = () => {
         "Programming",
         "Social Media",
         "Finances",
+        "Travel",
         "Cooking",
         "Photography",
         "Technology",

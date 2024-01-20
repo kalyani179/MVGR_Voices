@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import BlogsHome from './components/Blogs/BlogsHome';
 import BlogsSearchPage from './pages/BlogsSearchPage';
 import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
+import PageNotFound from './pages/404Page';
 
 export const UserContext = createContext({});
 
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="search/:query" element={<BlogsSearchPage />}/>
             </Route>
             <Route path="/editor" exact element={<Editor />} />
+            <Route path="*" element={<PageNotFound />} />
             
         </Routes>
       </BrowserRouter>

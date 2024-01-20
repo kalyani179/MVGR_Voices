@@ -82,6 +82,19 @@ const searchBlogsCount = async(req,res) =>{
     })
 }
 
+const searchUsers = async (req,res) =>{
+    let {query} = req.body;
+    User.find({"personal_info.username":new RegExp(query,'i')})
+    .limit(50)
+    .select("personal_info.fullname personal_info.username personal_info.profile_img")
+    .then(users=>{
+        res.status(200).json({users})
+    })
+    .catch(err=>{
+        return res.status(500).json({error:err.message});
+    })
+}
+
 const createBlog = async (req, res) => {
     try{
         let authorID = req.user;
@@ -130,4 +143,4 @@ const createBlog = async (req, res) => {
     
 }
 
-export { latestBlogs,allLatestBlogsCount,searchBlogsCount,trendingBlogs,searchBlogs,createBlog };
+export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,createBlog };
