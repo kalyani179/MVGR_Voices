@@ -44,14 +44,16 @@ const trendingBlogs = async (req,res) => {
 
 const searchBlogs = async (req,res) => {
     
-    let {tag,query,page} = req.body;
+    let {tag,query,author,page} = req.body;
     let findQuery;
     if(tag){
         findQuery = {tags:tag,draft:false};
     }else if(query){
         findQuery = {draft:false,title:new RegExp(query,'i')}
+    }else if(author) {
+        findQuery = {author,draft:false}
     }
-    let maxLimit = 1;
+    let maxLimit = 3;
     Blog.find(findQuery)
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
@@ -67,12 +69,14 @@ const searchBlogs = async (req,res) => {
 }
 
 const searchBlogsCount = async(req,res) =>{
-    let {tag,query} = req.body;
+    let {tag,author,query} = req.body;
     let findQuery;
     if(tag){
         findQuery = {tags:tag,draft:false};
     }else if(query){
         findQuery = {draft:false,title:new RegExp(query,'i')}
+    }else if(author) {
+        findQuery = {author,draft:false}
     }
     Blog.countDocuments(findQuery)
     .then(count => {
@@ -88,7 +92,19 @@ const searchUsers = async (req,res) =>{
     .limit(50)
     .select("personal_info.fullname personal_info.username personal_info.profile_img")
     .then(users=>{
-        res.status(200).json({users})
+        return res.status(200).json({users})
+    })
+    .catch(err=>{
+        return res.status(500).json({error:err.message});
+    })
+}
+
+const getProfile = async (req,res) => {
+    let {username} = req.body;
+    User.findOne({"personal_info.username":username})
+    .select("-personal_info.password -google_auth -updatedAt -blogs")
+    .then(user =>{
+        return res.status(200).json(user)
     })
     .catch(err=>{
         return res.status(500).json({error:err.message});
@@ -143,4 +159,4 @@ const createBlog = async (req, res) => {
     
 }
 
-export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,createBlog };
+export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog };

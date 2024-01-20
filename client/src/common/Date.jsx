@@ -5,3 +5,8 @@ export const getDate = (timestamp) =>{
     let date = new Date(timestamp);
     return `${date.getDate()} ${months[date.getMonth()]}`
 }
+
+export const getFullDate = (timestamp) => {
+    let date = new Date(timestamp); 
+    return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+}

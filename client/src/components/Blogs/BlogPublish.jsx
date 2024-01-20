@@ -89,7 +89,7 @@ const BlogPublish = () => {
             toast.dismiss(loadingToast);
             toast.success("Blog Published Successfully...");
             setTimeout(()=>{
-                navigate("/");
+                navigate("/blogs");
             },500);
         }).catch(({response})=>{
             e.target.classList.remove('disable');
