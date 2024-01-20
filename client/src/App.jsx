@@ -5,6 +5,7 @@ import Editor from './components/Blogs/Editor';
 import Home from './pages/Home';
 import BlogsHome from './components/Blogs/BlogsHome';
 import BlogsSearchPage from './pages/BlogsSearchPage';
+import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
 
 export const UserContext = createContext({});
 
@@ -21,9 +22,12 @@ const App = () => {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blogs" element={<BlogsHome />} />
+            <Route path="/" element={<BlogsNavbar />}>
+              <Route path="blogs" element={<BlogsHome />} />
+              <Route path="search/:query" element={<BlogsSearchPage />}/>
+            </Route>
             <Route path="/editor" exact element={<Editor />} />
-            <Route path="/search/:query" element={<BlogsSearchPage />}/>
+            
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

@@ -1,5 +1,5 @@
 import React, { useState,useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import UserNavigationPanel from './UserNavigationPanel';
 
@@ -15,6 +15,7 @@ const BlogsNavbar = () => {
         }
     }
     return (
+        <>
         <nav className="navbar border-b border-grey bg-white">
             {/* logo */}
             {/* <Link to="/" className="flex-none w-10">
@@ -61,6 +62,8 @@ const BlogsNavbar = () => {
                 </div>
             </div>
         </nav>
+        <Outlet />
+        </>
     )
 }
 

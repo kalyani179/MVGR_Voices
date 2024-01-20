@@ -101,7 +101,6 @@ const BlogsHome = () => {
         ? navigate("/") 
         : 
         <Animation>
-        <BlogsNavbar />
         <section className="h-cover flex justify-center gap-10">
             {/* latest blogs */}
             <div className="w-full">
