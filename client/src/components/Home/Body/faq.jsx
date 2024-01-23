@@ -1,7 +1,7 @@
 import {useState} from "react"
 
 
-const _faq = (props) => {
+const Faq = (props) => {
     const[item, setItem ]=useState(props.datas);
     const handletoggleActive = ()=>{
         let newActive =item.active === 1 ? 0 : 1;
@@ -29,4 +29,4 @@ const _faq = (props) => {
   )
 }
 
-export default _faq
+export default Faq
