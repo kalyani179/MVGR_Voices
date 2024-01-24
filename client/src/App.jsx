@@ -5,6 +5,9 @@ import Editor from './components/Blogs/Editor';
 import Home from './pages/Home';
 import BlogsHome from './components/Blogs/BlogsHome';
 import BlogsSearchPage from './pages/BlogsSearchPage';
+import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
+import PageNotFound from './pages/404Page';
+import UserProfilePage from './pages/UserProfilePage';
 
 export const UserContext = createContext({});
 
@@ -21,9 +24,14 @@ const App = () => {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blogs" element={<BlogsHome />} />
+            <Route path="/" element={<BlogsNavbar />}>
+              <Route path="blogs" element={<BlogsHome />} />
+              <Route path="search/:query" element={<BlogsSearchPage />}/>
+              <Route path="user/:id" element={<UserProfilePage />}/>
+            </Route>
             <Route path="/editor" exact element={<Editor />} />
-            <Route path="/search/:query" element={<BlogsSearchPage />}/>
+            <Route path="*" element={<PageNotFound />} />
+            
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
