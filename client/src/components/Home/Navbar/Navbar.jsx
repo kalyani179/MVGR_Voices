@@ -31,8 +31,8 @@ const Navbar = () => {
   
   return (
     <Animation>
-      <div className="navbar flex">
-      <div className={`w-full fixed top-0 left-0 opacity-85`}>
+      <div className="flex">
+      <div className={`w-full opacity-85`}>
             <div className="md:flex items-center justify-between py-4 pt-2 md:px-10 px-7">
             <div className=" cursor-pointer ">
                       <img width={125} height={125} src={logo} alt="Logo" />
