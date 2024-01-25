@@ -3,6 +3,7 @@ import UserAuth from "../../Authentication/UserAuth";
 import { UserContext } from "../../../App";
 import { removeFromSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
+import logo from "../../../assets/icons/logo.png"
 
 
 const Navbar = () => {
@@ -31,11 +32,11 @@ const Navbar = () => {
   return (
     <Animation>
       <div className="navbar flex">
-      <div className={`w-full fixed top-0 left-0 opacity-80`}>
-            <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
-              <div className="font-bold text-2xl cursor-pointer font-inter text-dark-grey">
-                Mvgr Voices
-              </div>
+      <div className={`w-full fixed top-0 left-0 opacity-85`}>
+            <div className="md:flex items-center justify-between py-4 pt-2 md:px-10 px-7">
+            <div className=" cursor-pointer ">
+                      <img width={125} height={125} src={logo} alt="Logo" />
+            </div>
               <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
                   <ion-icon name={open ?"close":"menu"}></ion-icon>
               </div>

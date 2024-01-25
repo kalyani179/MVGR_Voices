@@ -9,8 +9,10 @@ const Body = () => {
                 <video autoPlay loop muted className="w-full max-h-screen object-cover">
                     <source src={MVGRVideo} type="video/mp4"/>
                 </video>
-                <div className="absolute inset-0 bg-black bg-opacity-60 opacity-85">
+                <div className="absolute inset-0 bg-black bg-opacity-80 opacity-80">
                     <Navbar />
+                    <h1 className="text-6xl text-white font-extrabold mt-44 tracking-wide center">Welcome to <span className="text-6xl font-gelasio font-extrabold ml-6 text-primary"> MVGR VOICES</span></h1>
+                    <p className="text-xl text-white font-semibold mt-8 tracking-widest center uppercase">It's the best platform for Students to share their cool stories in podcasts and blogs.</p>
                 </div>
             </div>
             
