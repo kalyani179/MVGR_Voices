@@ -12,6 +12,14 @@ import { UserContext } from '../../App';
 
 const UserAuth = ({type,close,open}) => {
 
+    // to make the background unscrollable when signing up.
+    useEffect(()=>{
+        document.body.style.overflowY = "hidden";
+        return () => {
+            document.body.style.overflowY = "scroll";
+        };
+    },[])
+
     const [closeTab, setCloseTab] = useState(false);
 
     let {userAuth:{access_token},setUserAuth} = useContext(UserContext);
