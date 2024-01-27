@@ -22,7 +22,7 @@ const UserAuth = ({type,close,open}) => {
 
     const [closeTab, setCloseTab] = useState(false);
 
-    let {userAuth:{access_token},setUserAuth} = useContext(UserContext);
+    let {userAuth:{access_token},setUserAuth,isValidToken} = useContext(UserContext);
     console.log(access_token);
 
     /* To Translate the h5,change colors when clicked on the input */

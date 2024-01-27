@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post("/signup",signup);
 router.post("/signin",signin);
-router.get("/:id/verify/:token/",verifyEmailToken);
+router.post("/verifyEmailToken",verifyEmailToken);
 router.post("/google-auth",googleAuth);
 
 export default router;

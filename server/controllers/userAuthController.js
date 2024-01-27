@@ -1,11 +1,9 @@
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
 import nodemailer from "nodemailer";
-import crypto from "crypto";
 
 // Models
 import User from "../models/UserSchema.js";
-import Token from "../models/Token.js";
 
 // Firebase
 import admin from "firebase-admin";
@@ -75,16 +73,10 @@ export const signup = async(req, res) =>{
             personal_info:{fullname,email,password,username}
         })
         await newUser.save();
-        // res.status(200).json(formatDatatoSend(newUser));
-        console.log(`${newUser._id}`)
-        const token = await new Token({
-			userId: newUser._id,
-			token: crypto.randomBytes(32).toString("hex"),
-		}).save();
-        
-        await verifyMail(email,`http://localhost:3000/${newUser._id}/verify/${token.token}`);
-        return res.status(200).json({message:"An email is sent to your Account.Please verify!"});
-        // return res.status(200).json({"status":"User has Signed Up Successfully!"})
+        let {access_token} = formatDatatoSend(newUser);
+        console.log(access_token);
+        await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
+        return res.status(200).json(formatDatatoSend(newUser));
     }
     catch(err){
         console.log(err.message);
@@ -94,21 +86,19 @@ export const signup = async(req, res) =>{
 
 export const verifyEmailToken = async (req,res) =>{
     try {
-		const user = await User.findOne({ _id: req.params.id });
+        let {username,token} = req.body;
+		const user = await User.findOne({ "personal_info.username" : username });
 		if (!user) return res.status(400).send({ message: "Invalid link" });
 
-		const token = await Token.findOne({
-			userId: user._id,
-			token: req.params.token,
-		});
-		if (!token) return res.status(400).send({ message: "Invalid link" });
+        const token1 = jwt.verify(token,process.env.SECRET_ACCESS_KEY);
+		if (!token1) return res.status(400).send({ message: "Invalid link" });
 
-		await user.updateOne({ _id: user._id, "personal_info.verified": true });
+		await user.updateOne({ "personal_info.username":username, "personal_info.verified": true });
 		
-		res.status(200).send({ message: "Email verified successfully" });
+		return res.json({status:"okay"});
 	} catch (error) {
         console.log(error.message);
-		res.status(500).send({ message: "Internal Server Error" });
+		return res.status(500).json({ message: "Internal Server Error" });
 	}
 }
 

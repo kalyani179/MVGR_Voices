@@ -1,4 +1,8 @@
-GET http://localhost:3000/65b4c2590e1b0e3d0aceb3b2/verify/742d8b0b5e01ab58722e7c804183d599ef795fd526662de3bea1d8d67947e96a
+POST http://localhost:3000/verifyEmailToken
 Content-Type: application/json
 
-
+{
+    "username": "dantulurikalyani999",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjUwYjc5MGZkNjc1NzY2NWE5NWY5NCIsImlhdCI6MTcwNjM2Mzc2OX0.iPXFbW493RFk36GPcM-gCkUsvF3eOLcsdi84-LMlUIs"
+}
+//verify/
