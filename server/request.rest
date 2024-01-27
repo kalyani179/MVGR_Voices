@@ -1,6 +1,4 @@
-POST http://localhost:3000/get-profile
+GET http://localhost:3000/65b4c2590e1b0e3d0aceb3b2/verify/742d8b0b5e01ab58722e7c804183d599ef795fd526662de3bea1d8d67947e96a
 Content-Type: application/json
 
-{
-    "username" : "dantulurikalyani999"
-}
+
