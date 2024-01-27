@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react'
 import toast,{Toaster} from "react-hot-toast";
-import { Fade, Slide } from "react-awesome-reveal";
+import {Slide } from "react-awesome-reveal";
 
 import { authWithGoogle } from '../../common/firebase';
 import GoogleAuth from './GoogleAuth';

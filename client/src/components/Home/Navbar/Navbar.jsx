@@ -3,6 +3,7 @@ import UserAuth from "../../Authentication/UserAuth";
 import { UserContext } from "../../../App";
 import { removeFromSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
+import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png"
 
 
@@ -13,9 +14,14 @@ const Navbar = () => {
   const [showSignin,setShowSignin] = useState(false);
 
   const signOut = () => {
-    // window.location.reload();
-    removeFromSession("user");
-    setUserAuth({access_token:null});
+    let loadingToast = toast.loading("Signing Out...");
+    setTimeout(()=>{
+      toast.dismiss(loadingToast);
+      toast.success("Signed Out Successfully...");
+      removeFromSession("user");
+      setUserAuth({access_token:null});
+    },500);
+
   }
   const [activeLink, setActiveLink] = useState("Home");
 
@@ -31,6 +37,7 @@ const Navbar = () => {
   
   return (
     <Animation>
+    <Toaster />
       <div className="flex">
       <div className={`w-full opacity-85`}>
             <div className="md:flex items-center justify-between py-4 pt-2 md:px-10 px-7">
