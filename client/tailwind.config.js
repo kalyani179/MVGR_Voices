@@ -13,7 +13,8 @@ module.exports = {
       'twitter': '#1DA1F2',
       'purple': '#660066',
       'icons' : '#999999',
-      'primary' : '#e86f6f'
+      'primary' : '#e86f6f',
+      'green' : '#32CD32'
     },
     screens: {
       'sm': {'max': '767px'},

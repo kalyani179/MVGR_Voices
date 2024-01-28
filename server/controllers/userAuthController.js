@@ -49,7 +49,9 @@ const verifyMail = async(email,link) => {
             text:"This Email is sent to verify your account.",
             html:`
             <div>
-                <a href=${link}>Click Here to Login</a>
+                <p>Verify your email Address to complete signup and to signin to your account!</p>
+                <p>This link <b>expires in 6 hours</b>.</p>
+                <p>Click <a href=${link}>here</a> to proceed.</p>
             </div>
             `
         })
