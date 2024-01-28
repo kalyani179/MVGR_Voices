@@ -66,12 +66,6 @@ const UserAuth = ({type,close,open}) => {
     }
 
     const userAuthThroughServer = (route,formData) =>{
-        if(route==="signup"){
-            let loading = toast.loading("signing up...");
-            setTimeout(()=>{
-                toast.remove(loading);
-            },500)
-        }
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/"+route,formData)
         .then(async ({data})=>{console.log(data);
             if(route==="signup"){
@@ -110,6 +104,12 @@ const UserAuth = ({type,close,open}) => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         let formData = data;
+        if(type==="signup"){
+            let loading = toast.loading("signing up...");
+            setTimeout(()=>{
+                toast.remove(loading);
+            },2000)
+        }
         userAuthThroughServer(type,formData);
     }
     const handleGoogleAuth = (e) =>{

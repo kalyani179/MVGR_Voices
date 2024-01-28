@@ -35,7 +35,7 @@ const EmailVerification = () => {
                 <div className="center flex-col space-y-10">
                     <i class="fi fi-ss-check-circle text-9xl text-green mt-28"></i>
                     <BeatLoader color='#32CD32'/>
-                    <p className="text-2xl font-inter">Your Email Has been Verified Successfully! You Can now Signin to access your account!</p>
+                    <p className="text-2xl font-inter">Your Email has been <span className="text-2xl font-inter font-semibold text-green">Verified Successfully!</span> You Can now <a href="/" className="text-2xl font-inter font-semibold text-primary underline">Sign In</a> to access your account!</p>
                 </div>
                 :
                 <div className="center"> Couldn't verify your EmailId or Token has expired.Try again!</div>
