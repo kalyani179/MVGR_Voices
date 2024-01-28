@@ -45,7 +45,7 @@ const BlogsHome = () => {
             setBlog(formatedData);
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err.message);
         });
     };
     const fetchBlogsByCategory = ({page=1}) => {
@@ -159,7 +159,7 @@ const BlogsHome = () => {
                     <div className="flex gap-3 flex-wrap">
                         {categories.map((category, index) => {
                             return (
-                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? "bg-black text-white" : ""}`} key={index}>
+                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? "bg-primary text-white" : ""}`} key={index}>
                                 {category}
                                 </button>
                             );
@@ -180,7 +180,7 @@ const BlogsHome = () => {
                             trendingBlogs.map((blog, index) => {
                             return (
                                 <Animation transition={{ duration: 1, delay: index * 0.1 }}>
-                                    <TrendingBlogPostCard blog={blog} index={index} />
+                                    {/* <TrendingBlogPostCard blog={blog} index={index} /> */}
                                 </Animation>
                             );
                             })

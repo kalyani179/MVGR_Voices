@@ -9,7 +9,7 @@ const InPageNavigation = ({routes,defaultHidden=[],defaultActiveTab = 0,children
                     routes.map((route,index)=>{
                         return(
                             <button key={index} 
-                            onClick={()=>{setActiveTab(index)}} className={`p-4 px-5 capitalize  ${activeTab===index ? "text-black border-b border-black" : "text-dark-grey"} ${defaultHidden.includes(route) ? "md:hidden":""}`}>{route}</button>
+                            onClick={()=>{setActiveTab(index)}} className={`p-4 px-5 capitalize text-lg tracking-wide  ${activeTab===index ? "text-primary font-medium border-b-2 border-primary" : "text-dark-grey"} ${defaultHidden.includes(route) ? "md:hidden":""}`}>{route}</button>
                         )
                     })
                 }
