@@ -116,6 +116,9 @@ export const signin = async(req, res) =>{
         if(user.personal_info.password !== password){
             return res.status(400).json({"error":"Incorrect Password!"});
         }
+        if(user.personal_info.verified !== true){
+            return res.status(400).json({"error":"This email is not verified!"})
+        }
         return res.status(200).json(formatDatatoSend(user));
         // return res.status(200).json({"status":"User has Signed In Successfully!"})
     }

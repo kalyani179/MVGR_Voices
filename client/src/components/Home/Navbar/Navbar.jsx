@@ -8,7 +8,7 @@ import logo from "../../../assets/icons/logo.png"
 
 
 const Navbar = () => {
-  const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
+  const {userAuth:{access_token},setUserAuth,isValidToken,setValidToken} = useContext(UserContext);
 
   const [showSignup,setShowSignup] = useState(false);
   const [showSignin,setShowSignin] = useState(false);
@@ -70,8 +70,12 @@ const Navbar = () => {
                         </>
                         : 
                         <>
+                        {
+                          isValidToken ?
+                          <button onClick={()=>setShowSignin(true)} className="btn-purple md:text-xl sm:text-sm font-inter tracking-wide">Sign In</button>
+                          :
                           <button onClick={()=>setShowSignup(true)} className="btn-purple md:text-xl sm:text-sm font-inter tracking-wide">Sign Up</button>
-                          {/* <button onClick={()=>setShowSignin(true)} className="btn-purple">SignIn</button> */}
+                        }
                         </>
                       }              
                   </div>                                    

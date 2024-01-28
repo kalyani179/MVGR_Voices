@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useContext, useEffect} from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UserContext } from '../../App';
+import Loader from '../../common/Loader';
 
 const EmailVerification = () => {
+    let navigate = useNavigate();
     let {username} = useParams();
     let {access_token} = useParams();
     let {isValidToken,setValidToken} = useContext(UserContext);
@@ -12,6 +14,7 @@ const EmailVerification = () => {
         .then(response => {
             if(response.data.status === "okay"){
                 setValidToken(true);
+                console.log(isValidToken);
             }
         })
     }   
@@ -23,8 +26,13 @@ const EmailVerification = () => {
             {
                 isValidToken ?
                 <div className="center">
-                    Email Has been verified. YOu can now
-                    <Link to="/">login</Link>
+                    Your Email Has been Verified! You are redirected Back to Home.
+                    <Loader />
+                    {
+                        setTimeout(()=>{
+                            navigate("../");
+                        },5000)
+                    }
                 </div>
                 :
                 <div> Couldn't verify your EmailId or Token has expired.Try again!</div>
@@ -33,4 +41,4 @@ const EmailVerification = () => {
     )
 }
 
-export default EmailVerification
+export default EmailVerification;
