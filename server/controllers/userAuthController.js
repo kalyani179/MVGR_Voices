@@ -50,7 +50,6 @@ const verifyMail = async(email,link) => {
             html:`
             <div>
                 <p>Verify your email Address to complete signup and to signin to your account!</p>
-                <p>This link <b>expires in 6 hours</b>.</p>
                 <p>Click <a href=${link}>here</a> to proceed.</p>
             </div>
             `
@@ -68,7 +67,11 @@ export const signup = async(req, res) =>{
         let {fullname,email,password} = req.body;
         let exist = await User.findOne({"personal_info.email":email});
         if(exist){
-            return res.status(400).json({"error" : "User has already Signed up!"});
+            if(exist.personal_info.verified === true){
+                return res.status(400).json({"error" : "User has already Signed up!"});
+            }else if(exist.personal_info.verified === false){
+                return res.status(400).json({"error" : "We have already sent you an Email to verify your account! Please Check !!"});
+            }
         }
         let username = await generateUsername(email);
         let newUser = new User({
@@ -93,7 +96,7 @@ export const verifyEmailToken = async (req,res) =>{
 		if (!user) return res.status(400).send({ message: "Invalid link" });
 
         const token1 = jwt.verify(token,process.env.SECRET_ACCESS_KEY);
-		if (!token1) return res.status(400).send({ message: "Invalid link" });
+		if (!token1) return res.status(400).send({ message: "This Email has expired!" });
 
 		await user.updateOne({ "personal_info.username":username, "personal_info.verified": true });
 		

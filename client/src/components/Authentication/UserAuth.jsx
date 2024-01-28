@@ -105,7 +105,7 @@ const UserAuth = ({type,close,open}) => {
         e.preventDefault();
         let formData = data;
         if(type==="signup"){
-            let loading = toast.loading("signing up...");
+            let loading = toast.loading("please wait...");
             setTimeout(()=>{
                 toast.remove(loading);
             },2000)
@@ -140,10 +140,10 @@ const UserAuth = ({type,close,open}) => {
             <Toaster
                 toastOptions={{
                     success:{
-                        duration: 1700
+                        duration: 2000
                     },
                     error: {
-                        duration: 2500
+                        duration: 3500
                     }
                 }}
             />

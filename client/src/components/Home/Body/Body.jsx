@@ -3,6 +3,8 @@ import MVGRVideo from "../../../assets/videos/MVGR.mp4";
 import Navbar from '../Navbar/Navbar';
 import Faq from './FAQ';
 import { Fade, Zoom } from 'react-awesome-reveal';
+import MiddleSection from './MiddleSection';
+import Content from './Content';
 
 
 const Body = () => {
@@ -37,7 +39,16 @@ const Body = () => {
                     <p className="text-xl text-white font-semibold mt-8 tracking-widest center uppercase">It's the best platform for Students to share their cool stories in podcasts and blogs.</p>
                 </div>
             </div>
-            <div className="bg-black pt-10 flex items-center justify-center "> 
+            <div className="bg-black">
+                {Content.map(Content =>(
+                    <MiddleSection 
+                        title={Content.title}
+                        description={Content.description}
+                        img={Content.img}
+                    />   
+                ))}
+            </div>                
+            <div className="bg-black pt-20 flex items-center justify-center "> 
             <Fade direction='down' delay={0.2}>                    
                 <h1 className="text-6xl font-merriweather font-semibold leading-normal text-primary">FAQ's</h1> 
             </Fade>
