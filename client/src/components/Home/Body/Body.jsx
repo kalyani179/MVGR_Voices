@@ -7,6 +7,8 @@ import Blog2 from './Blog2';
 import Faq from './Faq';
 import {useState } from "react"
 import { Fade } from "react-awesome-reveal";
+import Content from './Content';
+import PodBlog from './PodBlog';
 const Body = () => {
     const [list]=useState([
         {
@@ -29,14 +31,19 @@ const Body = () => {
     ]);
     return (       
 
-        <div className="bg-black">
-                    
-           
+        <div className="bg-black">          
             <Navbar />    
-             <Top/>  
-                                  
-            <Pod1/>
-            <Blog2/>
+            <Top/>
+            <div>
+                {Content.map(Content =>(
+                    <PodBlog 
+                        title={Content.title}
+                        description={Content.description}
+                        img={Content.img}
+                    />   
+                ))}
+            </div>                              
+            
             <div className=" mt-4 flex items-center justify-center "> 
             <Fade direction='down'>                    
                 <h1 className="text-[52px] font-semibold mb-4 leading-normal text-primary">FAQ</h1> 

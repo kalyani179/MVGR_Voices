@@ -5,6 +5,7 @@ import { removeFromSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
 import logo from "C:/MyLearning/MVGR_Voices/client/src/assets/images/Icons/logo.png"
 import { Fade } from "react-awesome-reveal";
+//import { Fade } from "react-awesome-reveal";
 const Navbar = () => {
   const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
 
@@ -30,15 +31,17 @@ const Navbar = () => {
   
   return (
     <Animation>
-        <Fade direction="down">
+       
 
         
           <div className="navbar flex ">
           <div className={`w-full mt-12 left-0 opacity-80`}>
                 <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
+                  
                   <div className=" cursor-pointer ">
                       <img src={logo} alt="Logo" />
                   </div>
+                 
                   <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
                       <ion-icon name={open ?"close":"menu"}></ion-icon>
                   </div>
@@ -81,7 +84,6 @@ const Navbar = () => {
 
          
 
-    </Fade >
     </Animation>
   )
 }
