@@ -4,7 +4,7 @@ const Content = [
 
     {
         title: "Podcast",
-        description: " Here, you have the freedom to upload a diverse range of podcasts, from motivational speeches that ignite inspiration to captivating stories that resonate with the heart. Share your innovative ideas,or insightful interview experiences, thought-provoking discussions, and more. Your voice, your content - let your creativity flow on MVGR VOICES!",
+        description: `Here, you have the freedom to upload a diverse range of podcasts, from motivational speeches that ignite inspiration to captivating stories that resonate with the heart. Share your innovative ideas,or insightful interview experiences, thought-provoking discussions, and more. Your voice, your content - let your creativity flow on MVGR VOICES!`,
         img: podcast
     },
     {
