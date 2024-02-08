@@ -33,7 +33,7 @@
         @apply py-4 px-[5vw] md:px-[7vw] lg:px-[10vw];
     }
     .center {
-        @apply flex justify-center items-center
+        @apply block mx-auto
     }
     .auth-input {
         @apply border-2 border-b-input border-t-transparent border-l-transparent border-r-transparent w-80 my-3 p-0.5 pl-7 text-base font-inter focus:outline-none bg-white;

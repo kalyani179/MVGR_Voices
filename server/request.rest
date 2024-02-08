@@ -1,8 +1,6 @@
-POST http://localhost:3000/verifyEmailToken
+POST http://localhost:3000/get-blog
 Content-Type: application/json
 
 {
-    "username": "dantulurikalyani999",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YjUwYjc5MGZkNjc1NzY2NWE5NWY5NCIsImlhdCI6MTcwNjM2Mzc2OX0.iPXFbW493RFk36GPcM-gCkUsvF3eOLcsdi84-LMlUIs"
+    "blog_id": "ML7i3VLaQ2t4Iy-HVYXHJEr"
 }
-//verify/

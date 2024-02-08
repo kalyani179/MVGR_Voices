@@ -9,6 +9,7 @@ import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
 import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
+import BlogPage from './components/Blogs/BlogPage/BlogPage';
 
 export const UserContext = createContext({});
 
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="blogs" element={<BlogsHome />} />
               <Route path="search/:query" element={<BlogsSearchPage />}/>
               <Route path="user/:id" element={<UserProfilePage />}/>
+              <Route path="blog/:blog_id" element={<BlogPage />}/>
             </Route>
             <Route path="/editor" exact element={<Editor />} />
             <Route path="*" element={<PageNotFound />} />
