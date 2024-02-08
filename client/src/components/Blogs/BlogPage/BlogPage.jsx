@@ -39,7 +39,7 @@ const BlogPage = () => {
         <Animation>
             {
                 loading ? <Loader /> :
-                <div className="max-w-[900px] center py-10 px-[5vw]">
+                <div className="max-w-[900px] mx-auto block py-10 px-[5vw]">
                     <img src={defaultBanner} className="aspect-video" alt="banner"/>
                     <div className="mt-12">
                         <h2>{title}</h2>
