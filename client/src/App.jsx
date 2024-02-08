@@ -8,7 +8,7 @@ import BlogsSearchPage from './pages/BlogsSearchPage';
 import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
 import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
-
+import Pod from './components/Podcast/Pod';
 export const UserContext = createContext({});
 
 const App = () => {
@@ -31,6 +31,7 @@ const App = () => {
             </Route>
             <Route path="/editor" exact element={<Editor />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route path="podcast" element={<Pod />}></Route>
             
         </Routes>
       </BrowserRouter>

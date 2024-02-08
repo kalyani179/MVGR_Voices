@@ -4,7 +4,7 @@ import { UserContext } from "../../../App";
 import { removeFromSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
 import logo from "C:/MyLearning/MVGR_Voices/client/src/assets/images/Icons/logo.png"
-import { Fade } from "react-awesome-reveal";
+//import { Fade } from "react-awesome-reveal";
 //import { Fade } from "react-awesome-reveal";
 const Navbar = () => {
   const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
@@ -21,7 +21,7 @@ const Navbar = () => {
 
   let Links=[
     {name:"Home",link:"/"},
-    {name:"Podcast",link:"/"},
+    {name:"Podcast",link:"/podcast"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/"},
     {name:"Subscribe",link:"/"},

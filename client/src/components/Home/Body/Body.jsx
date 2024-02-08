@@ -2,8 +2,8 @@ import React from 'react'
 //import MVGRVideo from "../../../assets/videos/MVGR.mp4";
 import Navbar from '../Navbar/Navbar';
 import Top from 'C:/MyLearning/MVGR_Voices/client/src/components/Home/Body/Top.jsx'
-import Pod1 from './Pod1';
-import Blog2 from './Blog2';
+//import Pod1 from './Pod1';
+//import Blog2 from './Blog2';
 import Faq from './Faq';
 import {useState } from "react"
 import { Fade } from "react-awesome-reveal";
