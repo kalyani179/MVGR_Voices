@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
+import nodemailer from "nodemailer";
 
 // Models
 import User from "../models/UserSchema.js";
@@ -20,9 +21,9 @@ const generateUsername = async (email) => {
     isUsernameNotUnique ? username += nanoid().substring(0,3) : "";
     return username;
 }
-
+var access_token;
 const formatDatatoSend = (user) => {
-    const access_token = jwt.sign({id:user._id},process.env.SECRET_ACCESS_KEY)
+    access_token = jwt.sign({id:user._id},process.env.SECRET_ACCESS_KEY)
     return {
         access_token,
         profile_img : user.personal_info.profile_img,
@@ -31,25 +32,79 @@ const formatDatatoSend = (user) => {
     }
 }
 
+const verifyMail = async(email,link) => {
+    try{
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: "dantulurikalyani999@gmail.com",
+                pass: "ihmwfquaqzrjnhtq"
+            }
+        })
+        //send email
+        await transporter.sendMail({
+            from:"dantulurikalyani999@gmail.com", //sender mail
+            to:email, //reciever mail
+            subject:"Account Verification",
+            text:"This Email is sent to verify your account.",
+            html:`
+            <div>
+                <p>Verify your email Address to complete signup and to signin to your account!</p>
+                <p>Click <a href=${link}>here</a> to proceed.</p>
+            </div>
+            `
+        })
+        console.log("mail sent successfully");
+    }
+    catch(err){
+        console.log(err.message);
+        return res.status(500).json({"error":"Internal Server Error"});
+    }
+}
+
 export const signup = async(req, res) =>{
     try{
         let {fullname,email,password} = req.body;
         let exist = await User.findOne({"personal_info.email":email});
         if(exist){
-            return res.status(400).json({"error" : "User has already Signed up!"});
+            if(exist.personal_info.verified === true){
+                return res.status(400).json({"error" : "User has already Signed up!"});
+            }else if(exist.personal_info.verified === false){
+                return res.status(400).json({"error" : "We have already sent you an Email to verify your account! Please Check !!"});
+            }
         }
         let username = await generateUsername(email);
         let newUser = new User({
             personal_info:{fullname,email,password,username}
         })
         await newUser.save();
+        let {access_token} = formatDatatoSend(newUser);
+        console.log(access_token);
+        await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
         return res.status(200).json(formatDatatoSend(newUser));
-        // return res.status(200).json({"status":"User has Signed Up Successfully!"})
     }
     catch(err){
         console.log(err.message);
         return res.status(500).json({"error":"Internal Server Error"});
     }
+}
+
+export const verifyEmailToken = async (req,res) =>{
+    try {
+        let {username,token} = req.body;
+		const user = await User.findOne({ "personal_info.username" : username });
+		if (!user) return res.status(400).send({ message: "Invalid link" });
+
+        const token1 = jwt.verify(token,process.env.SECRET_ACCESS_KEY);
+		if (!token1) return res.status(400).send({ message: "This Email has expired!" });
+
+		await user.updateOne({ "personal_info.username":username, "personal_info.verified": true });
+		
+		return res.json({status:"okay"});
+	} catch (error) {
+        console.log(error.message);
+		return res.status(500).json({ message: "Internal Server Error" });
+	}
 }
 
 export const signin = async(req, res) =>{
@@ -65,6 +120,9 @@ export const signin = async(req, res) =>{
         }
         if(user.personal_info.password !== password){
             return res.status(400).json({"error":"Incorrect Password!"});
+        }
+        if(user.personal_info.verified !== true){
+            return res.status(400).json({"error":"This email is not verified!"})
         }
         return res.status(200).json(formatDatatoSend(user));
         // return res.status(200).json({"status":"User has Signed In Successfully!"})

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState, useEffect } from 'react'
 import toast,{Toaster} from "react-hot-toast";
-import { Fade, Slide } from "react-awesome-reveal";
+import {Slide } from "react-awesome-reveal";
 
 import { authWithGoogle } from '../../common/firebase';
 import GoogleAuth from './GoogleAuth';
@@ -11,6 +11,14 @@ import { UserContext } from '../../App';
 
 
 const UserAuth = ({type,close,open}) => {
+
+    // to make the background unscrollable when signing up.
+    useEffect(()=>{
+        document.body.style.overflowY = "hidden";
+        return () => {
+            document.body.style.overflowY = "scroll";
+        };
+    },[])
 
     const [closeTab, setCloseTab] = useState(false);
 
@@ -59,16 +67,31 @@ const UserAuth = ({type,close,open}) => {
 
     const userAuthThroughServer = (route,formData) =>{
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/"+route,formData)
-        .then(({data})=>{console.log(data);
-            storeInSession("user",JSON.stringify(data));
-            setUserAuth(data);
-            setData({fullname:"",email:"",password:""});
-            // window.location.reload(); // To make animation
-            toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully");
+        .then(async ({data})=>{console.log(data);
+            if(route==="signup"){
+                let loading = toast.loading("sending mail...");
+                setTimeout(()=>{
+                    toast.remove(loading);
+                    toast.success("Email has been sent to your Email!");
+                },500)
+            }
+            if(route==="signin"){
+                storeInSession("user",JSON.stringify(data));
+                let loadingSignin = toast.loading("signing in...")
+                setUserAuth(data);
+                setData({fullname:"",email:"",password:""});
+                // window.location.reload(); // To make animation
+                setTimeout(()=>{
+                    toast.remove(loadingSignin);
+                    toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully");
+                },500)
+            }   
             setTimeout(()=>{
                 setCloseTab(true);
-            },1000);
-        })
+            },500);
+        }
+            
+        )
         .catch(({response})=>{
             // To clear the input fields in the case of error
             setInputNameValue('');
@@ -81,6 +104,12 @@ const UserAuth = ({type,close,open}) => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         let formData = data;
+        if(type==="signup"){
+            let loading = toast.loading("please wait...");
+            setTimeout(()=>{
+                toast.remove(loading);
+            },2000)
+        }
         userAuthThroughServer(type,formData);
     }
     const handleGoogleAuth = (e) =>{
@@ -111,10 +140,10 @@ const UserAuth = ({type,close,open}) => {
             <Toaster
                 toastOptions={{
                     success:{
-                        duration: 1700
+                        duration: 2000
                     },
                     error: {
-                        duration: 2500
+                        duration: 3500
                     }
                 }}
             />

@@ -1,6 +1,6 @@
-POST http://localhost:3000/get-profile
+POST http://localhost:3000/get-blog
 Content-Type: application/json
 
 {
-    "username" : "dantulurikalyani999"
+    "blog_id": "ML7i3VLaQ2t4Iy-HVYXHJEr"
 }

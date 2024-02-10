@@ -11,6 +11,7 @@ import { UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import FilterPaginationData from "../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../common/LoadMoreDataBtn";
+import { BeatLoader } from "react-spinners";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
@@ -45,7 +46,7 @@ const BlogsHome = () => {
             setBlog(formatedData);
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err.message);
         });
     };
     const fetchBlogsByCategory = ({page=1}) => {
@@ -111,7 +112,10 @@ const BlogsHome = () => {
             >
                 <div>
                 {
-                    blogs===null ? <Loader /> : 
+                    blogs===null ? 
+                    <div className="center">
+                            <BeatLoader color="#e86f6f" />
+                    </div> : 
                     (
                         !blogs.results.length ? 
                         <NoBlogsDataMessage message={"No Blogs Published"}/>
@@ -125,12 +129,19 @@ const BlogsHome = () => {
                         })
                     )
                 }
-                <LoadMoreDataBtn state={blogs} fetchDataFunc={(pageState==="home"? fetchLatestBlogs : fetchBlogsByCategory)}/>
+                <div className="center">
+                    <LoadMoreDataBtn state={blogs} fetchDataFunc={(pageState==="home"? fetchLatestBlogs : fetchBlogsByCategory)}/>
+                </div>
+               
                 </div>
                 
                 <div>
                 {
-                    trendingBlogs===null ? <Loader /> : 
+                    trendingBlogs===null ?  
+                    <div className="center">
+                            <BeatLoader color="#e86f6f" />
+                    </div> 
+                    : 
                     (
                         !trendingBlogs.length ? 
                         <NoBlogsDataMessage message={"No Blogs Published"}/>
@@ -153,13 +164,13 @@ const BlogsHome = () => {
             <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-grey pl-8 pt-3 sm:hidden">
             <div className="flex flex-col gap-10">
                 <div>
-                    <h1 className="font-medium text-xl mb-8">
+                    <h1 className="font-medium text-primary text-xl mb-8">
                         Stories From All Interests
                     </h1>
                     <div className="flex gap-3 flex-wrap">
                         {categories.map((category, index) => {
                             return (
-                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? "bg-black text-white" : ""}`} key={index}>
+                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? "bg-primary text-white" : ""}`} key={index}>
                                 {category}
                                 </button>
                             );
@@ -167,11 +178,13 @@ const BlogsHome = () => {
                     </div>
                 </div>
                 <div>
-                    <h1 className="font-medium text-xl mb-8">
-                        Trending <i className="fi fi-rr-arrow-trend-up"></i>
+                    <h1 className="font-medium text-xl text-primary mb-8">
+                        Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                     </h1>
                     {trendingBlogs === null ? 
-                        <Loader />
+                        <div className="center">
+                            <BeatLoader color="#e86f6f" />
+                        </div>
                         : 
                         (
                             !trendingBlogs.length ? 
