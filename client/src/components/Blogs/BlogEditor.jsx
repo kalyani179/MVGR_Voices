@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import defaultBanner from "../../assets/images/Blogs/default_banner.png"
 import Animation from "../../common/Animation";
 
@@ -12,6 +12,8 @@ import { UserContext } from "../../App";
 
 const BlogEditor = () => {
 
+  let {blog_id} = useParams();
+
   let {blog,blog:{title,banner,content,tags,desc},setBlog,textEditor,setTextEditor,setEditorState} = useContext(EditorContext);
 
   let {userAuth:{access_token}} = useContext(UserContext);
@@ -22,7 +24,7 @@ const BlogEditor = () => {
     if(!textEditor.isReady){
       setTextEditor(new EditorJS({
         holder : "textEditor",
-        data : content,
+        data : Array.isArray(content) ? content[0] : content,
         tools: tools,
         placeholder : "Let's write an awesome story"
       }))
@@ -90,7 +92,7 @@ const BlogEditor = () => {
                 title, banner, desc, content, tags, draft:true
               }
               textEditor.save().then(content => {
-                axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/create-blog",blogObj,{
+                axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/create-blog",{...blogObj,id:blog_id},{
                   headers:{
                       'Authorization' : `Bearer ${access_token}`
                   }
