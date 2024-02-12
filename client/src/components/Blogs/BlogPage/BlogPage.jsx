@@ -6,12 +6,13 @@ import Loader from '../../../common/Loader';
 import defaultBanner from "../../../assets/images/Blogs/default_banner.png"
 import { getFullDate } from '../../../common/Date';
 import BlogInteraction from './BlogInteraction';
+import BlogPostCard from '../HomeBlogPostCard';
+import BlogContent from './BlogContent';
 
 export const blogStructure = {
     title:'',
     desc:'',
     content:[],
-    tags:[],
     author:{personal_info:{}},
     banner:'',
     publishedAt:''
@@ -22,11 +23,17 @@ export const BlogContext = createContext({});
 const BlogPage = () => {
     let {blog_id} = useParams();
     const [blog,setBlog] = useState(blogStructure);
+    const [similarBlogs,setSimilarBlogs] = useState(null);
     const [loading,setLoading] = useState(true);
     let {title,content,banner,author:{personal_info:{fullname,username:author_username,profile_img}},publishedAt} = blog;
     const fetchBlog = ()=>{
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/get-blog",{blog_id})
         .then(({data : {blog}}) => {
+            axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{tag:blog.tags[0],limit:5,eliminate_blog:blog_id})
+            .then(({data})=>{
+                setSimilarBlogs(data.blogs);
+                console.log(data.blogs);
+            })
             setBlog(blog);
             setLoading(false);
         })
@@ -36,8 +43,15 @@ const BlogPage = () => {
         })
     }
     useEffect(()=>{
+        resetStates();
         fetchBlog();
-    },[])
+    },[blog_id])
+
+    const resetStates = () =>{
+        setBlog(blogStructure);
+        setSimilarBlogs(null);
+        setLoading(true);
+    }
     return (
         <Animation>
             {
@@ -61,6 +75,32 @@ const BlogPage = () => {
                             </div>
                         </div>
                         <BlogInteraction />
+                        <div className='my-12 font-gelasio blog-page-content'>
+                            {
+                                content[0].blocks.map((block,i)=>{
+                                    return <div key={i} className="my-4 md:my-8">
+                                        <BlogContent block={block} />
+                                    </div>
+                                })
+                            }
+                        </div>
+                        <BlogInteraction />
+                        {
+                            similarBlogs !== null && similarBlogs.length ? 
+                            <>
+                                <h1 className="text-2xl mt-14 mb-10 font-medium">Similar Blogs</h1>
+                                {
+                                    similarBlogs.map((blog,i)=>{
+                                        let {author:{personal_info}} = blog;
+                                        return <Animation key={i} transition={{duration:1,delay:i*0.08}}>
+                                            <BlogPostCard content={blog} author={personal_info} />
+                                        </Animation>
+                                    })
+                                }
+                            </>
+                            :
+                            ""
+                        }
                     </div>
                 </BlogContext.Provider>
             }
