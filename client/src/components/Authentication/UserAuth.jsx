@@ -75,7 +75,7 @@ const UserAuth = ({type,close,open}) => {
                     toast.success("Email has been sent to your Email!");
                 },500)
             }
-            if(route==="signin"){
+            if(route==="signin" || route==="google-auth"){
                 storeInSession("user",JSON.stringify(data));
                 let loadingSignin = toast.loading("signing in...")
                 setUserAuth(data);
