@@ -19,7 +19,7 @@ const Body = () => {
             answer:'You have the option write in the blogs section to write the blogs.'
         },
         {
-            question:'How my Audio or Blog get published?',
+            question:'How will my Audio or Blog get published?',
             answer:'Your Audio or Blog will be reviewed by the Admin and then gets published.'
         },
         {
