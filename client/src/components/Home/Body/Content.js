@@ -10,7 +10,7 @@ const Content = [
     {
         title: "Blogs",
         description: "Whether you're a bit shy to speak or simply love conveying thoughts through writing, our community welcomes you. Share your unique perspectives, stories, and even interview experiences through the art of words.Your voice matters, whether spoken or written, and MVGR VOICES is the canvas for your ideas to shine.",
-        img:blogs
+        img: podcast
     },
     {
         title: "Contact",

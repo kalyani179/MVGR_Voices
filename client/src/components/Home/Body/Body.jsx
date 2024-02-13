@@ -40,12 +40,13 @@ const Body = () => {
                 </div>
             </div>
             <div className="bg-black">
-                {Content.map(Content =>(
+                {Content.map((Content,index) =>(
                     <MiddleSection 
+                        index={index}
                         title={Content.title}
                         description={Content.description}
                         img={Content.img}
-                    />   
+                    />  
                 ))}
             </div>                
             <div className="bg-black pt-20 flex items-center justify-center "> 
