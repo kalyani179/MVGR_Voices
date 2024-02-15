@@ -5,6 +5,7 @@ import BlogEditor from './BlogEditor';
 import BlogPublish from './BlogPublish';
 import Loader from '../../common/Loader';
 import axios from 'axios';
+import {Toaster,toast} from "react-hot-toast";
 
 const blogStructure = {
     title : "",
@@ -47,15 +48,18 @@ const Editor = () => {
     },[])
 
     return (
+        <>
+        <Toaster />
         <EditorContext.Provider value={{blog,setBlog,editorState,setEditorState,textEditor,setTextEditor}}>
         {
-            !access_token ? navigate("/")
+            !access_token ? 
+            navigate("/")
             :
             loading ? <Loader /> : 
             editorState === "editor" ? <BlogEditor /> : <BlogPublish />
         }
         </EditorContext.Provider>
-        
+        </>
     )
 }
 

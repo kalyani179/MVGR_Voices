@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 
 import Blog from "../models/BlogSchema.js";
 import User from "../models/UserSchema.js"
+import Notification from "../models/NotificationSchema.js";
 
 const latestBlogs = async (req,res) =>{
     let {page} = req.body;
@@ -188,4 +189,42 @@ const getBlog = async (req,res) =>{
     })
 }
 
-export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog};
+const likeBlog = async (req,res) => {
+    let user_id = req.user;
+    let {_id,isLiked} = req.body;
+    let incrementVal = !isLiked ? 1 : -1;
+    Blog.findOneAndUpdate({_id},{$inc : {"activity.total_likes":incrementVal}})
+    .then(blog => {
+        if(!isLiked){
+            let like = new Notification({
+                type:"like",
+                blog:_id,
+                notification_for:blog.author,
+                user:user_id
+            })
+            like.save().then(notification => {
+                return res.status(200).json({isLiked:true});
+            })
+        }else{
+            Notification.findOneAndDelete({user:user_id,blog:_id,type:"like"})
+            .then(data => {
+                return res.status(200).jso({isLiked:false});
+            })
+            .catch(err => {
+                return res.status(500).json({error:err.message});
+            })
+        }
+    })
+}
+const isBlogLiked = async(req,res) =>{
+    let user_id = req.user;
+    let {_id} = req.body;
+    Notification.exists({user:user_id,type:"like",blog:_id})
+    .then(result => {
+        return res.status(200).json({result});
+    })
+    .catch(err => {
+        return res.status(500).json({error:err.message})
+    })
+}
+export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked};

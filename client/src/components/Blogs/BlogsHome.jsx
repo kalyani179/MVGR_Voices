@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import FilterPaginationData from "../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../common/LoadMoreDataBtn";
 import { BeatLoader } from "react-spinners";
+import {Toaster,toast} from "react-hot-toast";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
@@ -99,10 +100,17 @@ const BlogsHome = () => {
     }, [pageState]);
 
     return (
+        <>
+        <Toaster />
+        {
         !access_token 
-        ? navigate("/") 
+        ?
+        <>
+        {toast.error("Please Sign In To View the Blogs")} {navigate("/")}
+        </> 
         : 
         <Animation>
+        
         <section className="h-cover flex justify-center gap-10">
             {/* latest blogs */}
             <div className="w-full">
@@ -204,6 +212,8 @@ const BlogsHome = () => {
             </div>
         </section>
         </Animation>
+        }
+        </>
     );
 };
 

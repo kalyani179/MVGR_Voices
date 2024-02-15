@@ -25,6 +25,8 @@ const BlogPage = () => {
     const [blog,setBlog] = useState(blogStructure);
     const [similarBlogs,setSimilarBlogs] = useState(null);
     const [loading,setLoading] = useState(true);
+    const [isLiked,setIsLiked] = useState(false);
+
     let {title,content,banner,author:{personal_info:{fullname,username:author_username,profile_img}},publishedAt} = blog;
     const fetchBlog = ()=>{
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/get-blog",{blog_id})
@@ -56,7 +58,7 @@ const BlogPage = () => {
         <Animation>
             {
                 loading ? <Loader /> :
-                <BlogContext.Provider value={{blog,setBlog}}>
+                <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked}}>
                     <div className="max-w-[900px] mx-auto block py-10 px-[5vw]">
                         <img src={defaultBanner} className="aspect-video" alt="banner"/>
                         <div className="mt-12">
