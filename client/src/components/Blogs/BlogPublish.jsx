@@ -7,9 +7,11 @@ import BlogTags from "./BlogTags";
 import Animation from "../../common/Animation";
 import axios from "axios";
 import { UserContext } from "../../App";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const BlogPublish = () => {
+
+    let {blog_id} = useParams();
 
     let characterLimit = 200;
     let tagsLimit = 10;
@@ -80,7 +82,7 @@ const BlogPublish = () => {
             title, banner, desc, content, tags, draft:false
         }
 
-        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/create-blog",blogObj,{
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/create-blog",{...blogObj,id:blog_id}, {
             headers:{
                 'Authorization' : `Bearer ${access_token}`
             }

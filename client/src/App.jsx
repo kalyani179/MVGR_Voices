@@ -36,6 +36,7 @@ const App = () => {
               <Route path="blog/:blog_id" element={<BlogPage />}/>
             </Route>
             <Route path="/editor" exact element={<Editor />} />
+            <Route path="/editor/:blog_id" exact element={<Editor />} />
             <Route path="*" element={<PageNotFound />} />
             <Route path="/" element={<PodsNavbar />}>
               <Route path="podcast" element={<Podcast />} />

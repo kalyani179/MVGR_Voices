@@ -156,6 +156,7 @@ export const googleAuth = async(req,res) =>{
 
             let newUser = new User({
                 personal_info :{fullname : name,email,username},
+                verified:true,
                 google_auth:true
             })
 

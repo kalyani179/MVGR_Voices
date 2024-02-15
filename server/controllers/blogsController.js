@@ -44,16 +44,16 @@ const trendingBlogs = async (req,res) => {
 
 const searchBlogs = async (req,res) => {
     
-    let {tag,query,author,page} = req.body;
+    let {tag,query,author,page,limit,eliminate_blog} = req.body;
     let findQuery;
     if(tag){
-        findQuery = {tags:tag,draft:false};
+        findQuery = {tags:tag,draft:false,blog_id:{$ne:eliminate_blog}};
     }else if(query){
         findQuery = {draft:false,title:new RegExp(query,'i')}
     }else if(author) {
         findQuery = {author,draft:false}
     }
-    let maxLimit = 3;
+    let maxLimit = limit ? limit : 3;
     Blog.find(findQuery)
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
@@ -114,7 +114,7 @@ const getProfile = async (req,res) => {
 const createBlog = async (req, res) => {
     try{
         let authorID = req.user;
-        let {title,desc,banner,tags,content,draft} = req.body;
+        let {title,desc,banner,tags,content,draft,id} = req.body;
     
         if(!title.length){
             return res.status(403).json({error:"You Must Provide a Title to publish the blog"});
@@ -136,22 +136,31 @@ const createBlog = async (req, res) => {
         
         tags = tags.map(tag => tag.toLowerCase());
     
-        let blog_id = title.replace(/[^a-zA-z0-9]/g,' ').replace(/\s+/g,"-").trim()+nanoid();
-    
-        let blog = new Blog({
-            title,desc,banner,content,tags,author:authorID,blog_id,draft:Boolean(draft)
-        })
-        await blog.save().then(async (blog)=>{
-            let incrementVal = draft ? 0 : 1;
-            let user = await User.findOneAndUpdate({_id:authorID},{$inc:{"account_info.total_posts" : incrementVal },$push:{"blogs":blog._id}});
-            if(user){
-                return res.status(200).json({id:blog.blog_id});
-            }else{
-                return res.status(500).json({error:"Failed to update total Posts Number"})
-            }
-        }).catch(err => {
-            return res.status(500).json({error:err.message});
-        })
+        let blog_id = id || title.replace(/[^a-zA-z0-9]/g,' ').replace(/\s+/g,"-").trim()+nanoid();
+        if(id){
+            Blog.findOneAndUpdate({blog_id},{title,desc,banner,content,tags,draft:draft ? draft : false})
+            .then(blog => {
+                return res.status(200).json({id:blog_id});
+            })
+            .catch(err => {
+                return res.status(500).json({error:"Failed To Update Blogs"});
+            })
+        }else{
+            let blog = new Blog({
+                title,desc,banner,content,tags,author:authorID,blog_id,draft:Boolean(draft)
+            })
+            await blog.save().then(async (blog)=>{
+                let incrementVal = draft ? 0 : 1;
+                let user = await User.findOneAndUpdate({_id:authorID},{$inc:{"account_info.total_posts" : incrementVal },$push:{"blogs":blog._id}});
+                if(user){
+                    return res.status(200).json({id:blog.blog_id});
+                }else{
+                    return res.status(500).json({error:"Failed to update total Posts Number"})
+                }
+            }).catch(err => {
+                return res.status(500).json({error:err.message});
+            })
+        }
     }
     catch(err){
         return res.status(500).json({error:err.message});
@@ -161,15 +170,17 @@ const createBlog = async (req, res) => {
 
 const getBlog = async (req,res) =>{
 
-    let {blog_id} = req.body;
-    let incrementVal = 1;
+    let {blog_id,draft,mode} = req.body;
+    let incrementVal = mode!=="edit" ? 1 : 0;
     Blog.findOneAndUpdate({blog_id},{$inc : {"activity.total_reads":incrementVal}})
     .populate("author","personal_info.fullname personal_info.username personal_info.profile_img")
     .select("title desc content banner activity publishedAt blog_id tags")
     .then(blog =>{
         
-        Blog.findOneAndUpdate({"personal_info.username":blog.author.personal_info.username},{$inc : {"activity.total_reads":incrementVal}})
-
+        User.findOneAndUpdate({"personal_info.username":blog.author.personal_info.username},{$inc : {"activity.total_reads":incrementVal}})
+        if(blog.draft && !draft){
+            return res.status(500).json({error:"You Cannot Access Draft Blog"});
+        }
         return res.status(200).json({blog});
     })
     .catch(err => {

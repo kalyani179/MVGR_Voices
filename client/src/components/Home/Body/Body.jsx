@@ -19,7 +19,7 @@ const Body = () => {
             answer:'You have the option write in the blogs section to write the blogs.'
         },
         {
-            question:'How my Audio or Blog get published?',
+            question:'How will my Audio or Blog get published?',
             answer:'Your Audio or Blog will be reviewed by the Admin and then gets published.'
         },
         {
@@ -40,12 +40,13 @@ const Body = () => {
                 </div>
             </div>
             <div className="bg-black">
-                {Content.map(Content =>(
+                {Content.map((Content,index) =>(
                     <MiddleSection 
+                        index={index}
                         title={Content.title}
                         description={Content.description}
                         img={Content.img}
-                    />   
+                    />  
                 ))}
             </div>                
             <div className="bg-black pt-20 flex items-center justify-center "> 

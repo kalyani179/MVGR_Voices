@@ -1,5 +1,6 @@
 import podcast from "../../../assets/images/Home/podcast.png";
-import blogs from "../../../assets/images/Home/blogs.png";
+// import blogs from "../../../assets/images/Home/blogs.png";
+// import blog from "../../../assets/images/Home/blog.jpg"
 const Content = [
 
     {
