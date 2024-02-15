@@ -10,7 +10,9 @@ import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
 import BlogPage from './components/Blogs/BlogPage/BlogPage';
-//import Pod from './components/Podcast/Pod';
+import Podcast from './components/Podcast/Podcast';
+import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
+//import Upload from './components/Podcast/Upload';
 export const UserContext = createContext({});
 
 const App = () => {
@@ -35,6 +37,12 @@ const App = () => {
             </Route>
             <Route path="/editor" exact element={<Editor />} />
             <Route path="*" element={<PageNotFound />} />
+            <Route path="/" element={<PodsNavbar />}>
+              <Route path="podcast" element={<Podcast />} />
+            </Route>
+           
+
+
            
         </Routes>
       </BrowserRouter>

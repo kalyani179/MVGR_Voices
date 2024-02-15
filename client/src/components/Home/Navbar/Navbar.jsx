@@ -27,7 +27,7 @@ const Navbar = () => {
 
   let Links=[
     {name:"Home",link:"/"},
-    {name:"Podcast",link:"/"},
+    {name:"Podcast",link:"/podcast"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/"},
     {name:"Subscribe",link:"/"},

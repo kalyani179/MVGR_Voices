@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Pod = () => {
+const Podcast = () => {
   return (
     <div>
-      Hello
+      
     </div>
   )
 }
 
-export default Pod
+export default Podcast

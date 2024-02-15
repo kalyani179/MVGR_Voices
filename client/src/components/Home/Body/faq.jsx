@@ -7,15 +7,16 @@ const Faq = (props) => {
         let newActive =item.active === 1 ? 0 : 1;
         setItem({...item, active:newActive});
     };
-  return (
+return (
     <div>
-        
-        <div className={` bg-[#e9e9e9] p-5 border mb-5 border-black  rounded-md  md:w-[480px] duration-500 group ${item.active===1?'is-active bg-white':''}`}>
+        <div className={`p-5 mb-5 mt-5 border-b border-white md:w-[550px] duration-700 group ${item.active===1?'is-active':''}`}>
             <div className="flex items-center ">
-                <div className="w-full duration-500 group-[.is-active]:font-bold">{item.question}</div>
-                <div className="text-xl rotate-90 duration-500 cursor-pointer group-[.is-active]:rotate-[270deg]" onClick={handletoggleActive}>></div>
+                <div className="text-2xl text-white w-full duration-500 group-[.is-active]:font-medium group-[.is-active]:tracking-wide">{item.question}</div>
+                <div className="text-2xl text-white duration-500 cursor-pointer group-[.is-active]:rotate-[180deg]" onClick={handletoggleActive}>
+                <i class="fi fi-rr-angle-up text-white"></i>
             </div>
-            <div className="overflow-hidden max-h-0 duration-500 group-[.is-active]:max-h-[100px]">
+            </div>
+            <div className="text-xl tracking-wide mt-3 overflow-hidden max-h-0 duration-700 group-[.is-active]:max-h-[100px] text-primary">
                 {item.answer}
             </div>
 
@@ -26,7 +27,7 @@ const Faq = (props) => {
     
             
 
-  )
+)
 }
 
 export default Faq
