@@ -49,7 +49,6 @@ const Editor = () => {
 
     return (
         <>
-        <Toaster />
         <EditorContext.Provider value={{blog,setBlog,editorState,setEditorState,textEditor,setTextEditor}}>
         {
             !access_token ? 

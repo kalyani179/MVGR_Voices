@@ -106,7 +106,7 @@ const BlogsHome = () => {
         !access_token 
         ?
         <>
-        {toast.error("Please Sign In To View the Blogs")} {navigate("/")}
+        {toast.error("Please Sign In To View Blogs!")} {navigate("/")}
         </> 
         : 
         <Animation>
