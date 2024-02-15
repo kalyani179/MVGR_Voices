@@ -1,13 +1,15 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import UserAuth from "../../Authentication/UserAuth";
 import { UserContext } from "../../../App";
 import { removeFromSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
 import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png"
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
+  let navigate = useNavigate();
   const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
 
   const [showSignup,setShowSignup] = useState(false);
@@ -32,12 +34,28 @@ const Navbar = () => {
     {name:"Contact",link:"/"},
     {name:"Subscribe",link:"/"},
   ];
-
+  const handleLinkClick = ({link}) =>{
+    if(!access_token) {
+      toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
+    }else{
+      setActiveLink(link.name);
+      navigate(link.link);
+    }
+  }
   let [open,setOpen]=useState(false);
-  
+
   return (
     <Animation>
-    <Toaster />
+    <Toaster 
+      toastOptions={{
+          success:{
+              duration: 2000
+          },
+          error: {
+              duration: 1500
+          }
+      }}
+    />
       <div className="flex">
       <div className={`w-full opacity-85`}>
             <div className="md:flex items-center justify-between py-4 pt-2 md:px-10 px-7">
@@ -52,12 +70,11 @@ const Navbar = () => {
                   {
                             Links.map((link)=>(
                               <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-                                <a
-                                    href={link.link}
-                                    className={`hover:border-b-2 hover:border-white duration-500 md:text-2xl tracking-wide font-inter ${
+                                <h3
+                                    className={`hover:border-b-2 hover:border-white duration-500 md:text-2xl tracking-wide font-inter cursor-pointer ${
                                       activeLink === link.name ? "border-b-2 border-white" : "border-b-2 border-transparent"}`}
-                                    onClick={() => setActiveLink(link.name)}
-                                  >{link.name}</a>
+                                    onClick={()=> handleLinkClick({link})}
+                                  >{link.name}</h3>
                               </li>
 
                             ))

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import FilterPaginationData from "../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../common/LoadMoreDataBtn";
 import { BeatLoader } from "react-spinners";
-import {Toaster,toast} from "react-hot-toast";
+
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
@@ -101,13 +101,10 @@ const BlogsHome = () => {
 
     return (
         <>
-        <Toaster />
         {
         !access_token 
         ?
-        <>
-        {toast.error("Please Sign In To View Blogs!")} {navigate("/")}
-        </> 
+        navigate("/")
         : 
         <Animation>
         
