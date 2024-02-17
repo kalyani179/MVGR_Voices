@@ -8,6 +8,7 @@ import { getFullDate } from '../../../common/Date';
 import BlogInteraction from './BlogInteraction';
 import BlogPostCard from '../HomeBlogPostCard';
 import BlogContent from './BlogContent';
+import CommentsContainer from './CommentsContainer';
 
 export const blogStructure = {
     title:'',
@@ -26,6 +27,8 @@ const BlogPage = () => {
     const [similarBlogs,setSimilarBlogs] = useState(null);
     const [loading,setLoading] = useState(true);
     const [isLiked,setIsLiked] = useState(false);
+    const [isCommentsVisible,setCommentsVisible] = useState(false);
+    const [totalParentCommentsLoaded,setTotalParentCommentsLoaded] = useState(0);
 
     let {title,content,banner,author:{personal_info:{fullname,username:author_username,profile_img}},publishedAt} = blog;
     const fetchBlog = ()=>{
@@ -47,6 +50,9 @@ const BlogPage = () => {
     useEffect(()=>{
         resetStates();
         fetchBlog();
+        setIsLiked(false);
+        // setCommentsVisible(false);
+        setTotalParentCommentsLoaded(0);
     },[blog_id])
 
     const resetStates = () =>{
@@ -58,7 +64,8 @@ const BlogPage = () => {
         <Animation>
             {
                 loading ? <Loader /> :
-                <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked}}>
+                <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible,totalParentCommentsLoaded,setTotalParentCommentsLoaded}}>
+                    <CommentsContainer />
                     <div className="max-w-[900px] mx-auto block py-10 px-[5vw]">
                         <img src={defaultBanner} className="aspect-video" alt="banner"/>
                         <div className="mt-12">
