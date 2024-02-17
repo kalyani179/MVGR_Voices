@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog, getBlog, likeBlog, isBlogLiked} from "../controllers/blogsController.js";
+import {latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog, getBlog, likeBlog, isBlogLiked, addComment} from "../controllers/blogsController.js";
 import verifyJWT from "../utilities/userVerification.js";
 
 router.post("/latest-blogs",latestBlogs);
@@ -14,4 +14,5 @@ router.post("/create-blog",verifyJWT,createBlog);
 router.post("/get-blog",getBlog);
 router.post("/like-blog",verifyJWT,likeBlog);
 router.post("/is-blog-liked",verifyJWT,isBlogLiked);
+router.post("/add-comment",verifyJWT,addComment);
 export default router;

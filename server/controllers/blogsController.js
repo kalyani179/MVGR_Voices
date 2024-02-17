@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import Blog from "../models/BlogSchema.js";
 import User from "../models/UserSchema.js"
 import Notification from "../models/NotificationSchema.js";
+import Comment from "../models/CommentSchema.js";
 
 const latestBlogs = async (req,res) =>{
     let {page} = req.body;
@@ -227,4 +228,32 @@ const isBlogLiked = async(req,res) =>{
         return res.status(500).json({error:err.message})
     })
 }
-export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked};
+
+const addComment = async (req,res) => {
+    let user_id = req.user;
+    let {_id,comment,replying_to,blog_author} = req.body;
+    if(!comment.length){
+        return res.status(403).json({"error":"Write Something to Leave a comment!"})
+    }
+    let commentObj = new Comment({
+        blog_id :_id,blog_author,comment,commented_by:user_id
+    })
+    commentObj.save().then(commentFile =>{
+        let {comment,commentedAt,children} = commentFile;
+        Blog.findOneAndUpdate({_id},{$push:{"comments" : commentFile._id},$inc:{"activity.total_comments":1,"activity.total_parent_comments":1}})
+        .then(blog=>{console.log("New Comment Created!");});
+
+        let notificationObj = {
+            type: "comment",
+            blog:_id,
+            notification_for:blog_author,
+            user:user_id,
+            comment:commentFile._id
+        }
+        new Notification(notificationObj).save().then(notification=>{console.log("New Notification Created")});
+        return res.status(200).json({comment,commentedAt,_id:commentFile._id,user_id,children})
+    })
+}
+
+export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked,addComment};
+
