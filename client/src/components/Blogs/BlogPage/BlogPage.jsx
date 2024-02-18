@@ -8,7 +8,7 @@ import { getFullDate } from '../../../common/Date';
 import BlogInteraction from './BlogInteraction';
 import BlogPostCard from '../HomeBlogPostCard';
 import BlogContent from './BlogContent';
-import CommentsContainer from './CommentsContainer';
+import CommentsContainer, { fetchComments } from './CommentsContainer';
 
 export const blogStructure = {
     title:'',
@@ -33,13 +33,14 @@ const BlogPage = () => {
     let {title,content,banner,author:{personal_info:{fullname,username:author_username,profile_img}},publishedAt} = blog;
     const fetchBlog = ()=>{
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/get-blog",{blog_id})
-        .then(({data : {blog}}) => {
+        .then(async ({data : {blog}}) => {
+            blog.comments = await fetchComments({blog_id:blog._id,setParentCommentCountFunc:setTotalParentCommentsLoaded})
+            setBlog(blog);
             axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{tag:blog.tags[0],limit:5,eliminate_blog:blog_id})
             .then(({data})=>{
                 setSimilarBlogs(data.blogs);
                 console.log(data.blogs);
             })
-            setBlog(blog);
             setLoading(false);
         })
         .catch(err => {
@@ -50,9 +51,9 @@ const BlogPage = () => {
     useEffect(()=>{
         resetStates();
         fetchBlog();
-        setIsLiked(false);
+        setIsLiked(isLiked);
         // setCommentsVisible(false);
-        setTotalParentCommentsLoaded(0);
+        setTotalParentCommentsLoaded(totalParentCommentsLoaded);
     },[blog_id])
 
     const resetStates = () =>{

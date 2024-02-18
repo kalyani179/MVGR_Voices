@@ -254,6 +254,23 @@ const addComment = async (req,res) => {
         return res.status(200).json({comment,commentedAt,_id:commentFile._id,user_id,children})
     })
 }
+const getBlogComments = async(req,res) => {
+    let {blog_id,skip} = req.body;
+    let maxLimit = 5;
+    Comment.find({blog_id,isReply:false})
+    .populate("commented_by","personal_info.username personal_info.fullname personal_info.profile_img")
+    .skip(skip)
+    .limit(maxLimit)
+    .sort({"commentedAt":-1})
+    .then(comment => {
+        console.log(comment,skip,blog_id);
+        return res.status(200).json(comment);
+    })
+    .catch(err =>{
+        console.log(err);
+        return res.status(500).json({error:err.message})
+    })
+}
 
-export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked,addComment};
+export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked,addComment,getBlogComments};
 
