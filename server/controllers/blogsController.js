@@ -231,24 +231,34 @@ const isBlogLiked = async(req,res) =>{
 
 const addComment = async (req,res) => {
     let user_id = req.user;
-    let {_id,comment,replying_to,blog_author} = req.body;
+    let {_id,comment,blog_author,replying_to} = req.body;
     if(!comment.length){
         return res.status(403).json({"error":"Write Something to Leave a comment!"})
     }
-    let commentObj = new Comment({
+    let commentObj = {
         blog_id :_id,blog_author,comment,commented_by:user_id
-    })
-    commentObj.save().then(commentFile =>{
+    }
+    if(replying_to){
+        commentObj.parent = replying_to;
+    }
+    new Comment(commentObj).save().then(async commentFile =>{
         let {comment,commentedAt,children} = commentFile;
-        Blog.findOneAndUpdate({_id},{$push:{"comments" : commentFile._id},$inc:{"activity.total_comments":1,"activity.total_parent_comments":1}})
+        Blog.findOneAndUpdate({_id},{$push:{"comments" : commentFile._id},$inc:{"activity.total_comments":1,"activity.total_parent_comments":replying_to ? 0 : 1}})
         .then(blog=>{console.log("New Comment Created!");});
 
         let notificationObj = {
-            type: "comment",
+            type: replying_to ? "reply" :"comment",
             blog:_id,
             notification_for:blog_author,
             user:user_id,
             comment:commentFile._id
+        }
+        if(replying_to){
+            notificationObj.replied_on_comment = replying_to;
+            await Comment.findOneAndUpdate({_id:replying_to},{$push:{children: commentFile._id}})
+            .then(replyingToCommentDoc => {
+                notificationObj.notification_for = replyingToCommentDoc.commented_by;
+            })
         }
         new Notification(notificationObj).save().then(notification=>{console.log("New Notification Created")});
         return res.status(200).json({comment,commentedAt,_id:commentFile._id,user_id,children})

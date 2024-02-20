@@ -3,11 +3,13 @@ import { BlogContext } from './BlogPage'
 import {UserContext} from "../../../App"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import {toast,Toaster} from "react-hot-toast";
 
 const BlogInteraction = () => {
   let {blog,blog:{_id,blog_id,activity,activity:{total_likes,total_comments},author:{personal_info:{username:author_username}}},setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible} = useContext(BlogContext);
   let {userAuth:{username,access_token}} = useContext(UserContext);
   const handleLikeButton = () =>{
+    if(!access_token) toast.error("Please SigIn to like the blog!!");
     setIsLiked(!isLiked);
     !isLiked ? ++total_likes : --total_likes;
     setBlog({...blog,activity:{...activity,total_likes}});
@@ -40,6 +42,7 @@ const BlogInteraction = () => {
   },[])
   return (
     <>
+    <Toaster />
       <hr className="border-grey my-2" />
         <div className="flex justify-between gap-6">
           <div className="flex gap-3 items-center">

@@ -4,7 +4,7 @@ import {toast,Toaster} from "react-hot-toast";
 import axios from 'axios';
 import { BlogContext } from './BlogPage';
 
-const CommentField = ({action}) => {
+const CommentField = ({action,index = undefined,replyingTo = undefined,setReplying}) => {
     const [comment,setComment] = useState("");
     let {userAuth:{access_token,username,fullname,profile_img}} = useContext(UserContext);
     let {blog,blog:{_id,author:{_id:blog_author},comments,comments:{results:commentsArr},activity,activity:{total_comments,total_parent_comments}},setBlog,setTotalParentCommentsLoaded,totalParentCommentsLoaded} = useContext(BlogContext);
@@ -15,19 +15,29 @@ const CommentField = ({action}) => {
         if(!comment.length){
             return toast.error("Write Something to Leave a comment!")
         }
-        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/add-comment",{_id,blog_author,comment},{
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/add-comment",{_id,blog_author,comment,replying_to:replyingTo},{
         headers:{
             'Authorization' : `Bearer ${access_token}`
         }})
         .then(({data})=>{
+            console.log(data);
             setComment("");
             data.commented_by = {
                 personal_info:{username,profile_img,fullname}
             }
             let newCommentArr;
-            data.childrenLevel = 0;
-            newCommentArr = [data,...commentsArr];
-            let parentCommentIncrementVal = 1;
+            if(replyingTo){
+                commentsArr[index].children.push(data._id);
+                data.childrenLevel = commentsArr[index].childrenLevel+1;
+                data.parentIndex = index;
+                commentsArr[index].isReplyLoaded = true;
+                commentsArr.splice(index+1,0,data);
+                newCommentArr = commentsArr;
+            }else{
+                data.childrenLevel = 0;
+                newCommentArr = [data,...commentsArr];
+            }
+            let parentCommentIncrementVal = replyingTo? 0 : 1;
             setBlog({...blog,comments:{...comments,results:newCommentArr},activity:{...activity,total_comments:total_comments+1,total_parent_comments:total_parent_comments+parentCommentIncrementVal}});
             setTotalParentCommentsLoaded(!totalParentCommentsLoaded);
         })
