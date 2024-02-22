@@ -240,6 +240,7 @@ const addComment = async (req,res) => {
     }
     if(replying_to){
         commentObj.parent = replying_to;
+        commentObj.isReply = true;
     }
     new Comment(commentObj).save().then(async commentFile =>{
         let {comment,commentedAt,children} = commentFile;
@@ -282,5 +283,32 @@ const getBlogComments = async(req,res) => {
     })
 }
 
-export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked,addComment,getBlogComments};
+const getReplies = async (req,res) => {
+    let {_id,skip} = req.body;
+    let maxLimit = 5;
+    Comment.findOne({_id})
+    .populate({
+        path:"children",
+        option:{
+            limit:maxLimit,
+            skip:skip,
+            sort:{"commentAt":-1}
+        },
+        populate : {
+            path: "commented_by",
+            select : "personal_info.profile_img personal_info.fullname personal_info.username"
+        },
+        select:"-blog_id -updatedAt"
+    })
+    .select("children")
+    .then(doc => {
+        return res.status(200).json({replies:doc.children})
+    })
+    .catch(err =>{
+        console.log(err);
+        return res.status(500).json({error:err.message})
+    })
+}
+
+export { latestBlogs,allLatestBlogsCount,trendingBlogs,searchBlogs,searchBlogsCount,searchUsers,getProfile,createBlog,getBlog,likeBlog,isBlogLiked,addComment,getBlogComments,getReplies};
 

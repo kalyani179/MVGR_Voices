@@ -33,6 +33,7 @@ const CommentField = ({action,index = undefined,replyingTo = undefined,setReplyi
                 commentsArr[index].isReplyLoaded = true;
                 commentsArr.splice(index+1,0,data);
                 newCommentArr = commentsArr;
+                setReplying(false);
             }else{
                 data.childrenLevel = 0;
                 newCommentArr = [data,...commentsArr];
