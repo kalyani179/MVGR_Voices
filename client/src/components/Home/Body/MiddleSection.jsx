@@ -4,13 +4,13 @@ const MiddleSection = (props) => {
     return (
     <div className="lg:py-32">
             <AttentionSeeker effect="pulse">
-                <img className={`absolute -ml-24 -mt-20 rotate-12 ${props.index % 2 === 0 ? "left-0" : ""}`} src={props.img} width={300} height={300} alt=""></img>
+                <img className={`absolute -mt-20 rotate-12 ${props.index===2 ? "h-[350px] w-[250px] -ml-5 -mt-10" : props.index % 2 === 0 ? "left-0 -ml-24" : "right-0 -mr-14 h-[400px] -mt-10"}`} src={props.img} width={300} height={300} alt=""></img>
             </AttentionSeeker>
             <div className="h-full lg:px-72 text-center flex flex-col justify-center items-center text-white">  
             <Zoom>
                 <h1 className="text-6xl tracking-wide uppercase font-merriweather font-semibold mb-8 leading-normal text-primary">{props.title}</h1>
             </Zoom>
-                <p className="text-xl tracking-wide">{props.description}</p>
+                <p className="text-xl tracking-wide w-[90.5%]">{props.description}</p>
             </div>
         </div>
     )
