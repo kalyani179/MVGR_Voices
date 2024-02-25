@@ -4,7 +4,7 @@ const MiddleSection = (props) => {
     return (
     <div className="lg:py-32">
             <AttentionSeeker effect="pulse">
-                <img className={`absolute -mt-20 rotate-12 ${props.index===2 ? "h-[350px] w-[250px] -ml-5 -mt-10" : props.index % 2 === 0 ? "left-0 -ml-24" : "right-0 -mr-14 h-[400px] -mt-10"}`} src={props.img} width={300} height={300} alt=""></img>
+                <img className={`absolute rotate-12 ${props.index===2 ? "h-[350px] w-[250px] -ml-5 -mt-10" : props.index===3 ? "right-0 -mr-20 rotate-6 -mt-32 h-[400px]" : props.index % 2 === 0 ? "left-0 -ml-24 -mt-20" : "right-0 -mr-14 rotate-12 -mt-20 h-[400px]"}`} src={props.img} width={300} height={300} alt=""></img>
             </AttentionSeeker>
             <div className="h-full lg:px-72 text-center flex flex-col justify-center items-center text-white">  
             <Zoom>
