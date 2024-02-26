@@ -137,7 +137,7 @@ const BlogsHome = () => {
                 <div className="center">
                     <LoadMoreDataBtn state={blogs} fetchDataFunc={(pageState==="home"? fetchLatestBlogs : fetchBlogsByCategory)}/>
                 </div>
-               
+            
                 </div>
                 
                 <div>

@@ -90,6 +90,14 @@
     .blog-index {
         @apply text-4xl sm:text-3xl lg:text-5xl font-bold text-grey leading-none;
     }
+
+    .sidebar-link {
+        @apply flex gap-4 items-center py-5 text-dark-grey text-sm hover:text-black;
+    }
+    
+    .sidebar-link.active {
+        @apply text-black border-r-2 border-black pl-6 bg-grey/50 -ml-6 md:rounded-tl-lg md:rounded-bl-lg sm:border-none;
+    }
 }
 
 /** To remove the blue background color when autofilled by chrome **/
