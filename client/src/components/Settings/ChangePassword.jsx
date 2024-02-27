@@ -9,6 +9,16 @@ const ChangePassword = () => {
     const [currentPasswordVisible,setCurrentPasswordVisible] = useState(false);
     const [newPasswordVisible,setNewPasswordVisible] = useState(false);
 
+    const [isCurrentPasswordFocused,setCurrentPasswordFocused] = useState(false);
+    const [isNewPasswordFocused,setNewPasswordFocused] = useState(false);
+
+    const translateCurrentPassword = () => {
+        setCurrentPasswordFocused(!isCurrentPasswordFocused);
+    }
+    const translateNewPassowrd = () => {
+        setNewPasswordFocused(!isNewPasswordFocused);
+    }
+
     const [inputCurrentPassword,setInputCurrentPassword] = useState('');
     const [inputNewPassword,setInputNewPassword] = useState('');
     const [data,setData] = useState({currentPassword : "",newPassword:""})
@@ -57,14 +67,14 @@ const ChangePassword = () => {
             <h1 className="sm:hidden text-xl font-medium text-primary">Change Password</h1>
             <div className="py-10 w-full md:max-w-[400px] flex flex-col justify-center items-center">
                 <div className='flex justify-start items-center'>
-                    <i className="fi fi-rr-lock absolute"></i>
-                    <input onChange={handleChange} className="auth-input" type={`${currentPasswordVisible ? "text" : "password"}`} name="currentPassword" value={inputCurrentPassword} placeholder="Current Password"/>
-                    <i onClick={()=>setCurrentPasswordVisible(!currentPasswordVisible)} className={`fi fi-rr-eye${currentPasswordVisible ? "" : "-crossed"} absolute ml-72 `}></i>
+                    <i className={`fi fi-rr-lock absolute ${isCurrentPasswordFocused || inputCurrentPassword ? 'text-primary' : ''}`}></i>
+                    <input onFocus={translateCurrentPassword} onBlur={()=>setCurrentPasswordFocused(false)} onChange={handleChange} className="auth-input" type={`${currentPasswordVisible ? "text" : "password"}`} name="currentPassword" value={inputCurrentPassword} placeholder="Current Password"/>
+                    <i onClick={()=>setCurrentPasswordVisible(!currentPasswordVisible)} className={`fi fi-rr-eye${currentPasswordVisible ? "" : "-crossed"}  ${isCurrentPasswordFocused || inputCurrentPassword ? 'text-primary' : ''} absolute ml-72 `}></i>
                 </div>
                 <div className='flex justify-start items-center'>
-                    <i className="fi fi-rr-unlock absolute"></i>
-                    <input onChange={handleChange} className="auth-input" type={`${newPasswordVisible ? "text" : "password"}`} name="newPassword" value={inputNewPassword} placeholder="New Password"/>
-                    <i onClick={()=>setNewPasswordVisible(!newPasswordVisible)} className={`fi fi-rr-eye${newPasswordVisible ? "" : "-crossed"} absolute ml-72`}></i>
+                    <i className={`fi fi-rr-unlock absolute ${isNewPasswordFocused || inputNewPassword ? 'text-primary' : '' }`}></i>
+                    <input onFocus={translateNewPassowrd} onBlur={()=>setNewPasswordFocused(false)} onChange={handleChange} className="auth-input" type={`${newPasswordVisible ? "text" : "password"}`} name="newPassword" value={inputNewPassword} placeholder="New Password"/>
+                    <i onClick={()=>setNewPasswordVisible(!newPasswordVisible)} className={`fi fi-rr-eye${newPasswordVisible ? "" : "-crossed"} ${isNewPasswordFocused || inputNewPassword ? 'text-primary' : '' } absolute ml-72`}></i>
                 </div>
                 <div>
                     <button onClick={handleSubmit} type="submit" className="btn-purple mt-10 font-medium w-68 rounded-md">{"Change Password"}</button>
