@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import 'dotenv/config'
 import nodemailer from "nodemailer";
+import bcrypt, { hash } from 'bcrypt';
 
 // Models
 import User from "../models/UserSchema.js";
@@ -73,15 +74,18 @@ export const signup = async(req, res) =>{
                 return res.status(400).json({"error" : "We have already sent you an Email to verify your account! Please Check !!"});
             }
         }
-        let username = await generateUsername(email);
-        let newUser = new User({
-            personal_info:{fullname,email,password,username}
+        bcrypt.hash(password,10,async (err,hashed_password)=>{
+            let username = await generateUsername(email);
+            let newUser = new User({
+                personal_info:{fullname,email,password:hashed_password,username}
+            })
+            await newUser.save();
+            console.log(hashed_password);
+            let {access_token} = formatDatatoSend(newUser);
+            console.log(access_token);
+            await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
+            return res.status(200).json(formatDatatoSend(newUser));
         })
-        await newUser.save();
-        let {access_token} = formatDatatoSend(newUser);
-        console.log(access_token);
-        await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
-        return res.status(200).json(formatDatatoSend(newUser));
     }
     catch(err){
         console.log(err.message);
@@ -112,19 +116,23 @@ export const signin = async(req, res) =>{
         let {email,password} = req.body;
         let user = await User.findOne({"personal_info.email":email});
         console.log(user);
-        if(user.google_auth){
-            return res.status(403).json({"error":"Account was created with google. Try Sign in with google"});
-        }
         if(!user){
             return res.status(400).json({"error":"User has not signed up yet! Sign up to continue"})
         }
-        if(user.personal_info.password !== password){
-            return res.status(400).json({"error":"Incorrect Password!"});
+        if(user.google_auth){
+            return res.status(403).json({"error":"Account was created with google. Try Sign in with google"});
         }
-        if(user.personal_info.verified !== true){
-            return res.status(400).json({"error":"This email is not verified!"})
-        }
-        return res.status(200).json(formatDatatoSend(user));
+        console.log(password);
+        bcrypt.compare(password,user.personal_info.password,(err,result)=>{
+            console.log(user.personal_info.password);
+            if(!result){
+                return res.status(403).json({"error" : "Incorrect Password"})
+            }
+            if(user.personal_info.verified !== true){
+                return res.status(400).json({"error":"This email is not verified!"})
+            }
+            else return res.status(200).json(formatDatatoSend(user));
+        })
         // return res.status(200).json({"status":"User has Signed In Successfully!"})
     }
     catch(err){
