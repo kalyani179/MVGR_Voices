@@ -10,8 +10,8 @@ import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
 import BlogPage from './components/Blogs/BlogPage/BlogPage';
-import SideNav from './components/Blogs/UserProfile/SideNav';
-import ChangePassword from './components/Blogs/UserProfile/ChangePassword';
+import SideNav from './components/Settings/SideNav';
+import ChangePassword from './components/Settings/ChangePassword';
 
 export const UserContext = createContext({});
 

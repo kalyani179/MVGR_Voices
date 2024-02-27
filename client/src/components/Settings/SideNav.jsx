@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { NavLink, Navigate, Outlet } from 'react-router-dom'
-import { UserContext } from '../../../App'
+import { UserContext } from '../../App'
 import {toast} from 'react-hot-toast'
 
 const SideNav = () => {

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import Animation from '../../../common/Animation';
+import Animation from '../../common/Animation';
 import {toast,Toaster} from "react-hot-toast";
 import axios from 'axios';
-import { UserContext } from '../../../App';
+import { UserContext } from '../../App';
 
 const ChangePassword = () => {
     let {userAuth:{access_token}} = useContext(UserContext);
