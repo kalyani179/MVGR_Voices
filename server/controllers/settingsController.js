@@ -1,34 +1,34 @@
 import Blog from "../models/BlogSchema.js";
 import User from "../models/UserSchema.js"
 
-const changePassword = async (req,res) => {
-    let {currentPassword,newPassword} = req.body;
-    User.findOne({_id:req.user})
-    .then((user) => {
-        if(user.google_auth){
-            return res.status(403).json({error:"you cannot change account password because you have signed in using google"});
+import bcrypt from 'bcrypt';
+
+const changePassword = async (req, res) => {
+    try {
+        let { currentPassword, newPassword } = req.body;
+        let user = await User.findOne({ _id: req.user });
+
+        if (!user) {
+            return res.status(404).json({ error: "User Not Found!" });
         }
-        bcrypt.compare(currentPassword,user.personal_info.password,(err,result) => {
-            if(err){
-                return res.json(500).json({error:"Some error occured while changing the password! please try again!"})
-            }
-            if(!result){
-                return res.json(403).json({error:"Incorrect current password"})
-            }
-            bcrypt.hash(newPassword,10,(err,hashed_password)=>{
-                User.findOneAndUpdate({_id:req.user},{"personal_info.password":hashed_password})
-                .then((u)=>{
-                    return res.status(200).json({status:"Password Changed"})
-                })
-                .catch(err => {
-                    return res.status(500).json({error:"Some error occured while saving the new password, please try again !"})
-                })
-            })
-        })
-    })
-    .catch(err => {
-        return res.status(500).json({error:"User Not Found!"})
-    })
+
+        if (user.google_auth) {
+            return res.status(403).json({ error: "You cannot change account password because you have signed in using Google" });
+        }
+
+        const passwordMatch = await bcrypt.compare(currentPassword, user.personal_info.password);
+        if (!passwordMatch) {
+            return res.status(403).json({ error: "Incorrect current password" });
+        }
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        await User.findOneAndUpdate({ _id: req.user }, { "personal_info.password": hashedPassword });
+
+        return res.status(200).json({ status: "Password Changed" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Some error occurred while changing the password, please try again!" });
+    }
 }
 
-export {changePassword}
+export { changePassword };

@@ -104,6 +104,7 @@ const UserAuth = ({type,close,open}) => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         let formData = data;
+        e.target.setAttribute("disabled",true);
         if(type==="signup"){
             let loading = toast.loading("please wait...");
             setTimeout(()=>{
@@ -111,6 +112,7 @@ const UserAuth = ({type,close,open}) => {
             },2000)
         }
         userAuthThroughServer(type,formData);
+        e.target.setAttribute("disabled",false);
     }
     const handleGoogleAuth = (e) =>{
 

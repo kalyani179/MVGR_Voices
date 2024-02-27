@@ -1,6 +1,8 @@
-POST http://localhost:3000/get-blog
+POST http://localhost:3000/change-password
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZGUyNTRkMzI3YzNjNDg1MGVkOGRmNyIsImlhdCI6MTcwOTA1ODgyNH0.weQr0IdGeL_t5r9c8Tz_81oBu_qNH8jUuwfvygNqmRk
 
 {
-    "blog_id": "ML7i3VLaQ2t4Iy-HVYXHJEr"
+    "currentPassword":"1234",
+    "newPassword":"12345"
 }

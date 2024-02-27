@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Animation from '../../../common/Animation';
 import {toast,Toaster} from "react-hot-toast";
+import axios from 'axios';
+import { UserContext } from '../../../App';
 
 const ChangePassword = () => {
+    let {userAuth:{access_token}} = useContext(UserContext);
     const [currentPasswordVisible,setCurrentPasswordVisible] = useState(false);
     const [newPasswordVisible,setNewPasswordVisible] = useState(false);
 
@@ -27,6 +30,24 @@ const ChangePassword = () => {
         if(!formData.currentPassword.length || !formData.newPassword.length){
             return toast.error("Please Fill All The Inputs!")
         }
+        e.target.setAttribute("disabled",true);
+        let loadingToast = toast.loading("Updating...");
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/change-password",formData,
+            {
+                headers:{
+                    'Authorization':`Bearer ${access_token}`
+                }
+            })
+        .then(()=>{
+            toast.dismiss(loadingToast);
+            e.target.removeAttribute("disabled");
+            return toast.success("Password Updated Successfully!");
+        })
+        .catch(({response})=> {
+            toast.dismiss(loadingToast);
+            e.target.removeAttribute("disabled");
+            return toast.error(response.data.error);
+        })
     }
 
     return (
