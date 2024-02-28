@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { NavLink, Navigate, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../App'
-import {toast} from 'react-hot-toast'
+
 
 const SideNav = () => {
     let {userAuth:{access_token}} = useContext(UserContext);
+    let navigate = useNavigate();
     let page = window.location.pathname.split("/")[2];
     const [pageState,setPageState] = useState(page.replace("-"," "));
     let [showSideNav,setShowSideNav] = useState(false);
@@ -23,13 +24,14 @@ const SideNav = () => {
     }
     useEffect(()=>{
         setShowSideNav(false);
+        if(pageState.current)
         pageStateTab.current.click();
     },[pageState]);
     return (
-        !access_token ? <>
-            <Navigate to="/" /> 
-            {toast.error("Please Signin to access the settings!")}
-        </>
+        !access_token ? 
+
+        navigate("/")
+        
         :
         <>
             <section className="relative flex gap-10 py-0 m-0 sm:flex-col">

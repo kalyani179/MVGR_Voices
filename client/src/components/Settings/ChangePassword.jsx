@@ -50,10 +50,14 @@ const ChangePassword = () => {
             })
         .then(()=>{
             toast.dismiss(loadingToast);
+            setInputCurrentPassword('');
+            setInputNewPassword('')
             e.target.removeAttribute("disabled");
             return toast.success("Password Updated Successfully!");
         })
         .catch(({response})=> {
+            setInputCurrentPassword('');
+            setInputNewPassword('')
             toast.dismiss(loadingToast);
             e.target.removeAttribute("disabled");
             return toast.error(response.data.error);
