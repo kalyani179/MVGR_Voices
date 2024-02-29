@@ -1,21 +1,9 @@
+const { createThemes } = require('tw-colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors:{
-      'white': '#FFFFFF',
-      'black': '#242424',
-      'grey': '#F3F3F3',
-      'input' : '#d9d9d9',
-      'dark-grey': '#6B6B6B',
-      'red': '#FF4E4E',
-      'transparent': 'transparent',
-      'twitter': '#1DA1F2',
-      'purple': '#660066',
-      'icons' : '#999999',
-      'primary' : '#e86f6f',
-      'green' : '#32CD32'
-    },
     screens: {
       'sm': {'max': '767px'},
       // => @media (max-width: 767px) { ... }
@@ -49,5 +37,30 @@ module.exports = {
       },
   },
   },
-  plugins: [],
+  plugins: [
+    createThemes({
+      light:{
+        'white': '#FFFFFF',
+        'black': '#242424',
+        'grey': '#F3F3F3',
+        'input' : '#d9d9d9',
+        'dark-grey': '#6B6B6B',
+        'transparent': 'transparent',
+        'purple': '#660066',
+        'icons' : '#999999',
+        'primary' : '#e86f6f'
+      },
+      dark:{
+        'white': '#242424',
+        'black': '#F3F3F3',
+        'grey': '#2A2A2A',
+        'input' : '#d9d9d9',
+        'dark-grey': '#E7E7E7',
+        'transparent': 'transparent',
+        'purple': '#582C8E',
+        'icons' : '#999999',
+        'primary' : '#ed9898'
+      }
+    })
+  ],
 }

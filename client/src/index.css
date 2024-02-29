@@ -11,6 +11,9 @@
     * {
         @apply m-0 p-0 box-border text-base font-inter;
     }
+    body {
+        @apply bg-white text-black
+    }
     .heading {
         @apply font-gelasio text-4xl
     }
