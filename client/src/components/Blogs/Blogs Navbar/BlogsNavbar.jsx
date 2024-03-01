@@ -2,17 +2,26 @@ import React, { useState,useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import UserNavigationPanel from './UserNavigationPanel';
+import { ThemeContext } from '../../../App';
+import { storeInSession } from '../../../common/session';
 
 const BlogsNavbar = () => {
     const {userAuth:{profile_img}} = useContext(UserContext);
     const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
     const [userNavPanel,setUserNavPanel] = useState(false);
+    let {theme,setTheme} = useContext(ThemeContext);
     let navigate = useNavigate();
     const handleSearch = (e) => {
         let query = e.target.value;
         if(e.keyCode === 13){
             navigate(`/search/${query}`)
         }
+    }
+    const changeTheme = () => {
+        let newTheme = theme === "light" ? "dark" : "light";
+        setTheme(newTheme);
+        document.body.setAttribute("data-theme",newTheme);
+        storeInSession("theme",newTheme);
     }
     return (
         <>
@@ -43,16 +52,20 @@ const BlogsNavbar = () => {
                     <i className="fi fi-rr-file-edit"></i>
                     <p>write</p>
                 </Link>
+                {/* Theme Change */}
+                <button onClick={changeTheme} className="bg-grey rounded-full w-11 h-11 hover:bg-black/10 relative">
+                        <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} text-xl block mt-1`}></i>
+                </button>
                 {/* notification button */}
                 <Link to="/dashboard/notification">
-                    <button className="bg-grey rounded-full w-10 h-10 hover:bg-black/10 relative">
-                        <i className="fi fi-rr-bell text-lg block mt-1"></i>
+                    <button className="bg-grey rounded-full w-11 h-11 hover:bg-black/10 relative">
+                        <i className="fi fi-rr-bell text-xl block mt-1"></i>
                     </button>
                 </Link>
 
                 {/* profile image */}
                 <div className="relative" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
-                    <button className="w-10 h-10 mt-1">
+                    <button className="w-11 h-11 mt-1">
                         <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
                     </button>
                     {

@@ -24,8 +24,12 @@ const App = () => {
   const [isValidToken,setValidToken] = useState(false);
   useEffect(() => {
     let userInSession = lookInSession("user");
-    userInSession ? setUserAuth(JSON.parse(userInSession)) : setUserAuth({access_token : null})
-    document.body.setAttribute('data-theme',theme)
+    let themeInSession = lookInSession("theme");
+    userInSession ? setUserAuth(JSON.parse(userInSession)) : setUserAuth({access_token : null});
+    themeInSession ? setTheme(()=>{
+      document.body.setAttribute("data-theme",themeInSession);
+      return themeInSession;
+    }) : document.body.setAttribute("data-theme",theme);
   },[])
 
   return (

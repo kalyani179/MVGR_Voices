@@ -1,18 +1,20 @@
 import React, { useContext } from "react"
 import { EditorContext } from "./Editor";
 import {Toaster,toast} from "react-hot-toast";
-import defaultBanner from "../../assets/images/Blogs/default_banner.png";
+import lightDefaultBanner from "../../assets/images/Blogs/default_banner_light.png";
+import darkDefaultBanner from "../../assets/images/Blogs/default_banner_dark.png";
 import BlogTags from "./BlogTags";
 
 import Animation from "../../common/Animation";
 import axios from "axios";
-import { UserContext } from "../../App";
+import { ThemeContext, UserContext } from "../../App";
 import { useNavigate, useParams } from "react-router-dom";
 
 const BlogPublish = () => {
 
-    let {blog_id} = useParams();
+    let {theme,setTheme} = useContext(ThemeContext);
 
+    let {blog_id} = useParams();
     let characterLimit = 200;
     let tagsLimit = 10;
     let navigate = useNavigate();
@@ -112,7 +114,7 @@ const BlogPublish = () => {
                 <p className="text-dark-grey mb-1">Preview</p>
 
                 <div className="w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4">
-                    <img src={defaultBanner} alt="Blog Banner"/> {/* remove later */}
+                    <img src={theme === "light" ? lightDefaultBanner : darkDefaultBanner} alt="Blog Banner"/> {/* remove later */}
                 </div>
 
                 <h1 className="text-4xl font-medium mt-2 leading-tight line-clamp-2">{title}</h1>

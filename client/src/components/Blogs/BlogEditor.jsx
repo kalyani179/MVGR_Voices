@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom";
-import defaultBanner from "../../assets/images/Blogs/default_banner.png"
+import lightDefaultBanner from "../../assets/images/Blogs/default_banner_light.png";
+import darkDefaultBanner from "../../assets/images/Blogs/default_banner_dark.png";
 import Animation from "../../common/Animation";
 
 import { EditorContext } from "./Editor";
@@ -8,10 +9,10 @@ import EditorJS from "@editorjs/editorjs";
 import { tools } from "./BlogTools";
 import {Toaster,toast} from "react-hot-toast";
 import axios from "axios";
-import { UserContext } from "../../App";
+import { ThemeContext, UserContext } from "../../App";
 
 const BlogEditor = () => {
-
+  let {theme,setTheme} = useContext(ThemeContext);
   let {blog_id} = useParams();
 
   let {blog,blog:{title,banner,content,tags,desc},setBlog,textEditor,setTextEditor,setEditorState} = useContext(EditorContext);
@@ -132,7 +133,7 @@ const BlogEditor = () => {
         <div className="mx-auto max-w-[900px] w-full">
           <div className="relative aspect-video hover:opacity-80 bg-white border-4 border-grey">
               <label htmlFor="uploadBanner">
-                  <img src={defaultBanner} className="z-20" alt="Default Banner"/>
+                  <img src={theme === "light" ? lightDefaultBanner : darkDefaultBanner} className="z-20" alt="Default Banner"/>
                   <input
                     id="uploadBanner"
                     type="file"
@@ -145,7 +146,7 @@ const BlogEditor = () => {
           <textarea
             defaultValue={title}
             placeholder="Blog Title"
-            className="w-full h-20 text-4xl font-medium outline-none resize-none mt-10 leading-tight placeholder:opacity-60"
+            className="w-full h-20 text-4xl font-medium outline-none resize-none mt-10 leading-tight placeholder:opacity-60 bg-white"
             onKeyDown={handleTitleKeyDown}
             onChange={handleTitleChange}
           ></textarea>

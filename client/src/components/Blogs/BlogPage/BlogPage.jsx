@@ -3,12 +3,14 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Animation from '../../../common/Animation';
 import Loader from '../../../common/Loader';
-import defaultBanner from "../../../assets/images/Blogs/default_banner.png"
+import lightDefaultBanner from "../../../assets/images/Blogs/default_banner_light.png";
+import darkDefaultBanner from "../../../assets/images/Blogs/default_banner_dark.png";
 import { getFullDate } from '../../../common/Date';
 import BlogInteraction from './BlogInteraction';
 import BlogPostCard from '../HomeBlogPostCard';
 import BlogContent from './BlogContent';
 import CommentsContainer, { fetchComments } from './CommentsContainer';
+import { ThemeContext } from '../../../App';
 
 export const blogStructure = {
     title:'',
@@ -23,6 +25,7 @@ export const BlogContext = createContext({});
 
 const BlogPage = () => {
     let {blog_id} = useParams();
+    let {theme,setTheme} = useContext(ThemeContext);
     const [blog,setBlog] = useState(blogStructure);
     const [similarBlogs,setSimilarBlogs] = useState(null);
     const [loading,setLoading] = useState(true);
@@ -68,7 +71,7 @@ const BlogPage = () => {
                 <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible,totalParentCommentsLoaded,setTotalParentCommentsLoaded}}>
                     <CommentsContainer />
                     <div className="max-w-[900px] mx-auto block py-10 px-[5vw]">
-                        <img src={defaultBanner} className="aspect-video" alt="banner"/>
+                        <img src={theme === "light" ? lightDefaultBanner : darkDefaultBanner} className="aspect-video" alt="banner"/>
                         <div className="mt-12">
                             <h2>{title}</h2>
                             <div className="flex sm:flex-col justify-between my-8">
