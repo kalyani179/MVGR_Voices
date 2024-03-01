@@ -7,11 +7,11 @@ import { authWithGoogle } from '../../common/firebase';
 import GoogleAuth from './GoogleAuth';
 
 import {storeInSession} from "../../common/session";
-import { UserContext } from '../../App';
+import { ThemeContext, UserContext } from '../../App';
 
 
 const UserAuth = ({type,close,open}) => {
-
+    let {theme,setTheme} = useContext(ThemeContext);
     // to make the background unscrollable when signing up.
     useEffect(()=>{
         document.body.style.overflowY = "hidden";
@@ -149,13 +149,13 @@ const UserAuth = ({type,close,open}) => {
                     }
                 }}
             />
-            <div className="fixed inset-0 bg-black bg-opacity-50 center" onClick={close}>
+            <div className={`fixed inset-0 bg-black ${theme==="light" ? "bg-opacity-50" : "bg-opacity-20"} center`} onClick={close}>
                 <Slide direction="down" duration={1500}>
                 {/* SignUp Heading */}
                 <div className="bg-white relative p-8 pb-4 rounded-md z-50" onClick={(e) => e.stopPropagation()}>
                     <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
                     <div className="center">
-                        <h1 className="text-center mb-5 heading">{type==="signup" ? "Sign Up" : "Sign In"}</h1>
+                        <h1 className={`text-center mb-5 heading`}>{type==="signup" ? "Sign Up" : "Sign In"}</h1>
                     </div>
 
                     {/* Form */}

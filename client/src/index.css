@@ -111,10 +111,22 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
-    border-top: 1px solid #ffffff !important;
-    border-left: 1px solid #ffffff !important;
-    border-right: 1px solid #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    border-top: 1px solid white  !important;
+    border-left: 1px solid white !important;
+    border-right: 1px solid white !important;
+    color: black !important;
+}
+/* Dark theme */
+[data-theme='dark'] input:-webkit-autofill,
+[data-theme='dark'] input:-webkit-autofill:hover,
+[data-theme='dark'] input:-webkit-autofill:focus,
+[data-theme='dark'] input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #242424 inset !important;
+    border-top: 1px solid #242424 !important;
+    border-left: 1px solid #242424 !important;
+    border-right: 1px solid #242424 !important;
+    -webkit-text-fill-color: white !important;
 }
 /* Styles for hiding scrollbar on modal content */
 .modal-content::-webkit-scrollbar {
