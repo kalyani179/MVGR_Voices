@@ -7,7 +7,7 @@ import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
 import NoBlogsDataMessage from "./NoBlogsDataMessage";
 import BlogsNavbar from "./Blogs Navbar/BlogsNavbar";
-import { UserContext } from "../../App";
+import { ThemeContext, UserContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import FilterPaginationData from "../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../common/LoadMoreDataBtn";
@@ -16,6 +16,7 @@ import { BeatLoader } from "react-spinners";
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
+    let {theme,setTheme} = useContext(ThemeContext);
     let [trendingBlogs, setTrendingBlog] = useState(null);
     let [pageState,setPageState] = useState("home");
     let {userAuth:{access_token}} = useContext(UserContext);
@@ -175,7 +176,7 @@ const BlogsHome = () => {
                     <div className="flex gap-3 flex-wrap">
                         {categories.map((category, index) => {
                             return (
-                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? "bg-primary text-white" : ""}`} key={index}>
+                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? theme==="light" ?  "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium" : ""}`} key={index}>
                                 {category}
                                 </button>
                             );
