@@ -83,7 +83,8 @@ export const signup = async(req, res) =>{
             console.log(hashed_password);
             let {access_token} = formatDatatoSend(newUser);
             console.log(access_token);
-            await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
+            await verifyMail(email,`https://mvgrvoices.onrender.com/${username}/verify/${access_token}`);
+            // await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
             return res.status(200).json(formatDatatoSend(newUser));
         })
     }
