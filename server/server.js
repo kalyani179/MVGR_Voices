@@ -7,6 +7,7 @@ import cors from "cors";
 import userAuthentication from "./routers/userAuthRouter.js";
 import blogsRouter from "./routers/blogsRouter.js";
 import settingsRouter from "./routers/settingsRouter.js";
+import dashboardRouter from "./routers/dashboardRouter.js";
 
 
 const server = express();
@@ -21,6 +22,7 @@ server.use(cors({origin:"*"}));
 server.use("/",userAuthentication);
 server.use("/",blogsRouter);
 server.use("/",settingsRouter);
+server.use("/",dashboardRouter);
 
 server.listen(PORT,()=>{
     console.log("Server is listening on port 3000");

@@ -15,7 +15,6 @@ const InPageNavigation = ({routes,defaultHidden=[],defaultActiveTab = 0,children
             })
         }
     },[width])
-    console.log(width);
     return (
         <>
             <div className="relative mb-8 bg-white border-b border-grey flex flex-nowrap overflow-x-auto">

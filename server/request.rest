@@ -1,8 +1,17 @@
-POST http://localhost:3000/change-password
+
+# POST http://localhost:3000/signin
+# Content-Type: application/json
+
+# {
+#     "email":"dantulurikalyani999@gmail.com",
+#     "password":"12345"
+# }
+
+POST http://localhost:3000/user-written-blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZGUyNTRkMzI3YzNjNDg1MGVkOGRmNyIsImlhdCI6MTcwOTA1ODgyNH0.weQr0IdGeL_t5r9c8Tz_81oBu_qNH8jUuwfvygNqmRk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZGUyNTRkMzI3YzNjNDg1MGVkOGRmNyIsImlhdCI6MTcwOTU2NTIxN30.WyhWtvFDQtXYSNKoncjk1HIQqeNlYbZ1Uj2q_bkS1_4
 
 {
-    "currentPassword":"1234",
-    "newPassword":"12345"
+    "page":1,
+    "draft":false
 }

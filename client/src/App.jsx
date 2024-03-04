@@ -13,6 +13,7 @@ import BlogPage from './components/Blogs/BlogPage/BlogPage';
 import SideNav from './components/Settings/SideNav';
 import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';
+import ManageBlogs from './components/Dashboard/ManageBlogs';
 
 export const UserContext = createContext({});
 
@@ -41,6 +42,9 @@ const App = () => {
               <Route path="/:username/verify/:access_token" element={<EmailVerification/>}/>
               <Route path="/" element={<BlogsNavbar />}>
                 <Route path="blogs" element={<BlogsHome />} />
+                <Route path="dashboard" element={<SideNav />}>
+                    <Route path="blogs" element={<ManageBlogs />}/>
+                </Route>
                 <Route path="settings" element={<SideNav />}>
                     <Route path="edit-profile" element={<EditProfile />}/>
                     <Route path="change-password" element={<ChangePassword />}/>
