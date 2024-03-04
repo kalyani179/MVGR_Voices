@@ -1,7 +1,21 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 
 const InPageNavigation = ({routes,defaultHidden=[],defaultActiveTab = 0,children}) => {
     const [activeTab,setActiveTab] = useState(defaultActiveTab);
+    let [isResizeEventAdded,setIsResizeEventAdded] = useState(false);
+    let [width,setWidth] = useState(window.innerWidth);
+    useEffect(()=>{
+        if(width>768 && activeTab!==defaultActiveTab){
+            setActiveTab(defaultActiveTab);
+        }
+        if(!isResizeEventAdded){
+            window.addEventListener("resize",()=>{
+                if(!isResizeEventAdded) setIsResizeEventAdded(true);
+                setWidth(window.innerWidth);
+            })
+        }
+    },[width])
+    console.log(width);
     return (
         <>
             <div className="relative mb-8 bg-white border-b border-grey flex flex-nowrap overflow-x-auto">
