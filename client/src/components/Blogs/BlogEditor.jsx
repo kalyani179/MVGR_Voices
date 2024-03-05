@@ -102,7 +102,7 @@ const BlogEditor = () => {
                   toast.dismiss(loadingToast);
                   toast.success("Blog Saved Successfully...");
                   setTimeout(()=>{
-                      navigate("/");
+                      navigate("/editor");
                   },500);
               }).catch(({response})=>{
                   e.target.classList.remove('disable');

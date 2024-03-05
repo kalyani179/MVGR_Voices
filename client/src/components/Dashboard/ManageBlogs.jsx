@@ -7,7 +7,7 @@ import InPageNavigation from '../Blogs/InPageNavigation';
 import Loader from '../../common/Loader';
 import NoBlogsDataMessage from '../Blogs/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
-import ManagePublishedBlogCard from './ManagePublishedBlogCard';
+import {ManagePublishedBlogCard, ManageDraftBlogCard } from './ManageBlogCard';
 
 const ManageBlogs = () => {
     const [blogs,setBlogs] = useState(null);
@@ -82,7 +82,7 @@ const ManageBlogs = () => {
                         {
                             blogs.results.map((blog,i)=>{
                                 return <Animation key={i} transition={{delay:i*0.04}}>
-                                    <ManagePublishedBlogCard blog={blog}/>
+                                    <ManagePublishedBlogCard blog={{...blog,index:i+1,setStateFunc:setBlogs}}/>
                                 </Animation>
                             })
                         }
@@ -90,7 +90,21 @@ const ManageBlogs = () => {
                     :
                     <NoBlogsDataMessage message="No Published Blogs"/>
                 }
-                    <h1>This is drafts</h1>
+                { // Drafts Blogs
+                    drafts === null ? <Loader /> :
+                    drafts.results.length ? 
+                    <>
+                        {
+                            drafts.results.map((blog,i)=>{
+                                return <Animation key={i} transition={{delay:i*0.04}}>
+                                    <ManageDraftBlogCard blog={{...blog,index:i+1,setStateFunc:setDrafts}}/>
+                                </Animation>
+                            })
+                        }
+                    </> 
+                    :
+                    <NoBlogsDataMessage message="No Drafts Blogs"/>
+                }
             </InPageNavigation>
         </>
     )
