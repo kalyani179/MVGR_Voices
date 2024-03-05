@@ -29,11 +29,11 @@ const ManagePublishedBlogCard = ({blog}) => {
   return (
     <>
       <div className="flex gap-10 border-b mb-6 sm:px-4 border-grey pb-6 items-center">
-        <img className="sm:hidden lg:hidden xl:block w-28 h-28 flex-none bg-grey object-cover" src={banner} alt="blog banner" />
+        <Link to={`/blog/${blog_id}`}><img className="sm:hidden lg:hidden xl:block w-28 h-28 flex-none bg-grey object-cover" src={banner} alt="blog banner" /></Link> 
         <div className="flex flex-col justify-between py-2 w-full min-w-[300px]">
             <div>
               <Link to={`/blog/${blog_id}`} className="blog-title mb-4 hover:underline">{title}</Link>
-              <p className="line-clamp-1">Published on {getDate(publishedAt)}</p>
+              <Link to={`/blog/${blog_id}`}><p className="line-clamp-1">Published on {getDate(publishedAt)}</p></Link>
             </div>
             <div className="flex gap-6 mt-3">
                 <Link  to={`/editor/${blog_id}`} className="pr-4 py-2 text-primary font-medium underline">Edit</Link>
