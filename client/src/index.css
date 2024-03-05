@@ -97,15 +97,18 @@
     }
 
     .sidebar-link {
-        @apply flex gap-4 items-center py-5 text-dark-grey text-sm hover:text-primary;
+        @apply flex gap-4 items-center py-5 text-dark-grey text-sm hover:text-primary hover:font-medium;
     }
     
     .sidebar-link.active {
-        @apply text-primary font-medium border-r-2 border-primary pl-6 bg-grey/50 -ml-6 md:rounded-tl-lg md:rounded-bl-lg sm:border-none;
+        @apply text-primary font-medium border-r-2 border-primary pl-6 bg-primary/5 -ml-6 md:rounded-tl-lg md:rounded-bl-lg sm:border-none;
     }
-    .sidebar-icon.active{
-        @apply text-primary
+    .sidebar-link:hover .sidebar-icon {
+        @apply text-primary;
     }
+    .sidebar-link.active .sidebar-icon {
+        @apply text-primary /* Change this to the appropriate color value */
+    }    
 }
 
 /** To remove the blue background color when autofilled by chrome **/

@@ -56,6 +56,7 @@ const ManagePublishedBlogCard = ({blog}) => {
 
 const ManageDraftBlogCard = ({blog}) => {
   let {title,desc,blog_id,index} = blog;
+  index++;
   let {userAuth:{access_token}} = useContext(UserContext);
     return (
       <div className="flex gap-5 pb-6 mb-6 lg:gap-10 border-b border-grey">

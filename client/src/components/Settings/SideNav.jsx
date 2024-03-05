@@ -50,15 +50,15 @@ const SideNav = () => {
                         <h1 className="text-dark-grey mb-3">Dashboard</h1>
                         <hr className="border-grey -ml-6 mb-4 mr-6" />
                         <NavLink to="/dashboard/blogs" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                            <i className="fi fi-rr-document"></i>
+                            <i className="fi fi-rr-document sidebar-icon"></i>
                             Blogs
                         </NavLink>
                         <NavLink to="/dashboard/notification" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                            <i className="fi fi-rr-bell"></i>
+                            <i className="fi fi-rr-bell sidebar-icon"></i>
                             Notifications
                         </NavLink>
                         <NavLink to="/editor" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                            <i className="fi fi-rr-file-edit"></i>
+                            <i className="fi fi-rr-file-edit sidebar-icon"></i>
                             Write
                         </NavLink>
 
@@ -66,11 +66,11 @@ const SideNav = () => {
                         <h1 className="text-dark-grey mt-8 mb-3">Settings</h1>
                         <hr className="border-grey -ml-6 mb-4 mr-6" />
                         <NavLink to="/settings/edit-profile" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                            <i className="fi fi-rr-user"></i>
+                            <i className="fi fi-rr-user sidebar-icon"></i>
                             Edit Profile
                         </NavLink>
                         <NavLink to="/settings/change-password" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                            <i className="fi fi-rr-lock"></i>
+                            <i className="fi fi-rr-lock sidebar-icon"></i>
                             Change Password
                         </NavLink>
                     </div>
