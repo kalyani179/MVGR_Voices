@@ -94,7 +94,7 @@ const deleteBlog = (blog,access_token,target) => {
               return null;
           }
           toast.remove(loadingToast);
-          toast.success("Blog Deleted Successfully...!");
+          toast.success("Blog Deleted Successfully..!");
           return {...preVal,totalDocs:totalDocs-1,deleteDocCount:deletedDocCount+1}
         })
     })

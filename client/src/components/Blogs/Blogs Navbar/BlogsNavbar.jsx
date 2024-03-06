@@ -25,7 +25,7 @@ const BlogsNavbar = () => {
     }
     return (
         <>
-        <nav className="navbar border-b border-grey bg-white">
+        <nav className="navbar pr-[3vw] border-b border-grey bg-white">
             {/* logo */}
             {/* <Link to="/" className="flex-none w-10">
                 <img src={} alt="logo" />
