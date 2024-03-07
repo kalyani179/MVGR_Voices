@@ -1,9 +1,9 @@
 import React, { createContext, useContext,useEffect,useState } from 'react'
-import { UserContext } from '../../App';
+import { UserContext } from '../../../App';
 import { useNavigate, useParams } from 'react-router-dom';
 import BlogEditor from './BlogEditor';
 import BlogPublish from './BlogPublish';
-import Loader from '../../common/Loader';
+import Loader from '../../../common/Loader';
 import axios from 'axios';
 import {Toaster,toast} from "react-hot-toast";
 

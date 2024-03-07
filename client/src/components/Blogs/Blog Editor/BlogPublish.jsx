@@ -1,13 +1,13 @@
 import React, { useContext } from "react"
 import { EditorContext } from "./Editor";
 import {Toaster,toast} from "react-hot-toast";
-import lightDefaultBanner from "../../assets/images/Blogs/default_banner_light.png";
-import darkDefaultBanner from "../../assets/images/Blogs/default_banner_dark.png";
-import BlogTags from "./BlogTags";
+import lightDefaultBanner from "../../../assets/images/Blogs/default_banner_light.png";
+import darkDefaultBanner from "../../../assets/images/Blogs/default_banner_dark.png";
+import BlogTags from "../Blog Home/BlogTags";
 
-import Animation from "../../common/Animation";
+import Animation from "../../../common/Animation";
 import axios from "axios";
-import { ThemeContext, UserContext } from "../../App";
+import { ThemeContext, UserContext } from "../../../App";
 import { useNavigate, useParams } from "react-router-dom";
 
 const BlogPublish = () => {

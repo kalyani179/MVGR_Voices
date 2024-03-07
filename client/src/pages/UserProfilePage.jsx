@@ -6,9 +6,9 @@ import Loader from '../common/Loader'
 import { UserContext } from '../App'
 import AboutUser from '../components/Blogs/AboutUser'
 import FilterPaginationData from '../common/FilterPaginationData'
-import InPageNavigation from '../components/Blogs/InPageNavigation'
-import BlogPostCard from '../components/Blogs/HomeBlogPostCard';
-import NoBlogsDataMessage from '../components/Blogs/NoBlogsDataMessage';
+import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation'
+import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
+import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn'
 import PageNotFound from './404Page'
 

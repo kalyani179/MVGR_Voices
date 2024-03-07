@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import Animation from "../../common/Animation";
+import Animation from "../../../common/Animation";
 import InPageNavigation from "./InPageNavigation";
 import axios from "axios";
-import Loader from "../../common/Loader";
+import Loader from "../../../common/Loader";
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
 import NoBlogsDataMessage from "./NoBlogsDataMessage";
-import BlogsNavbar from "./Blogs Navbar/BlogsNavbar";
-import { ThemeContext, UserContext } from "../../App";
+import BlogsNavbar from "../Blogs Navbar/BlogsNavbar";
+import { ThemeContext, UserContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
-import FilterPaginationData from "../../common/FilterPaginationData";
-import LoadMoreDataBtn from "../../common/LoadMoreDataBtn";
+import FilterPaginationData from "../../../common/FilterPaginationData";
+import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
 import { BeatLoader } from "react-spinners";
 
 

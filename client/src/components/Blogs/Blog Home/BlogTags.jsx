@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { EditorContext } from './Editor'
+import { EditorContext } from '../Blog Editor/Editor'
 
 const BlogTags = ({tag,tagIndex}) => {
 

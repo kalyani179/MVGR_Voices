@@ -7,7 +7,7 @@ import lightDefaultBanner from "../../../assets/images/Blogs/default_banner_ligh
 import darkDefaultBanner from "../../../assets/images/Blogs/default_banner_dark.png";
 import { getFullDate } from '../../../common/Date';
 import BlogInteraction from './BlogInteraction';
-import BlogPostCard from '../HomeBlogPostCard';
+import BlogPostCard from '../Blog Home/HomeBlogPostCard';
 import BlogContent from './BlogContent';
 import CommentsContainer, { fetchComments } from './CommentsContainer';
 import { ThemeContext } from '../../../App';

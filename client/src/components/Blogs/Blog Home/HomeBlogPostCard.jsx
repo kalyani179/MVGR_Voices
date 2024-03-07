@@ -1,5 +1,5 @@
 import React from 'react'
-import { getDate } from '../../common/Date';
+import { getDate } from '../../../common/Date';
 import { Link } from 'react-router-dom';
 
 const BlogPostCard = ({content,author}) => {

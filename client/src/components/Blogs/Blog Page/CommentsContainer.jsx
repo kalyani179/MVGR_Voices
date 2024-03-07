@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { BlogContext } from './BlogPage'
 import CommentField from './CommentField';
 import axios from 'axios';
-import NoBlogsDataMessage from '../NoBlogsDataMessage';
+import NoBlogsDataMessage from '../Blog Home/NoBlogsDataMessage';
 import Animation from '../../../common/Animation';
 import CommentCard from './CommentCard';
 

@@ -1,15 +1,15 @@
 import React,{createContext, useEffect, useState} from 'react'
 import {Routes,Route,BrowserRouter} from "react-router-dom"; 
 import { lookInSession } from './common/session';
-import Editor from './components/Blogs/Editor';
+import Editor from './components/Blogs/Blog Editor/Editor';
 import Home from './pages/Home';
-import BlogsHome from './components/Blogs/BlogsHome';
+import BlogsHome from './components/Blogs/Blog Home/BlogsHome';
 import BlogsSearchPage from './pages/BlogsSearchPage';
 import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
 import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
-import BlogPage from './components/Blogs/BlogPage/BlogPage';
+import BlogPage from './components/Blogs/Blog Page/BlogPage';
 import SideNav from './components/Settings/SideNav';
 import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';

@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../App';
 import FilterPaginationData from '../../common/FilterPaginationData';
 import { Toaster } from 'react-hot-toast';
-import InPageNavigation from '../Blogs/InPageNavigation';
+import InPageNavigation from '../Blogs/Blog Home/InPageNavigation';
 import Loader from '../../common/Loader';
-import NoBlogsDataMessage from '../Blogs/NoBlogsDataMessage';
+import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
 import {ManagePublishedBlogCard, ManageDraftBlogCard } from './ManageBlogCard';
 

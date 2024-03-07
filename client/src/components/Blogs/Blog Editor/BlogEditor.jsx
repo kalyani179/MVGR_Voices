@@ -1,17 +1,17 @@
 import React, { useContext, useEffect, useRef } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom";
-import lightDefaultBanner from "../../assets/images/Blogs/default_banner_light.png";
-import darkDefaultBanner from "../../assets/images/Blogs/default_banner_dark.png";
-import Animation from "../../common/Animation";
+import lightDefaultBanner from "../../../assets/images/Blogs/default_banner_light.png";
+import darkDefaultBanner from "../../../assets/images/Blogs/default_banner_dark.png";
+import Animation from "../../../common/Animation";
 
 import { EditorContext } from "./Editor";
 import EditorJS from "@editorjs/editorjs";
 import { tools } from "./BlogTools";
 import {Toaster,toast} from "react-hot-toast";
 import axios from "axios";
-import { ThemeContext, UserContext } from "../../App";
+import { ThemeContext, UserContext } from "../../../App";
 
-import { storage} from "../../common/firebase";
+import { storage} from "../../../common/firebase";
 import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
 
 const BlogEditor = () => {
