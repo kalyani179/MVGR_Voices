@@ -112,7 +112,7 @@ const UserAuth = ({type,close,open}) => {
             },2000)
         }
         userAuthThroughServer(type,formData);
-        e.target.setAttribute("disabled",false);
+        e.target.removeAttribute("disabled");
     }
     const handleGoogleAuth = (e) =>{
 

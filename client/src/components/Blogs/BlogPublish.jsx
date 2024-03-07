@@ -114,7 +114,7 @@ const BlogPublish = () => {
                 <p className="text-dark-grey mb-1">Preview</p>
 
                 <div className="w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4">
-                    <img src={theme === "light" ? lightDefaultBanner : darkDefaultBanner} alt="Blog Banner"/> {/* remove later */}
+                    <img src={banner.length ? banner : theme==="light" ? lightDefaultBanner : darkDefaultBanner} alt="Blog Banner"/> {/* remove later */}
                 </div>
 
                 <h1 className="text-4xl font-medium mt-2 leading-tight line-clamp-2">{title}</h1>

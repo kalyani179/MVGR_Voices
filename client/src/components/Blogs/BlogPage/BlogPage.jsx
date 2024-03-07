@@ -71,7 +71,7 @@ const BlogPage = () => {
                 <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible,totalParentCommentsLoaded,setTotalParentCommentsLoaded}}>
                     <CommentsContainer />
                     <div className="max-w-[900px] mx-auto block py-10 px-[5vw]">
-                        <img src={theme === "light" ? lightDefaultBanner : darkDefaultBanner} className="aspect-video" alt="banner"/>
+                        <img src={ banner ? banner : theme==="light" ? lightDefaultBanner : darkDefaultBanner } className="aspect-video" alt="banner"/>
                         <div className="mt-12">
                             <h2>{title}</h2>
                             <div className="flex sm:flex-col justify-between my-8">

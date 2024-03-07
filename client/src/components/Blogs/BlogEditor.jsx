@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useRef } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import lightDefaultBanner from "../../assets/images/Blogs/default_banner_light.png";
 import darkDefaultBanner from "../../assets/images/Blogs/default_banner_dark.png";
@@ -11,10 +11,13 @@ import {Toaster,toast} from "react-hot-toast";
 import axios from "axios";
 import { ThemeContext, UserContext } from "../../App";
 
+import { storage} from "../../common/firebase";
+import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
+
 const BlogEditor = () => {
   let {theme,setTheme} = useContext(ThemeContext);
   let {blog_id} = useParams();
-
+  let blogBannerRef = useRef();
   let {blog,blog:{title,banner,content,tags,desc},setBlog,textEditor,setTextEditor,setEditorState} = useContext(EditorContext);
 
   let {userAuth:{access_token}} = useContext(UserContext);
@@ -33,8 +36,24 @@ const BlogEditor = () => {
   }, [])
 
   const handleBannerUpload = (e) =>{
-    let img = e.target.files[0];
-    console.log(img);
+    let loadingToast=toast.loading("Uploading...");
+    let uploadedFile = e.target.files[0];
+    const storageRef = ref(storage,`Blog_Images/${Date.now()}-${uploadedFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef,uploadedFile);
+    uploadTask.on("state_changed",(snapshot)=>{
+      // loadingToast = toast.loading(`${(snapshot.bytesTransferred/snapshot.totalBytes)*100}% Uploading Image`);
+      // setProgress((snapshot.bytesTransferred/snapshot.totalBytes)*100);
+    },(error)=>{
+      toast.dismiss(loadingToast);
+      console.log(error);
+    },()=>{
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL)=>{
+        toast.dismiss(loadingToast);
+        blogBannerRef.current.src=downloadURL;
+        setBlog({...blog,banner:downloadURL});
+        toast.success("Image Uploaded!");
+      })
+    })
   }
   const handleTitleKeyDown = (e) =>{
     if(e.keyCode === 13){ // Enter key
@@ -51,9 +70,9 @@ const BlogEditor = () => {
   }
 
   const handlePublishEvent = () =>{
-    // if(!banner.length){
-    //   return toast.error("Upload a Blog Banner To publish IT!");
-    // }
+    if(!banner.length){
+      return toast.error("Upload a Blog Banner To publish IT!");
+    }
 
     if(!title.length){
       return toast.error("Write Blog Title To Publish IT!");
@@ -133,7 +152,7 @@ const BlogEditor = () => {
         <div className="mx-auto max-w-[900px] w-full">
           <div className="relative aspect-video hover:opacity-80 bg-white border-4 border-grey">
               <label htmlFor="uploadBanner">
-                  <img src={theme === "light" ? lightDefaultBanner : darkDefaultBanner} className="z-20" alt="Default Banner"/>
+                  <img ref={blogBannerRef} src={banner.length ? banner : theme==="light" ? lightDefaultBanner : darkDefaultBanner} className="z-20" alt="Default Banner"/>
                   <input
                     id="uploadBanner"
                     type="file"
