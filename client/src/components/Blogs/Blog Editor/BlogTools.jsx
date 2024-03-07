@@ -6,24 +6,46 @@ import Quote from "@editorjs/quote"
 import Marker from "@editorjs/marker";
 import InlineCode from "@editorjs/inline-code";
 
+import { storage} from "../../../common/firebase";
+import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
+
 const uploadImageByFile = (e) => {
-//     return link.then( url => {
-//         if(url){
-//             return {
-//                 success : 1,
-//                 file : {url}
-//             }
-//         }
-//     })
-}
+    return new Promise((resolve, reject) => {
+        const storageRef = ref(storage, `Blog_Images/${Date.now()}-${e.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, e);
+
+        uploadTask.on("state_changed", 
+            (snapshot) => {
+                // Upload progress can be monitored here if needed
+            },
+            (error) => {
+                console.log("Error during upload:", error);
+                reject(error); // Reject the promise if there's an error
+            },
+            () => {
+                // Upload completed successfully
+                getDownloadURL(uploadTask.snapshot.ref)
+                    .then(url => {
+                        console.log("Image uploaded successfully:", url);
+                        resolve({ success: 1, file: { url } }); // Resolve the promise with the uploaded image URL
+                    })
+                    .catch(err => {
+                        console.log("Error getting download URL:", err);
+                        reject(err); // Reject the promise if there's an error in getting the download URL
+                    });
+            }
+        );
+    });
+};
+
 
 const uploadImageByUrl = (e) => {
     let link = new Promise((resolve,reject) => {
         try{
-            resolve(e)
+            resolve(e);
         }
         catch(err) {
-            reject(err)
+            reject(err);
         }
     })
     return link.then( url => {
