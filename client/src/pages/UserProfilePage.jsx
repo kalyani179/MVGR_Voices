@@ -76,7 +76,6 @@ const UserProfilePage = () => {
             resetStates();
             fetchUserProfile();
         }
-       
     },[profileId,blogs])
     const resetStates = () =>{
         setLoading(true);

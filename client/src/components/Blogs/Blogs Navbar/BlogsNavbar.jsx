@@ -31,7 +31,12 @@ const BlogsNavbar = () => {
                 <img src={} alt="logo" />
             </Link> */} 
             {/* Search Box */}
-            <div className={`absolute bg-white w-full left-0 top-full mt-0.5 border-b border-grey py-4 px-[5vw] md:border-0 block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
+            <div>
+                <h1 className="font-bold opacity-25 text-dark-grey font-gelasio tracking-wider text-4xl">BLOGS</h1>
+            </div>
+
+            <div className="flex items-center ml-auto gap-3 md:gap-6">
+            <div className={`w-full top-full mt-0.5 border-b border-grey py-4 px-[5vw] md:-m-6 md:border-0 block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                 <input 
                     type='text'
                     placeholder='Search'
@@ -40,22 +45,24 @@ const BlogsNavbar = () => {
                 />
                 <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-3 md:pointer-events-none md:left-5 text-lg text-dark-grey"></i>
             </div>
-
-            <div className="flex items-center ml-auto gap-3 md:gap-6">
-                <button className="md:hidden bg-grey rounded-full w-10 h-10 center"
-                onClick={()=>setSearchBoxVisibility(!searchBoxVisibility)}
-                >
-                    <i className="fi fi-rr-search text-lg"></i>
-                </button>
+                <Link>
+                    <button className="md:hidden bg-grey rounded-full w-11 h-11 center"
+                    onClick={()=>setSearchBoxVisibility(!searchBoxVisibility)}
+                    >
+                        <i className="fi fi-rr-search block text-lg"></i>
+                    </button>
+                </Link>
                 {/* To Write blogs */}
                 <Link to="/editor" className="md:flex gap-2 link pl-3 px-3 py-2 hidden">
                     <i className="fi fi-rr-file-edit"></i>
                     <p>write</p>
                 </Link>
                 {/* Theme Change */}
+                <Link>
                 <button onClick={changeTheme} className="bg-grey rounded-full w-11 h-11 hover:bg-black/10 relative">
                         <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} text-xl block mt-1`}></i>
                 </button>
+                </Link>
                 {/* notification button */}
                 <Link to="/dashboard/notification">
                     <button className="bg-grey rounded-full w-11 h-11 hover:bg-black/10 relative">

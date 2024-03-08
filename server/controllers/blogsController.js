@@ -125,9 +125,9 @@ const createBlog = async (req, res) => {
             if(!desc.length || desc.length>200){
                 return res.status(403).json({error:"You Must Provide a Blog Description Under 200 Characters"});
             }
-            // if(!banner.length){
-            //     return res.status(403).json({error:"You Must Provide a Blog Banner to publish the blog"})
-            // }
+            if(!banner.length){
+                return res.status(403).json({error:"You Must Provide a Blog Banner to publish the blog"})
+            }
             if(!content.blocks.length){
                 return res.status(403).json({error:"You Must Write Something To Publish it!"})
             }
