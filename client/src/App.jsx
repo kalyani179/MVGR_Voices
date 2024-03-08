@@ -14,6 +14,7 @@ import SideNav from './components/Settings/SideNav';
 import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';
 import ManageBlogs from './components/Dashboard/ManageBlogs';
+import Contact from './components/Contact/Contact';
 
 export const UserContext = createContext({});
 
@@ -56,7 +57,7 @@ const App = () => {
               <Route path="/editor" exact element={<Editor />} />
               <Route path="/editor/:blog_id" exact element={<Editor />} />
               <Route path="*" element={<PageNotFound />} />
-              
+              <Route path="/contact" element={<Contact />}/>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

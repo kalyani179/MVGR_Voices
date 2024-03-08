@@ -135,11 +135,12 @@ input:-webkit-autofill:active{
     -webkit-text-fill-color: white !important;
 }
 /* Styles for hiding scrollbar on modal content */
-.modal-content::-webkit-scrollbar {
+
+.text-area-input::-webkit-scrollbar,.modal-content::-webkit-scrollbar {
     width: 0 !important;
     display: none; /* Safari and Chrome */
 }
-.modal-content {
+.text-area-input .modal-content {
     scrollbar-width: none; /* Firefox */
 }
 body::-webkit-scrollbar{

@@ -38,13 +38,13 @@ const verifyMail = async(email,link) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: "dantulurikalyani999@gmail.com",
-                pass: "ihmwfquaqzrjnhtq"
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
             }
         })
         //send email
         await transporter.sendMail({
-            from:"dantulurikalyani999@gmail.com", //sender mail
+            from:process.env.EMAIL, //sender mail
             to:email, //reciever mail
             subject:"Account Verification",
             text:"This Email is sent to verify your account.",
@@ -83,8 +83,8 @@ export const signup = async(req, res) =>{
             console.log(hashed_password);
             let {access_token} = formatDatatoSend(newUser);
             console.log(access_token);
-            await verifyMail(email,`https://mvgrvoices.onrender.com/${username}/verify/${access_token}`);
-            // await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
+            // await verifyMail(email,`https://mvgrvoices.onrender.com/${username}/verify/${access_token}`);
+            await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
             return res.status(200).json(formatDatatoSend(newUser));
         })
     }

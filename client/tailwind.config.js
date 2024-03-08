@@ -49,7 +49,9 @@ module.exports = {
         'transparent': 'transparent',
         'purple': '#660066',
         'icons' : '#999999',
-        'primary' : '#e86f6f'
+        'primary' : '#e86f6f',
+        'blue':'#002D62',
+        'green':"#32CD32"
       },
       dark:{
         'white': '#242424',

@@ -32,7 +32,7 @@ const Navbar = () => {
     {name:"Home",link:"/"},
     {name:"Podcasts",link:"/"},
     {name:"Blogs",link:"/blogs"},
-    {name:"Contact",link:"/"},
+    {name:"Contact",link:"/contact"},
     {name:"Subscribe",link:"/"},
   ];
   const handleLinkClick = ({link}) =>{
