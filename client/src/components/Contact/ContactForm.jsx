@@ -63,7 +63,7 @@ const ContactForm = () => {
         })
     }
     return (
-        <form className="bg-white flex flex-col gap-3 rounded-xl shadow-2xl p-10">
+        <form className="bg-white opacity-90 flex flex-col gap-3 rounded-xl shadow-2xl p-10">
             <Toaster />
             <div className="flex justify-start items-center">
                 <i className={`fas fa-user absolute ${isFullNameFocused || inputFullNameValue ? 'text-primary' : ''}`}></i>
@@ -76,9 +76,9 @@ const ContactForm = () => {
                 <input onClick={translateEmail} onBlur={()=>setEmailTranslated(false)} onChange={handleChange} className={`auth-input ${isEmailFocused || inputEmailValue ? "border-b-primary" : ""}`} type="email" name="email" value={inputEmailValue}/>
             </div>
             <div className="flex justify-start items-center">
-                <i class={`absolute fi fi-sr-comment-alt ${isMessageFocused|| inputMessageValue ?"text-primary":""}`}></i>
+                <i class={`absolute fi fi-sr-comment-alt mb-3 ${isMessageFocused|| inputMessageValue ?"text-primary":""}`}></i>
                 <h6 className={`absolute pl-7 mb-5 transition-transform duration-300 ease-in-out transform ${isMessageFocused || inputMessageValue ? '-translate-y-7 text-primary font-medium' : 'translate-y-0'}`}>Type Message Here</h6>
-                <textarea onClick={translateMessage} onBlur={()=>setMessageTranslated(false)} onChange={handleMessageChange} className={`resize-none w-full auth-input overflow-hidden text-area-input overflow-y-scroll ${isMessageFocused || inputMessageValue ? "border-b-primary" : ""}`} value={inputMessageValue}>
+                <textarea onClick={translateMessage} onBlur={()=>setMessageTranslated(false)} onChange={handleMessageChange} className={`resize-none bg-transparent w-full auth-input overflow-hidden text-area-input overflow-y-scroll ${isMessageFocused || inputMessageValue ? "border-b-primary" : ""}`} value={inputMessageValue}>
                 </textarea>
             </div>
             <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 rounded-md">Send</button>
