@@ -35,21 +35,31 @@ const ContactForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(inputEmailValue,inputFullNameValue,inputMessageValue)
+        if(!inputFullNameValue.length){
+            return toast.error("Please Enter Your Fullname..!");
+        }
+        if(!inputEmailValue.length){
+            return toast.error("Please Enter Your Email..!");
+        }
+        if(!inputMessageValue.length){
+            return toast.error("Please Enter The Message..!");
+        }
+        let loadingToast = toast.loading("sending mail...");
         e.target.setAttribute("disabled",true);
-        let loadingToast = toast.loading("sending mail...")
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/query-mail",{fullname:inputFullNameValue,email:inputEmailValue,query:inputMessageValue})
-        .then((response) =>{
+        .then(response =>{
                 e.target.removeAttribute("disabled");
                 toast.success("Mail Sent Successfully!");
                 toast.dismiss(loadingToast);
                 setInputFullNameValue('');setInputEmailValue('');setInputMessageValue('');
         })
-        .catch(err=>{
+        .catch(({response})=>{
             e.target.removeAttribute("disabled");
-            toast.error("Sorry!There is an error occured while sending mail...Please Try Again!");
+            toast.error(response.data.error);
+            // toast.error("Sorry!There is an error occured while sending mail...Please Try Again!");
             setInputFullNameValue('');setInputEmailValue('');setInputMessageValue('');
             toast.dismiss(loadingToast);
-            console.log(err);
+            console.log(response.data.error);
         })
     }
     return (

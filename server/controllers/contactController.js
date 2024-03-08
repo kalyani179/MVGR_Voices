@@ -1,7 +1,16 @@
 import nodemailer from "nodemailer";
 const queryMail = async (req,res) => {
     let {fullname,email,query} = req.body;
-    console.log(fullname,email,query)
+    console.log(fullname,email,query);
+    if(!fullname.length){
+        return res.status(403).json({"error":"Please Enter Your Fullname!"});
+    }
+    if(!email.length){
+        return res.status(403).json({"error":"Please Enter Your Email!"});
+    }
+    if(!query.length){
+        return res.status(403).json({"error":"Please Enter The Message!"});
+    }
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
