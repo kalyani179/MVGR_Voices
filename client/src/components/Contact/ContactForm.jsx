@@ -1,8 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {toast,Toaster} from 'react-hot-toast';
+import { ThemeContext } from '../../App';
 
 const ContactForm = () => {
+    let {theme,setTheme} = useContext(ThemeContext);
     const [isFullNameFocused,setFullNameTranslated] = useState(false);
     const [isEmailFocused,setEmailTranslated] = useState(false);
     const [isMessageFocused,setMessageTranslated] = useState(false);
@@ -81,7 +83,7 @@ const ContactForm = () => {
                 <textarea onClick={translateMessage} onBlur={()=>setMessageTranslated(false)} onChange={handleMessageChange} className={`resize-none bg-transparent w-full auth-input overflow-hidden text-area-input overflow-y-scroll ${isMessageFocused || inputMessageValue ? "border-b-primary" : ""}`} value={inputMessageValue}>
                 </textarea>
             </div>
-            <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 rounded-md">Send</button>
+            <button onClick={handleSubmit} type="submit" className={`btn-purple ${theme==="light" ? "font-medium" : "font-bold"} w-80 rounded-md`}>Send Message</button>
                 
             
         </form>

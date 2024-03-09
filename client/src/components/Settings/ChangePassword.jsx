@@ -69,7 +69,7 @@ const ChangePassword = () => {
         <Toaster />
         <form className="h-cover flex flex-col gap-5 items-center justify-center">
             <h1 className="sm:hidden text-xl font-medium text-primary">Change Password</h1>
-            <div className="py-10 w-full md:max-w-[400px] flex flex-col justify-center items-center">
+            <div className="py-8 w-full md:max-w-[400px] flex flex-col justify-center items-center">
                 <div className='flex justify-start items-center'>
                     <i className={`fi fi-rr-lock absolute ${isCurrentPasswordFocused || inputCurrentPassword ? 'text-primary' : ''}`}></i>
                     <input onFocus={translateCurrentPassword} onBlur={()=>setCurrentPasswordFocused(false)} onChange={handleChange} className="auth-input" type={`${currentPasswordVisible ? "text" : "password"}`} name="currentPassword" value={inputCurrentPassword} placeholder="Current Password"/>
