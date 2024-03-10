@@ -15,7 +15,7 @@ const UserNavigationPanel = () => {
     }
 
     return (
-        <Animation transition={{duration:0.2}}
+        <Animation transition={{duration:0}}
         className="absoulte right-0 z-50">
             <div className="bg-white z-50 absolute -right-8 border-t-4 border-primary w-48 duration-200 shadow-xl">
                 <Link to="/editor" className="flex gap-2 link md:hidden">

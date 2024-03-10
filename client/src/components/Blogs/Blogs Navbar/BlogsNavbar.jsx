@@ -25,7 +25,7 @@ const BlogsNavbar = () => {
     }
     return (
         <>
-        <nav className="navbar pr-[3vw] border-b border-grey bg-white">
+        <nav className={`navbar pr-[3vw] border-b border-grey bg-white ${searchBoxVisibility?"sm:mb-12 duration-500":"duration-500"}`}>
             {/* logo */}
             {/* <Link to="/" className="flex-none w-10">
                 <img src={} alt="logo" />
@@ -35,15 +35,16 @@ const BlogsNavbar = () => {
                 <h1 className="font-bold opacity-25 text-dark-grey font-gelasio tracking-wider text-4xl">BLOGS</h1>
             </div>
 
-            <div className="flex items-center ml-auto gap-3 md:gap-6">
-            <div className={`w-full top-full mt-0.5 border-b border-grey py-4 px-[5vw] md:-m-6 md:border-0 block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
+        
+        <div className="flex items-center ml-auto gap-3 md:gap-6">
+            <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                 <input 
                     type='text'
                     placeholder='Search'
                     className='w-full md:w-auto bg-grey p-3 pl-6 pr-[12%] md:pr-6 rounded-full md:pl-12'
                     onKeyDown={handleSearch}
                 />
-                <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-3 md:pointer-events-none md:left-5 text-lg text-dark-grey"></i>
+                <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-2 md:top-3 md:pointer-events-none md:left-5 text-lg text-dark-grey"></i>
             </div>
                 <Link>
                     <button className="md:hidden bg-grey rounded-full w-11 h-11 center"
@@ -52,6 +53,8 @@ const BlogsNavbar = () => {
                         <i className="fi fi-rr-search block text-lg"></i>
                     </button>
                 </Link>
+
+
                 {/* To Write blogs */}
                 <Link to="/editor" className="md:flex gap-2 link pl-3 px-3 py-2 hidden">
                     <i className="fi fi-rr-file-edit"></i>
