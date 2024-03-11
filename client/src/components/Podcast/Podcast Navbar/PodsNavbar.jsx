@@ -39,8 +39,8 @@ const PodsNavbar = () => {
                     <i className="fi fi-rr-search text-lg"></i>
                 </button>
                 {/* To Write blogs */}
-                <Link  className="md:flex gap-2 link pl-3 px-3 py-2 hidden">
-                    <i className="fi fi-rr-file-edit"></i>
+                <Link to="/upload" className="md:flex gap-2 link pl-3 px-3 py-2 hidden">
+                    <i class="fi fi-rr-cloud-upload"></i>
                     <p>Upload</p>
                 </Link>
                 {/* notification button */}

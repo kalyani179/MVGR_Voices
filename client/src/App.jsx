@@ -12,6 +12,7 @@ import EmailVerification from './components/Authentication/EmailVerification';
 import BlogPage from './components/Blogs/BlogPage/BlogPage';
 import Podcast from './components/Podcast/Podcast';
 import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
+import UploadPodcast from './components/Podcast/UploadPodcast';
 //import Upload from './components/Podcast/Upload';
 export const UserContext = createContext({});
 
@@ -37,12 +38,12 @@ const App = () => {
             </Route>
             <Route path="/editor" exact element={<Editor />} />
             <Route path="/editor/:blog_id" exact element={<Editor />} />
-            <Route path="*" element={<PageNotFound />} />
+            <Route path="*" element={<PageNotFound />} />          
             <Route path="/" element={<PodsNavbar />}>
-              <Route path="podcast" element={<Podcast />} />
+              <Route path="podcast" element={<Podcast></Podcast>}></Route>
+             
             </Route>
-           
-
+            <Route path="/upload" exact element={<UploadPodcast />} />
 
            
         </Routes>

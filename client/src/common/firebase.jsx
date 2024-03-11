@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {GoogleAuthProvider,getAuth, signInWithPopup} from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,6 +26,9 @@ const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
 
+//  Firebase Storage initialization
+const storage = getStorage(app);
+
 export const authWithGoogle = async () => {
     let user = null;
     await signInWithPopup(auth,provider)
@@ -36,3 +40,4 @@ export const authWithGoogle = async () => {
     })
     return user;
 }
+export { storage };

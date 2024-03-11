@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema } from "mongoose";
 
 const podSchema = mongoose.Schema({
     name: {
@@ -13,14 +13,16 @@ const podSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    artist: {
+    description: {
         type: String,
         required: true,
     },
-    category: {
+    /*category: {
         type: String,
         required: true,
-    },
+    },*/
 }, { timestamps: true });
 
-module.exports = mongoose.model("pod", podSchema);
+const PodModel = mongoose.model("pod", podSchema);
+
+export default PodModel;

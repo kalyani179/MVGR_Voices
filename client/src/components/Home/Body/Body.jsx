@@ -65,7 +65,7 @@ const Body = () => {
                 </div>                                    
                 </Zoom>
             </div> 
-        </div>
+            </div>
     )
 }
 

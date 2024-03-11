@@ -90,6 +90,37 @@
     .blog-index {
         @apply text-4xl sm:text-3xl lg:text-5xl font-bold text-grey leading-none;
     }
+        /* podcast imageLoader styling */
+    .loader-container {
+        width: 64px; /* Adjust as needed */
+        height: 64px; /* Adjust as needed */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .loader {
+        width: 50px; /* Adjust as needed */
+        height: 50px; /* Adjust as needed */
+        border-radius: 50%;
+        background: conic-gradient(
+          #ff6b6b 0% 25%,
+          #34d399 25% 50%,
+          #6366f1 50% 75%,
+          #fbbf24 75% 100%
+        );
+        animation: rotate 1.5s linear infinite;
+      }
+      
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      
 }
 
 /** To remove the blue background color when autofilled by chrome **/
