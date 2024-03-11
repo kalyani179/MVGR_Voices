@@ -70,11 +70,7 @@ const UploadPodcast = () => {
     };*/
     const handleUpload = (e) => {
       e.preventDefault();
-      if(!songImageCover ||!audioImageCover){
-        //throw alert
-      }else{
-        setIsAudioLoading(true);
-        setIsImageLoading(true);
+
         axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/save", {
           name: songName,
           description: songDescription,
@@ -86,7 +82,7 @@ const UploadPodcast = () => {
           // Add any further logic you need after successful upload
         })
         .catch(err => console.log(err));
-      }
+    
       setSongName(null);
       setIsAudioLoading(false);
       setIsImageLoading(false);

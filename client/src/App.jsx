@@ -9,7 +9,15 @@ import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
 import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
-import BlogPage from './components/Blogs/BlogPage/BlogPage';
+import BlogPage from './components/Blogs/Blog Page/BlogPage';
+import SideNav from './components/Settings/SideNav';
+import ChangePassword from './components/Settings/ChangePassword';
+import EditProfile from './components/Settings/EditProfile';
+import ManageBlogs from './components/Dashboard/ManageBlogs';
+import Contact from './components/Contact/Contact';
+import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
+import Podcast from './components/Podcast/Podcast';
+import UploadPodcast from './components/Podcast/UploadPodcast';
 
 export const UserContext = createContext({});
 
@@ -30,24 +38,38 @@ const App = () => {
   },[])
 
   return (
-    <UserContext.Provider value={{userAuth,setUserAuth,isValidToken,setValidToken}}>
-      <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/:username/verify/:access_token" element={<EmailVerification/>}/>
-            <Route path="/" element={<BlogsNavbar />}>
-              <Route path="blogs" element={<BlogsHome />} />
-              <Route path="search/:query" element={<BlogsSearchPage />}/>
-              <Route path="user/:id" element={<UserProfilePage />}/>
-              <Route path="blog/:blog_id" element={<BlogPage />}/>
-            </Route>
-            <Route path="/editor" exact element={<Editor />} />
-            <Route path="/editor/:blog_id" exact element={<Editor />} />
-            <Route path="*" element={<PageNotFound />} />
-            
-        </Routes>
-      </BrowserRouter>
-    </UserContext.Provider>
+    <ThemeContext.Provider value={{theme,setTheme}}>
+      <UserContext.Provider value={{userAuth,setUserAuth,isValidToken,setValidToken}}>
+        <BrowserRouter>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/:username/verify/:access_token" element={<EmailVerification/>}/>
+              <Route path="/" element={<BlogsNavbar />}>
+                <Route path="blogs" element={<BlogsHome />} />
+                <Route path="dashboard" element={<SideNav />}>
+                    <Route path="blogs" element={<ManageBlogs />}/>
+                </Route>
+                <Route path="settings" element={<SideNav />}>
+                    <Route path="edit-profile" element={<EditProfile />}/>
+                    <Route path="change-password" element={<ChangePassword />}/>
+                </Route>
+                <Route path="search/:query" element={<BlogsSearchPage />}/>
+                <Route path="user/:id" element={<UserProfilePage />}/>
+                <Route path="blog/:blog_id" element={<BlogPage />}/>
+              </Route>
+              <Route path="/editor" exact element={<Editor />} />
+              <Route path="/editor/:blog_id" exact element={<Editor />} />
+              <Route path="*" element={<PageNotFound />} />
+              <Route path="/contact" element={<Contact />}/>
+              <Route path="/" element={<PodsNavbar />}>
+                <Route path="podcast" element={<Podcast />} />
+              </Route>
+              <Route path='/upload' element={<UploadPodcast />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
+  
   )
 }
 
