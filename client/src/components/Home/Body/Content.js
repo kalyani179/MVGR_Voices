@@ -17,12 +17,12 @@ const Content = [
     {
         title: "Contact",
         description: "If you encounter any issues, we've got your back! Feel free to reach out to us through the contact section, and we'll swiftly address and resolve any concerns you may have. Your satisfaction is our priority, and we're here to ensure your MVGR VOICES experience is seamless and enjoyable.",
-        img: podcast
+        img: contact
     },
     {
         title: "Subscribe",
         description: "Enjoy our podcasts seamlessly on various platforms like Spotify and more! Head to the Subscribe section to find links to these platforms, allowing you to listen and subscribe to MVGR VOICES effortlessly.",
-        img: podcast
+        img: subscribe
     }
 
 ]

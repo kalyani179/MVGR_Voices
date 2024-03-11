@@ -15,26 +15,29 @@ const UserNavigationPanel = () => {
     }
 
     return (
-        <Animation transition={{duration:0.2}}
+        <Animation transition={{duration:0}}
         className="absoulte right-0 z-50">
-            <div className="bg-white absolute right-0 border border-grey w-60 duration-200">
-                <Link  className="flex gap-2 link md:hidden">
+            <div className="bg-white z-50 absolute -right-8 border-t-4 border-primary w-48 duration-200 shadow-xl">
+                <Link to="/editor" className="flex gap-2 link md:hidden">
                     <i className="fi fi-rr-file-edit"></i>
-                    <p>Upload</p>
+                    <p>write</p>
                 </Link>
                 <Link to={`/user/${username}`} className="link">
+                    <i class="fi fi-rs-user"></i>
                     Profile
                 </Link>
                 <Link to="/dashboard/blogs" className="link">
+                    <i class="fi fi-sr-book"></i>
                     Dashboard
                 </Link>
                 <Link to="/settings/edit-profile" className="link">
+                    <i class="fi fi-ss-settings"></i>
                     Settings
                 </Link>
-                <span className="absolute border-t border-grey w-[100%]"></span>
-                <button className="text-left p-4 hover:bg-grey w-full pl-8 pr-4" onClick={signOutUser}>
-                    <h1 className="font-semibold text-lg mb-1">Sign Out</h1>
-                    <p className="text-dark-grey">@{username}</p>
+                
+                <button className="hover:bg-grey w-full link" onClick={signOutUser}>
+                    <i class="fi fi-ss-sign-out-alt"></i>
+                    Sign Out
                 </button>
             </div>
         </Animation>
