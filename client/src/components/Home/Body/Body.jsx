@@ -1,13 +1,15 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import MVGRVideo from "../../../assets/videos/MVGR.mp4";
 import Navbar from '../Navbar/Navbar';
 import Faq from './FAQ';
 import { Fade, Zoom } from 'react-awesome-reveal';
 import MiddleSection from './MiddleSection';
 import Content from './Content';
+import { ThemeContext } from '../../../App';
 
 
 const Body = () => {
+    let {theme,setTheme} = useContext(ThemeContext);
     const [list]=useState([
         {
             question:'How Can I upload the Audio?',
@@ -33,13 +35,13 @@ const Body = () => {
                 <video autoPlay loop muted className="w-full max-h-screen object-cover">
                     <source src={MVGRVideo} type="video/mp4"/>
                 </video>
-                <div className="absolute inset-0 bg-black bg-opacity-80 opacity-80">
+                <div className={`absolute inset-0 ${theme==="light" ? "bg-black" : "bg-white"}  bg-opacity-80 opacity-80`}>
                     <Navbar />
-                    <h1 className="text-6xl text-white  font-extrabold mt-44 tracking-wide center">Welcome to <span className="text-6xl font-extrabold ml-6 text-primary"> MVGR VOICES</span></h1>
-                    <p className="text-xl text-white font-semibold mt-8 tracking-widest center uppercase">It's the best platform for Students to share their cool stories in podcasts and blogs.</p>
+                    <h1 className={`text-6xl ${theme==="light" ? "text-white" :"text-black"}  font-extrabold mt-44 tracking-wide center`}>Welcome to <span className="text-6xl font-extrabold ml-6 text-primary"> MVGR VOICES</span></h1>
+                    <p className={`text-xl ${theme==="light" ? "text-white" :"text-black"} font-semibold mt-8 tracking-widest center uppercase`}>It's the best platform for Students to share their cool stories in podcasts and blogs.</p>
                 </div>
             </div>
-            <div className="bg-black">
+            <div className={`${theme==="light" ? "bg-black" : "bg-white"}`}>
                 {Content.map((Content,index) =>(
                     <MiddleSection 
                         index={index}
@@ -49,12 +51,12 @@ const Body = () => {
                     />  
                 ))}
             </div>                
-            <div className="bg-black pt-20 flex items-center justify-center "> 
+            <div className={`${theme==="light" ? "bg-black" : "bg-white"} pt-20 flex items-center justify-center`}> 
             <Fade direction='down' delay={0.2}>                    
                 <h1 className="text-6xl font-merriweather font-semibold leading-normal text-primary">FAQ's</h1> 
             </Fade>
             </div>                   
-            <div className="bg-black flex p-20 pt-8 items-center justify-center">
+            <div className={`${theme==="light" ? "bg-black" : "bg-white"} flex p-20 pt-8 items-center justify-center`}>
                 <Zoom>
                 <div className="list">
                 {

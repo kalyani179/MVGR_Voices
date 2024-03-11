@@ -1,6 +1,17 @@
-POST http://localhost:3000/get-blog
+
+# POST http://localhost:3000/signin
+# Content-Type: application/json
+
+# {
+#     "email":"dantulurikalyani999@gmail.com",
+#     "password":"12345"
+# }
+
+POST http://localhost:3000/user-written-blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZGUyNTRkMzI3YzNjNDg1MGVkOGRmNyIsImlhdCI6MTcwOTU2NTIxN30.WyhWtvFDQtXYSNKoncjk1HIQqeNlYbZ1Uj2q_bkS1_4
 
 {
-    "blog_id": "ML7i3VLaQ2t4Iy-HVYXHJEr"
+    "page":1,
+    "draft":false
 }

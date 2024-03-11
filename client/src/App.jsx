@@ -1,27 +1,32 @@
 import React,{createContext, useEffect, useState} from 'react'
 import {Routes,Route,BrowserRouter} from "react-router-dom"; 
 import { lookInSession } from './common/session';
-import Editor from './components/Blogs/Editor';
+import Editor from './components/Blogs/Blog Editor/Editor';
 import Home from './pages/Home';
-import BlogsHome from './components/Blogs/BlogsHome';
+import BlogsHome from './components/Blogs/Blog Home/BlogsHome';
 import BlogsSearchPage from './pages/BlogsSearchPage';
 import BlogsNavbar from './components/Blogs/Blogs Navbar/BlogsNavbar';
 import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
 import BlogPage from './components/Blogs/BlogPage/BlogPage';
-import Podcast from './components/Podcast/Podcast';
-import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
-import UploadPodcast from './components/Podcast/UploadPodcast';
-//import Upload from './components/Podcast/Upload';
+
 export const UserContext = createContext({});
+
+export const ThemeContext = createContext({});
 
 const App = () => {
   const [userAuth,setUserAuth] = useState({});
+  const [theme,setTheme] = useState("light");
   const [isValidToken,setValidToken] = useState(false);
   useEffect(() => {
     let userInSession = lookInSession("user");
-    userInSession ? setUserAuth(JSON.parse(userInSession)) : setUserAuth({access_token : null})
+    let themeInSession = lookInSession("theme");
+    userInSession ? setUserAuth(JSON.parse(userInSession)) : setUserAuth({access_token : null});
+    themeInSession ? setTheme(()=>{
+      document.body.setAttribute("data-theme",themeInSession);
+      return themeInSession;
+    }) : document.body.setAttribute("data-theme",theme);
   },[])
 
   return (
@@ -38,14 +43,8 @@ const App = () => {
             </Route>
             <Route path="/editor" exact element={<Editor />} />
             <Route path="/editor/:blog_id" exact element={<Editor />} />
-            <Route path="*" element={<PageNotFound />} />          
-            <Route path="/" element={<PodsNavbar />}>
-              <Route path="podcast" element={<Podcast></Podcast>}></Route>
-             
-            </Route>
-            <Route path="/upload" exact element={<UploadPodcast />} />
-
-           
+            <Route path="*" element={<PageNotFound />} />
+            
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

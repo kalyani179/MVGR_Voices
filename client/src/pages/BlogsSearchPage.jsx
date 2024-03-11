@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import InPageNavigation from '../components/Blogs/InPageNavigation';
+import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
 import Loader from '../common/Loader';
 import Animation from '../common/Animation';
-import BlogPostCard from '../components/Blogs/HomeBlogPostCard';
-import NoBlogsDataMessage from '../components/Blogs/NoBlogsDataMessage';
+import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
+import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import FilterPaginationData from '../common/FilterPaginationData';
 import UserCard from '../components/Blogs/UserCard';
