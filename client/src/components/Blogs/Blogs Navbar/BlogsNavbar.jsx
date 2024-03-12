@@ -25,7 +25,7 @@ const BlogsNavbar = () => {
     }
     return (
         <>
-        <nav className={`navbar pr-[3vw] border-b border-grey bg-white ${searchBoxVisibility?"sm:mb-12 duration-500":"duration-500"}`}>
+        <nav className={`navbar pr-[3vw] border-b border-grey ${searchBoxVisibility?"sm:mb-12 duration-500":"sm:duration-500"}`}>
             {/* logo */}
             {/* <Link to="/" className="flex-none w-10">
                 <img src={} alt="logo" />
@@ -50,7 +50,7 @@ const BlogsNavbar = () => {
                     <button className="md:hidden bg-grey rounded-full w-11 h-11 center"
                     onClick={()=>setSearchBoxVisibility(!searchBoxVisibility)}
                     >
-                        <i className="fi fi-rr-search block text-lg"></i>
+                        <i className="fi fi-rr-search block text-lg mt-1"></i>
                     </button>
                 </Link>
 
