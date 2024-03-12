@@ -31,4 +31,15 @@ const changePassword = async (req, res) => {
     }
 }
 
-export { changePassword };
+// Edit Profile
+const updatedProfileImg = async (req,res) => {
+    let {url} = req.body;
+    await User.findOneAndUpdate({_id:req.user},{"personal_info.profile_img":url})
+    .then(()=>{
+        return res.status(200).json({profile_img:url});
+    }).catch(err=>{
+        return res.status(500).json({error:err.message});
+    })
+}
+
+export { changePassword,updatedProfileImg };
