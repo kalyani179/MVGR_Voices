@@ -7,11 +7,16 @@
 #     "password":"12345"
 # }
 
-POST http://localhost:3000/user-written-blogs
+# POST http://localhost:3000/get-blog
+# Content-Type: application/json
+
+# {
+#     "blog_id":"rgtrNsn6osFu_af-Q-iZ3H5gk"
+# }
+
+POST http://localhost:3000/get-profile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZGUyNTRkMzI3YzNjNDg1MGVkOGRmNyIsImlhdCI6MTcwOTU2NTIxN30.WyhWtvFDQtXYSNKoncjk1HIQqeNlYbZ1Uj2q_bkS1_4
 
 {
-    "page":1,
-    "draft":false
+    "username":"kalyanidantuluri79"
 }
