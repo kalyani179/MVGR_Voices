@@ -42,4 +42,45 @@ const updatedProfileImg = async (req,res) => {
     })
 }
 
-export { changePassword,updatedProfileImg };
+const updateProfile = (req,res) => {
+    let bioLimit  = 150;
+    let {username,bio,social_links} = req.body;
+    if(username.length < 3){
+        return res.status(403).json({error:"Username should be atleast 3 letters long!"})
+    }
+    if(bio.length>bioLimit){
+        return res.status(403).json({error:"Bio should not be more than 150 characters long!"});
+    }
+    let socialLinksArr = Object.keys(social_links);
+    try{
+        for(let i=0;i<socialLinksArr.length;i++){
+            if(social_links[socialLinksArr[i]].length){
+                let hostname = new URL(social_links[socialLinksArr[i]]).hostname;
+                if(!hostname.includes(`${socialLinksArr[i]}.com`) && socialLinksArr[i]!="website"){
+                    return res.status(403).json({error:`${socialLinksArr[i]} link is invalid! You must enter full link!`})
+                }
+            }
+        }
+    }catch(err){
+        return res.status(500).json({error:"You must provide full social links with http(s) included"});
+    }
+    let updateObj = {
+        "personal_info.username" : username,
+        "Personal_info.bio" : bio,
+        social_links
+    }
+    User.findOneAndUpdate({_id:req.user},updateObj,{
+        runValidators:true
+    })
+    .then(()=>{
+        return res.status(200).json({username});
+    })
+    .catch(err=>{
+        if(err.code == 11000){
+            return res.status(409).json({error:"This username is already taken!"});
+        }
+        return res.status(500).json({error:err.message});
+    })
+}
+
+export { changePassword,updatedProfileImg,updateProfile };

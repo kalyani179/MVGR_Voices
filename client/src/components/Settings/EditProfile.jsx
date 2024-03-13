@@ -14,6 +14,7 @@ import InputBox from '../../common/InputBox';
 const EditProfile = () => {
     let bioLimit = 150;
     let profileImgEle = useRef();
+    let editProfileForm = useRef();
     let {userAuth,userAuth:{access_token},setUserAuth} = useContext(UserContext);
     const [profile,setProfile] = useState(profileDataStructure);
     const [loading,setLoading] = useState(true);
@@ -75,6 +76,47 @@ const EditProfile = () => {
 
         }
     }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let form = new FormData(editProfileForm.current);
+        let formData = {};
+        for(let[key,value] of form.entries()){
+            formData[key] = value;
+        }
+        let {username,bio,youtube,facebook,twitter,github,instagram,website} = formData;
+        if(username.length < 3){
+            return toast.error("Username should be atleast 3 letters long!");
+        }
+        if(bio.length>bioLimit){
+            return toast.error("Bio should not be more than 150 characters long!");
+        }
+        let loadingToast = toast.loading("Updating...");
+        e.target.setAttribute("disabled",true);
+
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/update-profile",{
+            username,bio,
+            social_links:{youtube,facebook,twitter,github,instagram,website}
+        },{
+            headers:{
+                'Authorization' : `Bearer ${access_token}`
+            }
+
+        }).then(({data})=>{
+            if(userAuth.username !== data.username){
+                let newUserAuth = {...userAuth,username:data.username};
+                storeInSession("user",JSON.stringify(newUserAuth));
+                setUserAuth(newUserAuth);
+            }
+            toast.dismiss(loadingToast);
+            e.target.removeAttribute("disabled");
+            toast.success("Profile Updated Successfully!")
+        })
+        .catch(({response})=>{
+            toast.dismiss(loadingToast);
+            e.target.removeAttribute("disabled");
+            toast.error(response.data.error);
+        })
+    }
     useEffect(()=>{
         if(access_token){
             axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/get-profile",{username:userAuth.username})
@@ -93,7 +135,7 @@ const EditProfile = () => {
                 loading ? 
                 <Loader />
                 :
-                <form className="flex flex-col justify-center items-center">
+                <form ref={editProfileForm} className="flex flex-col justify-center items-center">
                     <Toaster />
                     <h1 className="sm:hidden text-primary text-xl font-medium ">Edit Profile</h1>
                     <div className="flex flex-col items-start py-10 gap-8 lg:flex-row lg:gap-20">
@@ -109,11 +151,11 @@ const EditProfile = () => {
                         </div>
                         <div className="w-full">
                             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
-                                <InputBox type="text" placeholder="Full Name" value={fullname} icon="fi-rr-user" disable={true}/>
-                                <InputBox type="text" placeholder="Email" value={email} icon="fi-rr-envelope" disable={true} />
+                                <InputBox type="text" name="fullname" placeholder="Full Name" value={fullname} icon="fi-rr-user" disable={true}/>
+                                <InputBox type="text" name="email" placeholder="Email" value={email} icon="fi-rr-envelope" disable={true} />
                             </div>
                             <div className="mb-8">
-                                <InputBox type="text" placeholder="Username" value={profile_username} icon="fi-rr-at" disable={false}/>
+                                <InputBox type="text" name="username" placeholder="Username" value={profile_username} icon="fi-rr-at" disable={false}/>
                             </div>
                             <div className="mb-5">
                                 <textarea
@@ -139,7 +181,7 @@ const EditProfile = () => {
                             }
                             </div>
                             <div className="flex items-center justify-center">
-                                <button className="btn-purple px-10" type="submit">Update</button>
+                                <button onClick={handleSubmit} className="btn-purple px-10" type="submit">Update</button>
                             </div>
                             
                         </div>
