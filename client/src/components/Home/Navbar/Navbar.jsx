@@ -6,10 +6,13 @@ import Animation from "../../../common/Animation";
 import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png"
 import { useNavigate } from "react-router-dom";
+import UserNavigationPanel from "../../Blogs/Blogs Navbar/UserNavigationPanel";
 
 
 const Navbar = () => {
   let navigate = useNavigate();
+  const {userAuth:{profile_img}} = useContext(UserContext);
+  const [userNavPanel,setUserNavPanel] = useState(false);
   let {theme,setTheme} = useContext(ThemeContext);
   const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
 
@@ -84,7 +87,15 @@ const Navbar = () => {
                       {
                         access_token ? 
                         <>
-                          <button onClick={signOut} className={`btn-purple ${theme === "light" ? "text-white" : "text-black"} text-xl`}>Sign Out</button>
+                        <div className="relative" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
+                        <button className="w-11 h-11 mt-1">
+                            <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
+                        </button>
+                        {
+                            userNavPanel ? <UserNavigationPanel /> : ""
+                        }
+                        
+                      </div>
                         </>
                         : 
                         <>
