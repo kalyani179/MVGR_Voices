@@ -9,6 +9,7 @@ import {toast,Toaster} from "react-hot-toast";
 import { storage} from "../../common/firebase";
 import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
 import { storeInSession } from '../../common/session';
+import InputBox from '../../common/InputBox';
 
 const EditProfile = () => {
     let bioLimit = 150;
@@ -45,30 +46,30 @@ const EditProfile = () => {
                 console.log(error);
             },()=>{
                 getDownloadURL(uploadTask.snapshot.ref).then(async (url)=>{
-                    console.log(url);
-                    if(url){
-                        await axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/update-profile-img",{url},{
-                            headers:{
-                                'Authorization' : `Bearer ${access_token}`
-                            }
-                        }).then(({data})=>{
-                            let newUserAuth = {...userAuth,profile_img:data.profile_img};
-                            storeInSession("user",JSON.stringify(newUserAuth));
-                            setUserAuth(newUserAuth);
+                console.log(url);
+                if(url){
+                    await axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/update-profile-img",{url},{
+                        headers:{
+                            'Authorization' : `Bearer ${access_token}`
+                        }
+                    }).then(({data})=>{
+                        let newUserAuth = {...userAuth,profile_img:data.profile_img};
+                        storeInSession("user",JSON.stringify(newUserAuth));
+                        setUserAuth(newUserAuth);
 
-                            setUpdatedProfileImg(null);
+                        setUpdatedProfileImg(null);
 
-                            toast.dismiss(loadingToast);
-                            e.target.removeAttribute("disabled");
-                            toast.success("Image Uploaded!");
-                        })
-                        .catch(({response})=>{
-                            toast.dismiss(loadingToast);
-                            e.target.removeAttribute("disabled");
-                            toast.error(response.data.error);
-                        })
-                    }
-                
+                        toast.dismiss(loadingToast);
+                        e.target.removeAttribute("disabled");
+                        toast.success("Image Uploaded!");
+                    })
+                    .catch(({response})=>{
+                        toast.dismiss(loadingToast);
+                        e.target.removeAttribute("disabled");
+                        toast.error(response.data.error);
+                    })
+                }
+            
             })
             })
 
@@ -106,30 +107,32 @@ const EditProfile = () => {
                             <input type="file" id="uploadImg" accept=".png, .jpg, .jpeg" hidden onChange={handleImagePreview}/>
                             <button onClick={handleImageUpload} className="btn-purple mt-5 lg:w-full px-5">Upload</button>
                         </div>
-                        <div className="w-full space-y-3">
+                        <div className="w-full">
                             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
-                                <input className="input-box pl-5" type="text" placeholder="Full Name" value={fullname} disabled/>
-                                <input type="text" placeholder="Email" value={email} disabled className="input-box"/>
-                            
+                                <InputBox type="text" placeholder="Full Name" value={fullname} icon="fi-rr-user" disable={true}/>
+                                <InputBox type="text" placeholder="Email" value={email} icon="fi-rr-envelope" disable={true} />
                             </div>
-                            <input className="input-box pl-5" type="text" placeholder="Username" value={profile_username}/>
-                            <textarea
-                            name="bio"
-                            placeholder="Type Your Bio Here..."
-                            maxLength={bioLimit}
-                            defaultValue={bio}
-                            className="input-box h-64 lg:h-40 resize-none leading-7 mt-5 pl-5 placeholder:text-dark-grey"
-                            onChange={handleCharacterChange}
-                            ></textarea>
-                            <p className="text-right text-dark-grey">{charactersLeft} characters left</p>
+                            <div className="mb-8">
+                                <InputBox type="text" placeholder="Username" value={profile_username} icon="fi-rr-at" disable={false}/>
+                            </div>
+                            <div className="mb-5">
+                                <textarea
+                                name="bio"
+                                placeholder="Type Your Bio Here..."
+                                maxLength={bioLimit}
+                                defaultValue={bio}
+                                className="input-box bg-white border-2 border-input h-64 lg:h-40 resize-none leading-7 pl-5 placeholder:text-dark-grey focus:outline-none focus:border-primary"
+                                onChange={handleCharacterChange}
+                                ></textarea>
+                                <p className="text-right text-dark-grey">{charactersLeft} characters left</p>
+                            </div>
                             <div className="md:grid md:grid-cols-2 gap-x-6">
                             {
                                 Object.keys(social_links).map((key,i)=>{
                                     let link = social_links[key];
                                     return (
                                         <div>
-                                        <i className={`key ${key!=="webiste" ?"fi-brands-"+key : "fi-rr-globe"} text-2xl hover:text-black`}></i>
-                                        <input className="input-box" type="text" key={i} value={link} name={key} placeholder="https://" />
+                                        <InputBox type="text" key={i} value={link} name={key} placeholder="https://" icon={`key ${key!=="webiste" ?"fi-brands-"+key : "fi-rr-globe"}`}/>
                                         </div>
                                     )
                                 })

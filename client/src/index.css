@@ -46,8 +46,17 @@
     i {
         @apply text-dark-grey
     }
-    .input-icon{
+    .input-icon {
         @apply absolute left-11
+    }
+    .input-box {
+        @apply w-[100%] rounded-md p-4 bg-grey border border-grey focus:bg-transparent placeholder:text-black;
+    }
+    .edit-profile-icon {
+        @apply absolute left-2 top-1/2 -translate-y-1/2;
+    }
+    .auth-input.active .edit-profile-icon{
+        @apply text-primary;
     }
     .google-button{
         @apply m-3 my-5 center space-x-3 font-inter border border-black rounded-md w-80 p-2 hover:bg-grey
@@ -77,9 +86,7 @@
     .blog-page-content a {
         @apply text-purple underline hover:opacity-50;
     }
-    .input-box {
-        @apply w-[100%] rounded-md p-4 bg-grey border border-grey focus:bg-transparent placeholder:text-black;
-    }
+    
     /* blog publish */
     .blog-label{
         @apply text-dark-grey mt-9 mb-2
