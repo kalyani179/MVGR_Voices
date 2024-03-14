@@ -25,7 +25,7 @@ const BlogsNavbar = () => {
     }
     return (
         <>
-        <nav className={`navbar pr-[3vw] border-b border-grey ${searchBoxVisibility?"sm:mb-12 duration-500":"sm:duration-500"}`}>
+        <nav className={`navbar z-50 pr-[3vw] border-b border-grey ${searchBoxVisibility?"sm:mb-12 duration-500":"sm:duration-500"}`}>
             {/* logo */}
             {/* <Link to="/" className="flex-none w-10">
                 <img src={} alt="logo" />

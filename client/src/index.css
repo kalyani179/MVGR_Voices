@@ -104,7 +104,7 @@
     }
 
     .sidebar-link {
-        @apply flex gap-4 items-center py-5 text-dark-grey text-sm hover:text-primary hover:font-medium;
+        @apply flex gap-4 items-center py-5 text-dark-grey text-base pr-10 hover:text-primary hover:font-medium;
     }
     
     .sidebar-link.active {

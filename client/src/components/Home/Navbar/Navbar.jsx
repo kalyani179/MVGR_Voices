@@ -62,9 +62,9 @@ const Navbar = () => {
     />
       <div className="flex">
       <div className={`w-full opacity-85`}>
-            <div className="md:flex items-center justify-between py-4 pt-2 md:px-10 px-7">
-            <div className=" cursor-pointer ">
-                      <img width={125} height={125} src={logo} alt="Logo" />
+            <div className="md:flex items-center justify-between py-3 pt-2 md:px-10 px-7">
+            <div className="cursor-pointer">
+                      <img width={110} height={110} src={logo} alt="Logo" />
             </div>
               <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
                   <ion-icon name={open ?"close":"menu"}></ion-icon>
@@ -73,9 +73,9 @@ const Navbar = () => {
 
                   {
                             Links.map((link)=>(
-                              <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
+                              <li key={link.name} className="md:ml-8 text-2xl md:my-0 my-7">
                                 <h3
-                                    className={`hover:border-b-2 ${theme==="light" ? "hover:border-white" : "hover:border-black"} duration-500 md:text-2xl tracking-wide font-inter cursor-pointer border-b-2 ${
+                                    className={`hover:border-b-2 hover:border-b-primary hover:text-primary ${theme==="light" ? "hover:border-white" : "hover:border-black"} duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
                                       activeLink === link.name ? theme==="light" ? "border-white" : "border-black" : "border-transparent"}`}
                                     onClick={()=> handleLinkClick({link})}
                                   >{link.name}</h3>
@@ -87,7 +87,7 @@ const Navbar = () => {
                       {
                         access_token ? 
                         <>
-                        <div className="relative" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
+                        <div className="z-30" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
                         <button className="w-11 h-11 mt-1">
                             <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
                         </button>

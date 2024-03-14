@@ -135,7 +135,7 @@ const EditProfile = () => {
                 loading ? 
                 <Loader />
                 :
-                <form ref={editProfileForm} className="flex flex-col justify-center items-center">
+                <form ref={editProfileForm} className="flex flex-col justify-center items-center ml-32 md:mt-24">
                     <Toaster />
                     <h1 className="sm:hidden text-primary text-xl font-medium ">Edit Profile</h1>
                     <div className="flex flex-col items-start py-10 gap-8 lg:flex-row lg:gap-20">
