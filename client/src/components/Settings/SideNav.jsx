@@ -35,8 +35,8 @@ const SideNav = () => {
         
         :
         <>
-            <div className="bg-dark-grey/60 fixed w-full z-50">
-            <Navbar />
+            <div className={`bg-white fixed w-full border-b-2 border-grey z-50`}>
+                <Navbar />
             </div>
             <section className="realtive px-[6vw] flex gap-10 py-0 m-0 sm:flex-col">
                 <div className="realtive">

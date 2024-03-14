@@ -11,6 +11,7 @@ import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
 import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn'
 import PageNotFound from './404Page'
+import Navbar from '../components/Home/Navbar/Navbar'
 
 export const profileDataStructure = {
     personal_info : {
@@ -87,8 +88,12 @@ const UserProfilePage = () => {
             {
                 loading ? <Loader /> : 
                 profile_username.length ?
+                <>
+                <div className={`bg-white fixed w-full border-b-2 border-grey z-50`}>
+                <Navbar />
+                </div>
                 <section className="h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
-                    <div className="flex flex-col sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-8 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
+                    <div className="flex flex-col sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
                         <img src={profile_img} className="w-48 h-48 bg-grey rounded-full md:w-32 md:h-32" alt="profile"/>
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>
@@ -102,7 +107,7 @@ const UserProfilePage = () => {
                         </div>
                         <AboutUser className={"sm:hidden"} bio={bio} social_links={social_links} joinedAt={joinedAt}/>
                     </div>
-                    <div className="sm:mt-12 w-full">
+                    <div className="sm:mt-12 md:mt-24 w-full">
                     <InPageNavigation
                 routes={["Blogs Published","About"]}
                 defaultHidden={["About"]}
@@ -130,10 +135,12 @@ const UserProfilePage = () => {
             </InPageNavigation>
                     </div>
                 </section>
+                </>
                 :
                 <PageNotFound />
             }
         </Animation>
+       
     )
 }
 
