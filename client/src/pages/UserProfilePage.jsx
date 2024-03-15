@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Animation from '../common/Animation'
 import Loader from '../common/Loader'
-import { UserContext } from '../App'
+import { ThemeContext, UserContext } from '../App'
 import AboutUser from '../components/Blogs/AboutUser'
 import FilterPaginationData from '../common/FilterPaginationData'
 import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation'
@@ -35,6 +35,7 @@ const UserProfilePage = () => {
     let [loading,setLoading] = useState(true);
     let [blogs,setBlog] = useState(null);
     let [profileLoaded,setProfileLoaded] = useState("");
+    let {theme,setTheme} = useContext(ThemeContext);
 
     let {personal_info:{fullname,username:profile_username,profile_img,bio},account_info:{total_posts,total_reads},social_links,joinedAt} = profile;
 
@@ -89,11 +90,11 @@ const UserProfilePage = () => {
                 loading ? <Loader /> : 
                 profile_username.length ?
                 <>
-                <div className={`bg-white fixed w-full border-b-2 border-grey z-50`}>
+                <div className={`${theme==="light" ? "bg-white" : "bg-white"} fixed w-full border-b-2 border-grey z-50`}>
                 <Navbar />
                 </div>
                 <section className="h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
-                    <div className="flex flex-col sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
+                    <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
                         <img src={profile_img} className="w-48 h-48 bg-grey rounded-full md:w-32 md:h-32" alt="profile"/>
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>

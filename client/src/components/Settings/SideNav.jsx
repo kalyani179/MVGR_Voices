@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { UserContext } from '../../App'
+import { ThemeContext, UserContext } from '../../App'
 import Navbar from '../Home/Navbar/Navbar';
 
 
@@ -10,6 +10,7 @@ const SideNav = () => {
     let page = window.location.pathname.split("/")[2];
     const [pageState,setPageState] = useState(page.replace("-"," "));
     let [showSideNav,setShowSideNav] = useState(false);
+    let {theme,setTheme} = useContext(ThemeContext);
     let activeTabLine = useRef();
     let sideBarIconTab = useRef();
     let pageStateTab = useRef();
@@ -49,7 +50,7 @@ const SideNav = () => {
                         </button>
                         <hr ref={activeTabLine} className="absolute bottom-0 duration-500"/>
                     </div>
-                    <div className={`min-w-[200px] sm:h-[calc(100vh-60px-60px)] md:fixed top-24 overflow-y-auto p-6 md:pr-0 md:border-r md:border-grey sm:top-[6px] sm:w-[calc(100%+80px)] sm:px-16 sm:-ml-7 ${!showSideNav ? "opacity-100 pointer-events-auto" : "sm:opacity-0 sm:pointer-events-none"}`}>
+                    <div className={`min-w-[200px] sm:h-[calc(100vh-60px-60px)] md:fixed top-20 overflow-y-auto p-6 md:pr-0 md:border-r md:border-grey sm:top-[6px] sm:w-[calc(100%+80px)] sm:px-16 sm:-ml-7 ${!showSideNav ? "opacity-100 pointer-events-auto" : "sm:opacity-0 sm:pointer-events-none"}`}>
                     {/* Dashboard */}
                     <div className="flex gap-4 mb-3">
                             <i class="fi fi-sr-book text-dark-grey/60 mt-0.5"></i>
@@ -97,4 +98,4 @@ const SideNav = () => {
     )
 }
 
-export default SideNav
+export default SideNav;

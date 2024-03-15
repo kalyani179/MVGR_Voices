@@ -4,7 +4,8 @@ import { ThemeContext, UserContext } from "../../../App";
 import { removeFromSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
 import {Toaster,toast} from "react-hot-toast";
-import logo from "../../../assets/icons/logo.png"
+import logo from "../../../assets/icons/logo.png";
+import logoDark from "../../../assets/icons/logoDark.png";
 import { useNavigate } from "react-router-dom";
 import UserNavigationPanel from "../../Blogs/Blogs Navbar/UserNavigationPanel";
 
@@ -62,26 +63,26 @@ const Navbar = () => {
     />
       <div className="flex">
       <div className={`w-full opacity-85`}>
-            <div className="md:flex items-center justify-between py-3 pt-2 md:px-10 px-7">
-            <div className="cursor-pointer">
-                      <img width={115} height={115} src={logo} alt="Logo" className="filter-grayscale" />
-            </div>
+            <div className="md:flex items-end justify-end py-3 pt-2 md:px-10 px-7">
+            {/* <div className="cursor-pointer">
+                      <img width={100} height={100} src={`${theme==="light" ? logo : logoDark}`} alt="Logo" className="filter grayscale" />
+            </div> */}
               <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
                   <ion-icon name={open ?"close":"menu"}></ion-icon>
               </div>
                 <ul className={`md:flex md:items-center ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 ":" top-[-490px] " }`} >
 
                   {
-                            Links.map((link)=>(
-                              <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7">
-                                <h3
-                                    className={`hover:border-b-2 text-dark-grey hover:border-b-primary hover:text-primary ${theme==="light" ? "hover:border-white" : "hover:border-black"} duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
-                                      activeLink === link.name ? theme==="light" ? "border-white" : "border-black" : "border-transparent"}`}
-                                    onClick={()=> handleLinkClick({link})}
-                                  >{link.name}</h3>
-                              </li>
+                      Links.map((link)=>(
+                        <li key={link.name} className="md:ml-8 md:my-0 my-7">
+                          <h4
+                              className={`hover:border-b-2 leading-relaxed text-xl ${theme==="light" ? "text-dark-grey" : "text-black"} hover:border-b-primary hover:text-primary ${theme==="light" ? "hover:border-white" : "hover:border-black"} duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
+                                activeLink === link.name ? theme==="light" ? "border-primary text-primary" : "border-primary" : "border-transparent"}`}
+                              onClick={()=> handleLinkClick({link})}
+                            >{link.name}</h4>
+                        </li>
 
-                            ))
+                      ))
                   }
                   <div className="md:ml-8 space-x-3 sm:mr-6">           
                       {

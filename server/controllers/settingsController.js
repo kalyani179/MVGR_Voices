@@ -66,7 +66,7 @@ const updateProfile = (req,res) => {
     }
     let updateObj = {
         "personal_info.username" : username,
-        "Personal_info.bio" : bio,
+        "personal_info.bio" : bio,
         social_links
     }
     User.findOneAndUpdate({_id:req.user},updateObj,{
