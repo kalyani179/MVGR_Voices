@@ -88,14 +88,7 @@ const BlogsHome = () => {
         }
         setPageState(category);
     }
-    // search box
-    const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
-    const handleSearch = (e) => {
-        let query = e.target.value;
-        if(e.keyCode === 13){
-            navigate(`/search/${query}`)
-        }
-    }
+
     useEffect(() => {
 
         if(pageState==="home"){
@@ -177,24 +170,6 @@ const BlogsHome = () => {
             {/* filters and trending blogs */}
             <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-grey pl-8 pt-3 sm:hidden">
             <div className="flex flex-col gap-10">
-                {/* <div className="w-full">
-                    <div className={`absolute left-0 w-full top-16 mt-0.5 px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-3 md:border-0 md:relative md:block md:inset-0 md:p-0 md:show ${searchBoxVisibility ? "show" : "hide"}`}>
-                        <input 
-                            type='text'
-                            placeholder='Search'
-                            className='w-full md:w-full bg-grey p-3 pl-6 pr-[12%] rounded-full md:pl-12'
-                            onKeyDown={handleSearch}
-                        />
-                        <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-2 md:top-3 md:pointer-events-none md:left-5 text-lg text-dark-grey"></i>
-                    </div>
-                        <Link>
-                            <button className="md:hidden bg-grey rounded-full w-11 h-11 center"
-                            onClick={()=>setSearchBoxVisibility(!searchBoxVisibility)}
-                            >
-                                <i className="fi fi-rr-search block text-lg mt-1"></i>
-                            </button>
-                        </Link> */}
-                {/* </div> */}
                 <div>
                     <h1 className="font-medium text-primary text-xl mb-8">
                         Stories From All Interests

@@ -30,6 +30,13 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     },500);
 
   }
+  const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
+  const handleSearch = (e) => {
+      let query = e.target.value;
+      if(e.keyCode === 13){
+          navigate(`/search/${query}`)
+      }
+  }
 
   let Links=[
     {name:"Home",link:"/"},
@@ -76,7 +83,24 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                   <ion-icon name={open ?"close":"menu"}></ion-icon>
               </div>
                 <ul className={`md:flex md:items-center ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 ":" top-[-490px] " }`} >
-
+                <div className={`${activeLink==="Blogs" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
+                  <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
+                  <input 
+                      type='text'
+                      placeholder='Search'
+                      className='w-full md:w-auto bg-grey p-3 pl-6 pr-[12%] md:pr-6 rounded-full md:pl-12 text-black'
+                      onKeyDown={handleSearch}
+                  />
+                  <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-2 md:top-3 md:pointer-events-none md:left-5 text-lg text-dark-grey"></i>
+                </div>
+                    <Link>
+                        <button className="md:hidden bg-grey rounded-full w-11 h-11 center"
+                        onClick={()=>setSearchBoxVisibility(!searchBoxVisibility)}
+                        >
+                            <i className="fi fi-rr-search block text-lg mt-1"></i>
+                        </button>
+                    </Link>
+                </div>
                   {
                       Links.map((link)=>(
                         <li key={link.name} className="md:ml-8 md:my-0 my-7">
