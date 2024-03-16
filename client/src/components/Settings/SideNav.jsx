@@ -37,9 +37,9 @@ const SideNav = () => {
         :
         <>
             <div className={`bg-white fixed w-full border-b-2 border-grey z-50`}>
-                <Navbar />
+                <Navbar home={0} activeLink="profile" />
             </div>
-            <section className="realtive px-[6vw] flex gap-10 py-0 m-0 sm:flex-col">
+            <section className="realtive px-[6vw] flex gap-10 py-0 -ml-10 sm:flex-col">
                 <div className="realtive">
                     <div className="md:hidden py-1 border-b border-grey flex flex-nowrap overflow-x-auto">
                         <button ref={sideBarIconTab} onClick={changePageState} className="p-5 capitalize">

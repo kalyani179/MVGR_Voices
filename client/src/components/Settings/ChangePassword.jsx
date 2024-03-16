@@ -69,7 +69,7 @@ const ChangePassword = () => {
         <Toaster />
         <div className="h-screen flex justify-center -mt-10 ml-32 items-center">
         <form className="h-cover flex flex-col gap-5 items-center justify-center">
-            <h1 className="sm:hidden text-xl font-medium text-primary">Change Password</h1>
+            {/* <h1 className="sm:hidden text-xl font-medium text-primary">Change Password</h1> */}
             <div className="py-8 w-full md:max-w-[400px] flex flex-col justify-center items-center">
                 <div className='flex justify-start items-center'>
                     <i className={`fi fi-rr-lock absolute ${isCurrentPasswordFocused || inputCurrentPassword ? 'text-primary' : ''}`}></i>

@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react"
 import UserAuth from "../../Authentication/UserAuth";
 import { ThemeContext, UserContext } from "../../../App";
-import { removeFromSession } from "../../../common/session";
+import { removeFromSession, storeInSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
 import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png";
 import logoDark from "../../../assets/icons/logoDark.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserNavigationPanel from "../../Blogs/Blogs Navbar/UserNavigationPanel";
 
 
-const Navbar = () => {
+const Navbar = ({home=1,activeLink="Home"}) => {
   let navigate = useNavigate();
   const {userAuth:{profile_img}} = useContext(UserContext);
   const [userNavPanel,setUserNavPanel] = useState(false);
@@ -30,7 +30,6 @@ const Navbar = () => {
     },500);
 
   }
-  const [activeLink, setActiveLink] = useState("Home");
 
   let Links=[
     {name:"Home",link:"/"},
@@ -43,9 +42,15 @@ const Navbar = () => {
     if(!access_token) {
       toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
     }else{
-      setActiveLink(link.name);
+      // setActiveLink(link.name);
       navigate(link.link);
     }
+  }
+  const changeTheme = () => {
+    let newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.body.setAttribute("data-theme",newTheme);
+    storeInSession("theme",newTheme);
   }
   let [open,setOpen]=useState(false);
 
@@ -63,10 +68,10 @@ const Navbar = () => {
     />
       <div className="flex">
       <div className={`w-full opacity-85`}>
-            <div className="md:flex items-end justify-end py-3 pt-2 md:px-10 px-7">
-            {/* <div className="cursor-pointer">
-                      <img width={100} height={100} src={`${theme==="light" ? logo : logoDark}`} alt="Logo" className="filter grayscale" />
-            </div> */}
+            <div className="md:flex items-center justify-between py-3 pt-2 md:px-10 px-7">
+            <div className="cursor-pointer">
+                      <img width={110} height={110} src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className="filter grayscale" />
+            </div>
               <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
                   <ion-icon name={open ?"close":"menu"}></ion-icon>
               </div>
@@ -76,20 +81,30 @@ const Navbar = () => {
                       Links.map((link)=>(
                         <li key={link.name} className="md:ml-8 md:my-0 my-7">
                           <h4
-                              className={`hover:border-b-2 leading-relaxed text-xl ${theme==="light" ? "text-dark-grey" : "text-black"} hover:border-b-primary hover:text-primary ${theme==="light" ? "hover:border-white" : "hover:border-black"} duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
-                                activeLink === link.name ? theme==="light" ? "border-primary text-primary" : "border-primary" : "border-transparent"}`}
+                              className={`hover:border-b-2 leading-relaxed text-[22px] ${theme==="light" ? home===1 ? "text-white" : "text-dark-grey" : "text-black"} hover:border-b-primary duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
+                                activeLink === link.name ? theme==="light" ? "border-primary" : "border-primary" : "border-transparent"}`}
                               onClick={()=> handleLinkClick({link})}
                             >{link.name}</h4>
                         </li>
 
                       ))
                   }
-                  <div className="md:ml-8 space-x-3 sm:mr-6">           
+            
+                    {/* Theme Change */}
+                  <div className="ml-4">
+                  <Link>
+                    <button onClick={changeTheme} className={`bg-grey rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/60" : "bg-grey"} relative`}>
+                            <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl block mt-1`}></i>
+                    </button>
+                  </Link>
+                  </div>
+                  
+                  <div className="md:ml-8 space-x-3 sm:mr-6">  
                       {
                         access_token ? 
                         <>
                         <div className="z-30" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
-                        <button className="w-11 h-11 mt-1">
+                        <button className={`w-11 h-11 mt-1 rounded-full ${activeLink==="profile" ? "border-2 border-primary" : ""}`}>
                             <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
                         </button>
                         {

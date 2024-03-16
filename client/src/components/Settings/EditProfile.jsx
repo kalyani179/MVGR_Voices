@@ -135,9 +135,9 @@ const EditProfile = () => {
                 loading ? 
                 <Loader />
                 :
-                <form ref={editProfileForm} className="flex flex-col justify-center items-center ml-32 md:mt-24">
+                <form ref={editProfileForm} className="flex flex-col justify-center items-center ml-32 md:mt-16">
                     <Toaster />
-                    <h1 className="sm:hidden text-primary text-xl font-medium ">Edit Profile</h1>
+                    {/* <h1 className="sm:hidden text-primary text-xl font-medium ">Edit Profile</h1> */}
                     <div className="flex flex-col items-start py-10 gap-8 lg:flex-row lg:gap-20">
                         <div className="sm:center mb-5">
                             <label htmlFor="uploadImg" id="profileImg" className="relative block w-48 h-48 bg-grey rounded-full overflow-hidden">

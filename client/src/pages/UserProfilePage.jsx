@@ -91,7 +91,7 @@ const UserProfilePage = () => {
                 profile_username.length ?
                 <>
                 <div className={`${theme==="light" ? "bg-white" : "bg-white"} fixed w-full border-b-2 border-grey z-50`}>
-                <Navbar />
+                <Navbar home="0"/>
                 </div>
                 <section className="h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
                     <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
