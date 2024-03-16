@@ -31,18 +31,20 @@ const Body = () => {
     ]);
     return (
         <div>
-           <div>
+            <div>
                 <video autoPlay loop muted className="w-full max-h-screen object-cover">
                     <source src={MVGRVideo} type="video/mp4"/>
                 </video>
-                <div className={`absolute inset-0 ${theme === "light" ? "bg-black" : "bg-white"} bg-opacity-80 opacity-80 `}>
+                <div className={`absolute inset-0 ${theme === "light" ? "background" : "background"}`}>
                     <Navbar />
-                    <h1 className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-8 md:mt-20 lg:mt-24 xl:mt-28 tracking-wide text-center`}>
-                    Welcome to <span className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold ml-2 md:ml-6 text-primary"> MVGR VOICES</span>
-                    </h1>
-                    <p className={`text-base md:text-lg lg:text-xl xl:text-xl ${theme === "light" ? "text-white" : "text-black"} font-semibold mt-5 md:mt-8 lg:mt-10 xl:mt-12 tracking-widest text-center uppercase`}>
-                    It's the best platform for Students to share their cool stories in podcasts and blogs.
-                    </p>
+                    <div className="center flex-col gap-8 md:mt-11">
+                        <h1 className={`text-4xl md:text-5xl lg:text-6xl xl:text-6xl  ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-32 tracking-wider text-center opacity-80`}>
+                        Welcome to <span className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold ml-2 text-primary tracking-normal"> MVGR VOICES</span>
+                        </h1>
+                        <p className={`sm:text-sm text-base md:text-lg lg:text-xl ${theme === "light" ? "text-white" : "text-black"} font-semibold tracking-widest uppercase text-center opacity-80`}>
+                        It's the best platform for Students to share their cool stories in podcasts and blogs.
+                        </p>
+                    </div>
 
                 </div>
             </div>
