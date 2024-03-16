@@ -11,7 +11,7 @@ import { ThemeContext, UserContext } from "../../../App";
 import { Link, useNavigate } from "react-router-dom";
 import FilterPaginationData from "../../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
-import { BeatLoader } from "react-spinners";
+import { BeatLoader, CircleLoader, ClipLoader, DotLoader, FadeLoader, RingLoader, SyncLoader } from "react-spinners";
 
 
 const BlogsHome = () => {
@@ -110,7 +110,7 @@ const BlogsHome = () => {
         : 
         <Animation>
         
-        <section className="h-cover flex justify-center gap-10">
+        <section className="h-cover md:px-[7vw] flex justify-center gap-5">
             {/* latest blogs */}
             <div className="w-full">
             <InPageNavigation
@@ -121,7 +121,7 @@ const BlogsHome = () => {
                 {
                     blogs===null ? 
                     <div className="center">
-                            <BeatLoader color="#e86f6f" />
+                            <SyncLoader color="#f59a9a" margin={4} size={15} />
                     </div> : 
                     (
                         !blogs.results.length ? 

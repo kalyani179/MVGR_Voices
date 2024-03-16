@@ -9,6 +9,7 @@ import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import FilterPaginationData from '../common/FilterPaginationData';
 import UserCard from '../components/Blogs/UserCard';
+import { SyncLoader } from 'react-spinners';
 
 const BlogsSearchPage = () => {
     let {query} = useParams();
@@ -73,7 +74,10 @@ const BlogsSearchPage = () => {
                     defaultHidden={["Accounts Matched"]}>
                 <>
                 {
-                    blogs===null ? <Loader /> : 
+                    blogs===null ? 
+                    <div className="center">
+                            <SyncLoader color="#f59a9a" margin={4} size={13} />
+                    </div>  : 
                     (
                         !blogs.results.length ? 
                         <NoBlogsDataMessage message={"No Blogs Published"}/>

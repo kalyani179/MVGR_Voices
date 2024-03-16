@@ -13,12 +13,12 @@
     * {
         @apply m-0 p-0 box-border text-base font-inter;
     }
+    body {
+        @apply bg-white text-black
+    }
     .background{
         height: calc(var(--vh, 1vh)* 100);
         background: linear-gradient(180deg, rgba(34, 34, 34, 0.6) 0%, rgba(34, 34, 34, 1) 100%);
-    }
-    body {
-        @apply bg-white text-black
     }
     .heading {
         @apply font-gelasio text-4xl

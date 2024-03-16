@@ -1,7 +1,7 @@
 import React, { useState,useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../App';
-import UserNavigationPanel from './UserNavigationPanel';
+import UserNavigationPanel from '../../Home/Navbar/UserNavigationPanel';
 import { ThemeContext } from '../../../App';
 import { storeInSession } from '../../../common/session';
 import Navbar from '../../Home/Navbar/Navbar';

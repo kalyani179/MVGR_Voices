@@ -25,7 +25,7 @@ const MiddleSection = (props) => {
         
             <div className={`lg:px-72 mt-5 lg:mt-0 md:mt-0 xl:mt-0 center flex-col ${theme === "light" ? "text-white" : "text-black"}`}>
             <Zoom>
-                <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl tracking-wide uppercase font-merriweather font-semibold mb-4 md:mb-8 leading-normal text-primary">{props.title}</h1>
+                <h1 className="text-5xl md:text-5xl lg:text-6xl xl:text-6xl tracking-wide uppercase font-merriweather font-semibold mb-4 md:mb-8 leading-normal text-primary">{props.title}</h1>
             </Zoom>
             <p className="text-base md:text-xl lg:text-xl xl:text-xl tracking-wide w-full md:w-[90.5%] lg:w-[90.5%]">{props.description}</p>
             </div>

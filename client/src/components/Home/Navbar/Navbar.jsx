@@ -7,7 +7,7 @@ import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png";
 import logoDark from "../../../assets/icons/logoDark.png";
 import { Link, useNavigate } from "react-router-dom";
-import UserNavigationPanel from "../../Blogs/Blogs Navbar/UserNavigationPanel";
+import UserNavigationPanel from "./UserNavigationPanel";
 
 
 const Navbar = ({home=1,activeLink="Home"}) => {
@@ -105,7 +105,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                       Links.map((link)=>(
                         <li key={link.name} className="md:ml-8 md:my-0 my-7">
                           <h4
-                              className={`hover:border-b-2 leading-relaxed text-[22px] ${theme==="light" ? home===1 ? "text-white" : "text-dark-grey" : "text-black"} hover:border-b-primary duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
+                              className={`hover:border-b-2 leading-relaxed text-[22px] ${theme==="light" ? home===1 ? "text-white" : "text-dark-grey" : "text-black/60"} hover:border-b-primary duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
                                 activeLink === link.name ? theme==="light" ? "border-primary" : "border-primary" : "border-transparent"}`}
                               onClick={()=> handleLinkClick({link})}
                             >{link.name}</h4>
@@ -117,7 +117,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                     {/* Theme Change */}
                   <div className="ml-4">
                   <Link>
-                    <button onClick={changeTheme} className={`bg-grey rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/20"} relative`}>
+                    <button onClick={changeTheme} className={`bg-grey rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/15" : "bg-grey/20"} relative`}>
                             <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl block mt-1`}></i>
                     </button>
                   </Link>

@@ -141,7 +141,7 @@ const EditProfile = () => {
                     <Toaster />
     
                     <Marquee speed={"40"} direction="right" pauseOnClick>
-                        <div className="mt-2">
+                        <div className="mt-3">
                             <h1 className="text-lg tracking-wide font text-primary font-inter">Note : You cannot change your Full name and Email ID !</h1>
                         </div>
                     </Marquee>

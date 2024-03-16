@@ -8,6 +8,7 @@ import Loader from '../../common/Loader';
 import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
 import {ManagePublishedBlogCard, ManageDraftBlogCard } from './ManageBlogCard';
+import { SyncLoader } from 'react-spinners';
 
 const ManageBlogs = () => {
     const [blogs,setBlogs] = useState(null);
@@ -76,7 +77,11 @@ const ManageBlogs = () => {
             </div>
             <InPageNavigation routes = {["Published Blogs","Drafts"]}>
                 { // Published Blogs
-                    blogs === null ? <Loader /> :
+                    blogs === null ? 
+                        <div className="center">
+                            <SyncLoader color="#f59a9a" margin={4} />
+                        </div>
+                    :
                     blogs.results.length ? 
                     <>
                         {
