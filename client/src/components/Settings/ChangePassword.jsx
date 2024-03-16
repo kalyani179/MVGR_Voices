@@ -3,6 +3,7 @@ import Animation from '../../common/Animation';
 import {toast,Toaster} from "react-hot-toast";
 import axios from 'axios';
 import { UserContext } from '../../App';
+import Marquee from 'react-fast-marquee';
 
 const ChangePassword = () => {
     let {userAuth:{access_token}} = useContext(UserContext);
@@ -67,7 +68,13 @@ const ChangePassword = () => {
     return (
         <Animation>
         <Toaster />
-        <div className="h-screen flex justify-center -mt-10 ml-32 items-center">
+        
+        <div className="h-screen flex flex-col justify-center -mt-20 ml-48 items-center">
+        <Marquee speed={"40"} direction="right">
+            <div className="">
+                <h1 className="text-lg tracking-wide font text-primary font-inter">Note : Please Make Sure that your new password is atleast 6 characters long !</h1>
+            </div>
+        </Marquee>
         <form className="h-cover flex flex-col gap-5 items-center justify-center">
             {/* <h1 className="sm:hidden text-xl font-medium text-primary">Change Password</h1> */}
             <div className="py-8 w-full md:max-w-[400px] flex flex-col justify-center items-center">

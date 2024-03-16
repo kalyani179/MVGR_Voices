@@ -6,6 +6,8 @@ import Animation from '../../common/Animation';
 import Loader from '../../common/Loader';
 import {toast,Toaster} from "react-hot-toast";
 
+import Marquee from "react-fast-marquee";
+
 import { storage} from "../../common/firebase";
 import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
 import { storeInSession } from '../../common/session';
@@ -135,10 +137,18 @@ const EditProfile = () => {
                 loading ? 
                 <Loader />
                 :
-                <form ref={editProfileForm} className="flex flex-col justify-center items-center ml-32 md:mt-16">
+                <form ref={editProfileForm} className="flex flex-col justify-center items-center ml-48 md:mt-16">
                     <Toaster />
+    
+                    <Marquee speed={"40"} direction="right" pauseOnClick>
+                        <div className="mt-2">
+                            <h1 className="text-lg tracking-wide font text-primary font-inter">Note : You cannot change your Full name and Email ID !</h1>
+                        </div>
+                    </Marquee>
+
                     {/* <h1 className="sm:hidden text-primary text-xl font-medium ">Edit Profile</h1> */}
                     <div className="flex flex-col items-start py-10 gap-8 lg:flex-row lg:gap-20">
+    
                         <div className="sm:center mb-5">
                             <label htmlFor="uploadImg" id="profileImg" className="relative block w-48 h-48 bg-grey rounded-full overflow-hidden">
                             <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center text-white bg-black/30 opacity-0 hover:opacity-100 cursor-pointer">
