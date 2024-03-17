@@ -117,7 +117,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                     {/* Theme Change */}
                   <div className="ml-4">
                   <Link>
-                    <button onClick={changeTheme} className={`bg-grey rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/15" : "bg-grey/20"} relative`}>
+                    <button onClick={changeTheme} className={`bg-grey rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                             <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl block mt-1`}></i>
                     </button>
                   </Link>

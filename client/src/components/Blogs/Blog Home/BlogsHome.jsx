@@ -121,7 +121,7 @@ const BlogsHome = () => {
                 {
                     blogs===null ? 
                     <div className="center">
-                            <SyncLoader color="#f59a9a" margin={4} size={15} />
+                            <SyncLoader color="#f59a9a" margin={4} />
                     </div> : 
                     (
                         !blogs.results.length ? 
