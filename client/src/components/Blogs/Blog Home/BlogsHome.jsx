@@ -31,6 +31,7 @@ const BlogsHome = () => {
         "Photography",
         "Technology",
         "Interviews",
+        "Motivation"
     ];
 
     const fetchLatestBlogs = ({page = 1}) => {
@@ -110,28 +111,75 @@ const BlogsHome = () => {
         : 
         <Animation>
         
-        <section className="h-cover md:px-[7vw] flex justify-center gap-5">
+        <section className="h-cover md:px-[4vw] flex flex-col justify-center gap-5 bg-cool-white">
+                {/* Trending Blogs */}
+                <div className="flex flex-col">
+                <h1 className="font-medium text-xl text-primary mb-8 tracking-wide">
+                            Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
+                </h1>
+                    <div className="flex justify-around">
+                    {trendingBlogs === null ? 
+                        <div className="center">
+                            <BeatLoader color="#e86f6f" />
+                        </div>
+                        : 
+                        (
+                            !trendingBlogs.length ? 
+                            <NoBlogsDataMessage message={"No Blogs Published"}/>
+                            :
+                            trendingBlogs.map((blog, index) => {
+                            return (
+                                <Animation transition={{ duration: 1, delay: index * 0.1 }}>
+                                    <TrendingBlogPostCard blog={blog} index={index} />
+                                </Animation>
+                            );
+                            })
+                        )
+                    }
+                    </div>
+                    
+                </div>
+
+             {/* categories */}
+                <div className="">
+                    <h1 className="font-medium text-primary tracking-wide text-xl mb-8">
+                        Categories
+                    </h1>
+                    <div className="flex gap-3 flex-wrap">
+                        {categories.map((category, index) => {
+                            return (
+                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? theme==="light" ?  "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium" : ""}`} key={index}>
+                                {category}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
             {/* latest blogs */}
-            <div className="w-full">
+            <div className="w-full bg-cool-white">
             <InPageNavigation
                 routes={[pageState,"trending blogs"]}
                 defaultHidden={["trending blogs"]}
             >
-                <div>
+                <div className="flex gap-8 justify-start items-center flex-wrap">
                 {
                     blogs===null ? 
-                    <div className="center">
+                    <div className="center w-full">
                             <SyncLoader color="#f59a9a" margin={4} />
                     </div> : 
                     (
                         !blogs.results.length ? 
-                        <NoBlogsDataMessage message={"No Blogs Published"}/>
+                        <div className="center w-full p-5">
+                            <NoBlogsDataMessage message={"No Blogs Published"}/>
+                        </div>
                         :
                         blogs.results.map((blog,index)=>{
                             return(
                                 <Animation transition={{duration:1,delay:index*0.1}}>
                                     <BlogPostCard content={blog} author={blog.author.personal_info}/>
                                 </Animation>
+                                
                             )
                         })
                     )
@@ -167,48 +215,8 @@ const BlogsHome = () => {
             </InPageNavigation>
             
             </div>
-            {/* filters and trending blogs */}
-            <div className="min-w-[40%] lg:min-w-[400px] max-w-min border-l border-grey pl-8 pt-3 sm:hidden">
-            <div className="flex flex-col gap-10">
-                <div>
-                    <h1 className="font-medium text-primary text-xl mb-8">
-                        Stories From All Interests
-                    </h1>
-                    <div className="flex gap-3 flex-wrap">
-                        {categories.map((category, index) => {
-                            return (
-                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? theme==="light" ?  "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium" : ""}`} key={index}>
-                                {category}
-                                </button>
-                            );
-                        })}
-                    </div>
-                </div>
-                <div>
-                    <h1 className="font-medium text-xl text-primary mb-8">
-                        Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
-                    </h1>
-                    {trendingBlogs === null ? 
-                        <div className="center">
-                            <BeatLoader color="#e86f6f" />
-                        </div>
-                        : 
-                        (
-                            !trendingBlogs.length ? 
-                            <NoBlogsDataMessage message={"No Blogs Published"}/>
-                            :
-                            trendingBlogs.map((blog, index) => {
-                            return (
-                                <Animation transition={{ duration: 1, delay: index * 0.1 }}>
-                                    <TrendingBlogPostCard blog={blog} index={index} />
-                                </Animation>
-                            );
-                            })
-                        )
-                    }
-                </div>
-            </div>
-            </div>
+    
+            
         </section>
         </Animation>
         }

@@ -7,7 +7,7 @@ import Comment from "../models/CommentSchema.js";
 
 const latestBlogs = async (req,res) =>{
     let {page} = req.body;
-    let maxLimit = 5;
+    let maxLimit = 8;
 
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
@@ -35,8 +35,8 @@ const trendingBlogs = async (req,res) => {
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"activity.total_read":-1,"activity.total_likes":-1,"publishedAt":-1})
-    .select("blog_id title publishedAt -_id")
-    .limit(5)
+    .select("blog_id banner title activity.total_likes publishedAt -_id")
+    .limit(3)
     .then( blogs => {
         return res.status(200).json({blogs});
     }).catch(err =>{
@@ -55,7 +55,7 @@ const searchBlogs = async (req,res) => {
     }else if(author) {
         findQuery = {author,draft:false}
     }
-    let maxLimit = limit ? limit : 3;
+    let maxLimit = limit ? limit : 4;
     Blog.find(findQuery)
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
