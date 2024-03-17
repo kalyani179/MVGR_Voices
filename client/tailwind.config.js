@@ -28,7 +28,6 @@ module.exports = {
       // // => @media (max-width: 639px) { ... }
     },
 
-
     extend: {
       fontFamily: {
         inter: ["'Inter'", "sans-serif"],
