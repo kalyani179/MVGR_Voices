@@ -6,10 +6,14 @@ import { Fade, Zoom } from 'react-awesome-reveal';
 import MiddleSection from './MiddleSection';
 import Content from './Content';
 import { ThemeContext } from '../../../App';
+import Carousel from '../Review Carousel/Carousel';
+import ReviewCarousel from '../Review Carousel/Carousel';
+import FeedbackForm from '../Review Carousel/FeedBackForm';
 
 
 const Body = () => {
     let {theme,setTheme} = useContext(ThemeContext);
+    let [FeedbackClicked,setFeedbackClicked] = useState(false);
     const [list]=useState([
         {
             question:'How Can I upload the Audio?',
@@ -74,6 +78,17 @@ const Body = () => {
                 </div>                                    
                 </Zoom>
             </div> 
+            <div className="bg-black p-8 pt-20">
+                <Zoom>
+                    <h1 className="text-5xl text-center font-gelasio tracking-wider font-semibold leading-normal text-primary">What Users Are Saying !</h1>
+                </Zoom>
+                <ReviewCarousel />
+            </div>
+                
+            <div className="fixed bottom-11 left-10">
+                <FeedbackForm />
+            </div>
+
             </div>
     )
 }

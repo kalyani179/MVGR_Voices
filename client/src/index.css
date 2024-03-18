@@ -119,6 +119,12 @@
     }
     .sidebar-link.active .sidebar-icon {
         @apply text-primary /* Change this to the appropriate color value */
+    }
+    .slick-slide > div {
+        @apply m-10
+    }
+    .slick-dots li.slick-active button:before {
+        color:orange !important;
     }    
 }
 

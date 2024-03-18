@@ -15,6 +15,7 @@ import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';
 import ManageBlogs from './components/Dashboard/ManageBlogs';
 import Contact from './components/Contact/Contact';
+import FeedbackForm from './components/Home/Review Carousel/FeedBackForm';
 
 export const UserContext = createContext({});
 
@@ -58,6 +59,7 @@ const App = () => {
               <Route path="/dashboard" element={<SideNav />}>
                     <Route path="blogs" element={<ManageBlogs />}/>
               </Route>
+              <Route path="/feedback" element={<FeedbackForm />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

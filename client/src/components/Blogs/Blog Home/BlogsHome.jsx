@@ -119,8 +119,8 @@ const BlogsHome = () => {
                 </h1>
                     <div className="flex justify-around">
                     {trendingBlogs === null ? 
-                        <div className="center">
-                            <BeatLoader color="#e86f6f" />
+                        <div className="center w-full">
+                            <SyncLoader color="#f59a9a" margin={4} />
                         </div>
                         : 
                         (
@@ -193,9 +193,9 @@ const BlogsHome = () => {
                 <div>
                 {
                     trendingBlogs===null ?  
-                    <div className="center">
-                            <BeatLoader color="#e86f6f" />
-                    </div> 
+                    <div className="center w-full">
+                            <SyncLoader color="#f59a9a" margin={4} />
+                    </div>
                     : 
                     (
                         !trendingBlogs.length ? 
