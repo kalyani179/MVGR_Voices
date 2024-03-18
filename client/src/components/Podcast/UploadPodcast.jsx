@@ -31,6 +31,7 @@ const UploadPodcast = () => {
     const [audioUploadProgress,setAudioUploadProgress]=useState(0);
     const [songName, setSongName] = useState("");
     const [songDescription, setSongDescription] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("");
    // const [songI, setSongDescription] = useState("");
     //const [songImageUrl, setSongImageUrl] = useState(null);
     //const [audioAsset, setAudioAsset] = useState(null);
@@ -70,26 +71,33 @@ const UploadPodcast = () => {
     };*/
     const handleUpload = (e) => {
       e.preventDefault();
-
-        axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/save", {
+    
+      // Check if required fields are empty
+    
+      axios
+        .post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/save', {
           name: songName,
           description: songDescription,
           imageURL: songImageCover,
           songURL: audioImageCover,
+          category: selectedCategory,
         })
-        .then(result => {
+        .then((result) => {
           console.log(result);
           // Add any further logic you need after successful upload
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     
-      setSongName(null);
+      // Reset state after successful upload
+      setSongName('');
+      setSongDescription('');
       setIsAudioLoading(false);
       setIsImageLoading(false);
       setAudioImageCover(null);
       setSongImageCover(null);
-      setSongDescription(null);
+     // setSelectedCategory('');
     };
+    
     const deleteImageObject = (url,isImage) => {
       if(isImage){
         setIsImageLoading(true);
@@ -108,14 +116,37 @@ const UploadPodcast = () => {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className='flex flex-col items-center justify-start p-4 border border-gray-300 rounded h-3/4 w-3/4'>
+        <div className="flex w-full mb-4">
           <input
             type="text"
-            placeholder='Podcast Name'
-            className='w-full p-3 rounded-md text-base font-semibold 
-            text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mb-4'
-            //onChange={(e)=>setName(e.target.value)}
+            placeholder="Podcast Name"
+            className="w-1/2 p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+            value={songName}
             onChange={(e) => setSongName(e.target.value)}
           />
+          {/* Dropdown menu for category filtering */}
+          <select
+            className="select-category w-1/2 p-3 rounded-md text-base font-semibold outline-none shadow-sm border border-gray-300 bg-transparent"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+             <option value="">Select Category</option>
+                {/* Add options for different categories here */}
+                <option >Business</option>
+                <option >Religion/Culture</option>
+                <option >History</option>
+                <option >Education</option>
+                <option >Health</option>
+                <option >Comedy</option>
+                <option >News</option>
+                <option >Science</option>
+                <option >Development</option>
+                <option >Sports</option>
+                <option >Crime</option>
+                <option >Horror</option>
+          </select>
+        </div>
+         
        
        <div className='flex mb-4 w-full h-full'>
           <div className='bg-card backdrop-blur-md w-full h-full rounded-md border-2 border-dotted border-gray-300

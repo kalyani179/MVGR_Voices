@@ -3,7 +3,7 @@ const router = express.Router();
 import PodModel from "../models/PodcastSchema.js";
 
 router.post("/save", async(req, res) => {
-    const { name, imageURL, songURL, description } = req.body;
+    const { name, imageURL, songURL, description, category } = req.body;
     console.log('Received data:', req.body);
     try {
         const newPod = new PodModel({
@@ -11,6 +11,8 @@ router.post("/save", async(req, res) => {
             imageURL,
             songURL,
             description,
+            category,
+
         });
 
         const savedPod = await newPod.save();

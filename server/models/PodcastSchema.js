@@ -17,10 +17,11 @@ const podSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    /*category: {
+    category: {
         type: String,
         required: true,
-    },*/
+    },
+
 }, { timestamps: true });
 
 const PodModel = mongoose.model("pod", podSchema);
