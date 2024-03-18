@@ -46,25 +46,27 @@ const App = () => {
               <Route path="/:username/verify/:access_token" element={<EmailVerification/>}/>
               <Route path="/" element={<BlogsNavbar />}>
                 <Route path="blogs" element={<BlogsHome />} />
-                <Route path="dashboard" element={<SideNav />}>
-                    <Route path="blogs" element={<ManageBlogs />}/>
-                </Route>
-                <Route path="settings" element={<SideNav />}>
-                    <Route path="edit-profile" element={<EditProfile />}/>
-                    <Route path="change-password" element={<ChangePassword />}/>
-                </Route>
                 <Route path="search/:query" element={<BlogsSearchPage />}/>
-                <Route path="user/:id" element={<UserProfilePage />}/>
                 <Route path="blog/:blog_id" element={<BlogPage />}/>
               </Route>
               <Route path="/editor" exact element={<Editor />} />
               <Route path="/editor/:blog_id" exact element={<Editor />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/contact" element={<Contact />}/>
+
               <Route path="/" element={<PodsNavbar />}>
                 <Route path="podcast" element={<Podcast />} />
               </Route>
               <Route path='/upload' element={<UploadPodcast />} />
+
+              <Route path="/user/:id" element={<UserProfilePage />}/>
+              <Route path="settings" element={<SideNav />}>
+                    <Route path="edit-profile" element={<EditProfile />}/>
+                    <Route path="change-password" element={<ChangePassword />}/>
+              </Route>
+              <Route path="/dashboard" element={<SideNav />}>
+                    <Route path="blogs" element={<ManageBlogs />}/>
+              </Route>
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

@@ -28,7 +28,6 @@ module.exports = {
       // // => @media (max-width: 639px) { ... }
     },
 
-
     extend: {
       fontFamily: {
         inter: ["'Inter'", "sans-serif"],
@@ -40,6 +39,7 @@ module.exports = {
   plugins: [
     createThemes({
       light:{
+        'cool-white':'#f5f5f5',
         'white': '#FFFFFF',
         'black': '#242424',
         'grey': '#F3F3F3',
@@ -54,6 +54,7 @@ module.exports = {
         'green':"#32CD32"
       },
       dark:{
+        'cool-white':'#242424',
         'white': '#242424',
         'black': '#F3F3F3',
         'grey': '#2A2A2A',

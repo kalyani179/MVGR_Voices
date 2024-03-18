@@ -8,6 +8,7 @@ import Loader from '../../common/Loader';
 import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
 import {ManagePublishedBlogCard, ManageDraftBlogCard } from './ManageBlogCard';
+import { SyncLoader } from 'react-spinners';
 
 const ManageBlogs = () => {
     const [blogs,setBlogs] = useState(null);
@@ -64,11 +65,11 @@ const ManageBlogs = () => {
         }
     },[access_token,blogs,drafts,query])
     return (
-        <>
-            <h1 className="sm:hidden text-primary text-xl text-center font-medium">Manage Blogs</h1>
+        <div className="ml-56 md:mt-24">
+            {/* <h1 className="sm:hidden text-primary text-xl text-center font-medium">Manage Blogs</h1> */}
             <Toaster />
             <div className="relative sm:mt-5 md:mt-8 mb-10">
-                <input type="search" className="w-full bg-grey p-4 pl-16 sm:pl-10 pr-6 rounded-full placeholder:text-dark-grey" placeholder="Search Blogs"
+                <input type="search" className="w-full bg-grey p-4 pl-16 sm:pl-10 pr-6 rounded-full placeholder:text-dark-grey focus:bg-white" placeholder="Search Blogs"
                 onChange={handleChange}
                 onKeyDown={handleSearch}
                 />
@@ -76,7 +77,11 @@ const ManageBlogs = () => {
             </div>
             <InPageNavigation routes = {["Published Blogs","Drafts"]}>
                 { // Published Blogs
-                    blogs === null ? <Loader /> :
+                    blogs === null ? 
+                        <div className="center">
+                            <SyncLoader color="#f59a9a" margin={4} />
+                        </div>
+                    :
                     blogs.results.length ? 
                     <>
                         {
@@ -106,7 +111,7 @@ const ManageBlogs = () => {
                     <NoBlogsDataMessage message="No Drafts Blogs"/>
                 }
             </InPageNavigation>
-        </>
+        </div>
     )
 }
 

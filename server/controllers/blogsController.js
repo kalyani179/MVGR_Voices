@@ -7,7 +7,7 @@ import Comment from "../models/CommentSchema.js";
 
 const latestBlogs = async (req,res) =>{
     let {page} = req.body;
-    let maxLimit = 5;
+    let maxLimit = 8;
 
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
@@ -35,8 +35,8 @@ const trendingBlogs = async (req,res) => {
     await Blog.find({draft:false})
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"activity.total_read":-1,"activity.total_likes":-1,"publishedAt":-1})
-    .select("blog_id title publishedAt -_id")
-    .limit(5)
+    .select("blog_id banner title activity.total_likes publishedAt -_id")
+    .limit(3)
     .then( blogs => {
         return res.status(200).json({blogs});
     }).catch(err =>{
@@ -55,7 +55,7 @@ const searchBlogs = async (req,res) => {
     }else if(author) {
         findQuery = {author,draft:false}
     }
-    let maxLimit = limit ? limit : 3;
+    let maxLimit = limit ? limit : 4;
     Blog.find(findQuery)
     .populate("author","personal_info.profile_img personal_info.username personal_info.fullname -_id")
     .sort({"publishedAt":-1})
@@ -106,7 +106,7 @@ const getProfile = async (req,res) => {
     User.findOne({"personal_info.username":username})
     .select("-personal_info.password -google_auth -updatedAt -blogs")
     .then(user =>{
-        return res.status(200).json(user)
+        return res.status(200).json(user);
     })
     .catch(err=>{
         return res.status(500).json({error:err.message});
@@ -170,20 +170,23 @@ const createBlog = async (req, res) => {
     
 }
 
-const getBlog = async (req,res) =>{
+const getBlog = (req,res) =>{
 
     let {blog_id,draft,mode} = req.body;
-    let incrementVal = mode!=="edit" ? 1 : 0;
+    let incrementVal = mode=="edit" ? 0 : 1;
     Blog.findOneAndUpdate({blog_id},{$inc : {"activity.total_reads":incrementVal}})
     .populate("author","personal_info.fullname personal_info.username personal_info.profile_img")
     .select("title desc content banner activity publishedAt blog_id tags")
     .then(blog =>{
-        
-        User.findOneAndUpdate({"personal_info.username":blog.author.personal_info.username},{$inc : {"activity.total_reads":incrementVal}})
-        if(blog.draft && !draft){
-            return res.status(500).json({error:"You Cannot Access Draft Blog"});
-        }
-        return res.status(200).json({blog});
+        console.log(blog.author.personal_info.username);
+        console.log(incrementVal);
+        User.findOneAndUpdate({"personal_info.username":blog.author.personal_info.username},{$inc : {"account_info.total_reads":incrementVal}})
+        .then(()=>{
+            if(blog.draft && !draft){
+                return res.status(500).json({error:"You Cannot Access Draft Blog"});
+            }
+            return res.status(200).json({blog});
+        })
     })
     .catch(err => {
         return res.status(500).json({error:err.message});
