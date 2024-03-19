@@ -51,7 +51,7 @@ function FeedbackForm() {
 
     return (
         <Zoom>
-        <div className={`${clicked ? "show" : "hidden"} mx-auto bg-black/90 p-8 rounded-md duration-500 absolute left-5 -bottom-5`}>
+        <div className={`${clicked ? "show" : "hidden"} mx-auto bg-black/95 p-8 rounded-md duration-500 absolute left-5 -bottom-5`}>
         <button onClick={()=>setClicked(!clicked)}><i className="fi fi-bs-cross-small text-lg text-white absolute top-3.5 right-4"></i></button>
             <h4 className="font-medium text-center text-xl text-primary">Feedback Form</h4>
             <form onSubmit={handleSubmit} className="space-y-4 mt-5">

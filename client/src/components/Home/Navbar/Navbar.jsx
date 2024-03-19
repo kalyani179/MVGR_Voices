@@ -44,7 +44,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     {name:"Podcasts",link:"/"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/contact"},
-    {name:"Subscribe",link:"/"},
+    {name:"Subscribe",link:""},
   ];
   const handleLinkClick = ({link}) =>{
     if(!access_token) {

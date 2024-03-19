@@ -8,7 +8,7 @@ let Platforms = [
 ]
 const FooterData = () => {
   return (
-    <footer className="py-4 relative overflow-hidden bg-primary/95">
+    <footer className="py-4 relative overflow-hidden bg-primary">
 
     <div className="center gap-10">
         {/* Subscribe */}
