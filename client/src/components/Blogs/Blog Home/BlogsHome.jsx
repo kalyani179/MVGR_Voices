@@ -12,6 +12,8 @@ import { Link, useNavigate } from "react-router-dom";
 import FilterPaginationData from "../../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
 import { BeatLoader, CircleLoader, ClipLoader, DotLoader, FadeLoader, RingLoader, SyncLoader } from "react-spinners";
+import Footer from "../../Home/Footer/Footer";
+import FooterData from "../../Home/Footer/FooterData";
 
 
 const BlogsHome = () => {
@@ -113,7 +115,7 @@ const BlogsHome = () => {
         
         <section className="h-cover md:px-[4vw] flex flex-col justify-center gap-5 bg-cool-white">
                 {/* Trending Blogs */}
-                <div className="flex flex-col">
+                <div className="flex flex-col sm:hidden max-md:hidden">
                 <h1 className="font-medium text-xl text-primary mb-8 tracking-wide">
                             Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
@@ -215,9 +217,11 @@ const BlogsHome = () => {
             </InPageNavigation>
             
             </div>
-    
             
         </section>
+            <div className="bg-cool-white">
+                <Footer />
+            </div>
         </Animation>
         }
         </>

@@ -1,23 +1,12 @@
-import React, { useContext } from 'react';
-import MVGR from "../../assets/images/contact/mvgr.png"
-import MVGRVideo from "../../assets/videos/pond.mp4"
+import React from 'react';
 import ContactForm from './ContactForm';
-import {ThemeContext} from "../../App.jsx";
 import Navbar from '../Home/Navbar/Navbar.jsx';
-import { Nav } from 'reactstrap';
 
 const Contact = () => {
-    let {theme,setTheme} = useContext(ThemeContext);
     return (
         <>
         <div>
         <div className="bg-cool-white">
-        {/* <video autoPlay loop muted className="w-full h-screen object-cover">
-                    <source src={MVGRVideo} type="video/mp4"/>
-        </video> */}
-            {/* <img className="object-cover w-full max-h-screen" src={MVGR} alt="background"/> */}
-
-            {/* <div className={`absolute inset-0 ${theme==="light" ? "bg-black" : "bg-white" } bg-opacity-90 ${theme==="light" ? "opacity-85" : "opacity-95"}`}> */}
                 <div className="bg-white border-b border-grey">  
                     <Navbar activeLink="Contact" home={0}/>
                 </div>
@@ -25,7 +14,7 @@ const Contact = () => {
                     <h1 className="text-primary text-4xl font-extrabold font-gelasio tracking-wide">CONTACT US</h1>
                     <p className={`text-dark-grey text-xl font-medium w-[60%] sm:w-[95%] sm:text-lg text-center tracking-wide`}>Reach out to us for inquiries, collaborations, or to share your thoughts.</p>
                 </div>
-                <div className="flex center justify-around sm:flex-col mt-10 m-20 mb-0 bg-cool-white pb-6">
+                <div className="flex center justify-around sm:flex-col sm:gap-10 mt-10 m-20 mb-0 bg-cool-white pb-6">
                 <div className="flex flex-col gap-10">
                     <div className="flex items-center gap-5">
                         <div className="bg-black/90 w-12 h-12 center rounded-full">

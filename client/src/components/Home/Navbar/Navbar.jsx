@@ -8,6 +8,7 @@ import logo from "../../../assets/icons/logo.png";
 import logoDark from "../../../assets/icons/logoDark.png";
 import { Link, useNavigate } from "react-router-dom";
 import UserNavigationPanel from "./UserNavigationPanel";
+import Footer from "../Footer/Footer";
 
 
 const Navbar = ({home=1,activeLink="Home"}) => {
@@ -51,6 +52,9 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     }else{
       // setActiveLink(link.name);
       navigate(link.link);
+    }
+    if (link.name === "Subscribe") {
+      window.scrollTo(0, document.body.scrollHeight);
     }
   }
   const changeTheme = () => {
@@ -113,7 +117,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
 
                       ))
                   }
-            
+                  {activeLink === "Subscribe" && <Footer />}
                     {/* Theme Change */}
                   <div className="ml-4">
                   <Link>
