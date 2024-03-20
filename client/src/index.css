@@ -172,48 +172,49 @@ body::-webkit-scrollbar{
     background: url(./assets/images/Home/FooterBG.png);
 }
 
+
 .bg-wave1 {
-    animation: animate 4s linear infinite;
+    animation: animate 30s linear infinite;
     z-index: 1000;
     opacity: 1;
     animation-delay: 0s;
 }
 
 .bg-wave2 {
-    animation: animate2 4s linear infinite;
+    animation: animate2 20s linear infinite;
     z-index: 999;
     opacity: 0.5;
-    /* animation-delay: -5s; */
+    animation-delay: -5s;
 }
 
 .bg-wave3 {
-    animation: animate2 3s linear infinite;
-    z-index: 1000;
-    opacity: 0.2;
+    animation: animate 30s linear infinite;
+    z-index: 998;
+    opacity: 0.6;
     animation-delay: -2s;
 }
 
 .bg-wave4 {
-    animation: animate2 3s linear infinite;
-    z-index: 999;
+    animation: animate2 20s linear infinite;
+    z-index: 997;
     opacity: 0.7;
-    /* animation-delay: -5s; */
+    animation-delay: -5s;
 }
 
 @keyframes animate {
     0% {
-        background-position-x: 1000px;
+        background-position-x: 0;
     }
     100% {
-        background-position-x: 0px;
+        background-position-x: 1000px;
     }
 }
 
 @keyframes animate2 {
     0% {
-        background-position-x: 0px;
+        background-position-x: 0;
     }
     100% {
-        background-position-x: 1000px;
+        background-position-x: -1000px;
     }
 }

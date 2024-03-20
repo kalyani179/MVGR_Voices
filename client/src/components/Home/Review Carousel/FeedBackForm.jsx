@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
 
@@ -28,30 +29,13 @@ function FeedbackForm() {
             review: review
         };
         console.log(stars);
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/feedback-form",feedbackData)
 
-        try {
-            // Send feedback data to backend
-            const response = await fetch('your-backend-endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(feedbackData)
-            });
-            if (response.ok) {
-                // Feedback submitted successfully
-                console.log('Feedback submitted successfully');
-            } else {
-                console.error('Failed to submit feedback');
-            }
-        } catch (error) {
-            console.error('Error submitting feedback:', error);
-        }
     };
 
     return (
         <Zoom>
-        <div className={`${clicked ? "show" : "hidden"} mx-auto bg-black/95 p-8 rounded-md duration-500 absolute left-5 -bottom-5`}>
+        <div className={`${clicked ? "show" : "hidden"} mx-auto bg-cool-black/95 p-8 rounded-md duration-500 absolute left-5 -bottom-5`}>
         <button onClick={()=>setClicked(!clicked)}><i className="fi fi-bs-cross-small text-lg text-white absolute top-3.5 right-4"></i></button>
             <h4 className="font-medium text-center text-xl text-primary">Feedback Form</h4>
             <form onSubmit={handleSubmit} className="space-y-4 mt-5">
