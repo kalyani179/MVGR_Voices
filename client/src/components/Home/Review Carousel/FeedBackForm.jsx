@@ -84,9 +84,11 @@ const FeedbackForm = () => {
             </form>
         
         </div>
-        <button className="sticky" onClick={()=>setClicked(!clicked)}>
-                    <i className="fi fi-ss-star text-primary text-2xl"></i>
-        </button>
+        <div>
+            <button className="sticky" onClick={()=>setClicked(!clicked)}>
+                        <i className="fi fi-ss-star text-primary text-2xl z-50"></i>
+            </button>
+        </div>
         </Zoom>
     );
 }

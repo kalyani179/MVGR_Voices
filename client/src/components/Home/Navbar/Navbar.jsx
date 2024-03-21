@@ -122,7 +122,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                       {
                         access_token ? 
                         <>
-                        <div className="z-30" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
+                        <div className="z-50" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
                         <button className={`w-11 h-11 mt-1 rounded-full ${activeLink==="profile" ? "border-2 border-primary" : ""}`}>
                             <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
                         </button>
