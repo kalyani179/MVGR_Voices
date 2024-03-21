@@ -41,7 +41,10 @@ export const signup = async(req, res) =>{
         if(exist){
             if(exist.personal_info.verified === true){
                 return res.status(400).json({"error" : "User has already Signed up!"});
-            }else if(exist.personal_info.verified === false){
+            }else if(exist.google_auth === true){
+                return res.status(400).json({"error" : "User has already Signed up with google!"});
+            }
+            else if(exist.personal_info.verified === false){
                 return res.status(400).json({"error" : "We have already sent you an Email to verify your account! Please Check !!"});
             }
         }

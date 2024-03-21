@@ -184,16 +184,6 @@ const UserAuth = ({type,close,open}) => {
                             <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 rounded-md">{type==="signup" ? "Create Account" : "Sign In"}</button>
                         </form>
                     </div>
-                    {/* Forgot Password */}
-                    <div className="-mt-1 mb-3">
-                    {
-                        type==="signin" ?
-                        <p className="text-primary text-end text-sm font-inter">
-                            <Link to={"/signin/forgot-password"}>Forgot Password?</Link>
-                        </p>
-                        : ""
-                    }
-                    </div>
 
                     {/* signin option */}
                     <div className="m-3 mt-1">
@@ -213,6 +203,17 @@ const UserAuth = ({type,close,open}) => {
 
                     {/* continue with google button */}
                     <GoogleAuth handleGoogleAuth={handleGoogleAuth} />
+
+                    {/* Forgot Password */}
+                    <div className="m-3">
+                    {
+                        type==="signin" ?
+                        <p className="text-primary text-center text-sm font-inter">
+                            <Link to={"/signin/forgot-password"} className="text-sm">Forgot Password?</Link>
+                        </p>
+                        : ""
+                    }
+                    </div>
                 
                 </div>
                 </Slide>
