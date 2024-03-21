@@ -6,23 +6,19 @@ import axios from "axios";
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
 import NoBlogsDataMessage from "./NoBlogsDataMessage";
-import BlogsNavbar from "../Blogs Navbar/BlogsNavbar";
-import { ThemeContext, UserContext } from "../../../App";
-import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../../App";
 import FilterPaginationData from "../../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
-import { BeatLoader, CircleLoader, ClipLoader, DotLoader, FadeLoader, RingLoader, SyncLoader } from "react-spinners";
+import {SyncLoader } from "react-spinners";
 import Footer from "../../Home/Footer/Footer";
-import FooterData from "../../Home/Footer/FooterData";
+
 
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
-    let {theme,setTheme} = useContext(ThemeContext);
+    let {theme} = useContext(ThemeContext);
     let [trendingBlogs, setTrendingBlog] = useState(null);
     let [pageState,setPageState] = useState("home");
-    let {userAuth:{access_token}} = useContext(UserContext);
-    let navigate = useNavigate();
 
     let categories = [
         "Programming",

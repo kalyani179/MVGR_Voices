@@ -70,17 +70,25 @@ const BlogPage = () => {
         setLoading(true);
     }
 
+    const [signInErrorHandled, setSignInErrorHandled] = useState(false);
+
     const handleSignInError = () => {
         navigate("/blogs");
-        setTimeout(()=>{
-            toast.error("Please sign in to see the blog!");
-        },1000)
+        setTimeout(() => {
+            return toast.error("Please sign in to see the blog!");
+        }, 1000);
     };
+
+    useEffect(() => {
+        if (!access_token && !signInErrorHandled) {
+            handleSignInError();
+            setSignInErrorHandled(true);
+        }
+    }, [access_token, signInErrorHandled]);
 
     return (
         <Animation>
             {
-                !access_token ? handleSignInError() :
                 loading ? <Loader /> :
                 <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible,totalParentCommentsLoaded,setTotalParentCommentsLoaded}}>
                     <CommentsContainer />
