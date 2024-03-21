@@ -33,35 +33,6 @@ const formatDatatoSend = (user) => {
     }
 }
 
-const verifyMail = async(email,link) => {
-    try{
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD
-            }
-        })
-        //send email
-        await transporter.sendMail({
-            from:process.env.EMAIL, //sender mail
-            to:email, //reciever mail
-            subject:"Account Verification",
-            text:"This Email is sent to verify your account.",
-            html:`
-            <div>
-                <p>Verify your email Address to complete signup and to signin to your account!</p>
-                <p>Click <a href=${link}>here</a> to proceed.</p>
-            </div>
-            `
-        })
-        console.log("mail sent successfully");
-    }
-    catch(err){
-        console.log(err.message);
-        return res.status(500).json({"error":"Internal Server Error"});
-    }
-}
 
 export const signup = async(req, res) =>{
     try{
@@ -87,6 +58,36 @@ export const signup = async(req, res) =>{
             await verifyMail(email,`http://localhost:3001/${username}/verify/${access_token}`);
             return res.status(200).json(formatDatatoSend(newUser));
         })
+    }
+    catch(err){
+        console.log(err.message);
+        return res.status(500).json({"error":"Internal Server Error"});
+    }
+}
+
+const verifyMail = async(email,link) => {
+    try{
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            }
+        })
+        //send email
+        await transporter.sendMail({
+            from:process.env.EMAIL, //sender mail
+            to:email, //reciever mail
+            subject:"Account Verification",
+            text:"This Email is sent to verify your account.",
+            html:`
+            <div>
+                <p>Verify your email Address to complete signup and to signin to your account!</p>
+                <p>Click <a href=${link}>here</a> to proceed.</p>
+            </div>
+            `
+        })
+        console.log("mail sent successfully");
     }
     catch(err){
         console.log(err.message);
@@ -135,6 +136,67 @@ export const signin = async(req, res) =>{
             else return res.status(200).json(formatDatatoSend(user));
         })
         // return res.status(200).json({"status":"User has Signed In Successfully!"})
+    }
+    catch(err){
+        console.log(err.message);
+        return res.status(500).json({"error":"Internal Server Error"});
+    }
+    
+}
+
+export const forgotPassword = async (req,res) => {
+    try{
+        let {email} = req.body;
+        User.findOne({"personal_info.email":email})
+        .then(async (user) => {
+            if(!user){
+                return res.status(400).json({"error":"User has not signed up yet! Sign up to continue"})
+            }
+            if(user.google_auth){
+                return res.status(403).json({"error":"Account was created with google. Try Sign in with google"});
+            }
+            const token = jwt.sign({id:user._id},process.env.SECRET_ACCESS_KEY,{expiresIn:"1d"})
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
+                }
+            })
+            let link = `http://localhost:3001/reset-password/${user._id}/${token}`
+            await transporter.sendMail({
+                from:process.env.EMAIL, //sender mail
+                to:email, //reciever mail
+                subject:"Reset Your Password",
+                text:"This Email is sent to Reset your password",
+                html:`
+                <div>
+                    <p>Click <a href=${link}>here</a> to reset your password.</p>
+                </div>
+                `
+            })
+            return res.status(200).json({status:"okay"})
+        })
+    }
+    catch(err){
+        console.log(err.message);
+        return res.status(500).json({"error":"Internal Server Error"});
+    }
+}
+
+export const resetPassword = async (req,res) => {
+    try{
+        let {password} =  req.body;
+        let {id,token} = req.params;
+        jwt.verify(token,process.env.SECRET_ACCESS_KEY)
+        const token1 = jwt.verify(token,process.env.SECRET_ACCESS_KEY);
+        if (!token1) return res.status(400).send({ message: "This Email has expired!" });
+        bcrypt.hash(password,10,async (err,hashed_password)=>{
+            User.findByIdAndUpdate({_id:id},{"personal_info.password":hashed_password})
+            .then(user => {
+                return res.status(200).json({"success":"Password Updated Successfully!"})
+            })
+        })
     }
     catch(err){
         console.log(err.message);

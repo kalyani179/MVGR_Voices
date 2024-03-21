@@ -8,6 +8,7 @@ import GoogleAuth from './GoogleAuth';
 
 import {storeInSession} from "../../common/session";
 import { ThemeContext, UserContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 
 const UserAuth = ({type,close,open}) => {
@@ -149,10 +150,10 @@ const UserAuth = ({type,close,open}) => {
                     }
                 }}
             />
-            <div className={`fixed inset-0 z-50 bg-black ${theme==="light" ? "bg-opacity-70" : "bg-cool-white bg-opacity-90"} center`} onClick={close}>
+            <div className={`fixed inset-0 z-50 bg-black ${theme==="light" ? "bg-opacity-60" : "bg-cool-white bg-opacity-90"} center`} onClick={close}>
                 <Slide direction="down" duration={1500}>
                 {/* SignUp Heading */}
-                <div className={`bg-white relative p-8 pb-4 rounded-md z-50 ${type==="signin" ? "md:mt-10" : ""} opacity-95`} onClick={(e) => e.stopPropagation()}>
+                <div className={`bg-white relative p-8 pb-4 rounded-md z-50 ${type==="signin" ? "md:mt-10" : ""} opacity-90`} onClick={(e) => e.stopPropagation()}>
                     <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
                     <div className="center">
                         <h1 className={`text-center mb-5 heading`}>{type==="signup" ? "Sign Up" : "Sign In"}</h1>
@@ -183,9 +184,19 @@ const UserAuth = ({type,close,open}) => {
                             <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 rounded-md">{type==="signup" ? "Create Account" : "Sign In"}</button>
                         </form>
                     </div>
+                    {/* Forgot Password */}
+                    <div className="-mt-1 mb-3">
+                    {
+                        type==="signin" ?
+                        <p className="text-primary text-end text-sm font-inter">
+                            <Link to={"/signin/forgot-password"}>Forgot Password?</Link>
+                        </p>
+                        : ""
+                    }
+                    </div>
 
                     {/* signin option */}
-                    <div className="m-3">
+                    <div className="m-3 mt-1">
                     {
                         type==="signup"
                         ? <p>Already have an account? <button onClick={open} className="text-purple underline">Sign In Here</button> </p>
