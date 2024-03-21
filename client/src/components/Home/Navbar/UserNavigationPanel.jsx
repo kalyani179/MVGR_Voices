@@ -1,17 +1,21 @@
 import React, { useContext } from 'react'
 import Animation from '../../../common/Animation'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../../App'
 import { removeFromSession } from '../../../common/session'
+import toast from 'react-hot-toast'
 
 const UserNavigationPanel = () => {
     let {userAuth:{username},setUserAuth} = useContext(UserContext);
-    let navigate = useNavigate();
 
     const signOutUser = () => {
-        removeFromSession("user");
-        setUserAuth({access_token:null});
-        navigate("/");
+        let loadingToast = toast.loading("Signing Out...");
+        setTimeout(()=>{
+            toast.dismiss(loadingToast);
+            toast.success("Signed Out Successfully..!");
+            removeFromSession("user");
+            setUserAuth({access_token:null});
+        },500);
     }
 
     return (

@@ -7,11 +7,9 @@ import axios from "axios";
 
 const ReviewCarousel = () => {
   const [data, setData] = useState([]);
-  console.log(data);
   axios.get(process.env.REACT_APP_SERVER_DOMAIN+"/get-all-feedbacks")
   .then(response => {
     setData(response.data);
-    console.log(data);
   }).catch(error => {
     console.log(error);
   })

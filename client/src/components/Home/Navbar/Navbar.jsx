@@ -21,16 +21,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
   const [showSignup,setShowSignup] = useState(false);
   const [showSignin,setShowSignin] = useState(false);
 
-  const signOut = () => {
-    let loadingToast = toast.loading("Signing Out...");
-    setTimeout(()=>{
-      toast.dismiss(loadingToast);
-      toast.success("Signed Out Successfully...");
-      removeFromSession("user");
-      setUserAuth({access_token:null});
-    },500);
 
-  }
   const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
   const handleSearch = (e) => {
       let query = e.target.value;

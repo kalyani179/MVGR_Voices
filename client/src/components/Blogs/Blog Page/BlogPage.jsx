@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Animation from '../../../common/Animation';
 import Loader from '../../../common/Loader';
 import lightDefaultBanner from "../../../assets/images/Blogs/default_banner_light.png";
@@ -10,7 +10,8 @@ import BlogInteraction from './BlogInteraction';
 import BlogPostCard from '../Blog Home/HomeBlogPostCard';
 import BlogContent from './BlogContent';
 import CommentsContainer, { fetchComments } from './CommentsContainer';
-import { ThemeContext } from '../../../App';
+import { ThemeContext, UserContext } from '../../../App';
+import toast from 'react-hot-toast';
 
 export const blogStructure = {
     title:'',
@@ -32,6 +33,10 @@ const BlogPage = () => {
     const [isLiked,setIsLiked] = useState(false);
     const [isCommentsVisible,setCommentsVisible] = useState(false);
     const [totalParentCommentsLoaded,setTotalParentCommentsLoaded] = useState(0);
+
+    let {userAuth:{access_token}} = useContext(UserContext);
+    // console.log(access_token);
+    let navigate = useNavigate();
 
     let {title,content,banner,author:{personal_info:{fullname,username:author_username,profile_img}},publishedAt} = blog;
     const fetchBlog = ()=>{
@@ -64,9 +69,18 @@ const BlogPage = () => {
         setSimilarBlogs(null);
         setLoading(true);
     }
+
+    const handleSignInError = () => {
+        navigate("/blogs");
+        setTimeout(()=>{
+            toast.error("Please sign in to see the blog!");
+        },1000)
+    };
+
     return (
         <Animation>
             {
+                !access_token ? handleSignInError() :
                 loading ? <Loader /> :
                 <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible,totalParentCommentsLoaded,setTotalParentCommentsLoaded}}>
                     <CommentsContainer />

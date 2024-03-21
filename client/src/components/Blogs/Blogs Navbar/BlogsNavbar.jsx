@@ -6,6 +6,7 @@ import { ThemeContext } from '../../../App';
 import { storeInSession } from '../../../common/session';
 import Navbar from '../../Home/Navbar/Navbar';
 
+
 const BlogsNavbar = () => {
     const {userAuth:{profile_img}} = useContext(UserContext);
     const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);

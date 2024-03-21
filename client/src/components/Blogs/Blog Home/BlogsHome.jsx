@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Animation from "../../../common/Animation";
 import InPageNavigation from "./InPageNavigation";
 import axios from "axios";
-import Loader from "../../../common/Loader";
+
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
 import NoBlogsDataMessage from "./NoBlogsDataMessage";
@@ -93,7 +93,6 @@ const BlogsHome = () => {
     }
 
     useEffect(() => {
-
         if(pageState==="home"){
             fetchLatestBlogs({page:1});
         }else{
@@ -105,9 +104,7 @@ const BlogsHome = () => {
     }, [pageState]);
 
     return (
-        <>
         <Animation>
-        
         <section className="h-cover md:px-[4vw] flex flex-col justify-center gap-5 bg-cool-white">
                 {/* Trending Blogs */}
                 <div className="flex flex-col sm:hidden max-md:hidden">
@@ -218,8 +215,6 @@ const BlogsHome = () => {
                 <Footer />
             </div>
         </Animation>
-        
-        </>
     );
 };
 
