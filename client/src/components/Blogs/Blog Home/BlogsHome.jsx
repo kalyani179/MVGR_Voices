@@ -106,11 +106,6 @@ const BlogsHome = () => {
 
     return (
         <>
-        {
-        !access_token 
-        ?
-        navigate("/")
-        : 
         <Animation>
         
         <section className="h-cover md:px-[4vw] flex flex-col justify-center gap-5 bg-cool-white">
@@ -223,7 +218,7 @@ const BlogsHome = () => {
                 <Footer />
             </div>
         </Animation>
-        }
+        
         </>
     );
 };

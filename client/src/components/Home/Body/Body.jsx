@@ -10,7 +10,7 @@ import { ThemeContext } from '../../../App';
 import ReviewCarousel from '../Review Carousel/Carousel';
 import FeedbackForm from '../Review Carousel/FeedBackForm';
 import Footer from '../Footer/Footer';
-import FooterData from '../Footer/FooterData';
+
 
 
 const Body = () => {
@@ -69,7 +69,7 @@ const Body = () => {
                 <h1 className="text-6xl font-merriweather font-semibold leading-normal text-primary">FAQ's</h1> 
             </Fade>
             </div>                   
-            <div className={`${theme==="light" ? "bg-black" : "bg-white"} flex px-20 mb-32 py-8 items-center justify-center`}>
+            <div className={`${theme==="light" ? "bg-black" : "bg-white"} flex px-20 mb-20 py-8 items-center justify-center`}>
                 <Zoom>
                 <div className="list">
                 {

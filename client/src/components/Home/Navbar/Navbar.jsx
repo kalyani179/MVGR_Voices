@@ -47,12 +47,12 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     {name:"Subscribe",link:""},
   ];
   const handleLinkClick = ({link}) =>{
-    if(!access_token) {
-      toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
-    }else{
+    // if(!access_token) {
+    //   toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
+    // }else{
       // setActiveLink(link.name);
       navigate(link.link);
-    }
+    // }
     if (link.name === "Subscribe") {
       window.scrollTo(0, document.body.scrollHeight);
     }

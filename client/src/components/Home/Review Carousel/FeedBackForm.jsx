@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
+import { toast } from 'react-hot-toast';
 
-function FeedbackForm() {
+const FeedbackForm = () => {
     const [title, setTitle] = useState('');
     const [stars, setStars] = useState(0);
     const [review, setReview] = useState('');
@@ -19,9 +20,10 @@ function FeedbackForm() {
         }
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        e.target.setAttribute('disabled',true);
+        let loadingToast = toast.loading("submitting feedback...")
         // Prepare feedback data
         const feedbackData = {
             title: title,
@@ -29,7 +31,25 @@ function FeedbackForm() {
             review: review
         };
         console.log(stars);
-        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/feedback-form",feedbackData)
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/feedback-form", feedbackData)
+        .then((response) => {
+            setTitle('');
+            setStars(0);
+            setReview('');
+            e.target.removeAttribute('disabled');
+            toast.dismiss(loadingToast);
+            toast.success("Feedback Submitted Succesfully!");
+        })
+        .catch((error) => {
+            // Handle errors if any
+            console.error("Error submitting feedback:", error);
+            setTitle('');
+            setStars(0);
+            setReview('');
+            e.target.removeAttribute('disabled');
+            toast.dismiss(loadingToast);
+            toast.error("Error submitting feedback:"+error);
+        });
 
     };
 
@@ -55,7 +75,7 @@ function FeedbackForm() {
                 </div>
                 <div className="flex flex-col">
                     <label className="font-medium text-primary tracking-wide">Review:</label>
-                    <textarea id="review" value={review} onChange={(e) => setReview(e.target.value)} className="auth-input bg-transparent border border-white h-20 text-white pl-2 resize-none"></textarea>
+                    <textarea id="review" value={review} onChange={(e) => setReview(e.target.value)} className="auth-input bg-transparent border border-white h-20 text-white pl-2 resize-none overflow-hidden overflow-y-scroll text-area-input"></textarea>
                 </div>
                 <div className="center">
                     <button type="submit" className="text-white rounded-md py-2 px-4 bg-primary">Submit Feedback</button>

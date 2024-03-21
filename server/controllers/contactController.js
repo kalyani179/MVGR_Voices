@@ -44,5 +44,15 @@ const feedbackForm = async (req,res) => {
         return res.status(500).json({error:"There is some issue! Please Try again!"})
     }
 }
+const getAllFeedbacks = (req,res) => {
+    Feedback.find({})
+    .then(feedbacks => {
+        res.status(200).json(feedbacks);
+    })
+    .catch(err => {
+        console.error('Error fetching feedbacks:', err);
+        res.status(500).json({ error: 'An error occurred while fetching feedbacks' });
+    });
+}
 
-export {queryMail,feedbackForm};
+export {queryMail,feedbackForm,getAllFeedbacks};
