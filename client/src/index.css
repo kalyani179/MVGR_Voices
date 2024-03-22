@@ -174,15 +174,15 @@ body::-webkit-scrollbar{
 .bg-wave1 {
     animation: animate 30s linear infinite;
     z-index: 10;
-    opacity: 0.4;
+    opacity: 0.9;
     animation-delay: 0s;
 }
 
 .bg-wave2 {
     animation: animate2 20s linear infinite;
     z-index: 9;
-    opacity: 0.5;
-    animation-delay: -5s;
+    opacity: 0.3;
+    animation-delay: -1s;
 }
 
 .bg-wave3 {

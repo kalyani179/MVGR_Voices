@@ -33,8 +33,6 @@ const ReviewCarousel = () => {
                                 <i key={index} className="fi fi-ss-star text-primary text-xl"></i>
                     ))}
                     </div>
-                    
-                    
                     <p className="text-lg text-center font-inter">{d.review}</p>
                     </div>
                 </div>

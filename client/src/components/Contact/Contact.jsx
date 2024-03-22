@@ -1,6 +1,7 @@
 import React from 'react';
 import ContactForm from './ContactForm';
 import Navbar from '../Home/Navbar/Navbar.jsx';
+import Footer from '../Home/Footer/Footer.jsx';
 
 const Contact = () => {
     return (
@@ -48,7 +49,9 @@ const Contact = () => {
                     <ContactForm/>
                 </div>
                 </div>
-                
+                <div className="bg-cool-white">
+                    <Footer />
+                </div>
             
             </div>
         </div>
