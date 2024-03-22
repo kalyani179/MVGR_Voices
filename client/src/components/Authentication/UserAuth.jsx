@@ -8,6 +8,7 @@ import GoogleAuth from './GoogleAuth';
 
 import {storeInSession} from "../../common/session";
 import { ThemeContext, UserContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 
 const UserAuth = ({type,close,open}) => {
@@ -72,7 +73,7 @@ const UserAuth = ({type,close,open}) => {
                 let loading = toast.loading("sending mail...");
                 setTimeout(()=>{
                     toast.remove(loading);
-                    toast.success("Email has been sent to your Email!");
+                    toast.success("Email has been sent to your Email! Please Verify it to Sign In !");
                 },500)
             }
             if(route==="signin" || route==="google-auth"){
@@ -103,16 +104,31 @@ const UserAuth = ({type,close,open}) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        let formData = data;
-        e.target.setAttribute("disabled",true);
-        if(type==="signup"){
-            let loading = toast.loading("please wait...");
-            setTimeout(()=>{
-                toast.remove(loading);
-            },2000)
+        let emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+        console.log(inputEmailValue.length,inputPasswordValue.length,inputNameValue.length)
+        if(!inputEmailValue.length){
+            return toast.error("Please Enter the Email!");
+        }else if(!emailRegex.test(inputEmailValue)){
+            return toast.error("Please Enter a valid Email ID!")
         }
-        userAuthThroughServer(type,formData);
-        e.target.removeAttribute("disabled");
+        else if(!inputPasswordValue.length){
+            return toast.error("Please Enter the Password!");
+        }
+        else if(type==="signup" && inputNameValue.length<3){
+            return toast.error("Fullname must be atleast 3 letters long!");
+        }
+        else{
+            let formData = data;
+            e.target.setAttribute("disabled",true);
+            if(type==="signup"){
+                let loading = toast.loading("please wait...");
+                setTimeout(()=>{
+                    toast.dismiss(loading);
+                },1000)
+            }
+            userAuthThroughServer(type,formData);
+            e.target.removeAttribute("disabled");
+        }
     }
     const handleGoogleAuth = (e) =>{
 
@@ -149,7 +165,7 @@ const UserAuth = ({type,close,open}) => {
                     }
                 }}
             />
-            <div className={`fixed inset-0 z-50 bg-black ${theme==="light" ? "bg-opacity-50" : "bg-white bg-opacity-50"} center`} onClick={close}>
+            <div className={`fixed inset-0 z-50 bg-black ${theme==="light" ? "bg-opacity-60" : "bg-cool-white bg-opacity-90"} center`} onClick={close}>
                 <Slide direction="down" duration={1500}>
                 {/* SignUp Heading */}
                 <div className={`bg-white relative p-8 pb-4 rounded-md z-50 ${type==="signin" ? "md:mt-10" : ""} opacity-90`} onClick={(e) => e.stopPropagation()}>
@@ -185,7 +201,7 @@ const UserAuth = ({type,close,open}) => {
                     </div>
 
                     {/* signin option */}
-                    <div className="m-3">
+                    <div className="m-3 mt-1">
                     {
                         type==="signup"
                         ? <p>Already have an account? <button onClick={open} className="text-purple underline">Sign In Here</button> </p>
@@ -202,6 +218,17 @@ const UserAuth = ({type,close,open}) => {
 
                     {/* continue with google button */}
                     <GoogleAuth handleGoogleAuth={handleGoogleAuth} />
+
+                    {/* Forgot Password */}
+                    <div className="m-3">
+                    {
+                        type==="signin" ?
+                        <p className="text-primary text-center text-sm font-inter">
+                            <Link to={"/signin/forgot-password"} className="text-sm">Forgot Password?</Link>
+                        </p>
+                        : ""
+                    }
+                    </div>
                 
                 </div>
                 </Slide>

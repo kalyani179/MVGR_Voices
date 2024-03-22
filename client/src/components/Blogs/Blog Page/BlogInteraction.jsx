@@ -9,7 +9,7 @@ const BlogInteraction = () => {
   let {blog,blog:{_id,blog_id,activity,activity:{total_likes,total_comments},author:{personal_info:{username:author_username}}},setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible} = useContext(BlogContext);
   let {userAuth:{username,access_token}} = useContext(UserContext);
   const handleLikeButton = () =>{
-    if(!access_token) toast.error("Please SigIn to like the blog!!");
+    if(!access_token) return toast.error("Please SigIn to like the blog!!");
     setIsLiked(!isLiked);
     !isLiked ? ++total_likes : --total_likes;
     setBlog({...blog,activity:{...activity,total_likes}});

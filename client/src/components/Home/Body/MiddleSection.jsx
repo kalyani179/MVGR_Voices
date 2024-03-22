@@ -7,7 +7,7 @@ const MiddleSection = (props) => {
         <div className="lg:py-32 relative text-center sm:p-5 sm:px-10">
         <AttentionSeeker effect="pulse">
             <img
-                className={`md:absolute md:rotate-12 mx-auto mt-6 lg:-mt-24 md:mt-0 ${
+                className={`md:absolute z-0 md:rotate-12 mx-auto mt-6 lg:-mt-24 md:mt-0 ${
                 props.index === 2
                     ? "sm:h-[200px] sm:w-[150px] md:h-[350px] md:w-[250px] md:-ml-5"
                     : props.index === 3

@@ -14,9 +14,11 @@
 #     "blog_id":"rgtrNsn6osFu_af-Q-iZ3H5gk"
 # }
 
-POST http://localhost:3000/get-profile
+POST http://localhost:3000/feedback-form
 Content-Type: application/json
 
 {
-    "username":"kalyanidantuluri79"
+    "title":"5",
+    "stars":"5",
+    "review":"Hello"
 }

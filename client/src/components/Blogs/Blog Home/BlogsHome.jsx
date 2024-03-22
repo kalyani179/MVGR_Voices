@@ -2,25 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import Animation from "../../../common/Animation";
 import InPageNavigation from "./InPageNavigation";
 import axios from "axios";
-import Loader from "../../../common/Loader";
+
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
 import NoBlogsDataMessage from "./NoBlogsDataMessage";
-import BlogsNavbar from "../Blogs Navbar/BlogsNavbar";
-import { ThemeContext, UserContext } from "../../../App";
-import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../../App";
 import FilterPaginationData from "../../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
-import { BeatLoader, CircleLoader, ClipLoader, DotLoader, FadeLoader, RingLoader, SyncLoader } from "react-spinners";
+import {SyncLoader } from "react-spinners";
+import Footer from "../../Home/Footer/Footer";
+
 
 
 const BlogsHome = () => {
     let [blogs, setBlog] = useState(null);
-    let {theme,setTheme} = useContext(ThemeContext);
+    let {theme} = useContext(ThemeContext);
     let [trendingBlogs, setTrendingBlog] = useState(null);
     let [pageState,setPageState] = useState("home");
-    let {userAuth:{access_token}} = useContext(UserContext);
-    let navigate = useNavigate();
 
     let categories = [
         "Programming",
@@ -91,7 +89,6 @@ const BlogsHome = () => {
     }
 
     useEffect(() => {
-
         if(pageState==="home"){
             fetchLatestBlogs({page:1});
         }else{
@@ -103,24 +100,17 @@ const BlogsHome = () => {
     }, [pageState]);
 
     return (
-        <>
-        {
-        !access_token 
-        ?
-        navigate("/")
-        : 
         <Animation>
-        
         <section className="h-cover md:px-[4vw] flex flex-col justify-center gap-5 bg-cool-white">
                 {/* Trending Blogs */}
-                <div className="flex flex-col">
+                <div className="flex flex-col sm:hidden max-md:hidden">
                 <h1 className="font-medium text-xl text-primary mb-8 tracking-wide">
                             Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
                     <div className="flex justify-around">
                     {trendingBlogs === null ? 
-                        <div className="center">
-                            <BeatLoader color="#e86f6f" />
+                        <div className="center w-full">
+                            <SyncLoader color="#f59a9a" margin={4} />
                         </div>
                         : 
                         (
@@ -193,9 +183,9 @@ const BlogsHome = () => {
                 <div>
                 {
                     trendingBlogs===null ?  
-                    <div className="center">
-                            <BeatLoader color="#e86f6f" />
-                    </div> 
+                    <div className="center w-full">
+                            <SyncLoader color="#f59a9a" margin={4} />
+                    </div>
                     : 
                     (
                         !trendingBlogs.length ? 
@@ -215,12 +205,12 @@ const BlogsHome = () => {
             </InPageNavigation>
             
             </div>
-    
             
         </section>
+            <div className="bg-cool-white">
+                <Footer />
+            </div>
         </Animation>
-        }
-        </>
     );
 };
 

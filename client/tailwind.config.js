@@ -40,6 +40,7 @@ module.exports = {
     createThemes({
       light:{
         'cool-white':'#f5f5f5',
+        'cool-black':'#1C1C1C',
         'white': '#FFFFFF',
         'black': '#242424',
         'grey': '#F3F3F3',
@@ -54,7 +55,8 @@ module.exports = {
         'green':"#32CD32"
       },
       dark:{
-        'cool-white':'#242424',
+        'cool-white':'#1C1C1C',
+        'cool-black':'#1C1C1C',
         'white': '#242424',
         'black': '#F3F3F3',
         'grey': '#2A2A2A',

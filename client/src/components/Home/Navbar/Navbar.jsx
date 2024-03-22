@@ -8,6 +8,7 @@ import logo from "../../../assets/icons/logo.png";
 import logoDark from "../../../assets/icons/logoDark.png";
 import { Link, useNavigate } from "react-router-dom";
 import UserNavigationPanel from "./UserNavigationPanel";
+import Footer from "../Footer/Footer";
 
 
 const Navbar = ({home=1,activeLink="Home"}) => {
@@ -20,16 +21,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
   const [showSignup,setShowSignup] = useState(false);
   const [showSignin,setShowSignin] = useState(false);
 
-  const signOut = () => {
-    let loadingToast = toast.loading("Signing Out...");
-    setTimeout(()=>{
-      toast.dismiss(loadingToast);
-      toast.success("Signed Out Successfully...");
-      removeFromSession("user");
-      setUserAuth({access_token:null});
-    },500);
 
-  }
   const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
   const handleSearch = (e) => {
       let query = e.target.value;
@@ -43,14 +35,17 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     {name:"Podcasts",link:"/podcast"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/contact"},
-    {name:"Subscribe",link:"/"},
+    {name:"Subscribe",link:""},
   ];
   const handleLinkClick = ({link}) =>{
-    if(!access_token) {
-      toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
-    }else{
+    // if(!access_token) {
+    //   toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
+    // }else{
       // setActiveLink(link.name);
       navigate(link.link);
+    // }
+    if (link.name === "Subscribe") {
+      window.scrollTo(0, document.body.scrollHeight);
     }
   }
   const changeTheme = () => {
@@ -113,7 +108,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
 
                       ))
                   }
-            
+                  {activeLink === "Subscribe" && <Footer />}
                     {/* Theme Change */}
                   <div className="ml-4">
                   <Link>
@@ -127,7 +122,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                       {
                         access_token ? 
                         <>
-                        <div className="z-30" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
+                        <div className="z-50" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
                         <button className={`w-11 h-11 mt-1 rounded-full ${activeLink==="profile" ? "border-2 border-primary" : ""}`}>
                             <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
                         </button>

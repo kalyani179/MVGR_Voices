@@ -15,10 +15,16 @@ import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';
 import ManageBlogs from './components/Dashboard/ManageBlogs';
 import Contact from './components/Contact/Contact';
+
 import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
 import Podcast from './components/Podcast/Podcast';
 import UploadPodcast from './components/Podcast/UploadPodcast';
 import PodcastSearchPage from './pages/PodcastSearchPage';
+
+import FeedbackForm from './components/Home/Review Carousel/FeedBackForm';
+import ForgotPassword from './components/Authentication/ForgotPassword';
+import ResetPassword from './components/Authentication/ResetPassword';
+
 
 export const UserContext = createContext({});
 
@@ -45,6 +51,8 @@ const App = () => {
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/:username/verify/:access_token" element={<EmailVerification/>}/>
+              <Route path="/signin/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
               <Route path="/" element={<BlogsNavbar />}>
                 <Route path="blogs" element={<BlogsHome />} />
                 <Route path="search/:query" element={<BlogsSearchPage />}/>
@@ -69,6 +77,7 @@ const App = () => {
               <Route path="/dashboard" element={<SideNav />}>
                     <Route path="blogs" element={<ManageBlogs />}/>
               </Route>
+              <Route path="/feedback" element={<FeedbackForm />} />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>

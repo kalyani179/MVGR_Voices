@@ -1,23 +1,27 @@
 import React, { useContext } from 'react'
 import Animation from '../../../common/Animation'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../../App'
 import { removeFromSession } from '../../../common/session'
+import toast from 'react-hot-toast'
 
 const UserNavigationPanel = () => {
     let {userAuth:{username},setUserAuth} = useContext(UserContext);
-    let navigate = useNavigate();
 
     const signOutUser = () => {
-        removeFromSession("user");
-        setUserAuth({access_token:null});
-        navigate("/");
+        let loadingToast = toast.loading("Signing Out...");
+        setTimeout(()=>{
+            toast.dismiss(loadingToast);
+            toast.success("Signed Out Successfully..!");
+            removeFromSession("user");
+            setUserAuth({access_token:null});
+        },500);
     }
 
     return (
         <Animation transition={{duration:0}}
         className="absoulte right-0 z-50">
-            <div className="bg-white z-50 absolute -right-8 border-t-4 border-primary w-48 duration-200 shadow-xl">
+            <div className="bg-white opacity-100 z-50 absolute -right-8 border-t-4 border-primary w-48 duration-100 shadow-2xl">
                 <Link to="/editor" className="link md:hidden">
                     <i className="fi fi-rr-file-edit"></i>
                     <p>write</p>

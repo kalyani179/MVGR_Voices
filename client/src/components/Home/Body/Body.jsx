@@ -7,9 +7,15 @@ import MiddleSection from './MiddleSection';
 import Content from './Content';
 import { ThemeContext } from '../../../App';
 
+import ReviewCarousel from '../Review Carousel/Carousel';
+import FeedbackForm from '../Review Carousel/FeedBackForm';
+import Footer from '../Footer/Footer';
+
+
 
 const Body = () => {
     let {theme,setTheme} = useContext(ThemeContext);
+
     const [list]=useState([
         {
             question:'How Can I upload the Audio?',
@@ -30,8 +36,8 @@ const Body = () => {
         }
     ]);
     return (
-        <div>
-            <div>
+        <div className="bg-black">
+            <div className="bg-black">
                 <video autoPlay loop muted className="w-full max-h-screen object-cover">
                     <source src={MVGRVideo} type="video/mp4"/>
                 </video>
@@ -63,7 +69,7 @@ const Body = () => {
                 <h1 className="text-6xl font-merriweather font-semibold leading-normal text-primary">FAQ's</h1> 
             </Fade>
             </div>                   
-            <div className={`${theme==="light" ? "bg-black" : "bg-white"} flex p-20 pt-8 items-center justify-center`}>
+            <div className={`${theme==="light" ? "bg-black" : "bg-white"} flex px-20 mb-20 py-8 items-center justify-center`}>
                 <Zoom>
                 <div className="list">
                 {
@@ -74,6 +80,21 @@ const Body = () => {
                 </div>                                    
                 </Zoom>
             </div> 
+            <div className="bg-cool-black p-8 pt-20 shadow-xl">
+                <Zoom>
+                    <h1 className="text-5xl text-center font-gelasio tracking-wider font-semibold leading-normal text-primary pb-10">What Users Are Saying !</h1>
+                </Zoom>
+                <ReviewCarousel />
+            </div>
+                
+            <div className="fixed left-11 bottom-11">
+                <FeedbackForm />
+            </div>
+
+            <div className="bg-cool-black">
+                <Footer />
+            </div>
+
             </div>
     )
 }

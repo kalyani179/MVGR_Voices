@@ -7,7 +7,7 @@ const TrendingBlogPostCard = ({blog,index}) => {
     return (
         <Link to={`/blog/${id}`} className="flex gap-5 mb-8">
             <h1 className="blog-index text-primary/30">{index<10 ? (index+1) : index}</h1>
-            <div className="aspect-square w-72 h-[370px] bg-white shadow-xl">
+            <div className="aspect-square w-72 h-[370px] bg-white shadow hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out">
             <img className="aspect-square w-72 h-56 object-center object-cover" src={banner} alt="Blog Banner" />
             <div className="py-5 p-4 bg-white">
                 <div className="flex justify-between">
