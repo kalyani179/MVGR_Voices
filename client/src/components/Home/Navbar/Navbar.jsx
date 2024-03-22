@@ -1,17 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from "react"
 import UserAuth from "../../Authentication/UserAuth";
 import { ThemeContext, UserContext } from "../../../App";
 import { removeFromSession, storeInSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
-import { Toaster, toast } from "react-hot-toast";
-import logo from "../../../assets/icons/logo.png";
-import { useNavigate } from "react-router-dom";
-
-const Navbar = () => {
-  let navigate = useNavigate();
-  let { theme, setTheme } = useContext(ThemeContext);
-  const { userAuth: { access_token }, setUserAuth } = useContext(UserContext);
-
 import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png";
 import logoDark from "../../../assets/icons/logoDark.png";
@@ -26,53 +17,30 @@ const Navbar = ({home=1,activeLink="Home"}) => {
   let {theme,setTheme} = useContext(ThemeContext);
   const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
 
-
-  const [showSignup, setShowSignup] = useState(false);
-  const [showSignin, setShowSignin] = useState(false);
+  const [showSignup,setShowSignup] = useState(false);
+  const [showSignin,setShowSignin] = useState(false);
 
   const signOut = () => {
     let loadingToast = toast.loading("Signing Out...");
-    setTimeout(() => {
+    setTimeout(()=>{
       toast.dismiss(loadingToast);
       toast.success("Signed Out Successfully...");
       removeFromSession("user");
-      setUserAuth({ access_token: null });
-    }, 500);
-  };
-
-
-  const [activeLink, setActiveLink] = useState("Home");
-  let Links = [
-    { name: "Home", link: "/" },
-    { name: "Podcast", link: "/podcast" },
-    { name: "Blogs", link: "/blogs" },
-    { name: "Contact", link: "/contact" },
-    { name: "Subscribe", link: "/" },
-  ];
-
-  const handleLinkClick = ({ link }) => {
-    if (!access_token) {
-      toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1) + "!");
-    } else {
-      setActiveLink(link.name);
-      navigate(link.link);
-    }
-  };
-
-  let [open, setOpen] = useState(false);
+      setUserAuth({access_token:null});
+    },500);
 
   }
   const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
   const handleSearch = (e) => {
       let query = e.target.value;
       if(e.keyCode === 13){
-          navigate(`/search/${query}`)
+          navigate(`podcast/search/${query}`)
       }
   }
 
   let Links=[
     {name:"Home",link:"/"},
-    {name:"Podcasts",link:"/"},
+    {name:"Podcasts",link:"/podcast"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/contact"},
     {name:"Subscribe",link:"/"},
@@ -93,24 +61,14 @@ const Navbar = ({home=1,activeLink="Home"}) => {
   }
   let [open,setOpen]=useState(false);
 
-
   return (
     <Animation>
-      <Toaster
-        toastOptions={{
-          success: {
-            duration: 2000,
+    <Toaster 
+      toastOptions={{
+          success:{
+              duration: 2000
           },
           error: {
-            duration: 1500,
-          },
-        }}
-      />
-      <div className="flex flex-col lg:flex-row">
-        <div className={`w-full opacity-85`}>
-          <div className="lg:flex items-center justify-between py-4 pt-2 lg:px-10 px-7">
-            <div className="cursor-pointer">
-              <img width={125} height={125} src={logo} alt="Logo" />
               duration: 1500
           }
       }}
@@ -120,49 +78,12 @@ const Navbar = ({home=1,activeLink="Home"}) => {
             <div className="md:flex items-center justify-between py-3 pt-2 md:px-10 px-7">
             <div className="cursor-pointer">
                       <img width={110} height={110} src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className="filter grayscale" />
-
             </div>
-            <div onClick={() => setOpen(!open)} className="text-3xl text-white absolute right-8 top-6 cursor-pointer lg:hidden">
-              <ion-icon name={open ? "close" : "menu"}></ion-icon>
-            </div>
-            <ul
-              className={`lg:flex lg:items-center ${theme === "light" ? "text-white" : "text-black"} lg:pb-0 pb:12 absolute lg:static lg:z-auto z-[-1] right-0 lg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 " : "hidden lg:flex"
-                }`}
-            >
-              {Links.map((link) => (
-                <li key={link.name} className="lg:ml-8 text-xl lg:my-0 my-7">
-                  <h3
-                    className={`hover:border-b-2 ${theme === "light" ? "hover:border-white" : "hover:border-black"} duration-500 lg:text-2xl tracking-wide font-inter cursor-pointer border-b-2 ${
-                      activeLink === link.name ? theme === "light" ? "border-white" : "border-black" : "border-transparent"
-                      }`}
-                    onClick={() => handleLinkClick({ link })}
-                  >
-                    {link.name}
-                  </h3>
-                </li>
-              ))}
-              <div className="lg:ml-8 space-x-3 sm:mr-6">
-                {access_token ? (
-                  <>
-                    <button onClick={signOut} className={`btn-purple ${theme === "light" ? "text-white" : "text-black"} text-xl`}>
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={() => setShowSignin(true)} className={`btn-purple ${theme === "light" ? "text-white" : "text-black"} lg:text-xl sm:text-sm font-inter tracking-wide`}>
-                      Sign In
-                    </button>
-                    {/* <button onClick={() => setShowSignup(true)} className="btn-purple lg:text-xl sm:text-sm font-inter tracking-wide">
-                      Sign Up
-                    </button> */}
-                  </>
-                )}
+              <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
+                  <ion-icon name={open ?"close":"menu"}></ion-icon>
               </div>
-
-            <ul/>
                 <ul className={`md:flex md:items-center ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 ":" top-[-490px] " }`} >
-                <div className={`${activeLink==="Blogs" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
+                <div className={`${(activeLink === "Podcasts" || activeLink === "Blogs") ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
                   <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                   <input 
                       type='text'
@@ -229,14 +150,12 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                   </div>                                    
                 </ul>
             </div> 
-
           </div>
-        </div>
-        {showSignup && <UserAuth type="signup" close={() => setShowSignup(false)} open={() => { setShowSignup(false); setShowSignin(true); }} />}
-        {showSignin && <UserAuth type="signin" close={() => setShowSignin(false)} open={() => { setShowSignin(false); setShowSignup(true); }} />}
+          {showSignup && <UserAuth type="signup" close={()=>setShowSignup(false)} open={()=>{setShowSignup(false);setShowSignin(true);}}/>}
+          {showSignin && <UserAuth type="signin" close={()=>setShowSignin(false)} open={()=>{setShowSignin(false);setShowSignup(true);}}/>}
       </div>
     </Animation>
-  );
-};
+  )
+}
 
 export default Navbar;

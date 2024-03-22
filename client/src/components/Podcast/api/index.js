@@ -14,8 +14,15 @@ export const getAllSongs = async() => {
         return null;
     }
 };
-
-
+export const fetchTopPodcards = async() => {
+    try {
+        const res = await axios.get(`${baseURL}api/pod/top-podcards`);
+        return res.data;
+    } catch (error) {
+        console.error("Error fetching top podcards:", error);
+        return [];
+    }
+};
 
 
 export const saveNewSong = async(data) => {

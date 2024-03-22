@@ -1,7 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import axios from 'axios';
 import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import { UserContext } from '../../App';
 import {
   getStorage,
   ref,
@@ -21,7 +22,7 @@ import {
 const UploadPodcast = () => {
     //const [name, setName]=useState()
     //const [description, setDescription]=useState()
-
+    const { userAuth: { access_token } } = useContext(UserContext);
     const [isImageLoading,setIsImageLoading]=useState(false);
     const [songImageCover,setSongImageCover]=useState(null);
     const [imageUploadProgress,setImageUploadProgress]=useState(0);
@@ -73,6 +74,15 @@ const UploadPodcast = () => {
       e.preventDefault();
     
       // Check if required fields are empty
+       // Check if access token is available
+       if (!access_token) {
+        console.error('Access token not found');
+        return;
+    }
+
+    const headers = {
+        Authorization: `Bearer ${access_token}`,
+    };
     
       axios
         .post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/save', {
@@ -81,6 +91,8 @@ const UploadPodcast = () => {
           imageURL: songImageCover,
           songURL: audioImageCover,
           category: selectedCategory,
+        }, {
+          headers: headers,
         })
         .then((result) => {
           console.log(result);

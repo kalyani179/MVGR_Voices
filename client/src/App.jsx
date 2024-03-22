@@ -18,6 +18,7 @@ import Contact from './components/Contact/Contact';
 import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
 import Podcast from './components/Podcast/Podcast';
 import UploadPodcast from './components/Podcast/UploadPodcast';
+import PodcastSearchPage from './pages/PodcastSearchPage';
 
 export const UserContext = createContext({});
 
@@ -56,6 +57,7 @@ const App = () => {
 
               <Route path="/" element={<PodsNavbar />}>
                 <Route path="podcast" element={<Podcast />} />
+                <Route path="podcast/search/:query" element={<PodcastSearchPage />}/>
               </Route>
               <Route path='/upload' element={<UploadPodcast />} />
 

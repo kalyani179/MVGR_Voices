@@ -21,8 +21,23 @@ const podSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    author: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'users'
+    },
+    activity: {
+        total_likes: {
+            type: Number,
+            default: 0
+        },
+    },
 
-}, { timestamps: true });
+}, {
+    timestamps: {
+        createdAt: 'publishedAt'
+    }
+});
 
 const PodModel = mongoose.model("pod", podSchema);
 

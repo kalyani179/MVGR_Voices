@@ -12,7 +12,7 @@
 @tailwind utilities;
 @layer components {
     * {
-        @apply m-0 p-0 box-border text-base font-inter;
+        @apply m-0 p-0 box-border font-inter;
     }
     body {
         @apply bg-white text-black
