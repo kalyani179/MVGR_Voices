@@ -98,8 +98,8 @@ const UserProfilePage = () => {
                 <div className={`${theme==="light" ? "bg-white" : "bg-white"} fixed w-full border-b-2 border-grey z-50`}>
                 <Navbar home="0" activeLink="profile"/>
                 </div>
-                <section className="h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
-                    <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
+                <section className="bg-cool-white h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
+                    <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-white md:sticky md:top-[100px] md:py-10">
                         <img src={profile_img} className="w-48 h-48 bg-grey rounded-full md:w-32 md:h-32" alt="profile"/>
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>
@@ -118,7 +118,7 @@ const UserProfilePage = () => {
                 routes={["Blogs Published","About"]}
                 defaultHidden={["About"]}
             >
-                <div>
+                <div className="flex flex-wrap gap-x-20 gap-y-5">
                 {
                     blogs===null ? <Loader /> : 
                     (
@@ -146,7 +146,6 @@ const UserProfilePage = () => {
                 <PageNotFound />
             }
         </Animation>
-       
     )
 }
 
