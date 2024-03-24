@@ -118,20 +118,27 @@ const UserProfilePage = () => {
                 routes={["Blogs Published","About"]}
                 defaultHidden={["About"]}
             >
-                <div className="flex flex-wrap gap-x-20 gap-y-5">
+                <div>
                 {
                     blogs===null ? <Loader /> : 
                     (
                         !blogs.results.length ? 
                         <NoBlogsDataMessage message={"No Blogs Published"}/>
                         :
-                        blogs.results.map((blog,index)=>{
+                        (
+                            <div className="flex flex-wrap gap-x-20 gap-y-5">
+                                {
+                                    blogs.results.map((blog,index)=>{
                             return(
                                 <Animation transition={{duration:1,delay:index*0.1}}>
                                     <BlogPostCard content={blog} author={blog.author.personal_info}/>
                                 </Animation>
                             )
                         })
+                                }
+                            </div>
+                        )
+                    
                     )
                 }
                 <LoadMoreDataBtn state={blogs} fetchDataFunc={getBlogs}/>
