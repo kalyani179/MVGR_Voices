@@ -75,7 +75,7 @@ const ManageBlogs = () => {
                 />
                 <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-4 md:pointer-events-none md:left-6 text-lg text-dark-grey"></i>
             </div>
-            <InPageNavigation routes = {["Published Blogs","Drafts"]}>
+            <InPageNavigation manageBlogs={true} routes = {["Published Blogs","Drafts"]}>
                 { // Published Blogs
                     blogs === null ? 
                         <div className="center">

@@ -157,7 +157,7 @@ const EditProfile = () => {
                             <img ref={profileImgEle} src={profile_img} alt="profile" />
                             </label>
                             <input type="file" id="uploadImg" accept=".png, .jpg, .jpeg" hidden onChange={handleImagePreview}/>
-                            <button onClick={handleImageUpload} className="btn-purple lg:w-full px-5">Upload</button>
+                            <button onClick={handleImageUpload} className="btn-purple lg:w-full md:my-5 px-5">Upload</button>
                         </div>
                         <div className="w-full sm:px-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
