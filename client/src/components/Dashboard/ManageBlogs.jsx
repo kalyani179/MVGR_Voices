@@ -65,7 +65,7 @@ const ManageBlogs = () => {
         }
     },[access_token,blogs,drafts,query])
     return (
-        <div className="ml-56 md:mt-24">
+        <div className="md:ml-56 mt-24 sm:ml-5">
             {/* <h1 className="sm:hidden text-primary text-xl text-center font-medium">Manage Blogs</h1> */}
             <Toaster />
             <div className="relative sm:mt-5 md:mt-8 mb-10">

@@ -137,7 +137,7 @@ const EditProfile = () => {
                 loading ? 
                 <Loader />
                 :
-                <form ref={editProfileForm} className="flex flex-col justify-center items-center ml-48 md:mt-16">
+                <form ref={editProfileForm} className="flex flex-col justify-center items-center md:ml-48 mt-16">
                     <Toaster />
     
                     <Marquee speed={"40"} direction="right" pauseOnClick>
@@ -147,9 +147,9 @@ const EditProfile = () => {
                     </Marquee>
 
                     {/* <h1 className="sm:hidden text-primary text-xl font-medium ">Edit Profile</h1> */}
-                    <div className="flex flex-col items-start py-10 gap-8 lg:flex-row lg:gap-20">
+                    <div className="flex flex-col items-start py-10 sm:center sm:w-full gap-8 lg:flex-row lg:gap-20">
     
-                        <div className="sm:center mb-5">
+                        <div className="sm:center flex-col gap-5 mb-5">
                             <label htmlFor="uploadImg" id="profileImg" className="relative block w-48 h-48 bg-grey rounded-full overflow-hidden">
                             <div className="w-full h-full absolute top-0 left-0 flex items-center justify-center text-white bg-black/30 opacity-0 hover:opacity-100 cursor-pointer">
                                 Upload Image
@@ -157,9 +157,9 @@ const EditProfile = () => {
                             <img ref={profileImgEle} src={profile_img} alt="profile" />
                             </label>
                             <input type="file" id="uploadImg" accept=".png, .jpg, .jpeg" hidden onChange={handleImagePreview}/>
-                            <button onClick={handleImageUpload} className="btn-purple mt-5 lg:w-full px-5">Upload</button>
+                            <button onClick={handleImageUpload} className="btn-purple lg:w-full px-5">Upload</button>
                         </div>
-                        <div className="w-full">
+                        <div className="w-full sm:px-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
                                 <InputBox type="text" name="fullname" placeholder="Full Name" value={fullname} icon="fi-rr-user" disable={true}/>
                                 <InputBox type="text" name="email" placeholder="Email" value={email} icon="fi-rr-envelope" disable={true} />

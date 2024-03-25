@@ -10,14 +10,14 @@ const SideNav = () => {
     let page = window.location.pathname.split("/")[2];
     const [pageState,setPageState] = useState(page.replace("-"," "));
     let [showSideNav,setShowSideNav] = useState(false);
-    let {theme,setTheme} = useContext(ThemeContext);
-    let activeTabLine = useRef();
+    // let {theme,setTheme} = useContext(ThemeContext);
+    let activeLineTab = useRef();
     let sideBarIconTab = useRef();
     let pageStateTab = useRef();
     const changePageState = (e) => {
         let {offsetWidth,offsetLeft} = e.target ;
-        activeTabLine.current.style.width = offsetWidth + "px";
-        activeTabLine.current.style.left = offsetLeft + "px";
+        activeLineTab.current.style.width = offsetWidth + "px";
+        activeLineTab.current.style.left = offsetLeft + "px";
         if(e.target === sideBarIconTab.current){
             setShowSideNav(true);
         }else{
@@ -39,18 +39,18 @@ const SideNav = () => {
             <div className={`bg-white fixed w-full border-b-2 border-grey z-50`}>
                 <Navbar home={0} activeLink="profile" />
             </div>
-            <section className="realtive px-[6vw] flex gap-10 py-0 -ml-10 sm:flex-col">
-                <div className="realtive">
-                    <div className="md:hidden py-1 border-b border-grey flex flex-nowrap overflow-x-auto">
-                        <button ref={sideBarIconTab} onClick={changePageState} className="p-5 capitalize">
+            <section className="realtive px-[6vw] flex gap-10 py-0 m-0 -ml-10 sm:flex-col">
+                <div className="realtive sm:sticky sm:z-40 sm:top-[80px]">
+                    <div className="md:hidden bg-white w-screen border-b-2 border-grey flex flex-nowrap overflow-x-hidden">
+                        <button ref={sideBarIconTab} onClick={changePageState} className="p-5">
                             <i className="fi fi-rr-bars-staggered pointer-events-none"></i>
                         </button>
                         <button ref={pageStateTab} onClick={changePageState} className="p-5 capitalize">
                             {pageState}
                         </button>
-                        <hr ref={activeTabLine} className="absolute bottom-0 duration-500"/>
+                        <hr ref={activeLineTab} className="border-b border-primary absolute bottom-0 duration-500"/>
                     </div>
-                    <div className={`min-w-[200px] sm:h-[calc(100vh-60px-60px)] md:fixed top-20 overflow-y-auto p-6 md:pr-0 md:border-r md:border-grey sm:top-[6px] sm:w-[calc(100%+80px)] sm:px-16 sm:-ml-7 ${!showSideNav ? "opacity-100 pointer-events-auto" : "sm:opacity-0 sm:pointer-events-none"}`}>
+                    <div className={`min-w-[200px] sm:h-[calc(100vh-80px-60px)] sm:absolute md:fixed top-20 overflow-y-auto p-6 md:pr-0 md:border-r md:border-grey sm:top-[64px] sm:w-[calc(100%+80px)] sm:px-16 sm:-ml-7 ${showSideNav ? "opacity-100 pointer-events-auto" : "sm:opacity-0 sm:pointer-events-none"}`}>
                     {/* Dashboard */}
                     <div className="flex gap-4 mb-3">
                             <i class="fi fi-sr-book text-dark-grey/60 mt-0.5"></i>
@@ -90,7 +90,7 @@ const SideNav = () => {
                         </NavLink>
                     </div>
                 </div>
-                <div className="sm:-mt-8 mt-5 w-full">
+                <div className={`sm:-mt-8 mt-5 w-full ${showSideNav ?"opacity-0":"opacity-100"}`}>
                     <Outlet />
                 </div>
             </section>
