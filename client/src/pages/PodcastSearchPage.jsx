@@ -9,7 +9,7 @@ import { SyncLoader } from 'react-spinners';
 
 import Animation from '../common/Animation';
 import FilterPaginationData from '../common/FilterPaginationData';
-import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
+import InPageNavigation from '../common/InPageNavigation';
 import NoDataMessage from '../common/NoDataMessage';
 const PodcastsSearchPage = () => {
     let { query } = useParams();

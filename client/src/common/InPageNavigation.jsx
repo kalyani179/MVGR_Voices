@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 
-const InPageNavigation = ({manageBlogs=false,routes,defaultHidden=[],defaultActiveTab = 0,children}) => {
+const InPageNavigation = ({manageBlogs=false,managePodcasts=false,routes,defaultHidden=[],defaultActiveTab = 0,children}) => {
     const [activeTab,setActiveTab] = useState(defaultActiveTab);
     let [isResizeEventAdded,setIsResizeEventAdded] = useState(false);
     let [width,setWidth] = useState(window.innerWidth);
@@ -17,7 +17,7 @@ const InPageNavigation = ({manageBlogs=false,routes,defaultHidden=[],defaultActi
     },[width])
     return (
         <>
-            <div className={`relative mb-8 border-b ${manageBlogs?"border-grey":"border-white/80"} flex flex-nowrap overflow-x-auto`}>
+            <div className={`relative mb-8 border-b ${manageBlogs || managePodcasts?"border-grey":"border-white/80"} flex flex-nowrap overflow-x-auto`}>
                 {
                     routes.map((route,index)=>{
                         return(

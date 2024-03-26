@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
+import InPageNavigation from '../common/InPageNavigation';
 import Loader from '../common/Loader';
 import Animation from '../common/Animation';
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';

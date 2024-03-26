@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Animation from "../../../common/Animation";
-import InPageNavigation from "./InPageNavigation";
+import InPageNavigation from "../../../common/InPageNavigation";
 import axios from "axios";
 
 import BlogPostCard from "./HomeBlogPostCard"
