@@ -1,7 +1,7 @@
 import React,{useContext, useState} from 'react'
 import MVGRVideo from "../../../assets/videos/MVGR.mp4";
 import Navbar from '../Navbar/Navbar';
-import Faq from './FAQ';
+import Faq from './Faq';
 import { Fade, Zoom } from 'react-awesome-reveal';
 import MiddleSection from './MiddleSection';
 import Content from './Content';
