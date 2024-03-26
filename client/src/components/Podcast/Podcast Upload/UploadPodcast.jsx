@@ -26,47 +26,26 @@ const UploadPodcast = () => {
     const [songName, setSongName] = useState("");
     const [songDescription, setSongDescription] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
-   // const [songI, setSongDescription] = useState("");
-    //const [songImageUrl, setSongImageUrl] = useState(null);
-    //const [audioAsset, setAudioAsset] = useState(null);
-    //const [allSongs, setAllSongs] = useState([]);
-    /*const handleUpload=(e)=>{
-        /*e.preventDefault();
-        axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/api/pod/save",{name,description,songImageUrl,audioAsset}, { timeout: 5000 })
-        .then(result=>console.log(result))
-        .catch(err=>console.log(err))*/
-       /* axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/save", {
-          name: songName,
-          description: songDescription,
-          songImageUrl: songImageCover,
-          audioAsset: audioImageCover,
-        })
-        .then(result => console.log(result))
-        .catch(err => console.log(err));
-        if(!songImageCover ||!audioImageCover){
-          //throw alert
-        }else{
-          setIsAudioLoading(true);
-          setIsImageLoading(true);
-        
-            const data = {
-              name: songName,
-              imageURL: songImageCover,
-              songUrl: audioImageCover,
-              description:songDescription,
-            };
-            saveNewSong(data).then((res) => {
-              getAllSongs().then((songs) => {
-                setAllSongs(songs);
-                //console.log(songs);
-              });
-            });
-          }  
-    };*/
     
+    const categories = [
+      "Business",
+      "Religion/Culture",
+      "History",
+      "Education",
+      "Health",
+      "Comedy",
+      "News",
+      "Science",
+      "Development",
+      "Sports",
+      "Crime",
+      "Horror"
+    ];
+    
+
     const handleUpload = (e) => {
       e.preventDefault();
-
+    
     
       // Check if required fields are empty
        // Check if access token is available
@@ -133,7 +112,7 @@ const UploadPodcast = () => {
       if(isImage){
         setIsImageLoading(true);
         setIsAudioLoading(true);
-       
+  
       }
       const deleteRef=ref(storage,url);
       deleteObject(deleteRef).then(()=>{
@@ -145,13 +124,15 @@ const UploadPodcast = () => {
       
     };
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className='flex flex-col items-center justify-start p-4 border border-gray-300 rounded h-3/4 w-3/4'>
+      <div className="bg-cool-white">
+      <div className="center flex-col gap-8 h-screen">
+        <h1 className="font-semibold text-primary text-3xl tracking-wide">Upload Your Podcast Here</h1>
+        <div className='flex flex-col items-center bg-white justify-start p-6 rounded h-3/4 w-3/4'>
         <div className="flex w-full mb-4">
           <input
             type="text"
             placeholder="Podcast Name"
-            className="w-1/2 p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+            className="w-1/2 p-3 rounded-md text-base font-semibold placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
           />
@@ -161,26 +142,15 @@ const UploadPodcast = () => {
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-             <option value="">Select Category</option>
-                {/* Add options for different categories here */}
-                <option >Business</option>
-                <option >Religion/Culture</option>
-                <option >History</option>
-                <option >Education</option>
-                <option >Health</option>
-                <option >Comedy</option>
-                <option >News</option>
-                <option >Science</option>
-                <option >Development</option>
-                <option >Sports</option>
-                <option >Crime</option>
-                <option >Horror</option>
+            <option value="">Select Category</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
           </select>
         </div>
-         
-       
-       <div className='flex mb-4 w-full h-full'>
-       <Toaster />
+  
+      <div className='flex mb-4 w-full h-full'>
+      <Toaster />
           <div className='bg-card backdrop-blur-md w-full h-full rounded-md border-2 border-dotted border-gray-300
             cursor-pointer self-start mr-2'>
               
@@ -208,9 +178,8 @@ const UploadPodcast = () => {
                       </button>
                   
                 </div>
-                 )}
-                 </>
-                                 
+                )}
+                </>
               )}
             </div>
             <div className='bg-card backdrop-blur-md w-full h-full rounded-md border-2 border-dotted border-gray-300
@@ -234,9 +203,8 @@ const UploadPodcast = () => {
                       </button>
                   
                 </div>
-                 )}
-                 </>
-                                 
+                )}
+                </>
               )}
             </div>
           </div>
@@ -244,14 +212,15 @@ const UploadPodcast = () => {
         <input
             type="text"
             placeholder='Description'
-            className='w-full p-3 rounded-md text-base font-semibold  
+            className='w-full p-3 rounded-md text-base font-semibold placeholder:font-medium 
             text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mb-4'
            // onChange={(e)=>setDescription(e.target.value)}
-           onChange={(e) => setSongDescription(e.target.value)}
+            onChange={(e) => setSongDescription(e.target.value)}
           />
         <button className="btn-purple px-8" onClick={handleUpload}>Upload</button>
         
         
+      </div>
       </div>
       </div>
     );
