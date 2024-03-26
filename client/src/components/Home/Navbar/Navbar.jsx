@@ -69,15 +69,24 @@ const Navbar = ({home=1,activeLink="Home"}) => {
       }}
     />
       <div className="flex">
-      <div className={`w-full opacity-85`}>
+      <div className={`w-full opacity-85 sm:opacity-100`}>
             <div className="md:flex items-center justify-between py-3 pt-2 md:px-10 px-7">
             <div className="cursor-pointer">
                       <img width={110} height={110} src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className="filter grayscale" />
             </div>
-              <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
-                  <ion-icon name={open ?"close":"menu"}></ion-icon>
+            
+                <div className="fixed right-16 md:hidden top-2.5">
+                  <button onClick={changeTheme} className={`rounded-full w-11 h-11 sm:w-8 sm:h-8 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
+                          <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl sm:text-sm block mt-1`}></i>
+                  </button>
+                </div>
+                
+              <div onClick={()=>setOpen(!open) } className="text-white fixed right-8 top-6 sm:top-4 z-50 cursor-pointer md:hidden" >
+                <i className={`fi ${!open? "fi-ss-menu-burger" : "fi-rs-circle-xmark text-xl text-black" } ${theme==="light" ? home===1 ? "text-white":"text-black" :"text-black"}`}></i>
+                  {/* <ion-icon name={open ?"close":"menu"}></ion-icon> */}
               </div>
-                <ul className={`md:flex md:items-center ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 ":" top-[-490px] " }`} >
+              <div className="sm:z-40 sm:fixed sm:right-0">
+                <ul className={`md:flex ${theme==="light"?"sm:bg-black":"sm:bg-white"} sm:pr-10 md:items-center sm:pt-10 sm:pb-20 sm:-mt-20 ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] md:right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in sm:min-h-screen ${open ? "right-0":" right-[-200px]" }`} >
                 <div className={`${activeLink==="Blogs" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
                   <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                   <input 
@@ -98,7 +107,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                 </div>
                   {
                       Links.map((link)=>(
-                        <li key={link.name} className="md:ml-8 md:my-0 my-7">
+                        <li key={link.name} className="md:ml-8 md:my-0 my-7 sm:my-10">
                           <h4
                               className={`hover:border-b-2 leading-relaxed text-[22px] ${theme==="light" ? home===1 ? "text-white" : "text-dark-grey" : "text-black/60"} hover:border-b-primary duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
                                 activeLink === link.name ? theme==="light" ? "border-primary" : "border-primary" : "border-transparent"}`}
@@ -112,7 +121,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                     {/* Theme Change */}
                   <div className="ml-4">
                   <Link>
-                    <button onClick={changeTheme} className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
+                    <button onClick={changeTheme} className={`rounded-full w-11 h-11 sm:hidden hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                             <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl block mt-1`}></i>
                     </button>
                   </Link>
@@ -144,6 +153,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                       }              
                   </div>                                    
                 </ul>
+                </div>
             </div> 
           </div>
           {showSignup && <UserAuth type="signup" close={()=>setShowSignup(false)} open={()=>{setShowSignup(false);setShowSignin(true);}}/>}
