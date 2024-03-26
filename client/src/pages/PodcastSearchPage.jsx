@@ -89,13 +89,16 @@ const PodcastsSearchPage = () => {
                         ) : (
                             !podcasts.results.length ? (
                                 <NoDataMessage message={"No Podcasts Published"} />
-                            ) : (
+                            ) : 
+                            <div className="flex flex-wrap gap-x-20 gap-y-5">
+                            {
                                 podcasts.results.map((podcast, index) => (
                                     <Animation key={index} transition={{ duration: 1, delay: index * 0.1 }}>
                                         <PodCard data={podcast} />
                                     </Animation>
                                 ))
-                            )
+                            }
+                            </div>
                         )}
                         {podcasts && <LoadMoreDataBtn state={podcasts} fetchDataFunc={searchPodcasts} />}
                     </>
