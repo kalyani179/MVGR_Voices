@@ -207,7 +207,27 @@ router.post('/is-podcast-liked', verifyJWT, async(req, res) => {
         return res.status(500).json({ success: false, error: error.message });
     }
 });
+router.post("/play-podcast", verifyJWT, async(req, res) => {
+    const { podcastId } = req.body;
+    const userId = req.user;
 
+    try {
+        // Increment play count in PodcastSchema
+        const updatedPodcast = await PodModel.findByIdAndUpdate(
+            podcastId, { $inc: { "activity.total_plays": 1 } }, { new: true }
+        );
+
+        // Increment total plays count in UserSchema
+
+        await user.findByIdAndUpdate(
+            userId, { $inc: { "account_info.total_plays": 1 } }
+        );
+
+        return res.status(200).json({ success: true, podcast: updatedPodcast });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+});
 
 //module.exports = router;
 export default router;

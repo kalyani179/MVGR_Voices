@@ -26,6 +26,9 @@ const notifications = async(req, res) => {
     let maxLimit = 10;
     let findQuery = { notification_for: user_id, user: { $ne: user_id } };
     let skipDocs = (page - 1) * maxLimit;
+    if (filter != 'all' && findQuery.type === 'like-podcast') {
+        findQuery.type = "like";
+    }
 
     if (filter != 'all') {
         findQuery.type = filter;

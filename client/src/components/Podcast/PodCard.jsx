@@ -1,8 +1,17 @@
-import React from 'react';
+import React,{useContext} from 'react';
 //import { motion } from "framer-motion";
 import { getDate, getFullDate } from '../../common/Date';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../App';
 const PodCard = ({ data, onClick }) => {
+  let { userAuth: { username: author_username, profile_img: author_profile_img, access_token } } = useContext(UserContext);
+  const {
+    user,
+   
+} = data;
+let { fullname, username, profile_img } = (data.user && data.user.personal_info) || {};
   return (
+   
     /*<motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:shadow-xl 
         hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center" onClick={onClick}>
       <div className='w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden' style={{ padding: '15px' }}>
@@ -31,6 +40,19 @@ const PodCard = ({ data, onClick }) => {
         </span>
       </div>
       <h1 className="blog-title mt-4">{data.name}</h1>
+      <div className='flex gap-5 mb-3'>
+                <img src={profile_img} className='w-14 h-14 flex-none rounded-full' />
+                <div className='w-full'>
+                    <h1>
+                        <Link to={`/user/${username}`} className='mx-1 text-black underline'>@{username}</Link>
+                        
+                    </h1>
+                  
+
+                </div>
+
+            </div>
+
     </div>
   </div>
     </div>

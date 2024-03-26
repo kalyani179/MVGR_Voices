@@ -42,7 +42,7 @@ const UserProfilePage = () => {
     let {theme,setTheme} = useContext(ThemeContext);
     const [selectedPodcast, setSelectedPodcast] = useState(null);
 
-    let {personal_info:{fullname,username:profile_username,profile_img,bio},account_info:{total_posts,total_reads,total_uploads},social_links,joinedAt} = profile;
+    let {personal_info:{fullname,username:profile_username,profile_img,bio},account_info:{total_posts,total_reads,total_uploads,total_plays},social_links,joinedAt} = profile;
 
     let {userAuth:{username}} = useContext(UserContext);
     const fetchUserProfile = () =>{
@@ -129,7 +129,7 @@ const UserProfilePage = () => {
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>
                         <p>{total_posts.toLocaleString()} Blogs - {total_reads.toLocaleString()} Reads</p>
-                        <p>{total_uploads.toLocaleString()} Podcasts </p>
+                        <p>{total_uploads.toLocaleString()} Podcasts- {total_plays.toLocaleString()} Plays </p>
                         <div className="flex gap-4 mt-2">
                             <Link to="/settings/edit-profile">
                                 {

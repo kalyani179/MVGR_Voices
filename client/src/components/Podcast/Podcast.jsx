@@ -14,6 +14,7 @@ import TrendingPodcard from "./TrendingPodcard";
 import Footer from "../Home/Footer/Footer";
 import { UserContext } from "../../App";
 import { toast } from 'react-hot-toast';
+import axios from "axios";
 
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);
@@ -24,6 +25,7 @@ const Podcast = () => {
   //let [trendingBlogs, setTrendingBlog] = useState(null);
   const [trendingPodcards, setTrendingPodcards] = useState([]);
   const { userAuth } = useContext(UserContext);
+  const { userAuth: { access_token } } = useContext(UserContext);
   useEffect(() => {
     // Fetch all songs
     getAllSongs().then((data) => {
@@ -36,16 +38,37 @@ const Podcast = () => {
   
   }, []);
 
-  const handleTrendingPodcardClick = (podcardData) => {
+ 
+  const handleTrendingPodcardClick = async (podcardData) => {
     if (!userAuth || !userAuth.username) {
       toast.error('Please sign in to listen to the podcast!');
       return;
-  }
+    }
+    const headers = {
+      Authorization: `Bearer ${access_token}`,
+  };
+
+    try {
+      // Make an HTTP POST request to increment play count
+      const response = await axios.post(process.env.REACT_APP_SERVER_DOMAIN+'/api/pod/play-podcast', 
+      { podcastId: podcardData._id },
+      {
+        headers: headers,
+      });
+      // Log success message or handle response as needed
+      console.log('Play count incremented:', response.data);
+    } catch (error) {
+      // Handle errors
+      console.error('Error incrementing play count:', error);
+      // Display an error message to the user
+      toast.error('Failed to increment play count.');
+    }
+
     // Find the index of the podcardData within trendingPodcards
     const index = trendingPodcards.findIndex(podcard => podcard._id === podcardData._id);
     // Set the selected song index based on the found index
     setSelectedSongIndex(index);
-};
+  };
   
 
   const handleSongClick = (songIndex) => {
