@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "nodemailer": "^6.9.9",
+    "tw-colors": "^3.3.1"
+  }
+}

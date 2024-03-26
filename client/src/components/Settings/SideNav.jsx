@@ -57,17 +57,25 @@ const SideNav = () => {
                             <h1 className="text-dark-grey">Dashboard</h1>
                         </div>
                         <hr className="border border-grey -ml-6 mb-4 mr-6" />
+                        <NavLink to="/dashboard/podcasts" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
+                        <i className="fa fa-podcast sidebar-icon"></i>
+                            Podcasts
+                        </NavLink>
+                    
+                        <NavLink to="/upload" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
+                        <i className="fi fi-rr-upload sidebar-icon"></i>
+                            Upload
+                        </NavLink>
                         <NavLink to="/dashboard/blogs" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
                             <i className="fi fi-rr-document sidebar-icon"></i>
                             Blogs
                         </NavLink>
                         
-                        <NavLink to="/dashboard/notification" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
+                        {<NavLink to="/dashboard/notifications" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
                             <i className="fi fi-rr-bell sidebar-icon"></i>
                             Notifications
-                        </NavLink>
+                        </NavLink>}
 
-                    
                         <NavLink to="/editor" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
                             <i className="fi fi-rr-file-edit sidebar-icon"></i>
                             Write

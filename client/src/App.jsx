@@ -15,9 +15,19 @@ import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';
 import ManageBlogs from './components/Dashboard/ManageBlogs';
 import Contact from './components/Contact/Contact';
+
+import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
+import Podcast from './components/Podcast/Podcast';
+import UploadPodcast from './components/Podcast/UploadPodcast';
+import PodcastSearchPage from './pages/PodcastSearchPage';
+
 import FeedbackForm from './components/Home/Review Carousel/FeedBackForm';
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import ResetPassword from './components/Authentication/ResetPassword';
+import ManagePodcasts from './components/Dashboard/ManagePodcasts';
+//import PodcastPlayer from './components/Podcast/Podcast Player/PodcastPlayer';
+import Noitifications from './components/Dashboard/Noitifications';
+
 
 export const UserContext = createContext({});
 
@@ -55,13 +65,22 @@ const App = () => {
               <Route path="/editor/:blog_id" exact element={<Editor />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/contact" element={<Contact />}/>
+
+              <Route path="/" element={<PodsNavbar />}>
+                <Route path="podcast" element={<Podcast />} />
+                <Route path="podcast/search/:query" element={<PodcastSearchPage />}/>
+              </Route>
+              <Route path='/upload' element={<UploadPodcast />} />
+
               <Route path="/user/:id" element={<UserProfilePage />}/>
               <Route path="settings" element={<SideNav />}>
                     <Route path="edit-profile" element={<EditProfile />}/>
                     <Route path="change-password" element={<ChangePassword />}/>
               </Route>
               <Route path="/dashboard" element={<SideNav />}>
-                    <Route path="blogs" element={<ManageBlogs />}/>
+                    <Route path="podcasts" element={<ManagePodcasts/>}/>
+                    <Route path="blogs" element={<ManageBlogs />}/>  
+                    <Route path="notifications" element={<Noitifications />}/>    
               </Route>
               <Route path="/feedback" element={<FeedbackForm />} />
           </Routes>

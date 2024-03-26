@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
             lowercase: true,
             unique: true
         },
-        password:String,
+        password: String,
         username: {
             type: String,
             minlength: [3, 'Username must be 3 letters long'],
@@ -33,11 +33,11 @@ const userSchema = mongoose.Schema({
             type: String,
             default: () => {
                 return `https://api.dicebear.com/6.x/${profile_imgs_collections_list[Math.floor(Math.random() * profile_imgs_collections_list.length)]}/svg?seed=${profile_imgs_name_list[Math.floor(Math.random() * profile_imgs_name_list.length)]}`
-            } 
+            }
         },
-        verified:{
-            type:Boolean,
-            default:false
+        verified: {
+            type: Boolean,
+            default: false
         }
     },
     social_links: {
@@ -66,12 +66,20 @@ const userSchema = mongoose.Schema({
             default: "",
         }
     },
-    account_info:{
+    account_info: {
         total_posts: {
             type: Number,
             default: 0
         },
         total_reads: {
+            type: Number,
+            default: 0
+        },
+        total_uploads: {
+            type: Number,
+            default: 0
+        },
+        total_plays: {
             type: Number,
             default: 0
         },
@@ -81,16 +89,21 @@ const userSchema = mongoose.Schema({
         default: false
     },
     blogs: {
-        type: [ Schema.Types.ObjectId ],
+        type: [Schema.Types.ObjectId],
         ref: 'blogs',
         default: [],
-    }
+    },
+    podcasts: {
+        type: [Schema.Types.ObjectId],
+        ref: 'pod',
+        default: [],
+    },
 
-}, 
-{ 
+
+}, {
     timestamps: {
         createdAt: 'joinedAt'
-    } 
+    }
 
 })
 

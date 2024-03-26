@@ -26,6 +26,10 @@ const UserNavigationPanel = () => {
                     <i className="fi fi-rr-file-edit"></i>
                     <p>write</p>
                 </Link>
+                <Link to="/upload" className="link md:hidden">
+                    <i className="fi fi-rr-file-edit"></i>
+                    <p>Upload</p>
+                </Link>
                 <Link to={`/user/${username}`} className="link">
                     <i class="fi fi-rs-user"></i>
                     Profile

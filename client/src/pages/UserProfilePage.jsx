@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Animation from '../common/Animation'
+import { motion } from "framer-motion";
 import Loader from '../common/Loader'
 import { ThemeContext, UserContext } from '../App'
 import AboutUser from '../components/Blogs/AboutUser'
@@ -13,7 +14,8 @@ import LoadMoreDataBtn from '../common/LoadMoreDataBtn'
 import PageNotFound from './404Page'
 import Navbar from '../components/Home/Navbar/Navbar'
 import { SyncLoader } from 'react-spinners'
-
+import TrendingPodcard from '../components/Podcast/TrendingPodcard'
+import ProfilePodcastPlayer from '../components/Podcast/Podcast Player/ProfilePodcastPlayer';
 export const profileDataStructure = {
     personal_info : {
         fullname:"",
@@ -35,10 +37,12 @@ const UserProfilePage = () => {
     let [profile,setProfile] = useState(profileDataStructure);
     let [loading,setLoading] = useState(true);
     let [blogs,setBlog] = useState(null);
+    let [podcasts, setPodcasts] = useState(null);
     let [profileLoaded,setProfileLoaded] = useState("");
     let {theme,setTheme} = useContext(ThemeContext);
+    const [selectedPodcast, setSelectedPodcast] = useState(null);
 
-    let {personal_info:{fullname,username:profile_username,profile_img,bio},account_info:{total_posts,total_reads},social_links,joinedAt} = profile;
+    let {personal_info:{fullname,username:profile_username,profile_img,bio},account_info:{total_posts,total_reads,total_uploads},social_links,joinedAt} = profile;
 
     let {userAuth:{username}} = useContext(UserContext);
     const fetchUserProfile = () =>{
@@ -48,7 +52,8 @@ const UserProfilePage = () => {
                 setProfile(user);
             }
             setProfileLoaded(profileId);
-            getBlogs({user_id:user._id})
+            getBlogs({user_id:user._id});
+            getPodcasts({author: user._id}); 
             setLoading(false);
         })
         .catch(err=>{
@@ -56,6 +61,21 @@ const UserProfilePage = () => {
             setLoading(false);
         })
     }
+    const getPodcasts = ({ author, page = 1 }) => {
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/search-podcasts", { author, page })
+            .then(async ({ data }) => {
+                let formatedData = await FilterPaginationData({
+                    state: podcasts,
+                    data: data.podcasts,
+                    page,
+                    countRoute: "/api/pod/search-podcasts-count",
+                    data_to_send: { author },
+                })
+                formatedData.user_id = author;
+                setPodcasts(formatedData);
+            })
+            .catch(error => console.error("Error fetching podcasts:", error));
+    };
     const getBlogs = ({page=1,user_id}) =>{
         user_id = user_id===undefined ? blogs.user_id : user_id;
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{author:user_id,page})
@@ -74,17 +94,22 @@ const UserProfilePage = () => {
     useEffect(()=>{
         if(profileId!==profileLoaded){
             setBlog(null);
+            setPodcasts(null);
         }
-        if(blogs === null){
+        if(blogs === null|| podcasts === null){
             resetStates();
             fetchUserProfile();
         }
-    },[profileId,blogs])
+    },[profileId, blogs, podcasts]);
+
     const resetStates = () =>{
         setLoading(true);
         setProfile(profileDataStructure);
         setProfileLoaded("");
     }
+    const handlePodcastSelect = (podcast) => {
+        setSelectedPodcast(podcast);
+      }
     return (
         <Animation>
             {
@@ -104,6 +129,7 @@ const UserProfilePage = () => {
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>
                         <p>{total_posts.toLocaleString()} Blogs - {total_reads.toLocaleString()} Reads</p>
+                        <p>{total_uploads.toLocaleString()} Podcasts </p>
                         <div className="flex gap-4 mt-2">
                             <Link to="/settings/edit-profile">
                                 {
@@ -115,9 +141,26 @@ const UserProfilePage = () => {
                     </div>
                     <div className="sm:mt-12 md:mt-24 w-full">
                     <InPageNavigation
-                routes={["Blogs Published","About"]}
+                routes={["Podcasts Published","Blogs Published","About"]}
                 defaultHidden={["About"]}
             >
+                <div>
+                {
+                    podcasts === null ? <Loader /> :
+                    (
+                        podcasts.results && podcasts.results.length === 0 ?
+                        <NoBlogsDataMessage message={"No Podcasts Published"} /> :
+                        podcasts.results.map((podcast, index) => {
+                            return (
+                                <Animation transition={{ duration: 1, delay: index * 0.1 }}>
+                                     <TrendingPodcard data={podcast} onClick={() => handlePodcastSelect(podcast)} />
+                                </Animation>
+                            )
+                        })
+                    )
+                }
+                <LoadMoreDataBtn state={podcasts} fetchDataFunc={getPodcasts}/>
+                </div>
                 <div>
                 {
                     blogs===null ? <Loader /> : 
@@ -143,11 +186,28 @@ const UserProfilePage = () => {
                 }
                 <LoadMoreDataBtn state={blogs} fetchDataFunc={getBlogs}/>
                 </div>
+                
                 <AboutUser bio={bio} social_links={social_links} joinedAt={joinedAt}/>
             
             </InPageNavigation>
                     </div>
                 </section>
+                {selectedPodcast !== null && (
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              className="fixed left-0 right-0 bottom-0 z-50 bg-cardOverlay backdrop-blur-md"
+            >
+              <ProfilePodcastPlayer
+                selectedSong={selectedPodcast}
+                songs={podcasts.results}
+                setSelectedSongIndex={setSelectedPodcast}
+               
+              />
+            </motion.div>
+          )}
+                
                 </>
                 :
                 <PageNotFound />
