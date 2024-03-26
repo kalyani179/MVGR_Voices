@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Animation from '../common/Animation'
+import { motion } from "framer-motion";
 import { ThemeContext, UserContext } from '../App'
 import AboutUser from '../components/Blogs/AboutUser'
 import FilterPaginationData from '../common/FilterPaginationData'
@@ -13,6 +14,9 @@ import { SyncLoader } from 'react-spinners'
 import TrendingPodcard from '../components/Podcast/Podcast Home/TrendingPodcard'
 import ProfilePodcastPlayer from '../components/Podcast/Podcast Player/ProfilePodcastPlayer';
 import NoDataMessage from '../common/NoDataMessage';
+import Loader from '../common/Loader'
+import PageNotFound from './404Page'
+
 export const profileDataStructure = {
     personal_info : {
         fullname:"",
@@ -36,7 +40,7 @@ const UserProfilePage = () => {
     let [blogs,setBlog] = useState(null);
     let [podcasts, setPodcasts] = useState(null);
     let [profileLoaded,setProfileLoaded] = useState("");
-    let {theme} = useContext(ThemeContext);
+    let {theme,setTheme} = useContext(ThemeContext);
     const [selectedPodcast, setSelectedPodcast] = useState(null);
 
     let {personal_info:{fullname,username:profile_username,profile_img,bio},account_info:{total_posts,total_reads,total_uploads},social_links,joinedAt} = profile;
@@ -93,17 +97,17 @@ const UserProfilePage = () => {
             setBlog(null);
             setPodcasts(null);
         }
-        if(blogs === null|| podcasts === null){
-            resetStates();
+        if(blogs === null || podcasts === null){
+            // resetStates();
             fetchUserProfile();
         }
     },[profileId, blogs, podcasts]);
 
-    const resetStates = () =>{
-        setLoading(true);
-        setProfile(profileDataStructure);
-        setProfileLoaded("");
-    }
+    // const resetStates = () =>{
+    //     setLoading(true);
+    //     setProfile(profileDataStructure);
+    //     setProfileLoaded("");
+    // }
     const handlePodcastSelect = (podcast) => {
         setSelectedPodcast(podcast);
     }
@@ -118,10 +122,10 @@ const UserProfilePage = () => {
                     <SyncLoader color="#f59a9a" margin={4} />
                 </div> 
                 : 
-                profile_username.length &&
+                profile_username.length ?
                 <>
-                <section className="bg-cool-white h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
-                    <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-white md:sticky md:top-[100px] md:py-10">
+                <section className="h-cover md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
+                    <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-grey md:sticky md:top-[100px] md:py-10">
                         <img src={profile_img} className="w-48 h-48 bg-grey rounded-full md:w-32 md:h-32" alt="profile"/>
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>
@@ -138,9 +142,9 @@ const UserProfilePage = () => {
                     </div>
                     <div className="sm:mt-12 md:mt-24 w-full">
                     <InPageNavigation
-                    routes={["Podcasts Published","Blogs Published","About"]}
-                    defaultHidden={["About"]}
-                    >
+                routes={["Podcasts Published","Blogs Published","About"]}
+                defaultHidden={["About"]}
+            >
                 <div>
                 {
                     podcasts === null ? 
@@ -167,25 +171,19 @@ const UserProfilePage = () => {
                     blogs===null ? 
                     <div className="center">
                         <SyncLoader color="#f59a9a" margin={4} />
-                    </div> : 
+                    </div> 
+                    : 
                     (
                         !blogs.results.length ? 
                         <NoDataMessage message={"No Blogs Published"}/>
                         :
-                        (
-                            <div className="flex flex-wrap gap-x-20 gap-y-5">
-                                {
-                                    blogs.results.map((blog,index)=>{
+                        blogs.results.map((blog,index)=>{
                             return(
                                 <Animation transition={{duration:1,delay:index*0.1}}>
                                     <BlogPostCard content={blog} author={blog.author.personal_info}/>
                                 </Animation>
                             )
                         })
-                                }
-                            </div>
-                        )
-                    
                     )
                 }
                 <LoadMoreDataBtn state={blogs} fetchDataFunc={getBlogs}/>
@@ -197,18 +195,27 @@ const UserProfilePage = () => {
                     </div>
                 </section>
                 {selectedPodcast !== null && (
-                <ProfilePodcastPlayer
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              className="fixed left-0 right-0 bottom-0 z-50 bg-cardOverlay backdrop-blur-md"
+            >
+              <ProfilePodcastPlayer
                 selectedSong={selectedPodcast}
                 songs={podcasts.results}
                 setSelectedSongIndex={setSelectedPodcast}
-                />
-        
-            )}
+               
+              />
+            </motion.div>
+          )}
                 
                 </>
+                :
+                <PageNotFound />
             }
         </Animation>
     )
 }
 
-export default UserProfilePage;
+export default UserProfilePage
