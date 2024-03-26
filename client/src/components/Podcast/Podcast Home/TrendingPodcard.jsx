@@ -1,13 +1,23 @@
-import React from 'react'
+import React,{useState} from 'react'
 //import { Link } from 'react-router-dom';
 import { getDate, getFullDate } from '../../../common/Date';
 
 const TrendingPodcard = ({ data ,index,onClick }) => {
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div className="flex gap-5 mb-8 cursor-pointer" onClick={() => onClick(data)} >
+        <div className="flex gap-5 mb-8 cursor-pointer" onClick={() => onClick(data)}  >
             <h1 className="blog-index text-primary/30">{index<10 ? (index+1) : index}</h1>
-            <div className="aspect-square w-72 h-[370px] bg-white shadow hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out">
+            <div className="aspect-square w-72 h-[370px] bg-white shadow hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out" onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
+        {isHovered && (
+        <button
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-primary text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none"
+          onClick={onClick}
+        >
+          <i className="fi fi-rr-play"></i>
+        </button>
+      )}
             <img className="aspect-square w-72 h-56 object-center object-cover" src={data.imageURL} alt="" />
             <div className="py-5 p-4 bg-white">
                 <div className="flex justify-between">
