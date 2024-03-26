@@ -50,13 +50,13 @@ const SideNav = () => {
                         </button>
                         <hr ref={activeLineTab} className="border-b border-primary absolute bottom-0 duration-500"/>
                     </div>
-                    <div className={`min-w-[200px] sm:h-[calc(100vh-80px-60px)] sm:absolute md:fixed top-20 overflow-y-auto p-6 md:pr-0 md:border-r md:border-grey sm:top-[64px] sm:w-[calc(100%+80px)] sm:px-16 sm:-ml-7 ${showSideNav ? "opacity-100 pointer-events-auto" : "sm:opacity-0 sm:pointer-events-none"}`}>
+                    <div className={`sidenav min-w-[200px] h-[calc(100vh-80px)] sm:h-[calc(100vh-80px-60px)] sm:absolute md:fixed top-20 overflow-y-auto p-6 md:pr-0 md:border-r md:border-grey sm:top-[64px] sm:w-[calc(100%+80px)] sm:px-16 sm:-ml-7 ${showSideNav ? "opacity-100 pointer-events-auto" : "sm:opacity-0 sm:pointer-events-none"}`}>
                     {/* Dashboard */}
                     <div className="flex gap-4 mb-3">
                             <i class="fi fi-sr-book text-dark-grey/60 mt-0.5"></i>
                             <h1 className="text-dark-grey">Dashboard</h1>
-                        </div>
-                        <hr className="border border-grey -ml-6 mb-4 mr-6" />
+                    </div>
+                        <hr className="border border-grey -ml-6 mb-4 mr-1" />
                         <NavLink to="/dashboard/podcasts" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
                         <i className="fa fa-podcast sidebar-icon"></i>
                             Podcasts
@@ -71,14 +71,14 @@ const SideNav = () => {
                             Blogs
                         </NavLink>
                         
-                        {<NavLink to="/dashboard/notifications" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                            <i className="fi fi-rr-bell sidebar-icon"></i>
-                            Notifications
-                        </NavLink>}
-
                         <NavLink to="/editor" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
                             <i className="fi fi-rr-file-edit sidebar-icon"></i>
                             Write
+                        </NavLink>
+
+                        <NavLink to="/dashboard/notifications" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
+                            <i className="fi fi-rr-bell sidebar-icon"></i>
+                            Notifications
                         </NavLink>
 
                     {/* settings */}
@@ -87,7 +87,7 @@ const SideNav = () => {
                             <h1 className="text-dark-grey">Settings</h1>
                         </div>
                         
-                        <hr className="border border-grey -ml-6 mb-4 mr-6" />
+                        <hr className="border border-grey -ml-6 mb-4 mr-1" />
                         <NavLink to="/settings/edit-profile" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
                             <i className="fi fi-rr-user sidebar-icon"></i>
                             Edit Profile
