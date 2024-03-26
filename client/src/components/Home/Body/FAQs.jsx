@@ -11,9 +11,9 @@ const Faq = (props) => {
     };
 return (
     <div>
-        <div className={`p-5 mb-5 mt-5 border-b ${theme==="light" ? "border-white" : "border-black"} md:w-[550px] duration-700 group ${item.active===1?'is-active':''}`}>
+        <div className={`p-5 sm:p-0 mb-5 mt-5 border-b ${theme==="light" ? "border-white" : "border-black"} md:w-[550px] duration-700 group ${item.active===1?'is-active':''}`}>
             <div className="flex items-center ">
-                <div className={`text-2xl ${theme==="light" ? "text-white" : "text-black"} w-full duration-500 group-[.is-active]:font-medium group-[.is-active]:tracking-wide`}>{item.question}</div>
+                <div className={`text-2xl sm:text-xl ${theme==="light" ? "text-white" : "text-black"} w-full duration-500 group-[.is-active]:font-medium group-[.is-active]:tracking-wide`}>{item.question}</div>
                 <div className={`text-lg duration-500 cursor-pointer group-[.is-active]:rotate-[180deg]`} onClick={handletoggleActive}>
                 <i class={`fi fi-rr-angle-up ${theme==="light" ? "text-white" : "text-black"}`}></i>
             </div>
