@@ -2,7 +2,7 @@ import React,{useState,useContext} from 'react'
 import axios from 'axios';
 import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { UserContext } from '../../App';
+import { UserContext } from '../../../App.jsx';
 
 import {
   ref,
@@ -10,7 +10,7 @@ import {
   uploadBytesResumable,
   deleteObject,
 } from "firebase/storage";
-import {storage} from  "../../common/firebase.jsx"
+import {storage} from  "../../../common/firebase.jsx"
 import { toast, Toaster } from "react-hot-toast";
 const UploadPodcast = () => {
     //const [name, setName]=useState()

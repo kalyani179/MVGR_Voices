@@ -14,7 +14,7 @@ import LoadMoreDataBtn from '../common/LoadMoreDataBtn'
 import PageNotFound from './404Page'
 import Navbar from '../components/Home/Navbar/Navbar'
 import { SyncLoader } from 'react-spinners'
-import TrendingPodcard from '../components/Podcast/TrendingPodcard'
+import TrendingPodcard from '../components/Podcast/Podcast Home/TrendingPodcard'
 import ProfilePodcastPlayer from '../components/Podcast/Podcast Player/ProfilePodcastPlayer';
 export const profileDataStructure = {
     personal_info : {

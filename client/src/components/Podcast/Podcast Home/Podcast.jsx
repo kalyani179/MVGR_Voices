@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getAllSongs,fetchTopPodcards } from './api';
+import { getAllSongs,fetchTopPodcards } from '../api';
 import PodCard from './PodCard';
 import { motion } from "framer-motion";
-import PodcastPlayer from "./Podcast Player/PodcastPlayer";
-import { ThemeContext } from "../../App";
+import PodcastPlayer from "../Podcast Player/PodcastPlayer";
+import { ThemeContext } from "../../../App";
 import { BeatLoader } from "react-spinners";
-import Animation from "../../common/Animation";
-import InPageNavigation from "../Blogs/Blog Home/InPageNavigation";
+import Animation from "../../../common/Animation";
+import InPageNavigation from "../../Blogs/Blog Home/InPageNavigation";
 
 import TrendingPodcard from "./TrendingPodcard";
 
-import Footer from "../Home/Footer/Footer";
-import { UserContext } from "../../App";
+import Footer from "../../Home/Footer/Footer";
+import { UserContext } from "../../../App";
 import { toast } from 'react-hot-toast';
-import NoDataMessage from "../../common/NoDataMessage";
+import NoDataMessage from "../../../common/NoDataMessage";
 
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);

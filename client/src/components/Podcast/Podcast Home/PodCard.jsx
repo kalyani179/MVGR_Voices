@@ -1,6 +1,6 @@
 import React from 'react';
 //import { motion } from "framer-motion";
-import { getDate, getFullDate } from '../../common/Date';
+import { getDate, getFullDate } from '../../../common/Date';
 const PodCard = ({ data, onClick }) => {
   return (
     /*<motion.div className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:shadow-xl 

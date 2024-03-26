@@ -3,9 +3,6 @@ import axios from "axios";
 const baseURL = "http://localhost:3000/";
 
 
-
-
-
 export const getAllSongs = async() => {
     try {
         const res = await axios.get(`${baseURL}api/pod/getAll`);

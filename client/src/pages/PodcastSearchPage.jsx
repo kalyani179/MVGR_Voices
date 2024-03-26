@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../common/Loader';
-import PodCard from "../components/Podcast/PodCard";
+import PodCard from "../components/Podcast/Podcast Home/PodCard";
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import UserCard from '../components/Blogs/UserCard';
 import { SyncLoader } from 'react-spinners';

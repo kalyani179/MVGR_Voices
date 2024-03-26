@@ -1,6 +1,6 @@
 import React from 'react'
 //import { Link } from 'react-router-dom';
-import { getDate, getFullDate } from '../../common/Date';
+import { getDate, getFullDate } from '../../../common/Date';
 
 const TrendingPodcard = ({ data ,index,onClick }) => {
 
