@@ -135,23 +135,18 @@ router.get("/getOne/:id", async(req, res) => {
     }
 });
 
+// Assuming this is your existing code to fetch all podcasts
 router.get("/getAll", async(req, res) => {
-    const options = {
-        sort: {
-            createdAt: 1,
-        },
-    };
-
     try {
-        const data = await PodModel.find({}, {}, options); // Passing an empty object as the filter
-        if (data.length > 0) {
-            return res.status(200).send({ success: true, podcast: data });
+        const podcasts = await PodModel.find({}).populate("author", "personal_info.profile_img personal_info.username -_id");
+        if (podcasts.length > 0) {
+            return res.status(200).json({ success: true, podcasts: podcasts });
         } else {
-            return res.status(400).send({ success: false, msg: "data not found" });
+            return res.status(404).json({ success: false, msg: "No podcasts found" });
         }
     } catch (error) {
-        console.error("Error fetching data:", error);
-        return res.status(500).send({ success: false, msg: "Internal server error" });
+        console.error("Error fetching podcasts:", error);
+        return res.status(500).json({ success: false, error: "Internal server error" });
     }
 });
 
@@ -208,14 +203,20 @@ router.post('/is-podcast-liked', verifyJWT, async(req, res) => {
     }
 });
 router.post("/play-podcast", verifyJWT, async(req, res) => {
-    const { podcastId } = req.body;
-
+    const { podcastId } = req.body; // Assuming userId is included in the request body or retrieved from JWT
+    const userId = req.user;
     try {
         // Retrieve the podcast to get the user who uploaded it
         const podcast = await PodModel.findById(podcastId);
 
         if (!podcast) {
             return res.status(404).json({ success: false, message: "Podcast not found" });
+        }
+
+        // Check if the current user is the author of the podcast
+        if (podcast.author.toString() === userId) {
+            // If the current user is the author, do not increment play count
+            return res.status(200).json({ success: true, podcast });
         }
 
         // Increment play count in PodcastSchema
@@ -226,6 +227,11 @@ router.post("/play-podcast", verifyJWT, async(req, res) => {
         // Increment total plays count in UserSchema of the user who uploaded the podcast
         await user.findByIdAndUpdate(
             podcast.author, { $inc: { "account_info.total_plays": 1 } }
+        );
+
+        // Increment total plays count in UserSchema of the current user
+        await UserModel.findByIdAndUpdate(
+            userId, { $inc: { "account_info.total_plays": 1 } }
         );
 
         return res.status(200).json({ success: true, podcast: updatedPodcast });

@@ -64,7 +64,7 @@ const Podcast = () => {
       // Handle errors
       console.error('Error incrementing play count:', error);
       // Display an error message to the user
-      toast.error('Failed to increment play count.');
+      
     }
 
     // Find the index of the podcardData within trendingPodcards

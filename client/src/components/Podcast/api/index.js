@@ -3,14 +3,17 @@ import axios from "axios";
 const baseURL = "http://localhost:3000/";
 
 
+// Assuming this is your existing code to fetch all podcasts in the frontend
 export const getAllSongs = async() => {
     try {
-        const res = await axios.get(`${baseURL}api/pod/getAll`);
-        return res.data.podcast;
+        const response = await axios.get(`${baseURL}api/pod/getAll`);
+        return response.data.podcasts; // Ensure to access response.data.podcasts
     } catch (error) {
+        console.error('Error fetching all podcasts:', error);
         return null;
     }
 };
+
 export const fetchTopPodcards = async() => {
     try {
         const res = await axios.get(`${baseURL}api/pod/top-podcards`);
