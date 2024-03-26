@@ -31,4 +31,4 @@ return (
 )
 }
 
-export default Faq
+export default Faq;
