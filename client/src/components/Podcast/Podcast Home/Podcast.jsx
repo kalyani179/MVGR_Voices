@@ -220,6 +220,7 @@ const Podcast = () => {
                 songs={allSongs}
                 setSelectedSongIndex={setSelectedSongIndex}
                 pageState={pageState}
+                
               />
             </motion.div>
           )}

@@ -155,7 +155,7 @@ router.post('/like-podcast', verifyJWT, async(req, res) => {
     const { _id, isLiked } = req.body;
 
     try {
-        const podcast = await PodModel.findById(_id);
+        const podcast = await PodModel.findById(_id).populate('author');
         if (!podcast) {
             return res.status(404).json({ success: false, error: 'Podcast not found' });
         }

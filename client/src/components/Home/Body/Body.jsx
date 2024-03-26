@@ -44,13 +44,15 @@ const Body = () => {
                 <div className={`absolute inset-0 ${theme === "light" ? "background" : "background"}`}>
                     <Navbar />
                     <div className="center flex-col gap-8 md:mt-11">
-                        <h1 className={`text-4xl md:text-5xl lg:text-6xl xl:text-6xl  ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-32 tracking-wider text-center opacity-80`}>
-                        Welcome to <span className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold ml-2 text-primary tracking-normal"> MVGR VOICES</span>
+                        <h1 className={`text-3xl md:text-5xl lg:text-6xl xl:text-6xl ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-32 tracking-wider text-center opacity-80`}>
+                            Welcome to <span className="text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold ml-2 text-primary tracking-normal">MVGR VOICES</span>
                         </h1>
-                        <p className={`sm:text-sm text-base md:text-lg lg:text-xl ${theme === "light" ? "text-white" : "text-black"} font-semibold tracking-widest uppercase text-center opacity-80`}>
-                        It's the best platform for Students to share their cool stories in podcasts and blogs.
+                        <p className={`sm:text-xs text-base md:text-lg lg:text-xl ${theme === "light" ? "text-white" : "text-black"} font-semibold tracking-widest uppercase text-center opacity-80`}>
+                            It's the best platform for Students to share their cool stories in podcasts and blogs.
                         </p>
                     </div>
+
+
 
                 </div>
             </div>
@@ -64,22 +66,23 @@ const Body = () => {
                     />  
                 ))}
             </div>                
-            <div className={`${theme==="light" ? "bg-black" : "bg-white"} pt-20 flex items-center justify-center`}> 
-            <Fade direction='down' delay={0.2}>                    
-                <h1 className="text-6xl font-merriweather font-semibold leading-normal text-primary">FAQ's</h1> 
-            </Fade>
-            </div>                   
-            <div className={`${theme==="light" ? "bg-black" : "bg-white"} flex px-20 mb-20 py-8 items-center justify-center`}>
-                <Zoom>
-                <div className="list">
-                {
-                    list.map((item, key) => (
-                        <Faq key={key} datas={item}/>
-                    ))                             
-                }
-                </div>                                    
-                </Zoom>
-            </div> 
+            <div className={`${theme==="light" ? "bg-black" : "bg-white"} pt-10 md:pt-20 flex items-center justify-center`}> 
+    <Fade direction='down' delay={0.2}>                    
+        <h1 className="md:text-6xl text-4xl font-merriweather font-semibold leading-normal text-primary">FAQ's</h1> 
+    </Fade>
+</div>                   
+
+<div className={`${theme==="light" ? "bg-black" : "bg-white"} flex flex-col md:flex-row px-6 md:px-20 mb-6 md:mb-20 py-4 md:py-8 items-center justify-center`}>
+    <Zoom>
+        <div className="list">
+            {
+                list.map((item, key) => (
+                    <Faq key={key} datas={item}/>
+                ))                             
+            }
+        </div>                                    
+    </Zoom>
+</div>
             <div className="bg-cool-black p-8 pt-20 shadow-xl">
                 <Zoom>
                     <h1 className="text-5xl text-center font-gelasio tracking-wider font-semibold leading-normal text-primary pb-10">What Users Are Saying !</h1>

@@ -1,4 +1,3 @@
-
 import Notification from "../models/NotificationSchema.js";
 
 const newNotification = async(req, res) => {
