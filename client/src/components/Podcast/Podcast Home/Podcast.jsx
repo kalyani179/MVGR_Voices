@@ -6,7 +6,7 @@ import PodcastPlayer from "../Podcast Player/PodcastPlayer";
 import { ThemeContext } from "../../../App";
 import { BeatLoader } from "react-spinners";
 import Animation from "../../../common/Animation";
-import InPageNavigation from "../../Blogs/Blog Home/InPageNavigation";
+import InPageNavigation from "../../../common/InPageNavigation";
 
 import TrendingPodcard from "./TrendingPodcard";
 

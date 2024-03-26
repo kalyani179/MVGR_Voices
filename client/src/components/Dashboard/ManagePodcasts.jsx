@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import FilterPaginationData from '../../common/FilterPaginationData';
 import { Toaster } from 'react-hot-toast';
-import InPageNavigation from '../Blogs/Blog Home/InPageNavigation';
+import InPageNavigation from '../../common/InPageNavigation';
 import Animation from '../../common/Animation';
 import { ManagePublishedPodcastCard } from './ManagePodcastCard';
 import { SyncLoader } from 'react-spinners';
@@ -71,7 +71,7 @@ const ManagePodcasts = () => {
                 />
                 <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-4 md:pointer-events-none md:left-6 text-lg text-dark-grey"></i>
             </div>
-            <InPageNavigation routes={["Published Podcasts"]}>
+            <InPageNavigation managePodcasts={true} routes={["Published Podcasts"]}>
                 {podcasts === null ?(
                     <div className="center">
                         <SyncLoader color="#f59a9a" margin={4} />

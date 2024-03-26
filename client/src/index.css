@@ -97,7 +97,7 @@
         @apply text-dark-grey mt-9 mb-2
     }
     .tag {
-        @apply p-2.5 bg-dark-grey/10 rounded-full px-6 capitalize;
+        @apply p-2.5 bg-dark-grey/10 rounded-full px-6 sm:px-4 sm:py-1.5 capitalize;
     }
     
     .blog-title {

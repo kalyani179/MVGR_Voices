@@ -8,6 +8,7 @@ import NoBlogsDataMessage from '../../common/NoDataMessage';
 import Animation from '../../common/Animation';
 import NotificationCard from './NotificationCard';
 import LoadMoreDataBtn from '../../common/LoadMoreDataBtn';
+import { SyncLoader } from 'react-spinners';
 const Noitifications = () => {
     const [filter, setFilter] =useState('all');
     let filters=['all','like','comment','reply'];
@@ -58,12 +59,12 @@ const Noitifications = () => {
     }
 
   return (
-    <div className="ml-56 md:mt-24">
-        <h1 className='max-md:hidden'> Recent Notifications </h1>
-        <div className='my-8 flex gap-3'>
+    <div className="md:ml-56 mt-24 sm:ml-5 sm:center flex-col">
+        {/* <h1 className='max-md:hidden'> Recent Notifications </h1> */}
+        <div className='mb-5 flex gap-3'>
             {
                 filters.map((filterName,i)=>{
-                    return <button key={i}className={`tag ${filter===filterName ? 
+                    return <button key={i}className={`tag md:py-2 ${filter===filterName ? 
                         (theme === "light" ? "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium") : ""}`} 
                         onClick={ handleFilter}>{filterName}
                     </button>
@@ -74,7 +75,11 @@ const Noitifications = () => {
         </div>
 
         {
-            notifications===null?<Loader/>:
+            notifications===null?
+            <div className="center">
+                <SyncLoader color="#f59a9a" margin={4} size={13} />
+            </div>
+            :
             <>
                 {
                     notifications.results.length?

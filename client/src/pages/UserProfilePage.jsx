@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ThemeContext, UserContext } from '../App'
 import AboutUser from '../components/Blogs/AboutUser'
 import FilterPaginationData from '../common/FilterPaginationData'
-import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation'
+import InPageNavigation from '../common/InPageNavigation'
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn'
 import Navbar from '../components/Home/Navbar/Navbar'

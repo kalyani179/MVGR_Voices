@@ -1,8 +1,5 @@
-import Blog from "../models/BlogSchema.js";
-import User from "../models/UserSchema.js"
+
 import Notification from "../models/NotificationSchema.js";
-import Comment from "../models/CommentSchema.js";
-//import { finished } from "nodemailer/lib/xoauth2/index.js";
 
 const newNotification = async(req, res) => {
     let user_id = req.user;
