@@ -97,17 +97,17 @@ const UserProfilePage = () => {
             setBlog(null);
             setPodcasts(null);
         }
-        if(blogs === null || podcasts === null){
-            // resetStates();
+        if(blogs === null && podcasts === null){
+            resetStates();
             fetchUserProfile();
         }
     },[profileId, blogs, podcasts]);
 
-    // const resetStates = () =>{
-    //     setLoading(true);
-    //     setProfile(profileDataStructure);
-    //     setProfileLoaded("");
-    // }
+    const resetStates = () =>{
+        setLoading(true);
+        setProfile(profileDataStructure);
+        setProfileLoaded("");
+    }
     const handlePodcastSelect = (podcast) => {
         setSelectedPodcast(podcast);
     }
@@ -145,7 +145,7 @@ const UserProfilePage = () => {
                 routes={["Podcasts Published","Blogs Published","About"]}
                 defaultHidden={["About"]}
             >
-                <div>
+                <div className="flex flex-wrap gap-x-24 gap-y-5">
                 {
                     podcasts === null ? 
                     <div className="center">
@@ -166,7 +166,7 @@ const UserProfilePage = () => {
                 }
                 <LoadMoreDataBtn state={podcasts} fetchDataFunc={getPodcasts}/>
                 </div>
-                <div>
+                <div className="flex flex-wrap gap-x-24 gap-y-5">
                 {
                     blogs===null ? 
                     <div className="center">
