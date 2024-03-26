@@ -45,43 +45,35 @@ const UploadPodcast = () => {
 
     const handleUpload = (e) => {
       e.preventDefault();
-    
-    
+
       // Check if required fields are empty
        // Check if access token is available
-        if (!access_token) {
-      toast.error("Access token not found");
-      return;
+    if (!access_token) {
+      return toast.error("Access token not found");
     }
 
     if (!songName) {
-      toast.error("Please provide a name for the podcast");
-      return;
+      return toast.error("Please provide a name for the podcast");
     }
 
     if (!songDescription) {
-      toast.error("Please provide a description for the podcast");
-      return;
+      return toast.error("Please provide a description for the podcast");
     }
 
     if (!songImageCover) {
-      toast.error("Please upload an image for the podcast");
-      return;
+      return toast.error("Please upload an image for the podcast");
     }
 
     if (!audioImageCover) {
-      toast.error("Please upload an audio file for the podcast");
-      return;
+      return toast.error("Please upload an audio file for the podcast");
     }
 
     if (!selectedCategory) {
-      toast.error("Please select a category for the podcast");
-      return;
+      return toast.error("Please select a category for the podcast");
     }
     const headers = {
         Authorization: `Bearer ${access_token}`,
     };
-    
       axios
         .post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/save', {
           name: songName,
