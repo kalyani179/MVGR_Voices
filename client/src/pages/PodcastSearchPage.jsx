@@ -7,10 +7,10 @@ import NoPodcastDataMessage from '../components/Podcast/NoPodcastDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import UserCard from '../components/Blogs/UserCard';
 import { SyncLoader } from 'react-spinners';
-import PodFilterPaginationData from '../components/Podcast/PodFilterPaginationData';
-import InPageNavigation from '../components/Podcast/InPageNavigation';
-import Animation from '../common/Animation';
 
+import Animation from '../common/Animation';
+import FilterPaginationData from '../common/FilterPaginationData';
+import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
 const PodcastsSearchPage = () => {
     let { query } = useParams();
     const [podcasts, setPodcasts] = useState({ results: [] });
@@ -19,17 +19,17 @@ const PodcastsSearchPage = () => {
 
     const searchPodcasts = ({ page = 1, create_new_arr = false }) => {
 
-        axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/search", {
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/search-podcasts", {
                 query,
                 page,
                 category: selectedCategory // Include selected category in the search
             })
             .then(async ({ data }) => {
-                let formattedData = await PodFilterPaginationData({
+                let formattedData = await FilterPaginationData({
                     state: podcasts,
                     data: data.podcasts,
                     page,
-                    countRoute: "/search-podcasts-count",
+                    countRoute: "/api/pod/search-podcasts-count",
                     data_to_send: { query },
                     create_new_arr
                 });

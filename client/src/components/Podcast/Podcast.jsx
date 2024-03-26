@@ -2,15 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import { getAllSongs,fetchTopPodcards } from './api';
 import PodCard from './PodCard';
 import { motion } from "framer-motion";
-import PodcastPlayer from "./PodcastPlayer";
+import PodcastPlayer from "./Podcast Player/PodcastPlayer";
 import { ThemeContext } from "../../App";
 import { BeatLoader } from "react-spinners";
 import Animation from "../../common/Animation";
-import InPageNavigation from "./InPageNavigation";
+import InPageNavigation from "../Blogs/Blog Home/InPageNavigation";
 import NoPodcastDataMessage from "./NoPodcastDataMessage";
 //import TrendingBlogPostCard from "../Blogs/Blog Home/TrendingBlogPostCard";
 import TrendingPodcard from "./TrendingPodcard";
-import axios from 'axios';
+//import axios from 'axios';
+import Footer from "../Home/Footer/Footer";
+import { UserContext } from "../../App";
+import { toast } from 'react-hot-toast';
 
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);
@@ -20,7 +23,7 @@ const Podcast = () => {
   const [loading, setLoading] = useState(false); 
   //let [trendingBlogs, setTrendingBlog] = useState(null);
   const [trendingPodcards, setTrendingPodcards] = useState([]);
-
+  const { userAuth } = useContext(UserContext);
   useEffect(() => {
     // Fetch all songs
     getAllSongs().then((data) => {
@@ -33,10 +36,23 @@ const Podcast = () => {
   
   }, []);
 
-  
+  const handleTrendingPodcardClick = (podcardData) => {
+    if (!userAuth || !userAuth.username) {
+      toast.error('Please sign in to listen to the podcast!');
+      return;
+  }
+    // Find the index of the podcardData within trendingPodcards
+    const index = trendingPodcards.findIndex(podcard => podcard._id === podcardData._id);
+    // Set the selected song index based on the found index
+    setSelectedSongIndex(index);
+};
   
 
   const handleSongClick = (songIndex) => {
+    if (!userAuth || !userAuth.username) {
+      toast.error('Please sign in to listen to the podcast!');
+      return;
+  }
     let songsInCategory = [];
     if (pageState !== "home") {
       songsInCategory = allSongs.filter(song => song.category.toLowerCase() === pageState);
@@ -51,6 +67,7 @@ const Podcast = () => {
   };
 
   const loadPodcastByCategory = async (e) => {
+    
     const category = e.target.innerText.toLowerCase();
     const newPageState = pageState === category ? "home" : category;
     setPageState(newPageState);
@@ -92,7 +109,7 @@ const Podcast = () => {
                 {trendingPodcards && trendingPodcards.length > 0 ? (
           trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
-                  <TrendingPodcard data={podcard} index={index} />
+                  <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
               </Animation>
           ))
             ) : (
@@ -162,6 +179,9 @@ const Podcast = () => {
                           
         </div>
       </section>
+      <div className="bg-cool-white">
+                <Footer />
+            </div>
     </Animation>
   );
 };

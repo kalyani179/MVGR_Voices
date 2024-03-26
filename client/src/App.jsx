@@ -24,6 +24,9 @@ import PodcastSearchPage from './pages/PodcastSearchPage';
 import FeedbackForm from './components/Home/Review Carousel/FeedBackForm';
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import ResetPassword from './components/Authentication/ResetPassword';
+import ManagePodcasts from './components/Dashboard/ManagePodcasts';
+//import PodcastPlayer from './components/Podcast/Podcast Player/PodcastPlayer';
+import Noitifications from './components/Dashboard/Noitifications';
 
 
 export const UserContext = createContext({});
@@ -75,7 +78,9 @@ const App = () => {
                     <Route path="change-password" element={<ChangePassword />}/>
               </Route>
               <Route path="/dashboard" element={<SideNav />}>
-                    <Route path="blogs" element={<ManageBlogs />}/>
+                    <Route path="podcasts" element={<ManagePodcasts/>}/>
+                    <Route path="blogs" element={<ManageBlogs />}/>  
+                    <Route path="notifications" element={<Noitifications />}/>    
               </Route>
               <Route path="/feedback" element={<FeedbackForm />} />
           </Routes>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import UserAuth from "../../Authentication/UserAuth";
 import { ThemeContext, UserContext } from "../../../App";
 import { removeFromSession, storeInSession } from "../../../common/session";
@@ -6,23 +6,42 @@ import Animation from "../../../common/Animation";
 import {Toaster,toast} from "react-hot-toast";
 import logo from "../../../assets/icons/logo.png";
 import logoDark from "../../../assets/icons/logoDark.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,NavLink, useNavigate } from "react-router-dom";
 import UserNavigationPanel from "./UserNavigationPanel";
 import Footer from "../Footer/Footer";
-
+import axios from "axios";
 
 const Navbar = ({home=1,activeLink="Home"}) => {
   let navigate = useNavigate();
   const {userAuth:{profile_img}} = useContext(UserContext);
   const [userNavPanel,setUserNavPanel] = useState(false);
   let {theme,setTheme} = useContext(ThemeContext);
-  const {userAuth:{access_token},setUserAuth} = useContext(UserContext);
+  const {userAuth, userAuth:{access_token, new_notification_available},setUserAuth} = useContext(UserContext);
 
   const [showSignup,setShowSignup] = useState(false);
   const [showSignin,setShowSignin] = useState(false);
 
 
   const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
+  useEffect(() => {
+    if (access_token) {
+      axios.get(process.env.REACT_APP_SERVER_DOMAIN + '/new-notification', {
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        }
+      })
+      .then((response) => {
+        //console.log(response.data); // Log the response to see its structure
+        setUserAuth({ ...userAuth, ...response.data }); // Update state based on response
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+  }, [access_token]);
+
+  console.log(new_notification_available);
+
   const handleSearch = (e) => {
       let query = e.target.value;
       if(e.keyCode === 13){
@@ -77,7 +96,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
               <div onClick={()=>setOpen(!open) } className="text-3xl text-white absolute right-8 top-6 cursor-pointer md:hidden" >
                   <ion-icon name={open ?"close":"menu"}></ion-icon>
               </div>
-                <ul className={`md:flex md:items-center ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? "top-20 ":" top-[-490px] " }`} >
+                <ul className={`md:flex md:items-center  ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500  ease-in ${open ? "top-20 ":" top-[-490px] " }`} >
                 <div className={`${(activeLink === "Podcasts" || activeLink === "Blogs") ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
                   <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                   <input 
@@ -114,6 +133,19 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                   <Link>
                     <button onClick={changeTheme} className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                             <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl block mt-1`}></i>
+                    </button>
+                  </Link>
+                             
+                  </div>
+                  <div className="ml-4">
+                  <Link to="dashboard/notifications">
+                    <button  className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
+                     
+                      <i className={`fi fi-rr-bell sidebar-icon text-xl block mt-1 ${home===1? "text-white" : "text-black"}`}></i>
+                      {
+                        new_notification_available ?<span className="bg-red w-3 h-3 rounded-full absolute z-10 top-2 right-2"></span>:""
+                      }
+                     
                     </button>
                   </Link>
                   </div>

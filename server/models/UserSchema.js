@@ -75,6 +75,14 @@ const userSchema = mongoose.Schema({
             type: Number,
             default: 0
         },
+        total_uploads: {
+            type: Number,
+            default: 0
+        },
+        total_plays: {
+            type: Number,
+            default: 0
+        },
     },
     google_auth: {
         type: Boolean,

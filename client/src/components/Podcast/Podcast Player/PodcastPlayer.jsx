@@ -1,68 +1,56 @@
-import React, { useState, useEffect,useContext } from 'react';
+// PodcastPlayer.js
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { IoMdClose } from 'react-icons/io';
 import { motion } from 'framer-motion';
-import { UserContext } from '../../App';
+import { UserContext } from '../../../App';
 import { toast } from 'react-hot-toast';
 
 const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState }) => {
   const { userAuth } = useContext(UserContext);
+  const [likesCount, setLikesCount] = useState(selectedSong?.activity?.total_likes || 0);
   const [isLiked, setIsLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(selectedSong.activity.total_likes || 0);
 
   useEffect(() => {
-    if (userAuth && userAuth.access_token && selectedSong) {
-      axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/is-podcast-liked', { _id: selectedSong._id }, {
-        headers: {
-          Authorization: `Bearer ${userAuth.access_token}`
+    const fetchLikedState = async () => {
+      try {
+        if (userAuth && userAuth.access_token && selectedSong && selectedSong.activity) {
+          const response = await axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/is-podcast-liked', { _id: selectedSong._id }, {
+            headers: {
+              Authorization: `Bearer ${userAuth.access_token}`
+            }
+          });
+          setIsLiked(response.data.isLiked);
+          setLikesCount(response.data.likesCount);
         }
-      })
-      .then(({ data }) => {
-        setIsLiked(data.result);
-        setLikesCount(data.likesCount);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-    }else{
-      setIsLiked(false); 
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchLikedState();
   }, [userAuth, selectedSong]);
 
-  useEffect(() => {
-    const likedState = localStorage.getItem('likedState');
-    if (likedState) {
-      setIsLiked(JSON.parse(likedState));
-    }
-  }, []);
-
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
     if (!userAuth || !userAuth.access_token) {
       toast.error('Please SignIn to like the podcast!');
       return;
     }
 
-    const newIsLiked = !isLiked;
-    setIsLiked(newIsLiked);
-
-    const newLikesCount = newIsLiked ? likesCount + 1 : likesCount - 1;
-    setLikesCount(newLikesCount);
-
-    localStorage.setItem('likedState', JSON.stringify(newIsLiked));
-
-    axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/like-podcast', { _id: selectedSong._id, isLiked: newIsLiked }, {
-      headers: {
-        Authorization: `Bearer ${userAuth.access_token}`
-      }
-    })
-    .then(({ data }) => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    try {
+      const newIsLiked = !isLiked;
+      const response = await axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/like-podcast', { _id: selectedSong._id, isLiked: newIsLiked }, {
+        headers: {
+          Authorization: `Bearer ${userAuth.access_token}`
+        }
+      });
+      setIsLiked(newIsLiked);
+      setLikesCount(response.data?.podcast?.activity?.total_likes || 0);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const nextTrack = () => {
@@ -98,7 +86,7 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
   };
 
   return (
-    <div className="w-full flex items-center justify-between gap-3 overflow-hidden">
+    <div className="w-full flex items-center justify-between gap-3 overflow-hidden bg-white">
       <div className="w-full relative flex items-center gap-3 p-4">
         {selectedSong && (
           <>
@@ -116,7 +104,7 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
         )}
         <div className="flex-1">
           <AudioPlayer
-            src={selectedSong.songURL}
+            src={selectedSong?.songURL}
             autoPlay={true}
             showSkipControls={true}
             onClickNext={nextTrack}

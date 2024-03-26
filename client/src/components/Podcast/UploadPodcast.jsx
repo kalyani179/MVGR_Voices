@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { UserContext } from '../../App';
+
 import {
   getStorage,
   ref,
@@ -19,6 +20,7 @@ import {
   saveNewArtist,
   saveNewSong,
 } from "./api";
+import { toast, Toaster } from "react-hot-toast";
 const UploadPodcast = () => {
     //const [name, setName]=useState()
     //const [description, setDescription]=useState()
@@ -70,16 +72,42 @@ const UploadPodcast = () => {
             });
           }  
     };*/
+    
     const handleUpload = (e) => {
       e.preventDefault();
+
     
       // Check if required fields are empty
        // Check if access token is available
-       if (!access_token) {
-        console.error('Access token not found');
-        return;
+        if (!access_token) {
+      toast.error("Access token not found");
+      return;
     }
 
+    if (!songName) {
+      toast.error("Please provide a name for the podcast");
+      return;
+    }
+
+    if (!songDescription) {
+      toast.error("Please provide a description for the podcast");
+      return;
+    }
+
+    if (!songImageCover) {
+      toast.error("Please upload an image for the podcast");
+      return;
+    }
+
+    if (!audioImageCover) {
+      toast.error("Please upload an audio file for the podcast");
+      return;
+    }
+
+    if (!selectedCategory) {
+      toast.error("Please select a category for the podcast");
+      return;
+    }
     const headers = {
         Authorization: `Bearer ${access_token}`,
     };
@@ -161,8 +189,10 @@ const UploadPodcast = () => {
          
        
        <div className='flex mb-4 w-full h-full'>
+       <Toaster />
           <div className='bg-card backdrop-blur-md w-full h-full rounded-md border-2 border-dotted border-gray-300
             cursor-pointer self-start mr-2'>
+              
               {isImageLoading && <FileLoader progress={imageUploadProgress} />}
               {!isImageLoading &&(
                 <>

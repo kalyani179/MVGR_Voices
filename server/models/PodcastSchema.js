@@ -26,6 +26,11 @@ const podSchema = mongoose.Schema({
         required: true,
         ref: 'users'
     },
+    likes: [{
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'users'
+    }],
     activity: {
         total_likes: {
             type: Number,

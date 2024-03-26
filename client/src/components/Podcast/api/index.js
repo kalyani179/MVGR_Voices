@@ -23,6 +23,20 @@ export const fetchTopPodcards = async() => {
         return [];
     }
 };
+export const fetchUserPodcards = async(token) => {
+    try {
+        const res = await axios.get(`${baseURL}api/pod/user-podcasts`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return res.data;
+    } catch (error) {
+        console.error("Error fetching user podcasts:", error);
+        return [];
+    }
+};
+
 
 
 export const saveNewSong = async(data) => {
