@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { EditorContext } from "./Editor";
 import {Toaster,toast} from "react-hot-toast";
 import lightDefaultBanner from "../../../assets/images/Blogs/default_banner_light.png";
@@ -12,7 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const BlogPublish = () => {
 
-    let {theme,setTheme} = useContext(ThemeContext);
+    let {theme} = useContext(ThemeContext);
 
     let {blog_id} = useParams();
     let characterLimit = 200;
@@ -21,6 +21,20 @@ const BlogPublish = () => {
 
     let {blog,blog:{banner,title,tags,desc,content},setEditorState,setBlog} = useContext(EditorContext);
     let {userAuth:{access_token}} = useContext(UserContext);
+
+    const [selectedCategory, setSelectedCategory] = useState("");
+    
+    const categories = [
+        "Programming",
+        "Social Media",
+        "Finances",
+        "Travel",
+        "Cooking",
+        "Photography",
+        "Technology",
+        "Interviews",
+        "Motivation"
+    ];
 
     const handleCloseEvent = () =>{
         setEditorState("editor");
@@ -42,24 +56,24 @@ const BlogPublish = () => {
         }
     }
 
-    const handleKeyDown = (e) => {
-        if(e.keyCode === 13 || e.keyCode === 188){ // Enter key or Comma key
-            e.preventDefault();
+    // const handleKeyDown = (e) => {
+    //     if(e.keyCode === 13 || e.keyCode === 188){ // Enter key or Comma key
+    //         e.preventDefault();
 
-            let tag = e.target.value;
+    //         let tag = e.target.value;
 
-            if(tags.length < tagsLimit){
-                if(!tags.includes(tag) && tag.length){
-                    console.log(tags);
-                    setBlog({...blog,tags:[...tags,tag]})
-                }
-            }else{
-                toast.error(`You Can add max ${tagsLimit} Tags`)
-            }
+    //         if(tags.length < tagsLimit){
+    //             if(!tags.includes(tag) && tag.length){
+    //                 console.log(tags);
+    //                 setBlog({...blog,tags:[...tags,tag]})
+    //             }
+    //         }else{
+    //             toast.error(`You Can add max ${tagsLimit} Tags`)
+    //         }
 
-            e.target.value = "";
-        }
-    }
+    //         e.target.value = "";
+    //     }
+    // }
 
     const handlePublish = (e) => {
         // To prevent user submitting the blog more than once
@@ -72,8 +86,12 @@ const BlogPublish = () => {
         if(!desc.length || desc.length > characterLimit){
             return toast.error("You Must Provide a Blog Description Under 200 Characters");
         }
-        if(!tags.length || tags.length>10){
-            return toast.error("Provide tags in order to publish the blog, Maximum 10");
+        // if(!tags.length || tags.length>10){
+        //     return toast.error("Provide tags in order to publish the blog, Maximum 10");
+        // }
+
+        if (!selectedCategory) {
+            return toast.error("Please select a category for the blogs");
         }
 
         let loadingToast = toast.loading("publishing...");
@@ -81,7 +99,7 @@ const BlogPublish = () => {
         e.target.classList.add('disable');
 
         let blogObj = {
-            title, banner, desc, content, tags, draft:false
+            title, banner, desc, content, tags:[selectedCategory], draft:false
         }
 
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/create-blog",{...blogObj,id:blog_id}, {
@@ -146,8 +164,17 @@ const BlogPublish = () => {
                 <p className="blog-label">
                     Topics - (Helps in searching and ranking your blog post)
                 </p>
-
-                <div className="relative input-box pl-2 py-2 pb-4">
+                <select
+                className="select-category w-full p-3 rounded-md text-base font-medium outline-none shadow-sm border border-gray-300 bg-transparent mb-5"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                <option>Select Category</option>
+                {categories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+                ))}
+            </select>
+                {/* <div className="relative input-box pl-2 py-2 pb-4">
                     <input type="text" placeholder="Topic"
                     className="sticky input-box bg-white top-0 left-0 pl-4 mb-3 focus:bg-white"
                     onKeyDown={handleKeyDown}
@@ -159,11 +186,12 @@ const BlogPublish = () => {
                         })
                     }
 
+                </div> */}
+
+                {/* <p className="mt-1 mb-4 text-dark-grey text-sm text-right">{tagsLimit-tags.length} Tags left</p> */}
+                <div className="center">
+                    <button className="btn-purple px-8" onClick={handlePublish}>Publish</button>
                 </div>
-
-                <p className="mt-1 mb-4 text-dark-grey text-sm text-right">{tagsLimit-tags.length} Tags left</p>
-
-                <button className="btn-purple px-8" onClick={handlePublish}>Publish</button>
 
             </div>
 
