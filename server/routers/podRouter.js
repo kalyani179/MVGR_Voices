@@ -209,18 +209,23 @@ router.post('/is-podcast-liked', verifyJWT, async(req, res) => {
 });
 router.post("/play-podcast", verifyJWT, async(req, res) => {
     const { podcastId } = req.body;
-    const userId = req.user;
 
     try {
+        // Retrieve the podcast to get the user who uploaded it
+        const podcast = await PodModel.findById(podcastId);
+
+        if (!podcast) {
+            return res.status(404).json({ success: false, message: "Podcast not found" });
+        }
+
         // Increment play count in PodcastSchema
         const updatedPodcast = await PodModel.findByIdAndUpdate(
             podcastId, { $inc: { "activity.total_plays": 1 } }, { new: true }
         );
 
-        // Increment total plays count in UserSchema
-
+        // Increment total plays count in UserSchema of the user who uploaded the podcast
         await user.findByIdAndUpdate(
-            userId, { $inc: { "account_info.total_plays": 1 } }
+            podcast.author, { $inc: { "account_info.total_plays": 1 } }
         );
 
         return res.status(200).json({ success: true, podcast: updatedPodcast });

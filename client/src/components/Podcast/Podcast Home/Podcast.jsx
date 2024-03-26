@@ -74,10 +74,31 @@ const Podcast = () => {
   };
   
 
-  const handleSongClick = (songIndex) => {
+  const handleSongClick = async(songIndex) => {
     if (!userAuth || !userAuth.username) {
       toast.error('Please sign in to listen to the podcast!');
       return;
+  }
+  const selectedPodcast = filteredSongs[songIndex];
+  const headers = {
+    Authorization: `Bearer ${access_token}`,
+  };
+
+  try {
+    // Make an HTTP POST request to increment play count
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_DOMAIN}/api/pod/play-podcast`, 
+      { podcastId: selectedPodcast._id }, // Pass the selected podcast's ID
+      { headers: headers }
+    );
+
+    // Log success message or handle response as needed
+    console.log('Play count incremented:', response.data);
+  } catch (error) {
+    // Handle errors
+    console.error('Error incrementing play count:', error);
+    // Display an error message to the user
+    toast.error('Failed to increment play count.');
   }
     let songsInCategory = [];
     if (pageState !== "home") {
@@ -88,7 +109,7 @@ const Podcast = () => {
   
     const selectedSongInCategory = songsInCategory[songIndex];
     const selectedSongIndexInAllSongs = allSongs.indexOf(selectedSongInCategory);
-  
+    
     setSelectedSongIndex(selectedSongIndexInAllSongs);
   };
 
