@@ -11,7 +11,7 @@ import {
   uploadBytesResumable,
   deleteObject,
 } from "firebase/storage";
-import {storage} from  "C:/MyLearning/MVGR_Voices/client/src/common/firebase.jsx"
+import {storage} from  "../../common/firebase.jsx"
 import {
   getAllAlbums,
   getAllArtist,

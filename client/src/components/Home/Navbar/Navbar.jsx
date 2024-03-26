@@ -32,7 +32,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
 
   let Links=[
     {name:"Home",link:"/"},
-    {name:"Podcasts",link:"/"},
+    {name:"Podcasts",link:"/podcast"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/contact"},
     {name:"Subscribe",link:""},
@@ -86,8 +86,8 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                   {/* <ion-icon name={open ?"close":"menu"}></ion-icon> */}
               </div>
               <div className="sm:z-40 sm:fixed sm:right-0">
-                <ul className={`md:flex ${theme==="light"?"sm:bg-black":"sm:bg-white"} sm:pr-10 md:items-center  sm:pt-10 sm:pb-20 sm:-mt-20 ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] md:right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500  ease-in sm:min-h-screen ${open ? "right-0":" right-[-200px]" }`} >
-                <div className={`${(activeLink === "Podcasts" || activeLink === "Blogs") ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
+                <ul className={`md:flex ${theme==="light"?"sm:bg-black":"sm:bg-white"} sm:pr-10 md:items-center sm:pt-10 sm:pb-20 sm:-mt-20 ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] md:right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in sm:min-h-screen ${open ? "right-0":" right-[-200px]" }`} >
+                <div className={`${activeLink==="Blogs" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
                   <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                   <input 
                       type='text'
