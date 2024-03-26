@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getAllSongs,fetchTopPodcards } from './api';
+import { getAllSongs,fetchTopPodcards } from '../api';
 import PodCard from './PodCard';
 import { motion } from "framer-motion";
-import PodcastPlayer from "./Podcast Player/PodcastPlayer";
-import { ThemeContext } from "../../App";
+import PodcastPlayer from "../Podcast Player/PodcastPlayer";
+import { ThemeContext } from "../../../App";
 import { BeatLoader } from "react-spinners";
-import Animation from "../../common/Animation";
-import InPageNavigation from "../Blogs/Blog Home/InPageNavigation";
-import NoPodcastDataMessage from "./NoPodcastDataMessage";
-//import TrendingBlogPostCard from "../Blogs/Blog Home/TrendingBlogPostCard";
+import Animation from "../../../common/Animation";
+import InPageNavigation from "../../Blogs/Blog Home/InPageNavigation";
+
 import TrendingPodcard from "./TrendingPodcard";
-//import axios from 'axios';
-import Footer from "../Home/Footer/Footer";
-import { UserContext } from "../../App";
+
+import Footer from "../../Home/Footer/Footer";
+import { UserContext } from "../../../App";
 import { toast } from 'react-hot-toast';
+
 import axios from "axios";
+
+import NoDataMessage from "../../../common/NoDataMessage";
+
 
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);
@@ -137,7 +140,7 @@ const Podcast = () => {
           ))
             ) : (
                 <div className="center w-full p-5">
-                    <NoPodcastDataMessage message={"No Trending Podcards Found"} />
+                    <NoDataMessage message={"No Trending Podcards Found"} />
                 </div>
             )}
 
@@ -179,7 +182,7 @@ const Podcast = () => {
                 />
               ) : (
                 <div className="center w-full p-5">
-                  <NoPodcastDataMessage message={"No Podcasts Published"} />
+                  <NoDataMessage message={"No Podcasts Published"} />
                 </div>
               )}
             </div>

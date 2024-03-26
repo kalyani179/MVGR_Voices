@@ -5,10 +5,10 @@ import FilterPaginationData from '../../common/FilterPaginationData';
 import { Toaster } from 'react-hot-toast';
 import InPageNavigation from '../Blogs/Blog Home/InPageNavigation';
 import Loader from '../../common/Loader';
-import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
 import {ManagePublishedBlogCard, ManageDraftBlogCard } from './ManageBlogCard';
 import { SyncLoader } from 'react-spinners';
+import NoDataMessage from '../../common/NoDataMessage';
 
 const ManageBlogs = () => {
     const [blogs,setBlogs] = useState(null);
@@ -65,7 +65,7 @@ const ManageBlogs = () => {
         }
     },[access_token,blogs,drafts,query])
     return (
-        <div className="ml-56 md:mt-24">
+        <div className="md:ml-56 mt-24 sm:ml-5">
             {/* <h1 className="sm:hidden text-primary text-xl text-center font-medium">Manage Blogs</h1> */}
             <Toaster />
             <div className="relative sm:mt-5 md:mt-8 mb-10">
@@ -75,7 +75,7 @@ const ManageBlogs = () => {
                 />
                 <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-4 md:pointer-events-none md:left-6 text-lg text-dark-grey"></i>
             </div>
-            <InPageNavigation routes = {["Published Blogs","Drafts"]}>
+            <InPageNavigation manageBlogs={true} routes = {["Published Blogs","Drafts"]}>
                 { // Published Blogs
                     blogs === null ? 
                         <div className="center">
@@ -93,7 +93,7 @@ const ManageBlogs = () => {
                         }
                     </> 
                     :
-                    <NoBlogsDataMessage message="No Published Blogs"/>
+                    <NoDataMessage message="No Published Blogs"/>
                 }
                 { // Drafts Blogs
                     drafts === null ? <Loader /> :
@@ -108,7 +108,7 @@ const ManageBlogs = () => {
                         }
                     </> 
                     :
-                    <NoBlogsDataMessage message="No Drafts Blogs"/>
+                    <NoDataMessage message="No Drafts Blogs"/>
                 }
             </InPageNavigation>
         </div>

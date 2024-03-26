@@ -7,7 +7,7 @@ import Marker from "@editorjs/marker";
 import InlineCode from "@editorjs/inline-code";
 
 import { storage} from "../../../common/firebase";
-import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
+import { ref,getDownloadURL,uploadBytesResumable } from "firebase/storage";
 
 const uploadImageByFile = (e) => {
     return new Promise((resolve, reject) => {

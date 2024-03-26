@@ -17,8 +17,8 @@ import ManageBlogs from './components/Dashboard/ManageBlogs';
 import Contact from './components/Contact/Contact';
 
 import PodsNavbar from './components/Podcast/Podcast Navbar/PodsNavbar';
-import Podcast from './components/Podcast/Podcast';
-import UploadPodcast from './components/Podcast/UploadPodcast';
+import Podcast from './components/Podcast/Podcast Home/Podcast';
+import UploadPodcast from './components/Podcast/Podcast Upload/UploadPodcast';
 import PodcastSearchPage from './pages/PodcastSearchPage';
 
 import FeedbackForm from './components/Home/Review Carousel/FeedBackForm';

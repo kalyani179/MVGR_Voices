@@ -5,12 +5,12 @@ import axios from "axios";
 
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
-import NoBlogsDataMessage from "./NoBlogsDataMessage";
 import { ThemeContext } from "../../../App";
 import FilterPaginationData from "../../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
 import {SyncLoader } from "react-spinners";
 import Footer from "../../Home/Footer/Footer";
+import NoDataMessage from "../../../common/NoDataMessage";
 
 
 
@@ -115,7 +115,7 @@ const BlogsHome = () => {
                         : 
                         (
                             !trendingBlogs.length ? 
-                            <NoBlogsDataMessage message={"No Blogs Published"}/>
+                            <NoDataMessage message={"No Blogs Published"}/>
                             :
                             trendingBlogs.map((blog, index) => {
                             return (
@@ -161,7 +161,7 @@ const BlogsHome = () => {
                     (
                         !blogs.results.length ? 
                         <div className="center w-full p-5">
-                            <NoBlogsDataMessage message={"No Blogs Published"}/>
+                            <NoDataMessage message={"No Blogs Published"}/>
                         </div>
                         :
                         blogs.results.map((blog,index)=>{
@@ -189,7 +189,7 @@ const BlogsHome = () => {
                     : 
                     (
                         !trendingBlogs.length ? 
-                        <NoBlogsDataMessage message={"No Blogs Published"}/>
+                        <NoDataMessage message={"No Blogs Published"}/>
                         :
                         trendingBlogs.map((blog,index)=>{
                             return(

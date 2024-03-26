@@ -1,11 +1,11 @@
 import React from 'react'
 //import { Link } from 'react-router-dom';
-import { getDate, getFullDate } from '../../common/Date';
+import { getDate, getFullDate } from '../../../common/Date';
 
 const TrendingPodcard = ({ data ,index,onClick }) => {
-   
+
     return (
-       <div className="flex gap-5 mb-8 cursor-pointer" onClick={() => onClick(data)} >
+        <div className="flex gap-5 mb-8 cursor-pointer" onClick={() => onClick(data)} >
             <h1 className="blog-index text-primary/30">{index<10 ? (index+1) : index}</h1>
             <div className="aspect-square w-72 h-[370px] bg-white shadow hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out">
             <img className="aspect-square w-72 h-56 object-center object-cover" src={data.imageURL} alt="" />

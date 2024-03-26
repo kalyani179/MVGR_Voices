@@ -2,24 +2,15 @@ import React,{useState,useContext} from 'react'
 import axios from 'axios';
 import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { UserContext } from '../../App';
+import { UserContext } from '../../../App.jsx';
 
 import {
-  getStorage,
   ref,
   getDownloadURL,
   uploadBytesResumable,
   deleteObject,
 } from "firebase/storage";
-import {storage} from  "C:/MyLearning/MVGR_Voices/client/src/common/firebase.jsx"
-import {
-  getAllAlbums,
-  getAllArtist,
-  getAllSongs,
-  saveNewAlbum,
-  saveNewArtist,
-  saveNewSong,
-} from "./api";
+import {storage} from  "../../../common/firebase.jsx"
 import { toast, Toaster } from "react-hot-toast";
 const UploadPodcast = () => {
     //const [name, setName]=useState()

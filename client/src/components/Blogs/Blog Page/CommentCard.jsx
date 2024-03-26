@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { getDate, getFullDate } from '../../../common/Date';
+import { getDate} from '../../../common/Date';
 import { UserContext } from '../../../App';
 import {toast,Toaster} from "react-hot-toast";
 import CommentField from './CommentField';

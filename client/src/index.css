@@ -148,11 +148,11 @@ input:-webkit-autofill:active{
 }
 /* Styles for hiding scrollbar on modal content */
 
-.text-area-input::-webkit-scrollbar,.modal-content::-webkit-scrollbar {
+.text-area-input::-webkit-scrollbar,.modal-content::-webkit-scrollbar,.sidenav::-webkit-scrollbar {
     width: 0 !important;
     display: none; /* Safari and Chrome */
 }
-.text-area-input .modal-content {
+.text-area-input .modal-content ,.sidenav{
     scrollbar-width: none; /* Firefox */
 }
 body::-webkit-scrollbar{

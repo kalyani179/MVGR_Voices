@@ -69,7 +69,7 @@ const ChangePassword = () => {
         <Animation>
         <Toaster />
         
-        <div className="h-screen flex flex-col justify-center gap-5 -mt-12 -mb-1 ml-48 items-center">
+        <div className="h-screen flex flex-col justify-center gap-5 md:-mt-12 -mb-1 md:ml-48 items-center">
         <Marquee speed={"40"} direction="right">
             <div className="">
                 <h1 className="text-lg tracking-wide font text-primary font-inter">Note : Please Make Sure that your new password is atleast 6 characters long !</h1>

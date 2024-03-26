@@ -5,11 +5,11 @@ import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
 import Loader from '../common/Loader';
 import Animation from '../common/Animation';
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
-import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import FilterPaginationData from '../common/FilterPaginationData';
 import UserCard from '../components/Blogs/UserCard';
 import { SyncLoader } from 'react-spinners';
+import NoDataMessage from '../common/NoDataMessage';
 
 const BlogsSearchPage = () => {
     let {query} = useParams();
@@ -61,46 +61,44 @@ const BlogsSearchPage = () => {
                             return <Animation key={i} transition={{duration:1,dealay:i*0.08}}>
                                 <UserCard user={user} />
                             </Animation>
-                        }) : <NoBlogsDataMessage message={"No Users Found"}/>
+                        }) : <NoDataMessage message={"No Users Found"}/>
                 }
             </>
         )
     }
     return (
-        <section className="h-cover flex justify-center gap-10">
-            <div className="w-full">
-                <InPageNavigation
-                    routes = {[`search results for ${query}`,"Accounts Matched"]}
-                    defaultHidden={["Accounts Matched"]}>
-                <>
-                {
-                    blogs===null ? 
-                    <div className="center">
+        <section className="flex min-h-screen bg-cool-white justify-center gap-10">
+        <div className="w-full">
+            <InPageNavigation
+                routes={[`search results for ${query}`, "Accounts Matched"]}
+                defaultHidden={["Accounts Matched"]}
+            >
+                <div>
+                    {blogs === null ? (
+                        <div className="center">
                             <SyncLoader color="#f59a9a" margin={4} size={13} />
-                    </div>  : 
-                    (
-                        !blogs.results.length ? 
-                        <NoBlogsDataMessage message={"No Blogs Published"}/>
-                        :
-                        blogs.results.map((blog,index)=>{
-                            return(
-                                <Animation transition={{duration:1,delay:index*0.1}}>
-                                    <BlogPostCard content={blog} author={blog.author.personal_info}/>
+                        </div>
+                    ) : !blogs.results.length ? (
+                        <NoDataMessage message={"No Blogs Published"} />
+                    ) : (
+                        <div className="flex flex-wrap gap-x-24 gap-y-5"> 
+                            {blogs.results.map((blog, index) => (
+                                <Animation key={blog.id} transition={{ duration: 1, delay: index * 0.1 }}>
+                                    <BlogPostCard content={blog} author={blog.author.personal_info} />
                                 </Animation>
-                            )
-                        })
-                    )
-                }
-                <LoadMoreDataBtn state={blogs} fetchDataFunc={searchBlogs}/>
-                </>
+                            ))}
+                            <LoadMoreDataBtn state={blogs} fetchDataFunc={searchBlogs} />
+                        </div>
+                    )}
+                </div>
                 <UserCardWrapper />
-                </InPageNavigation>
-            </div>
-            <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-l border-grey pl-8 pt-3 sm:hidden">
-                <h1 className="font-medium text-lg mb-8">User related to Search <i className="fi fi-rr-user mt-1"></i></h1>
-                <UserCardWrapper />
-            </div>
-        </section>
+            </InPageNavigation>
+        </div>
+        <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-l border-white pl-8 pt-3 sm:hidden">
+            <h1 className="font-medium text-lg mb-8">User related to Search <i className="fi fi-rr-user mt-1"></i></h1>
+            <UserCardWrapper />
+        </div>
+    </section>
     )
 }
 

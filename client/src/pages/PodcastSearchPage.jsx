@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../common/Loader';
-import PodCard from "../components/Podcast/PodCard";
-import NoPodcastDataMessage from '../components/Podcast/NoPodcastDataMessage';
+import PodCard from "../components/Podcast/Podcast Home/PodCard";
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import UserCard from '../components/Blogs/UserCard';
 import { SyncLoader } from 'react-spinners';
@@ -11,6 +10,7 @@ import { SyncLoader } from 'react-spinners';
 import Animation from '../common/Animation';
 import FilterPaginationData from '../common/FilterPaginationData';
 import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
+import NoDataMessage from '../common/NoDataMessage';
 const PodcastsSearchPage = () => {
     let { query } = useParams();
     const [podcasts, setPodcasts] = useState({ results: [] });
@@ -68,7 +68,7 @@ const PodcastsSearchPage = () => {
                                 <Animation key={i} transition={{ duration: 1, dealay: i * 0.08 }}>
                                     <UserCard user={user} />
                                 </Animation>
-                            )) : <NoPodcastDataMessage message={"No Users Found"} />
+                            )) : <NoDataMessage message={"No Users Found"} />
                 }
             </>
         )
@@ -88,7 +88,7 @@ const PodcastsSearchPage = () => {
                             </div>
                         ) : (
                             !podcasts.results.length ? (
-                                <NoPodcastDataMessage message={"No Podcasts Published"} />
+                                <NoDataMessage message={"No Podcasts Published"} />
                             ) : (
                                 podcasts.results.map((podcast, index) => (
                                     <Animation key={index} transition={{ duration: 1, delay: index * 0.1 }}>

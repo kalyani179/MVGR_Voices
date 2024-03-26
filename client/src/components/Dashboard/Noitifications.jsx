@@ -4,7 +4,7 @@ import { ThemeContext } from "../../App";
 import axios from 'axios';
 import FilterPaginationData from '../../common/FilterPaginationData';
 import Loader from '../../common/Loader';
-import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
+import NoBlogsDataMessage from '../../common/NoDataMessage';
 import Animation from '../../common/Animation';
 import NotificationCard from './NotificationCard';
 import LoadMoreDataBtn from '../../common/LoadMoreDataBtn';
