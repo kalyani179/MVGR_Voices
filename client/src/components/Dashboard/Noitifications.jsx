@@ -64,7 +64,7 @@ const Noitifications = () => {
         <div className='mb-5 flex gap-3'>
             {
                 filters.map((filterName,i)=>{
-                    return <button key={i}className={`tag ${filter===filterName ? 
+                    return <button key={i}className={`tag md:py-2 ${filter===filterName ? 
                         (theme === "light" ? "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium") : ""}`} 
                         onClick={ handleFilter}>{filterName}
                     </button>
