@@ -4,7 +4,7 @@ import {toast,Toaster} from 'react-hot-toast';
 import { ThemeContext } from '../../App';
 
 const ContactForm = () => {
-    let {theme,setTheme} = useContext(ThemeContext);
+    let {theme} = useContext(ThemeContext);
     const [isFullNameFocused,setFullNameTranslated] = useState(false);
     const [isEmailFocused,setEmailTranslated] = useState(false);
     const [isMessageFocused,setMessageTranslated] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { getDate, getFullDate } from '../../../common/Date';
+import {getFullDate } from '../../../common/Date';
 
 const TrendingBlogPostCard = ({blog,index}) => {
     let {title,blog_id:id,banner,activity:{total_likes},author:{personal_info : {fullname,username,profile_img}},publishedAt} = blog;

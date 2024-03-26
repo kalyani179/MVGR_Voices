@@ -7,13 +7,13 @@ import { ThemeContext } from "../../App";
 import { BeatLoader } from "react-spinners";
 import Animation from "../../common/Animation";
 import InPageNavigation from "../Blogs/Blog Home/InPageNavigation";
-import NoPodcastDataMessage from "./NoPodcastDataMessage";
-//import TrendingBlogPostCard from "../Blogs/Blog Home/TrendingBlogPostCard";
+
 import TrendingPodcard from "./TrendingPodcard";
-//import axios from 'axios';
+
 import Footer from "../Home/Footer/Footer";
 import { UserContext } from "../../App";
 import { toast } from 'react-hot-toast';
+import NoDataMessage from "../../common/NoDataMessage";
 
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);
@@ -114,7 +114,7 @@ const Podcast = () => {
           ))
             ) : (
                 <div className="center w-full p-5">
-                    <NoPodcastDataMessage message={"No Trending Podcards Found"} />
+                    <NoDataMessage message={"No Trending Podcards Found"} />
                 </div>
             )}
 
@@ -156,7 +156,7 @@ const Podcast = () => {
                 />
               ) : (
                 <div className="center w-full p-5">
-                  <NoPodcastDataMessage message={"No Podcasts Published"} />
+                  <NoDataMessage message={"No Podcasts Published"} />
                 </div>
               )}
             </div>

@@ -5,11 +5,11 @@ import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation';
 import Loader from '../common/Loader';
 import Animation from '../common/Animation';
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
-import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import FilterPaginationData from '../common/FilterPaginationData';
 import UserCard from '../components/Blogs/UserCard';
 import { SyncLoader } from 'react-spinners';
+import NoDataMessage from '../common/NoDataMessage';
 
 const BlogsSearchPage = () => {
     let {query} = useParams();
@@ -61,7 +61,7 @@ const BlogsSearchPage = () => {
                             return <Animation key={i} transition={{duration:1,dealay:i*0.08}}>
                                 <UserCard user={user} />
                             </Animation>
-                        }) : <NoBlogsDataMessage message={"No Users Found"}/>
+                        }) : <NoDataMessage message={"No Users Found"}/>
                 }
             </>
         )
@@ -79,7 +79,7 @@ const BlogsSearchPage = () => {
                             <SyncLoader color="#f59a9a" margin={4} size={13} />
                         </div>
                     ) : !blogs.results.length ? (
-                        <NoBlogsDataMessage message={"No Blogs Published"} />
+                        <NoDataMessage message={"No Blogs Published"} />
                     ) : (
                         <div className="flex flex-wrap gap-x-24 gap-y-5"> 
                             {blogs.results.map((blog, index) => (

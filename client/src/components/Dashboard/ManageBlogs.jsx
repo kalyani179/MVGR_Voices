@@ -5,10 +5,10 @@ import FilterPaginationData from '../../common/FilterPaginationData';
 import { Toaster } from 'react-hot-toast';
 import InPageNavigation from '../Blogs/Blog Home/InPageNavigation';
 import Loader from '../../common/Loader';
-import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
 import {ManagePublishedBlogCard, ManageDraftBlogCard } from './ManageBlogCard';
 import { SyncLoader } from 'react-spinners';
+import NoDataMessage from '../../common/NoDataMessage';
 
 const ManageBlogs = () => {
     const [blogs,setBlogs] = useState(null);
@@ -93,7 +93,7 @@ const ManageBlogs = () => {
                         }
                     </> 
                     :
-                    <NoBlogsDataMessage message="No Published Blogs"/>
+                    <NoDataMessage message="No Published Blogs"/>
                 }
                 { // Drafts Blogs
                     drafts === null ? <Loader /> :
@@ -108,7 +108,7 @@ const ManageBlogs = () => {
                         }
                     </> 
                     :
-                    <NoBlogsDataMessage message="No Drafts Blogs"/>
+                    <NoDataMessage message="No Drafts Blogs"/>
                 }
             </InPageNavigation>
         </div>

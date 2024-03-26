@@ -4,11 +4,10 @@ import { UserContext } from '../../App';
 import FilterPaginationData from '../../common/FilterPaginationData';
 import { Toaster } from 'react-hot-toast';
 import InPageNavigation from '../Blogs/Blog Home/InPageNavigation';
-import Loader from '../../common/Loader';
-import NoBlogsDataMessage from '../Blogs/Blog Home/NoBlogsDataMessage';
 import Animation from '../../common/Animation';
 import { ManagePublishedPodcastCard } from './ManagePodcastCard';
 import { SyncLoader } from 'react-spinners';
+import NoDataMessage from '../../common/NoDataMessage';
 
 
 const ManagePodcasts = () => {
@@ -87,7 +86,7 @@ const ManagePodcasts = () => {
                         })
                     }
                 </> :
-                <NoBlogsDataMessage message="No Published Podcasts"/>
+                <NoDataMessage message="No Published Podcasts"/>
                 }
             </InPageNavigation>
         </div>

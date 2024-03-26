@@ -12,10 +12,10 @@ import axios from "axios";
 import { ThemeContext, UserContext } from "../../../App";
 
 import { storage} from "../../../common/firebase";
-import { getStorage,ref,getDownloadURL,uploadBytesResumable,deleteObject } from "firebase/storage";
+import { ref,getDownloadURL,uploadBytesResumable } from "firebase/storage";
 
 const BlogEditor = () => {
-  let {theme,setTheme} = useContext(ThemeContext);
+  let {theme} = useContext(ThemeContext);
   let {blog_id} = useParams();
   let blogBannerRef = useRef();
   let {blog,blog:{title,banner,content,tags,desc},setBlog,textEditor,setTextEditor,setEditorState} = useContext(EditorContext);

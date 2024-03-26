@@ -9,7 +9,7 @@ import AboutUser from '../components/Blogs/AboutUser'
 import FilterPaginationData from '../common/FilterPaginationData'
 import InPageNavigation from '../components/Blogs/Blog Home/InPageNavigation'
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
-import NoBlogsDataMessage from '../components/Blogs/Blog Home/NoBlogsDataMessage';
+import NoBlogsDataMessage from '../common/NoDataMessage';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn'
 import PageNotFound from './404Page'
 import Navbar from '../components/Home/Navbar/Navbar'

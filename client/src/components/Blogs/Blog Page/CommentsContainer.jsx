@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { BlogContext } from './BlogPage'
 import CommentField from './CommentField';
 import axios from 'axios';
-import NoBlogsDataMessage from '../Blog Home/NoBlogsDataMessage';
 import Animation from '../../../common/Animation';
 import CommentCard from './CommentCard';
+import NoDataMessage from '../../../common/NoDataMessage';
 
 export const fetchComments = async({skip=0,blog_id,setParentCommentCountFunc,commentArr=null}) => {
     let res;
@@ -48,7 +48,7 @@ const CommentsContainer = () => {
                     return <Animation key={i}>
                         <CommentCard index={i} leftVal={comment.childrenLevel*4} commentData={comment} />
                     </Animation>
-                }) : <NoBlogsDataMessage message="No Comments"/>
+                }) : <NoDataMessage message="No Comments"/>
             }
             </div>
             {

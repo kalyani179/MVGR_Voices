@@ -5,21 +5,12 @@ import { MdDelete } from "react-icons/md";
 import { UserContext } from '../../App';
 
 import {
-  getStorage,
   ref,
   getDownloadURL,
   uploadBytesResumable,
   deleteObject,
 } from "firebase/storage";
 import {storage} from  "../../common/firebase.jsx"
-import {
-  getAllAlbums,
-  getAllArtist,
-  getAllSongs,
-  saveNewAlbum,
-  saveNewArtist,
-  saveNewSong,
-} from "./api";
 import { toast, Toaster } from "react-hot-toast";
 const UploadPodcast = () => {
     //const [name, setName]=useState()
