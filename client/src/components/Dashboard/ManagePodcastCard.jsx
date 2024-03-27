@@ -22,13 +22,13 @@ const PodcastStats = ({stats}) => {
     )
 }
 
-const ManagePublishedPodcastCard = ({podcast}) => {
+const ManagePublishedPodcastCard = ({podcast,onClick}) => {
   const { imageURL, name, publishedAt, activity } = podcast;
   const { userAuth: { access_token } } = useContext(UserContext);
   const [showStat, setShowStat] = useState(false);
   return (
     <>
-      <div className="flex gap-10 border-b mb-6 sm:px-4 border-grey pb-6 items-center">
+      <div className="flex gap-10 border-b mb-6 sm:px-4 border-grey pb-6 items-center cursor-pointer" onClick={() => onClick(podcast)}>
         <img className="sm:hidden lg:hidden xl:block w-28 h-28 flex-none bg-grey object-cover" src={imageURL} alt="" />
         <div className="flex flex-col justify-between py-2 w-full min-w-[300px]">
             <div>

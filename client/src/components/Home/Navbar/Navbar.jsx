@@ -95,7 +95,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
       <div className={`w-full opacity-85 sm:opacity-100`}>
             <div className="flex items-center justify-between py-3 pt-2 md:px-10 px-7">
             <div className="cursor-pointer">
-                      <img width={110} height={110} src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className="filter grayscale" />
+            <img src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className={`filter grayscale w-full md:w-25 md:h-15  sm:w-20 sm:h-10`} />
             </div>
           {/* mobile screens */}
           <div className="md:hidden flex items-center justify-center gap-4">
