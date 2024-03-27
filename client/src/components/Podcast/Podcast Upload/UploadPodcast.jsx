@@ -118,7 +118,7 @@ const UploadPodcast = () => {
     return (
       <div className="bg-cool-white">
       <div className="center flex-col gap-8 h-screen">
-        <h1 className="font-semibold text-primary text-3xl tracking-wide">Upload Your Podcast Here</h1>
+        <h1 className="font-medium text-primary/90 text-2xl tracking-wide">Upload Your Podcast and Let Your Voice Be Heard!</h1>
         <div className='flex flex-col items-center bg-white justify-start p-6 rounded h-3/4 w-3/4'>
         <div className="flex w-full mb-4">
           <input
