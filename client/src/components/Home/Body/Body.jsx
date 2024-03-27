@@ -18,21 +18,21 @@ const Body = () => {
 
     const [list]=useState([
         {
-            question:'How Can I upload the Audio?',
-            answer:'you can go to the podcast section,and click on upload and provide mentioned details of the Audio.',
+            question:'Who is eligible to write blogs or upload podcasts on MVGR Voices?',
+            answer:'Anyone who is interested in sharing their ideas, expertise, or stories is welcome to contribute to MVGR Voices by writing blogs or uploading podcasts.',
             active:1
         },
         {
-            question:'How Can I write the blogs?',
-            answer:'You have the option write in the blogs section to write the blogs.'
+            "question": "How do I submit my own podcast or blog post to MVGR Voices?",
+            "answer": "Simply sign in, go to your profile, and access the dashboard. From there, you can click on 'Upload' to submit a podcast or 'Write' to create a blog. It's that easy!"
         },
         {
-            question:'How will my Audio or Blog get published?',
-            answer:'Your Audio or Blog will be reviewed by the Admin and then gets published.'
+            question:'Are there any restrictions on the type of content I can upload?',
+            answer:'While there are no specific restrictions, we encourage contributors to ensure their content is of good quality and interesting to our audience.'
         },
         {
-            question:'How Can I know if any podcast or blog published?',
-            answer:'You will get a mail to ur registered Email ID whenever a blog or podcast is published on this website.'
+            question:'Do I need to sign in to listen to podcasts or read blogs?',
+            answer:"You can access the blogs and podcasts sections without signing in, but to listen to podcasts or view blog content, you'll need to sign in."
         }
     ]);
     return (

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import {Zoom, AttentionSeeker } from "react-awesome-reveal";
 import { ThemeContext } from '../../../App';
 const MiddleSection = (props) => {
-    let {theme,setTheme} = useContext(ThemeContext);
+    let {theme} = useContext(ThemeContext);
     return (
         <div className="lg:py-32 relative text-center sm:p-5 sm:px-10">
         <AttentionSeeker effect="pulse">
@@ -27,7 +27,7 @@ const MiddleSection = (props) => {
     <Zoom>
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl tracking-wide uppercase font-merriweather font-semibold mb-4 md:mb-8 leading-normal text-primary">{props.title}</h1>
     </Zoom>
-    <p className="text-sm md:text-base lg:text-lg xl:text-lg tracking-wide w-full md:w-[90.5%] lg:w-[90.5%]">{props.description}</p>
+    <p className="text-sm md:text-base lg:text-xl xl:text-xl tracking-wide w-full md:w-[90.5%] lg:w-[90.5%]">{props.description}</p>
 </div>
 
         </div>
