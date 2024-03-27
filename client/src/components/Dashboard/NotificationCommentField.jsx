@@ -34,10 +34,14 @@ const NotificationCommentField = ({_id,blog_author,index=undefined, replyingTo=u
     return (
         <>
         <Toaster />
+        <div className='flex flex-col'>
             <textarea value={comment} onChange={(e)=>setComment(e.target.value)} placeholder="Leave a reply..." className="input-box pl-5 placeholder:text-dark-grey resize-none h-[150px] overflow-auto"></textarea>
-            <div className="absolute right-14">
-                <button onClick={handleComment} className="btn-purple mt-5 px-10">Reply</button>
+            <div className="relative">
+                <button onClick={handleComment} className="btn-purple mt-2 px-10">Reply</button>
             </div>
+
+        </div>
+            
 
         </>
     )

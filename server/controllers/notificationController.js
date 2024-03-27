@@ -1,4 +1,3 @@
-
 import Notification from "../models/NotificationSchema.js";
 
 const newNotification = async(req, res) => {
@@ -23,8 +22,9 @@ const notifications = async(req, res) => {
     let maxLimit = 10;
     let findQuery = { notification_for: user_id, user: { $ne: user_id } };
     let skipDocs = (page - 1) * maxLimit;
-
-    if (filter != 'all') {
+    if (filter === 'like') {
+        findQuery.type = { $in: ['like', 'like-podcast'] };
+    } else if (filter !== 'all') {
         findQuery.type = filter;
     }
 

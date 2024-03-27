@@ -7,6 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 import { motion } from 'framer-motion';
 import { UserContext } from '../../../App';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState }) => {
   const { userAuth } = useContext(UserContext);
@@ -93,13 +94,22 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
             <img src={selectedSong.imageURL} alt={selectedSong.name} className="w-40 h-20 rounded-md object-cover" />
             <div className="flex items-start flex-col">
               <p className="text-xl text-headingColor font-semibold">{selectedSong.name}</p>
+              <div className='flex gap-1 mb-3'>
+                <img src={selectedSong.author.personal_info.profile_img}  className='w-6 h-6 flex-none rounded-full' alt="User Profile" />
+                <Link to={`/user/${selectedSong.author.personal_info.username}`} className='mx-1 text-black underline'>@{selectedSong.author.personal_info.username}</Link>
+                        
+               </div> 
+              
               <div className="flex items-center gap-1">
                 <button onClick={handleLikeClick} className={`w-10 h-10 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>
                   <i className={`fi ${isLiked ? 'fi-sr-heart text-red' : 'fi-rr-heart'}`}></i>  
                 </button>
                 <p className="tex-xl text-dark-grey">{likesCount}</p>
               </div>
-            </div>
+
+              </div>
+            
+            
           </>
         )}
         <div className="flex-1">

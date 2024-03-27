@@ -36,6 +36,10 @@ const podSchema = mongoose.Schema({
             type: Number,
             default: 0
         },
+        total_plays: {
+            type: Number,
+            default: 0
+        },
     },
 
 }, {
