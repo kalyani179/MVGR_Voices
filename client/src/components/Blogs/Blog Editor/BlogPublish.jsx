@@ -162,7 +162,7 @@ const BlogPublish = () => {
                 <p className="mt-1 text-dark-grey text-sm text-right">{characterLimit - desc.length} characters left</p>
 
                 <p className="blog-label">
-                    Topics - (Helps in searching and ranking your blog post)
+                    Categories - (Helps in searching and ranking your blog post)
                 </p>
                 <select
                 className="select-category w-full p-3 rounded-md text-base font-medium outline-none shadow-sm border border-gray-300 bg-transparent mb-5"
