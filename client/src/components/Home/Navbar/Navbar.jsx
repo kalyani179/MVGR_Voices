@@ -100,12 +100,33 @@ const Navbar = ({home=1,activeLink="Home"}) => {
           {/* mobile screens */}
           <div className="md:hidden flex items-center justify-center gap-4">
               <div className="flex gap-3">
-              <div>
+              {/* search button */}
+                <div className={`${activeLink==="Blogs" || activeLink==="Podcasts" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
+                  <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2 md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
+                  <input 
+                      type='text'
+                      placeholder='Search'
+                      className='w-full realtive md:w-auto bg-grey sm:bg-white p-3 pl-6 pr-[12%] md:pr-6 rounded-full md:pl-12 text-black'
+                      onKeyDown={activeLink==="Podcasts" ? handlePodcastSearch : handleBlogSearch}
+                  />
+                  <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-2 md:top-3 md:pointer-events-none md:left-5 text-lg text-dark-grey"></i>
+                </div>
+                    <Link>
+                        <button className="md:hidden bg-grey rounded-full w-11 h-11 sm:w-8 sm:h-8 center"
+                        onClick={()=>setSearchBoxVisibility(!searchBoxVisibility)}
+                        >
+                            <i className="fi fi-rr-search block text-sm mt-1"></i>
+                        </button>
+                    </Link>
+                </div>
+
+                  {/* theme button */}
+                <div>
                   <button onClick={changeTheme} className={`rounded-full w-11 h-11 sm:w-8 sm:h-8 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                           <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl sm:text-sm block mt-1`}></i>
                   </button>
                 </div>
-
+                  {/* Notifications */}
                 <div>
                   <Link to="dashboard/notifications">
                     <button  className={`rounded-full w-11 h-11 sm:w-8 sm:h-8 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
@@ -156,7 +177,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
             {/* larger screens */}
               <div className="sm:z-40 sm:mt-20 sm:fixed sm:right-0">
                 <ul className={`md:flex ${theme==="light"?"sm:bg-black":"sm:bg-white"} sm:pr-10 md:items-center sm:pt-12 sm:pb-20 sm:-mt-20 ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] md:right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in sm:min-h-screen ${open ? "right-0":" right-[-200px]" }`} >
-                <div className={`${activeLink==="Blogs" || activeLink==="Podcasts" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
+                <div className={`sm:hidden ${activeLink==="Blogs" || activeLink==="Podcasts" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
                   <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2  md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                   <input 
                       type='text'
