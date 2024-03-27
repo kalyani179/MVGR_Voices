@@ -4,7 +4,7 @@ import axios from 'axios';
 import Loader from '../common/Loader';
 import PodCard from "../components/Podcast/Podcast Home/PodCard";
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
-import UserCard from '../components/Blogs/UserCard';
+import UserCard from '../components/Blogs/Blog Page/UserCard';
 import { SyncLoader } from 'react-spinners';
 
 import Animation from '../common/Animation';

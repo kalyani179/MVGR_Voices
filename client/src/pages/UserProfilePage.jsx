@@ -125,7 +125,7 @@ const UserProfilePage = () => {
                 profile_username.length ?
                 <>
                 <section className="h-cover bg-cool-white md:flex flex-row-reverse items-start gap-5 min-[1100px]:gap-12">
-                    <div className="flex flex-col mt-10 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-white md:sticky md:top-[100px] md:py-10">
+                    <div className="flex flex-col mt-10 sm:mt-20 sm:items-center gap-5 min-w-[250px] md:w-[50%] md:pl-14 md:border-l md:border-white md:sticky md:top-[100px] md:py-10">
                         <img src={profile_img} className="w-48 h-48 bg-grey rounded-full md:w-32 md:h-32" alt="profile"/>
                         <h1 className="text-2xl font-medium">@{profile_username}</h1>
                         <p className="text-xl capitalize h-6">{fullname}</p>

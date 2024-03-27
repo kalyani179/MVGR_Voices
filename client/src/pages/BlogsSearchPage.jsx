@@ -7,7 +7,7 @@ import Animation from '../common/Animation';
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import FilterPaginationData from '../common/FilterPaginationData';
-import UserCard from '../components/Blogs/UserCard';
+import UserCard from '../components/Blogs/Blog Page/UserCard';
 import { SyncLoader } from 'react-spinners';
 import NoDataMessage from '../common/NoDataMessage';
 
