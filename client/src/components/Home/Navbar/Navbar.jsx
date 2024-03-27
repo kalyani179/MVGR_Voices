@@ -97,17 +97,59 @@ const Navbar = ({home=1,activeLink="Home"}) => {
             <div className="cursor-pointer">
                       <img width={110} height={110} src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className="filter grayscale" />
             </div>
-            
-                <div className="fixed right-16 md:hidden top-2.5">
+          {/* mobile screens */}
+              <div className="fixed flex gap-3 right-16 md:hidden top-2.5">
+              <div>
                   <button onClick={changeTheme} className={`rounded-full w-11 h-11 sm:w-8 sm:h-8 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                           <i className={`fi fi-rr-${theme === "light" ? "moon-stars" :"brightness"} ${home===1? "text-white" : "text-black"} text-xl sm:text-sm block mt-1`}></i>
                   </button>
                 </div>
+
+                <div>
+                  <Link to="dashboard/notifications">
+                    <button  className={`rounded-full w-11 h-11 sm:w-8 sm:h-8 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                 
-              <div onClick={()=>setOpen(!open) } className="text-white fixed right-8 top-6 sm:top-4 z-50 cursor-pointer md:hidden" >
-                <i className={`fi ${!open? "fi-ss-menu-burger" : "fi-rs-circle-xmark text-xl text-black" } ${theme==="light" ? home===1 ? "text-white":"text-black" :"text-black"}`}></i>
-                  {/* <ion-icon name={open ?"close":"menu"}></ion-icon> */}
+                      <i className={`fi fi-rr-bell sidebar-icon text-xl sm:text-sm block mt-1 ${home===1? "text-white" : "text-black"}`}></i>
+                      {
+                        new_notification_available ?<span className="bg-red w-3 h-3 rounded-full absolute z-10 top-2 right-2"></span>:""
+                      }
+                    </button>
+                  </Link>
+                  </div>
+                  <div className="z-50">  
+                      {
+                        access_token ? 
+                        <>
+                        <div className="z-40" onClick={()=>setUserNavPanel(!userNavPanel)} onBlur={()=>{setTimeout(()=>setUserNavPanel(false),200)}}>
+                        <button className={`w-11 h-11 sm:w-7 sm:h-7 mt-0.5 rounded-full ${activeLink==="profile" ? "border-2 border-primary" : ""}`}>
+                            <img className="w-full h-full object-cover rounded-full" src={profile_img} alt="profile"/>
+                        </button>
+                        {
+                            userNavPanel ? <UserNavigationPanel /> : ""
+                        }
+                        
+                      </div>
+                        </>
+                        : 
+                        <>
+                        
+                          
+                          <button onClick={()=>setShowSignin(true)} className={`btn-purple ${theme === "light" ? "text-white" : "text-black"} md:text-xl sm:text-xs font-inter tracking-wide`}>Sign In</button>
+                        
+                          {/* <button onClick={()=>setShowSignup(true)} className="btn-purple md:text-xl sm:text-sm font-inter tracking-wide">Sign Up</button> */}
+                        
+                        </>
+                      }              
+                  </div>   
+                
               </div>
+
+              <div onClick={()=>setOpen(!open) } className="text-white fixed right-8 top-6 sm:top-4 z-50 cursor-pointer md:hidden" >
+                  <i className={`fi ${!open? "fi-ss-menu-burger" : "fi-rs-circle-xmark text-xl text-black" } ${theme==="light" ? home===1 ? "text-white":"text-black" :"text-black"}`}></i>
+                    {/* <ion-icon name={open ?"close":"menu"}></ion-icon> */}
+              </div>
+
+            {/* larger screens */}
               <div className="sm:z-40 sm:fixed sm:right-0">
                 <ul className={`md:flex ${theme==="light"?"sm:bg-black":"sm:bg-white"} sm:pr-10 md:items-center sm:pt-10 sm:pb-20 sm:-mt-20 ${theme==="light" ? "text-white" : "text-black"} md:pb-0 pb:12 absolute md:static md:z-auto z-[-1] md:right-0 md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in sm:min-h-screen ${open ? "right-0":" right-[-200px]" }`} >
                 <div className={`${activeLink==="Blogs" || activeLink==="Podcasts" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
@@ -151,20 +193,19 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                   </div>
 
                   {/* Notifiactions */}
-                  <div className="ml-4">
+                  <div className="ml-4 sm:hidden">
                   <Link to="dashboard/notifications">
                     <button  className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
-                     
+                
                       <i className={`fi fi-rr-bell sidebar-icon text-xl block mt-1 ${home===1? "text-white" : "text-black"}`}></i>
                       {
                         new_notification_available ?<span className="bg-red w-3 h-3 rounded-full absolute z-10 top-2 right-2"></span>:""
                       }
-                     
                     </button>
                   </Link>
                   </div>
                   
-                  <div className="md:ml-8 space-x-3 sm:mr-6">  
+                  <div className="md:ml-8 sm:hidden space-x-3 sm:mr-6">  
                       {
                         access_token ? 
                         <>

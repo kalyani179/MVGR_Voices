@@ -19,7 +19,7 @@ const Body = () => {
     const [list]=useState([
         {
             question:'Who is eligible to write blogs or upload podcasts on MVGR Voices?',
-            answer:'Anyone who is interested in sharing their ideas, expertise, or stories is welcome to contribute to MVGR Voices by writing blogs or uploading podcasts.',
+            answer:'Anyone who is interested in sharing their ideas, expertise, or stories are welcome to contribute to MVGR Voices by writing blogs or uploading podcasts.',
             active:1
         },
         {
@@ -44,7 +44,7 @@ const Body = () => {
                 <div className={`absolute inset-0 ${theme === "light" ? "background" : "background"}`}>
                     <Navbar />
                     <div className="center flex-col gap-8 md:mt-11">
-                        <h1 className={`text-3xl md:text-5xl lg:text-6xl xl:text-6xl ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-32 tracking-wider text-center opacity-80`}>
+                        <h1 className={`text-3xl md:text-5xl lg:text-6xl xl:text-6xl ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-32 tracking-wider text-center`}>
                             Welcome to <span className="text-3xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold ml-2 text-primary tracking-normal">MVGR VOICES</span>
                         </h1>
                         <p className={`sm:text-xs text-base md:text-lg lg:text-xl ${theme === "light" ? "text-white" : "text-black"} font-semibold tracking-widest uppercase text-center opacity-80`}>
