@@ -75,7 +75,7 @@ const PodcastsSearchPage = () => {
     }
 
     return (
-        <section className="h-cover flex justify-center gap-10">
+        <section className="h-cover bg-cool-white flex justify-center gap-5">
             <div className="w-full">
                 <InPageNavigation
                     routes={[`search results for ${query}`, "Accounts Matched"]}
@@ -105,7 +105,7 @@ const PodcastsSearchPage = () => {
                     <UserCardWrapper />
                 </InPageNavigation>
             </div>
-            <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-l border-grey pl-8 pt-3 sm:hidden">
+            <div className="min-w-[40%] lg:min-w-[350px] max-w-min border-l border-white pl-8 pt-3 sm:hidden">
                 <h1 className="font-medium text-lg mb-8">User related to Search <i className="fi fi-rr-user mt-1"></i></h1>
                 <UserCardWrapper />
             </div>

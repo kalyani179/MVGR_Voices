@@ -8,7 +8,7 @@ let Platforms = [
 ]
 let Links = [
   {name:"Home",link:"/"},
-  {name:"Podcasts",link:"/podcast"},
+  {name:"Podcasts",link:"/podcasts"},
   {name:"Blogs",link:"/blogs"},
   {name:"Contact",link:"/contact"}
 ]

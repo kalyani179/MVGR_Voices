@@ -49,13 +49,13 @@ const Navbar = ({home=1,activeLink="Home"}) => {
   const handlePodcastSearch = (e) => {
     let query = e.target.value;
     if(e.keyCode === 13){
-        navigate(`podcast/search/${query}`)
+        navigate(`podcasts/search/${query}`)
     }
 }
 
   let Links=[
     {name:"Home",link:"/"},
-    {name:"Podcasts",link:"/podcast"},
+    {name:"Podcasts",link:"/podcasts"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/contact"},
     {name:"Subscribe"},
@@ -100,7 +100,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     />
       <div className="flex">
       <div className={`w-full opacity-85 sm:opacity-100`}>
-            <div className="flex items-center justify-between py-3 pt-2 md:px-10 px-7">
+            <div className="flex items-center justify-between py-3 pt-2 px-7">
             <div className="cursor-pointer">
             <img src={`${theme==="light" ? home===1 ? logo :  logoDark : logo}`} alt="Logo" className={`filter grayscale w-full md:w-28 md:h-14  sm:w-14 sm:h-7`} />
             </div>

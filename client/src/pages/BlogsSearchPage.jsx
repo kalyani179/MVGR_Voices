@@ -67,7 +67,7 @@ const BlogsSearchPage = () => {
         )
     }
     return (
-        <section className="flex min-h-screen bg-cool-white justify-center gap-10">
+        <section className="flex min-h-screen bg-cool-white justify-center gap-5">
         <div className="w-full">
             <InPageNavigation
                 routes={[`search results for ${query}`, "Accounts Matched"]}

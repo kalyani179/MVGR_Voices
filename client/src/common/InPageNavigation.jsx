@@ -17,7 +17,7 @@ const InPageNavigation = ({manageBlogs=false,managePodcasts=false,routes,default
     },[width])
     return (
         <>
-            <div className={`relative mb-8 border-b ${manageBlogs || managePodcasts?"border-grey":"border-white/80"} flex flex-nowrap overflow-x-auto`}>
+            <div className={`relative mb-8 border-b ${manageBlogs || managePodcasts ?"border-grey":"border-b border-white"} flex flex-nowrap overflow-x-auto`}>
                 {
                     routes.map((route,index)=>{
                         return(

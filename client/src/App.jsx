@@ -67,8 +67,8 @@ const App = () => {
               <Route path="/contact" element={<Contact />}/>
 
               <Route path="/" element={<PodsNavbar />}>
-                <Route path="podcast" element={<Podcast />} />
-                <Route path="podcast/search/:query" element={<PodcastSearchPage />}/>
+                <Route path="podcasts" element={<Podcast />} />
+                <Route path="podcasts/search/:query" element={<PodcastSearchPage />}/>
               </Route>
               <Route path='/upload' element={<UploadPodcast />} />
 
