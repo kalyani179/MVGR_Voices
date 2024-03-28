@@ -128,7 +128,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                 </div>
                   {/* Notifications */}
                 <div>
-                  <Link to="dashboard/notifications">
+                  <Link to="/dashboard/notifications">
                     <button  className={`rounded-full w-11 h-11 sm:w-8 sm:h-8 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                 
                       <i className={`fi fi-rr-bell sidebar-icon text-xl sm:text-sm block mt-1 ${home===1? "text-white" : "text-black"}`}></i>
@@ -219,7 +219,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
 
                   {/* Notifiactions */}
                   <div className="ml-4 sm:hidden">
-                  <Link to="dashboard/notifications">
+                  <Link to="/dashboard/notifications">
                     <button  className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                 
                       <i className={`fi fi-rr-bell sidebar-icon text-xl block mt-1 ${home===1? "text-white" : "text-black"}`}></i>
