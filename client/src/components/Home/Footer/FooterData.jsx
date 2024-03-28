@@ -1,39 +1,61 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from "../../../assets/icons/logo.png"
 
 let Platforms = [
     {name:"Spotify",icon:"fi fi-brands-spotify",link:"https://open.spotify.com/show/6J8UPeMRykeUM5f08vgkSg"},
-    {name:"Google",icon:"",link:""},
-    {name:"Apache",icon:"",link:""}
+    {name:"Google",icon:"fi fi-brands-google",link:""},
+]
+let Links = [
+  {name:"Home",link:"/"},
+  {name:"Podcasts",link:"/podcast"},
+  {name:"Blogs",link:"/blogs"},
+  {name:"Contact",link:"/contact"}
 ]
 const FooterData = () => {
   return (
-    <footer className="py-4 relative overflow-hidden bg-primary">
+    <footer className="py-4 text-white relative overflow-hidden bg-primary">
 
-    <div className="center gap-10">
+    <div className="center justify-around">
+    <img className="w-36 h-20" src={logo} alt="Logo" />
+
+      <div class="h-20 border-l border-grey/70"></div>
         {/* Subscribe */}
         <div className="center gap-10">
-            <h1 className="text-white">SUBSCRIBE ON</h1>
+            <h1 className="text-white font-medium font-gelasio text-xl tracking-wide">SUBSCRIBE ON</h1>
             {
                 Platforms.map((platform,i)=>{
                     return (
-                        <Link to={`${platform.link}`} target="_blank" key={i} className="border border-white flex flex-row gap-3 p-2">
+                        <Link to={`${platform.link}`} target="_blank" key={i} className="border border-white flex flex-row gap-3 p-2 px-3">
                             <i className={`${platform.icon} text-white`}></i>
-                            <h1 className="text-white">{platform.name}</h1>
+                            <h1 className="text-white font-merriweather">{platform.name}</h1>
                         </Link>
                     );
                 })
             }
         </div>
-        {/* Social icons */}
-        <div className="flex items-center mt-4 md:mt-0">
-        
+        <div class="h-20 border-l border-grey/70"></div>
+      <div className="center flex-col gap-5">
+        <div className="flex gap-3 font-medium tracking-wide text-2xl text-grey/80">
+          {
+            Links.map((link,i)=>{
+              return (
+                <div key={i} className="flex gap-3">
+                  <a href={link.link} className="hover:text-white font-gelasio">{link.name}</a>
+                  <p className={`text-grey/50 ${link.name==="Contact" ? "hidden" : ""}`}>|</p>
+                </div>
+              )
+            })
+          }
+
         </div>
+      
       </div>
-      {/* Copyright notice */}
-      <div className="text-center text-gray-300 text-sm my-5 mt-10">
-        © 2024 MVGR VOICES. All rights reserved.
       </div>
+        {/* Copyright notice */}
+        <div className="text-center text-grey/70 text-xs my-5 mt-10">
+          © 2024 MVGR VOICES All Rights Reserved
+        </div>
     </footer>
   );
 }
