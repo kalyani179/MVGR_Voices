@@ -16,7 +16,7 @@ const FooterData = () => {
   return (
     <footer className="py-4 text-white relative overflow-hidden bg-primary">
 
-    <div className="center justify-around">
+    <div className="center justify-around mx-5">
     <img className="w-36 h-20" src={logo} alt="Logo" />
 
       <div class="h-20 border-l border-grey/70"></div>
@@ -26,7 +26,7 @@ const FooterData = () => {
             {
                 Platforms.map((platform,i)=>{
                     return (
-                        <Link to={`${platform.link}`} target="_blank" key={i} className="border border-white flex flex-row gap-3 p-2 px-3">
+                        <Link to={`${platform.link}`} target="_blank" key={i} className="border border-white flex flex-row gap-3 p-2 px-3 hover:bg-grey/15">
                             <i className={`${platform.icon} text-white`}></i>
                             <h1 className="text-white font-merriweather">{platform.name}</h1>
                         </Link>
@@ -53,8 +53,8 @@ const FooterData = () => {
       </div>
       </div>
         {/* Copyright notice */}
-        <div className="text-center text-grey/70 text-xs my-5 mt-10">
-          © 2024 MVGR VOICES All Rights Reserved
+        <div className="text-center text-grey/70 text-sm my-5 mt-10">
+          <span className="rotate-180 inline-block">&copy;</span>  2024 MVGR VOICES All Rights Reserved
         </div>
     </footer>
   );

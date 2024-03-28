@@ -58,18 +58,18 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     {name:"Podcasts",link:"/podcast"},
     {name:"Blogs",link:"/blogs"},
     {name:"Contact",link:"/contact"},
-    {name:"Subscribe",link:""},
+    {name:"Subscribe"},
   ];
   const handleLinkClick = ({link}) =>{
     // if(!access_token) {
     //   toast.error("Please Sign In to Access " + link.name.charAt(0).toUpperCase() + link.name.slice(1)+"!");
     // }else{
       // setActiveLink(link.name);
+      if (link.name === "Subscribe") {
+        window.scrollTo(0, document.body.scrollHeight);
+      }
       navigate(link.link);
     // }
-    if (link.name === "Subscribe") {
-      window.scrollTo(0, document.body.scrollHeight);
-    }
   }
   const handleNotificationClick=()=>{
     if(!access_token) {
