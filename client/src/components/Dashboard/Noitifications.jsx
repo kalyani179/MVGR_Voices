@@ -58,7 +58,7 @@ const Noitifications = () => {
         setNotifications(null);
     }
 
-  return (
+return (
     <div className="md:ml-56 mt-24 sm:ml-5 sm:center flex-col">
         {/* <h1 className='max-md:hidden'> Recent Notifications </h1> */}
         <div className='mb-5 flex gap-3'>

@@ -71,6 +71,13 @@ const Navbar = ({home=1,activeLink="Home"}) => {
       window.scrollTo(0, document.body.scrollHeight);
     }
   }
+  const handleNotificationClick=()=>{
+    if(!access_token) {
+      toast.error("Please Sign In to Access Notifications!");
+    }else{
+      navigate("/dashboard/notifications");
+    }
+  }
   const changeTheme = () => {
     let newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
@@ -219,15 +226,15 @@ const Navbar = ({home=1,activeLink="Home"}) => {
 
                   {/* Notifiactions */}
                   <div className="ml-4 sm:hidden">
-                  <Link to="/dashboard/notifications">
-                    <button  className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
+                  
+                    <button onClick={handleNotificationClick} className={`rounded-full w-11 h-11 hover:bg-black/10 ${home===1 ? "bg-black/20" : "bg-grey/90"} relative`}>
                 
                       <i className={`fi fi-rr-bell sidebar-icon text-xl block mt-1 ${home===1? "text-white" : "text-black"}`}></i>
                       {
                         new_notification_available ?<span className="bg-red w-3 h-3 rounded-full absolute z-10 top-2 right-2"></span>:""
                       }
                     </button>
-                  </Link>
+                  
                   </div>
                   
                   <div className="md:ml-8 sm:hidden space-x-3 sm:mr-6">  

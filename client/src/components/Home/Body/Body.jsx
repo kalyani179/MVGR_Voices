@@ -7,7 +7,7 @@ import MiddleSection from './MiddleSection';
 import Content from './Content';
 import { ThemeContext } from '../../../App';
 
-import ReviewCarousel from '../Review Carousel/Carousel';
+import ReviewCarousel from '../Review Carousel/ReviewCarousel';
 import FeedbackForm from '../Review Carousel/FeedBackForm';
 import Footer from '../Footer/Footer';
 
@@ -72,7 +72,7 @@ const Body = () => {
     </Fade>
 </div>                   
 
-<div className={`${theme==="light" ? "bg-black" : "bg-white"} flex flex-col md:flex-row px-6 md:px-20 mb-6 md:mb-20 py-4 md:py-8 items-center justify-center`}>
+<div className={`${theme==="light" ? "bg-black" : "bg-white"} flex flex-col md:flex-row px-6 md:px-20 pb-6 md:pb-20 py-4 md:py-8 items-center justify-center`}>
     <Zoom>
         <div className="list">
             {
