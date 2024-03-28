@@ -110,7 +110,7 @@ const BlogsHome = () => {
                     <div className="flex justify-around">
                     {trendingBlogs === null ? 
                         <div className="center w-full">
-                            <SyncLoader color="#f59a9a" margin={4} />
+                            <SyncLoader color="#f59a9a" margin={6} />
                         </div>
                         : 
                         (
@@ -156,7 +156,7 @@ const BlogsHome = () => {
                 {
                     blogs===null ? 
                     <div className="center w-full">
-                            <SyncLoader color="#f59a9a" margin={4} />
+                            <SyncLoader color="#f59a9a" margin={6} />
                     </div> : 
                     (
                         !blogs.results.length ? 
@@ -184,7 +184,7 @@ const BlogsHome = () => {
                 {
                     trendingBlogs===null ?  
                     <div className="center w-full">
-                            <SyncLoader color="#f59a9a" margin={4} />
+                            <SyncLoader color="#f59a9a" margin={6} />
                     </div>
                     : 
                     (

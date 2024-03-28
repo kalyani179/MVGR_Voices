@@ -81,7 +81,7 @@ const ManagePodcasts = () => {
             <InPageNavigation managePodcasts={true} routes={["Published Podcasts"]}>
                 {podcasts === null ? (
                     <div className="center">
-                        <SyncLoader color="#f59a9a" margin={4} />
+                        <SyncLoader color="#f59a9a" margin={6} />
                     </div>
                 ) : podcasts.results.length ?
                     <>

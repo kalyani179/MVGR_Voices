@@ -4,7 +4,7 @@ import PodCard from './PodCard';
 import { motion } from "framer-motion";
 import PodcastPlayer from "../Podcast Player/PodcastPlayer";
 import { ThemeContext } from "../../../App";
-import { BeatLoader } from "react-spinners";
+import { BeatLoader, SyncLoader } from "react-spinners";
 import Animation from "../../../common/Animation";
 import InPageNavigation from "../../../common/InPageNavigation";
 
@@ -193,7 +193,7 @@ const Podcast = () => {
             <div className=" ">
               {loading ? (
                 <div className="center">
-                  <BeatLoader color="#f59a9a" margin={4} />
+                  <SyncLoader color="#f59a9a" margin={6} />
                 </div>
               ) : filteredSongs.length > 0 ? (
                 <SongContainer

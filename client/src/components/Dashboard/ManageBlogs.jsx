@@ -79,7 +79,7 @@ const ManageBlogs = () => {
                 { // Published Blogs
                     blogs === null ? 
                         <div className="center">
-                            <SyncLoader color="#f59a9a" margin={4} />
+                            <SyncLoader color="#f59a9a" margin={6} />
                         </div>
                     :
                     blogs.results.length ? 
