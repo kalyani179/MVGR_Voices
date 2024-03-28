@@ -51,9 +51,6 @@ const Body = () => {
                             It's the best platform for Students to share their cool stories in podcasts and blogs.
                         </p>
                     </div>
-
-
-
                 </div>
             </div>
             <div className={`${theme==="light" ? "bg-black" : "bg-white"}`}>
