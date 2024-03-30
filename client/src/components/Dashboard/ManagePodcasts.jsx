@@ -32,6 +32,7 @@ const ManagePodcasts = () => {
                 countRoute: "/user-uploaded-podcasts-count",
                 data_to_send: { query }
             });
+            console.log(formattedData);
             setPodcasts(formattedData);
         } catch (err) {
             console.log(err);
@@ -43,30 +44,26 @@ const ManagePodcasts = () => {
         setQuery(searchQuery);
         if (e.keyCode === 13 && searchQuery.length) {
             setPodcasts(null);
-
         }
     }
+
     const handleChange = (e) => {
         if (!e.target.value.length) {
             setQuery("");
             setPodcasts(null);
-
         }
     }
+
     useEffect(() => {
-        if (access_token) {
-            if (podcasts === null) {
-                getPodcasts({ page: 1 })
-            }
-
+        if (access_token && podcasts === null) {
+            getPodcasts({ page: 1 });
         }
-    }, [access_token, podcasts, query])
+    }, [access_token, podcasts, query]);
 
-    const handlePodcastSelect = (podcast) => {
-        console.log("Selected Podcast:", podcast);
+    const handlePodcastClick = (podcast) => {
+        console.log("Selected Podcast ID:", podcast._id);
         setSelectedPodcast(podcast);
-    }
-    
+    };
 
     return (
         <div className="md:ml-56 mt-24 sm:ml-5">
@@ -85,18 +82,16 @@ const ManagePodcasts = () => {
                     </div>
                 ) : podcasts.results.length ?
                     <>
-                        {
-                            podcasts.results.map((podcast, i) => {
-                                return <Animation key={i} transition={{ delay: i * 0.04 }}>
-                                    <ManagePublishedPodcastCard podcast={{ ...podcast, index: i, setStateFunc: setPodcasts }} onClick={() => handlePodcastSelect(podcast)} />
-                                </Animation>
-                            })
-                        }
+                        {podcasts.results.map((podcast, i) => (
+                            <Animation key={i} transition={{ delay: i * 0.04 }}>
+                                <ManagePublishedPodcastCard podcast={{ ...podcast, index: i, setStateFunc: setPodcasts }} onClick={() => handlePodcastClick(podcast)} />
+                            </Animation>
+                        ))}
                     </> :
                     <NoDataMessage message="No Published Podcasts" />
                 }
             </InPageNavigation>
-            {selectedPodcast !== null && (
+            {selectedPodcast && (
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -111,7 +106,7 @@ const ManagePodcasts = () => {
                 </motion.div>
             )}
         </div>
-    )
-}
+    );
+};
 
 export default ManagePodcasts;

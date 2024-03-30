@@ -98,7 +98,7 @@ const Podcast = () => {
     // Handle errors
     console.error('Error incrementing play count:', error);
     // Display an error message to the user
-    toast.error('Failed to increment play count.');
+    //toast.error('Failed to increment play count.');
   }
     let songsInCategory = [];
     if (pageState !== "home") {
@@ -148,7 +148,7 @@ const Podcast = () => {
   return (
     <Animation>
       <section className="h-cover md:px-[4vw] flex flex-col justify-center gap-5 bg-cool-white">
-            <div className="flex flex-col">
+            <div className="flex flex-col sm:hidden max-md:hidden">
                 <h1 className="font-medium text-xl text-primary mb-8 tracking-wide">
                   Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
@@ -187,8 +187,8 @@ const Podcast = () => {
 
         <div className="w-full bg-cool-white">
           <InPageNavigation
-            routes={[pageState,"trending blogs"]}
-            defaultHidden={["trending blogs"]}
+            routes={[pageState,"trending podcasts"]}
+            defaultHidden={["trending podcasts"]}
           >
             <div className=" ">
               {loading ? (
@@ -207,6 +207,20 @@ const Podcast = () => {
                 </div>
               )}
             </div>
+            <div >
+                {trendingPodcards && trendingPodcards.length > 0 ? (
+          trendingPodcards.map((podcard, index) => (
+              <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
+                  <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
+              </Animation>
+          ))
+            ) : (
+                <div className="center w-full p-5">
+                    <NoDataMessage message={"No Trending Podcards Found"} />
+                </div>
+            )}
+
+                </div>
           </InPageNavigation>
           {selectedSongIndex !== null && (
             <motion.div
