@@ -215,54 +215,61 @@ body::-webkit-scrollbar{
 
 .bg-wave {
     height: 100px;
+    position: absolute;
+    top: 95px;
+    left:0;
+    width: 100%;
     background-size: 1000px 1000px;
     background: url(./assets/images/Home/FooterBG.png);
 }
 
-
 .bg-wave1 {
-    animation: animate 30s linear infinite;
     z-index: 10;
-    opacity: 0.9;
-    animation-delay: 0s;
+    opacity: 1;
+    bottom: 0;
+    animation: animate 10s linear infinite; /* Adjust duration for a slower wave */
+    animation-delay: -10s;
 }
 
 .bg-wave2 {
-    animation: animate2 20s linear infinite;
     z-index: 9;
-    opacity: 0.3;
-    animation-delay: -1s;
+    opacity: 0.5;
+    bottom: 10px;
+    animation: animate2 4s linear infinite; /* Adjust duration for a slower wave */
+    /* animation-delay: -2s; Adjust delay */
 }
 
 .bg-wave3 {
-    animation: animate 30s linear infinite;
     z-index: 10;
-    opacity: 0.6;
-    animation-delay: -2s;
+    opacity: 0.3;
+    bottom: 15px;
+    animation: animate 3s linear infinite; /* Adjust duration for a slower wave */
 }
 
 .bg-wave4 {
-    animation: animate2 20s linear infinite;
     z-index: 9;
     opacity: 0.7;
-    animation-delay: -5s;
+    bottom: 20px;
+    animation: animate2 8s linear infinite; /* Adjust duration for a slower wave */
+    /* animation-delay: -1s; Adjust delay */
 }
+
 
 @keyframes animate {
     0% {
-        background-position-x: 0;
+        background-position-x: 1000px;
     }
     100% {
-        background-position-x: 1000px;
+        background-position-x: 0px;
     }
 }
 
 @keyframes animate2 {
     0% {
-        background-position-x: 0;
+        background-position-x: 0px;
     }
     100% {
-        background-position-x: -1000px;
+        background-position-x: 1000px;
     }
 }
 

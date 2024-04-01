@@ -4,7 +4,7 @@ import PodCard from './PodCard';
 import { motion } from "framer-motion";
 import PodcastPlayer from "../Podcast Player/PodcastPlayer";
 import { ThemeContext } from "../../../App";
-import { BeatLoader, SyncLoader } from "react-spinners";
+import {  SyncLoader } from "react-spinners";
 import Animation from "../../../common/Animation";
 import InPageNavigation from "../../../common/InPageNavigation";
 
@@ -79,6 +79,7 @@ const Podcast = () => {
       toast.error('Please sign in to listen to the podcast!');
       return;
   }
+
   const selectedPodcast = filteredSongs[songIndex];
   const headers = {
     Authorization: `Bearer ${access_token}`,
