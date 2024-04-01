@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState,useContext } from 'react';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../common/Loader';
 import PodCard from "../components/Podcast/Podcast Home/PodCard";
 import LoadMoreDataBtn from '../common/LoadMoreDataBtn';
 import UserCard from '../components/Blogs/Blog Page/UserCard';
 import { SyncLoader } from 'react-spinners';
-
+import ProfilePodcastPlayer from '../components/Podcast/Podcast Player/ProfilePodcastPlayer';
+//import PodcastPlayer from '../components/Podcast/Podcast Player/PodcastPlayer';
 import Animation from '../common/Animation';
 import FilterPaginationData from '../common/FilterPaginationData';
 import InPageNavigation from '../common/InPageNavigation';
 import NoDataMessage from '../common/NoDataMessage';
+import { UserContext } from "../App";
+import { motion } from "framer-motion";
+import { toast } from 'react-hot-toast';
 const PodcastsSearchPage = () => {
     let { query } = useParams();
     const [podcasts, setPodcasts] = useState({ results: [] });
     const [users, setUsers] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
-
+    const [selectedPodcast, setSelectedPodcast] = useState(null);
+    const { userAuth } = useContext(UserContext);
+    const { userAuth: { access_token } } = useContext(UserContext);
+    let navigate = useNavigate();
     const searchPodcasts = ({ page = 1, create_new_arr = false }) => {
 
         axios.post(process.env.REACT_APP_SERVER_DOMAIN + "/api/pod/search-podcasts", {
@@ -58,6 +65,17 @@ const PodcastsSearchPage = () => {
         setUsers(null);
         setSelectedCategory(null); // Reset selected category
     }
+   
+
+    const handlePodcastSelect = (podcast) => {
+         if (!userAuth || !userAuth.username) {
+            navigate("/podcasts");
+            toast.error('Please sign in to listen to the podcast!');
+            return;
+          }
+        console.log("Selected Podcast:", podcast);
+        setSelectedPodcast(podcast);
+    }
     const UserCardWrapper = () => {
         return (
             <>
@@ -94,7 +112,7 @@ const PodcastsSearchPage = () => {
                             {
                                 podcasts.results.map((podcast, index) => (
                                     <Animation key={index} transition={{ duration: 1, delay: index * 0.1 }}>
-                                        <PodCard data={podcast} />
+                                        <PodCard data={podcast} onClick={() => handlePodcastSelect(podcast)} />
                                     </Animation>
                                 ))
                             }
@@ -109,7 +127,22 @@ const PodcastsSearchPage = () => {
                 <h1 className="font-medium text-lg mb-8">User related to Search <i className="fi fi-rr-user mt-1"></i></h1>
                 <UserCardWrapper />
             </div>
+            {selectedPodcast !== null && (
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                className="fixed left-0 right-0 bottom-0 z-50 bg-cardOverlay backdrop-blur-md"
+            >
+                <ProfilePodcastPlayer
+                    selectedSong={selectedPodcast}
+                    songs={podcasts.results}
+                    setSelectedSongIndex={setSelectedPodcast}
+                />
+            </motion.div>
+        )}
         </section>
+      
     );
 }
 

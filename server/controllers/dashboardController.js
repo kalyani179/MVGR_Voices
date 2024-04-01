@@ -40,7 +40,6 @@ const userWrittenBlogsCount = (req, res) => {
 const userUploadedPodcasts = (req, res) => {
     const user_id = req.user;
     const { page, query, deletedDocCount } = req.body;
-
     const maxLimit = 5;
     let skipPodcasts = (page - 1) * maxLimit;
 
@@ -49,11 +48,13 @@ const userUploadedPodcasts = (req, res) => {
     }
 
     PodModel.find({ author: user_id, name: new RegExp(query, 'i') })
+        .populate('author', 'personal_info.profile_img personal_info.username -_id') // Populate author details
         .skip(skipPodcasts)
         .limit(maxLimit)
         .sort({ publishedAt: -1 })
-        .select("name imageURL songURL publishedAt description category activity -_id")
-        .then(podcasts => {
+
+    .then(podcasts => {
+            console.log("Retrieved Podcasts:", podcasts);
             return res.status(200).json({ podcasts });
         })
         .catch(error => {
@@ -90,16 +91,29 @@ const deleteBlog = (req, res) => {
 }
 const deletePodcast = (req, res) => {
     let user_id = req.user;
-    let { podcast_id } = req.body;
-    PodModel.findOneAndDelete({ podcast_id })
-        .then(podcast => {
+    let { _id } = req.body;
 
-            User.findOneAndUpdate({ _id: user_id }, { $pull: { podcasts: podcast._id }, $inc: { "account_info.total_uploads": -1 } })
-                .then(user => console.log("Podcast Deleted"));
-            return res.status(200).json({ status: 'done' })
+    // Check if podcast_id is provided
+    if (!_id) {
+        return res.status(400).json({ error: "Podcast ID is required" });
+    }
+
+    PodModel.findOneAndDelete({ _id })
+        .then(podcast => {
+            if (!podcast) {
+                return res.status(404).json({ error: "Podcast not found" });
+            }
+
+            User.findOneAndUpdate({ _id: user_id }, { $pull: { podcasts: podcast._id }, $inc: { "account_info.total_uploads": -1 } }).then(user => {
+                console.log("Podcast Deleted");
+                return res.status(200).json({ status: 'done' });
+            }).catch(err => {
+                return res.status(500).json({ error: err.message });
+            });
         })
         .catch(err => {
             return res.status(500).json({ error: err.message });
         })
 };
+
 export { userWrittenBlogs, userWrittenBlogsCount, deleteBlog, userUploadedPodcasts, userUploadedPodcastsCount, deletePodcast };

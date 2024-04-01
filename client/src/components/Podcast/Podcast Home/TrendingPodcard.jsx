@@ -12,10 +12,10 @@ const TrendingPodcard = ({ data ,index,onClick }) => {
       onMouseLeave={() => setIsHovered(false)}>
         {isHovered && (
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-primary text-white rounded-full w-10 h-10 flex items-center justify-center focus:outline-none"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-primary  rounded-full w-12 h-12 flex items-center justify-center focus:outline-none"
           onClick={onClick}
         >
-          <i className="fi fi-rr-play"></i>
+          <i className="fi fi-rr-play text-white"></i>
         </button>
       )}
             <img className="aspect-square w-72 h-56 object-center object-cover" src={data.imageURL} alt="" />

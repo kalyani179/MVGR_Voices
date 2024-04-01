@@ -7,7 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 import { motion } from 'framer-motion';
 import { UserContext } from '../../../App';
 import { toast } from 'react-hot-toast';
-
+import { Link } from 'react-router-dom';
 const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => {
   const { userAuth } = useContext(UserContext);
   const [likesCount, setLikesCount] = useState(selectedSong?.activity?.total_likes || 0);
@@ -15,6 +15,7 @@ const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => 
 
   useEffect(() => {
     const fetchLikedState = async () => {
+      console.log(selectedSong.activity);
       try {
         if (userAuth && userAuth.access_token && selectedSong && selectedSong.activity) {
           const response = await axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/is-podcast-liked', { _id: selectedSong._id }, {
@@ -22,6 +23,8 @@ const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => 
               Authorization: `Bearer ${userAuth.access_token}`
             }
           });
+          console.log(response.data.isLiked);
+          
           setIsLiked(response.data.isLiked);
           setLikesCount(response.data.likesCount);
         }
@@ -77,37 +80,50 @@ const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => 
 
   return (
     <div className="w-full flex items-center justify-between gap-3 overflow-hidden bg-white">
-      <div className="w-full relative flex items-center gap-3 p-4">
-        {selectedSong && (
-          <>
-            <img src={selectedSong.imageURL} alt={selectedSong.name} className="w-40 h-20 rounded-md object-cover" />
-            <div className="flex items-start flex-col">
-              <p className="text-xl text-headingColor font-semibold">{selectedSong.name}</p>
-              <div className="flex items-center gap-1">
-                <button onClick={handleLikeClick} className={`w-10 h-10 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>
-                  <i className={`fi ${isLiked ? 'fi-sr-heart text-red' : 'fi-rr-heart'}`}></i>  
-                </button>
-                <p className="tex-xl text-dark-grey">{likesCount}</p>
+    <div className="w-full relative flex items-center gap-4 p-4">
+      {selectedSong && (
+        <>
+          <img src={selectedSong.imageURL} alt={selectedSong.name} className="w-40 h-20 rounded-md object-cover" />
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex flex-col gap-1">
+              <p className="text-xl text-headingColor font-medium">{selectedSong.name}</p>
+              <div className='flex gap-1 mb-3'>
+              {selectedSong.author && selectedSong.author.personal_info && (
+    <>
+      <img src={selectedSong.author.personal_info.profile_img} className='w-6 h-6 flex-none rounded-full' alt="User Profile" />
+      <Link to={`/user/${selectedSong.author.personal_info.username}`} className='mx-1 text-black underline'>@{selectedSong.author.personal_info.username}</Link>
+    </>
+  )}
               </div>
+            </div> 
+            
             </div>
-          </>
-        )}
-        <div className="flex-1">
-          <AudioPlayer
-            src={selectedSong?.songURL}
-            autoPlay={true}
-            showSkipControls={true}
-            onClickNext={nextTrack}
-            onClickPrevious={previousTrack}
-          />
-        </div>
-        <div className="h-full flex items-center justify-center flex-col gap-3">
-          <motion.i whileTap={{ scale: 0.8 }} onClick={closeMusicPlayer}>
-            <IoMdClose className="text-textColor hover:text-headingColor text-2xl cursor-pointer" />
-          </motion.i>
-        </div> 
+          
+          
+        </>
+      )}
+      <div className="flex-1">
+        <AudioPlayer
+          src={selectedSong?.songURL}
+          autoPlay={true}
+          showSkipControls={true}
+          onClickNext={nextTrack}
+          onClickPrevious={previousTrack}
+        />
       </div>
+      <div className="flex items-center gap-1 -mt-2 mx-2">
+              <button onClick={handleLikeClick} className={`w-10 h-10 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>
+                <i className={`fi ${isLiked ? 'fi-sr-heart text-red' : 'fi-rr-heart'} mt-1`}></i>  
+              </button>
+              <p className="tex-xl text-dark-grey">{likesCount}</p>
+      </div>
+      <div className="h-full flex flex-col gap-3 -mt-20">
+        <motion.i whileTap={{ scale: 0.8 }} onClick={closeMusicPlayer}>
+          <IoMdClose className="text-textColor hover:text-headingColor text-xl cursor-pointer" />
+        </motion.i>
+      </div> 
     </div>
+  </div>
   );
 };
 
