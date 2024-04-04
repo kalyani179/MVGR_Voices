@@ -22,7 +22,7 @@
         background: linear-gradient(180deg, rgba(34, 34, 34, 0.6) 0%, rgba(34, 34, 34, 1) 100%);
     }
     .heading {
-        @apply font-gelasio text-4xl
+        @apply font-gelasio text-4xl sm:text-3xl
     }
     .btn-purple {
         @apply whitespace-nowrap text-white bg-primary rounded-full py-2 px-5 sm:px-3 sm:py-1.5 text-lg sm:text-base capitalize hover:bg-opacity-80;
@@ -46,13 +46,13 @@
         @apply flex justify-center items-center
     }
     .auth-input {
-        @apply border-2 border-b-input border-t-transparent border-l-transparent border-r-transparent w-80 my-3 p-0.5 pl-7 text-base font-inter focus:outline-none bg-white;
+        @apply border-2 border-b-input border-t-transparent border-l-transparent border-r-transparent w-80 sm:w-64 my-3 p-0.5 pl-7 text-base font-inter focus:outline-none bg-white;
     }
     i {
         @apply text-dark-grey
     }
     .input-icon {
-        @apply absolute left-11
+        @apply absolute left-11 sm:left-10
     }
     .input-box {
         @apply w-[100%] rounded-md p-4 bg-grey border border-grey focus:bg-transparent placeholder:text-black;
@@ -64,10 +64,10 @@
         @apply text-primary;
     }
     .google-button{
-        @apply m-3 my-5 center space-x-3 font-inter border border-black rounded-md w-80 p-2 hover:bg-grey
+        @apply m-3 my-5 center space-x-3 font-inter border border-black rounded-md w-80 sm:w-64 p-2 hover:bg-grey
     }
     h5{
-        @apply absolute left-16 p-2 text-dark-grey transition-transform duration-300 ease-in-out transform
+        @apply absolute sm:text-base left-16 p-2 sm:px-0 text-dark-grey transition-transform duration-300 ease-in-out transform
     }
     .zIndex{
         z-index: 1000;
@@ -219,7 +219,7 @@ body::-webkit-scrollbar{
     top: 95px;
     left:0;
     width: 100%;
-    background-size: 1000px 1000px;
+    /* background-size: 1000px 1000px; */
     background: url(./assets/images/Home/FooterBG.png);
 }
 
@@ -227,8 +227,8 @@ body::-webkit-scrollbar{
     z-index: 10;
     opacity: 1;
     bottom: 0;
-    animation: animate 10s linear infinite; /* Adjust duration for a slower wave */
-    animation-delay: -10s;
+    animation: animate 15s linear infinite; /* Adjust duration for a slower wave */
+    /* animation-delay: -40s; */
 }
 
 .bg-wave2 {

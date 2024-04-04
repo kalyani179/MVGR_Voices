@@ -168,7 +168,7 @@ const UserAuth = ({type,close,open}) => {
             <div className={`fixed inset-0 z-50 bg-black ${theme==="light" ? "bg-opacity-60" : "bg-cool-white bg-opacity-90"} center`} onClick={close}>
                 <Slide direction="down" duration={1500}>
                 {/* SignUp Heading */}
-                <div className={`bg-white relative p-8 pb-4 rounded-md z-50 ${type==="signin" ? "md:mt-10" : ""} opacity-90`} onClick={(e) => e.stopPropagation()}>
+                <div className={`bg-white relative p-8 pb-4 sm:px-6 sm:py-2 sm:pb-4 rounded-md z-50 ${type==="signin" ? "md:mt-10" : ""} opacity-90`} onClick={(e) => e.stopPropagation()}>
                     <button onClick={close}><i className="fi fi-bs-cross-small text-lg text-dark-grey absolute top-3.5 right-4"></i></button>
                     <div className="center">
                         <h1 className={`text-center mb-5 heading`}>{type==="signup" ? "Sign Up" : "Sign In"}</h1>
@@ -176,7 +176,7 @@ const UserAuth = ({type,close,open}) => {
 
                     {/* Form */}
                     <div className="m-3">
-                        <form className="h-cover flex flex-col gap-5 items-center justify-center">
+                        <form className="h-cover flex flex-col gap-5 sm:gap-3 items-center justify-center">
                             {
                                 type === "signup" ?
                                 <div className="flex justify-start items-center">
@@ -196,7 +196,7 @@ const UserAuth = ({type,close,open}) => {
                                 <input onClick={translatePassword} onBlur={()=>setPasswordTranslated(false)} onChange={handleChange} className={`auth-input ${isPasswordFocused || inputPasswordValue ? "border-b-primary" : ""}`} type={`${passwordVisible ? "text" : "password"}`} name="password" value={inputPasswordValue}/>
                                 <i onClick={()=>setPasswordVisible(!passwordVisible)} className={`fi fi-rr-eye${passwordVisible ? "" : "-crossed"} absolute right-11`}></i>
                             </div>
-                            <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 rounded-md">{type==="signup" ? "Create Account" : "Sign In"}</button>
+                            <button onClick={handleSubmit} type="submit" className="btn-purple font-medium w-80 sm:w-64 rounded-md">{type==="signup" ? "Create Account" : "Sign In"}</button>
                         </form>
                     </div>
 
@@ -204,7 +204,7 @@ const UserAuth = ({type,close,open}) => {
                     <div className="m-3 mt-1">
                     {
                         type==="signup"
-                        ? <p>Already have an account? <button onClick={open} className="text-purple underline">Sign In Here</button> </p>
+                        ? <p>Already have an account? <button onClick={open} className="text-purple underline">Sign In</button> </p>
                         : <p>Don't have an account ? <button onClick={open} className="text-purple underline">Sign Up</button></p>
                     }
                     </div>

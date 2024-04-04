@@ -17,11 +17,11 @@ const FooterData = () => {
     <footer className="py-4 text-white relative overflow-hidden bg-primary">
 
     <div className="center justify-around mx-5">
-    <img className="w-36 h-20" src={logo} alt="Logo" />
+    <img className="w-36 h-20 sm:hidden" src={logo} alt="Logo" />
 
-      <div class="h-20 border-l border-grey/70"></div>
+      <div class="h-20 border-l border-grey/70 sm:border-none"></div>
         {/* Subscribe */}
-        <div className="center gap-10">
+        <div className="center gap-10 sm:flex-col sm:gap-5">
             <h1 className="text-white font-medium font-gelasio text-xl tracking-wide">SUBSCRIBE ON</h1>
             {
                 Platforms.map((platform,i)=>{
@@ -34,8 +34,8 @@ const FooterData = () => {
                 })
             }
         </div>
-        <div class="h-20 border-l border-grey/70"></div>
-      <div className="center flex-col gap-5">
+        <div class="h-20 border-l border-grey/70 sm:border-none"></div>
+      <div className="center flex-col gap-5 sm:hidden">
         <div className="flex gap-3 font-medium tracking-wide text-2xl text-grey/80">
           {
             Links.map((link,i)=>{
