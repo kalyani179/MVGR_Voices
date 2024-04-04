@@ -22,7 +22,7 @@ const MiddleSection = (props) => {
                     : props.index === 3
                     ? "right-0 md:-mr-20 rotate-6 sm:h-[250px]"
                     : props.index % 2 === 0
-                    ? "left-0 md:-ml-24 sm:h-[250px] sm:w-[250px]"
+                    ? "left-0 md:-ml-24 sm:h-[230px] sm:w-[200px]"
                     : "right-0 md:-mr-14 rotate-12 sm:h-[250px] md:h-[400px]"
                 } `} /* Centering on smaller screens */
                 src={props.img}
