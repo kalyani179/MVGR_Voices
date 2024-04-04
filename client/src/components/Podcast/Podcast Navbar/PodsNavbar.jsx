@@ -4,9 +4,6 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../../Home/Navbar/Navbar';
 
 const PodsNavbar = () => {
-    
-    
-    
     return (
         <>
             <div className="border-b border-grey">

@@ -11,6 +11,7 @@ import settingsRouter from "./routers/settingsRouter.js";
 import dashboardRouter from "./routers/dashboardRouter.js";
 import contactRouter from "./routers/contactRouter.js";
 import notificationRouter from "./routers/notificationRouter.js";
+import interactionRouter from "./routers/interactionRouter.js";
 const server = express();
 let PORT = process.env.PORT || 3000;
 
@@ -27,6 +28,8 @@ server.use("/", settingsRouter);
 server.use("/", dashboardRouter);
 server.use("/", contactRouter);
 server.use("/", notificationRouter);
+server.use("/",interactionRouter);
+
 server.listen(PORT, () => {
     console.log("Server is listening on port 3000");
 })
