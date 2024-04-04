@@ -11,7 +11,7 @@ const MiddleSection = (props) => {
         <AttentionSeeker effect="pulse">
         {
             props.index===2 ?
-            <div className="w-[27%] md:absolute md:rotate-2 md:-ml-16 md:-mt-20 z-0">
+            <div className="w-[27%] md:absolute md:rotate-2 md:-ml-16 md:-mt-20 z-0 mx-auto sm:w-[100%]">
                 <Lottie animationData={contact}/>
             </div>
             :

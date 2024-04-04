@@ -19,8 +19,27 @@ const ReviewCarousel = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        responsive: [
+          {
+            breakpoint: 768, // Adjust the breakpoint according to your design
+            settings: {
+              slidesToShow: 1
+            }
+          },
+          {
+            breakpoint: 1024, // Adjust the breakpoint according to your design
+            settings: {
+              slidesToShow: 2
+            }
+          },
+          {
+            breakpoint: 1440, // Adjust the breakpoint according to your design
+            settings: {
+              slidesToShow: 3
+            }
+          }
+        ]
     };
     return (
         <div className="block m-auto bg-cool-black w-full">
