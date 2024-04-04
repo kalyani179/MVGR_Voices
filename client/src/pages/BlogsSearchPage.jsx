@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import InPageNavigation from '../common/InPageNavigation';
@@ -10,11 +10,13 @@ import FilterPaginationData from '../common/FilterPaginationData';
 import UserCard from '../components/Blogs/Blog Page/UserCard';
 import { SyncLoader } from 'react-spinners';
 import NoDataMessage from '../common/NoDataMessage';
+import { SearchContext } from '../App';
 
 const BlogsSearchPage = () => {
     let {query} = useParams();
     const [blogs,setBlog] = useState(null);
     const [users,setUsers] = useState(null);
+    const {searchBoxVisibility} = useContext(SearchContext);
     const searchBlogs = ({page = 1,create_new_arr=false}) => {
         axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/search-blogs",{query,page})
         .then( async ({ data }) => {
@@ -68,7 +70,7 @@ const BlogsSearchPage = () => {
     }
     return (
         <section className="flex min-h-screen bg-cool-white justify-center gap-5">
-        <div className="w-full">
+        <div className={`w-full ${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
             <InPageNavigation
                 routes={[`search results for ${query}`, "Accounts Matched"]}
                 defaultHidden={["Accounts Matched"]}

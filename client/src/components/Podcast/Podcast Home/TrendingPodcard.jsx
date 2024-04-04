@@ -32,9 +32,7 @@ const TrendingPodcard = ({ data ,index,onClick }) => {
                     {/* <p className="my-3 text-lg font-gelasio leading-7 sm:hidden md:max-[1100px]:hidden line-clamp-2">{desc}</p> */}
                 </div>
             </div>
-       </div>
-            
-       
+      </div>    
     )
 }
 

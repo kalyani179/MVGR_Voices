@@ -13,15 +13,15 @@ const PageNotFound = () => {
             {/* <img src={PageNotFoundImage} className="select-none border-2 border-grey w-72 aspect-square object-cover rounded" alt="404"/> */}
             {
                 theme==="light" ?
-                <div className="w-[35%]">
+                <div className="w-[35%] sm:w-[100%]">
                     <Lottie animationData={PageNotFoundAnimation}/>
                 </div> :
-                <div className="w-[35%]">
+                <div className="w-[35%] sm:w-[100%]">
                     <Lottie animationData={DarkPageNotFoundAnimation}/>
                 </div>
             }
             {/* <h1 className="text-4xl font-gelasio leading-7">Page Not Found</h1> */}
-            <p className="text-dark-grey text-lg">The Page you are looking for doesn't exists.Please Head Back to the <Link to="/" className="text-primary underline">Home Page</Link> !</p>
+            <p className="text-dark-grey text-lg sm:text-xs sm:leading-5">The Page you are looking for doesn't exists.Please Head Back to the <Link to="/" className="text-primary underline">Home Page</Link> !</p>
         </section>
     )
 }

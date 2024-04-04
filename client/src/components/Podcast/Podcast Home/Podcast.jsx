@@ -3,7 +3,7 @@ import { getAllSongs,fetchTopPodcards } from '../api';
 import PodCard from './PodCard';
 import { motion } from "framer-motion";
 import PodcastPlayer from "../Podcast Player/PodcastPlayer";
-import { ThemeContext } from "../../../App";
+import { SearchContext, ThemeContext } from "../../../App";
 import {  SyncLoader } from "react-spinners";
 import Animation from "../../../common/Animation";
 import InPageNavigation from "../../../common/InPageNavigation";
@@ -28,6 +28,7 @@ const Podcast = () => {
   //let [trendingBlogs, setTrendingBlog] = useState(null);
   const [trendingPodcards, setTrendingPodcards] = useState([]);
   const { userAuth } = useContext(UserContext);
+  const {searchBoxVisibility} = useContext(SearchContext);
   const { userAuth: { access_token } } = useContext(UserContext);
   useEffect(() => {
     // Fetch all songs
@@ -168,7 +169,7 @@ const Podcast = () => {
 
                 </div>
               </div>
-        <div className="">
+        <div className={`${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
           <h1 className="font-medium text-primary tracking-wide text-xl mb-8">
             Categories
           </h1>

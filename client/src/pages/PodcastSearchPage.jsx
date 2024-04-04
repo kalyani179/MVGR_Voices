@@ -12,7 +12,7 @@ import Animation from '../common/Animation';
 import FilterPaginationData from '../common/FilterPaginationData';
 import InPageNavigation from '../common/InPageNavigation';
 import NoDataMessage from '../common/NoDataMessage';
-import { UserContext } from "../App";
+import { SearchContext, UserContext } from "../App";
 import { motion } from "framer-motion";
 import { toast } from 'react-hot-toast';
 const PodcastsSearchPage = () => {
@@ -23,6 +23,7 @@ const PodcastsSearchPage = () => {
     const [selectedPodcast, setSelectedPodcast] = useState(null);
     const { userAuth } = useContext(UserContext);
     const { userAuth: { access_token } } = useContext(UserContext);
+    const {searchBoxVisibility} = useContext(SearchContext);
     let navigate = useNavigate();
     const searchPodcasts = ({ page = 1, create_new_arr = false }) => {
 
@@ -65,14 +66,13 @@ const PodcastsSearchPage = () => {
         setUsers(null);
         setSelectedCategory(null); // Reset selected category
     }
-   
 
     const handlePodcastSelect = (podcast) => {
-         if (!userAuth || !userAuth.username) {
+        if (!userAuth || !userAuth.username) {
             navigate("/podcasts");
             toast.error('Please sign in to listen to the podcast!');
             return;
-          }
+        }
         console.log("Selected Podcast:", podcast);
         setSelectedPodcast(podcast);
     }
@@ -94,7 +94,7 @@ const PodcastsSearchPage = () => {
 
     return (
         <section className="h-cover bg-cool-white flex justify-center gap-5">
-            <div className="w-full">
+            <div className={`w-full ${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
                 <InPageNavigation
                     routes={[`search results for ${query}`, "Accounts Matched"]}
                     defaultHidden={["Accounts Matched"]}
@@ -142,7 +142,6 @@ const PodcastsSearchPage = () => {
             </motion.div>
         )}
         </section>
-      
     );
 }
 

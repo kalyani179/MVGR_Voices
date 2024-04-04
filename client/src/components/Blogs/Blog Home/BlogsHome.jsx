@@ -5,7 +5,7 @@ import axios from "axios";
 
 import BlogPostCard from "./HomeBlogPostCard"
 import TrendingBlogPostCard from "./TrendingBlogPostCard";
-import { ThemeContext } from "../../../App";
+import { SearchContext, ThemeContext } from "../../../App";
 import FilterPaginationData from "../../../common/FilterPaginationData";
 import LoadMoreDataBtn from "../../../common/LoadMoreDataBtn";
 import {SyncLoader } from "react-spinners";
@@ -19,7 +19,7 @@ const BlogsHome = () => {
     let {theme} = useContext(ThemeContext);
     let [trendingBlogs, setTrendingBlog] = useState(null);
     let [pageState,setPageState] = useState("home");
-
+    const {searchBoxVisibility} = useContext(SearchContext);
     let categories = [
         "Programming",
         "Social Media",
@@ -131,7 +131,7 @@ const BlogsHome = () => {
                 </div>
 
              {/* categories */}
-                <div className="">
+                <div className={`${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
                     <h1 className="font-medium text-primary tracking-wide text-xl mb-8">
                         Categories
                     </h1>

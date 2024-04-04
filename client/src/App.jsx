@@ -30,12 +30,13 @@ import Noitifications from './components/Dashboard/Noitifications';
 
 
 export const UserContext = createContext({});
-
+export const SearchContext = createContext({});
 export const ThemeContext = createContext({});
 
 const App = () => {
   const [userAuth,setUserAuth] = useState({});
   const [theme,setTheme] = useState("light");
+  const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
   const [isValidToken,setValidToken] = useState(false);
   useEffect(() => {
     let userInSession = lookInSession("user");
@@ -49,6 +50,7 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={{theme,setTheme}}>
+      <SearchContext.Provider value={{searchBoxVisibility,setSearchBoxVisibility}}>
       <UserContext.Provider value={{userAuth,setUserAuth,isValidToken,setValidToken}}>
         <BrowserRouter>
           <Routes>
@@ -86,6 +88,7 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
+      </SearchContext.Provider>
     </ThemeContext.Provider>
   
   )

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import UserAuth from "../../Authentication/UserAuth";
-import { ThemeContext, UserContext } from "../../../App";
+import { SearchContext, ThemeContext, UserContext } from "../../../App";
 import { removeFromSession, storeInSession } from "../../../common/session";
 import Animation from "../../../common/Animation";
 import {Toaster,toast} from "react-hot-toast";
@@ -22,7 +22,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
   const [showSignin,setShowSignin] = useState(false);
 
 
-  const [searchBoxVisibility,setSearchBoxVisibility] = useState(false);
+  const {searchBoxVisibility,setSearchBoxVisibility} = useContext(SearchContext);
   useEffect(() => {
     if (access_token) {
       axios.get(process.env.REACT_APP_SERVER_DOMAIN + '/new-notification', {
@@ -109,7 +109,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
               <div className="flex gap-3">
               {/* search button */}
                 <div className={`${activeLink==="Blogs" || activeLink==="Podcasts" ? "show" : "hidden"} flex items-center ml-auto gap-3 md:gap-6`}>
-                  <div className={`absolute left-0 w-full top-16 mt-0.5  px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2 md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
+                  <div className={`absolute left-0 w-full top-12 mt-0.5 px-[5vw] py-4 pb-1 border-b border-grey duration-500 md:-m-6 md:ml-2 md:border-0 md:block md:relative md:inset-0 md:p-0 md:w-auto md:show ${searchBoxVisibility ? "show" : "hide"}`}>
                   <input 
                       type='text'
                       placeholder='Search'
