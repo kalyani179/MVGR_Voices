@@ -18,6 +18,8 @@ import axios from "axios";
 
 import NoDataMessage from "../../../common/NoDataMessage";
 
+import TrendingPodPlayer from "../Podcast Player/TrendingPodPlayer";
+
 
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);
@@ -25,11 +27,13 @@ const Podcast = () => {
   const [pageState, setPageState] = useState("home");
   const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false); 
-  //let [trendingBlogs, setTrendingBlog] = useState(null);
+ 
   const [trendingPodcards, setTrendingPodcards] = useState([]);
   const { userAuth } = useContext(UserContext);
   const {searchBoxVisibility} = useContext(SearchContext);
+  const [selectedPodcast, setSelectedPodcast] = useState(null);
   const { userAuth: { access_token } } = useContext(UserContext);
+  const [isTrendingPodcard, setIsTrendingPodcard] = useState(false);
   useEffect(() => {
     // Fetch all songs
     getAllSongs().then((data) => {
@@ -42,7 +46,7 @@ const Podcast = () => {
   
   }, []);
 
- 
+  
   const handleTrendingPodcardClick = async (podcardData) => {
     if (!userAuth || !userAuth.username) {
       toast.error('Please sign in to listen to the podcast!');
@@ -68,10 +72,14 @@ const Podcast = () => {
       
     }
 
-    // Find the index of the podcardData within trendingPodcards
-    const index = trendingPodcards.findIndex(podcard => podcard._id === podcardData._id);
-    // Set the selected song index based on the found index
-    setSelectedSongIndex(index);
+    const index = trendingPodcards.findIndex(song => song._id === podcardData._id);
+    
+       //Set the selected song index based on the found index
+      setSelectedSongIndex(index);
+    
+       // Set the selected podcast based on the clicked podcardData
+      setSelectedPodcast(podcardData);
+      setIsTrendingPodcard(true);
   };
   
 
@@ -113,6 +121,7 @@ const Podcast = () => {
     const selectedSongIndexInAllSongs = allSongs.indexOf(selectedSongInCategory);
     
     setSelectedSongIndex(selectedSongIndexInAllSongs);
+    setIsTrendingPodcard(false);
   };
 
   const loadPodcastByCategory = async (e) => {
@@ -231,15 +240,26 @@ const Podcast = () => {
               exit={{ opacity: 0, y: 50 }}
               className="fixed left-0 right-0 bottom-0 z-50 bg-cardOverlay backdrop-blur-md"
             >
-              <PodcastPlayer
-                selectedSong={allSongs[selectedSongIndex]}
-                songs={allSongs}
-                setSelectedSongIndex={setSelectedSongIndex}
-                pageState={pageState}
-                
-              />
+              {selectedPodcast && (
+                // Conditionally rendering PodcastPlayer or TrendingPodPlayer based on isTrendingPodcard
+                isTrendingPodcard ? (
+                  <TrendingPodPlayer
+                    selectedSong={trendingPodcards[selectedSongIndex]}
+                    songs={trendingPodcards}
+                    setSelectedSongIndex={setSelectedSongIndex}
+                  />
+                ) : (
+                  <PodcastPlayer
+                    selectedSong={allSongs[selectedSongIndex]}
+                    songs={allSongs}
+                    setSelectedSongIndex={setSelectedSongIndex}
+                    pageState={pageState}
+                  />
+                )
+              )}
             </motion.div>
           )}
+         
                           
         </div>
       </section>

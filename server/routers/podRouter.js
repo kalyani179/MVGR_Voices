@@ -83,18 +83,20 @@ router.post("/search-podcasts-count", async(req, res) => {
 
 
 
-
-
-
 router.get('/top-podcards', async(req, res) => {
     try {
-        const topPodcards = await PodModel.find().sort({ 'activity.total_likes': -1 }).limit(3); // Assuming likes is the field representing likes count
+        const topPodcards = await PodModel.find()
+            .sort({ 'activity.total_likes': -1 })
+            .limit(3)
+            .populate("author", "personal_info.profile_img personal_info.username -_id");
+
         res.json(topPodcards);
     } catch (error) {
         console.error('Error fetching top podcards:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 const getAllPodcastsByAuthorId = async(authorId) => {
     try {
         // Query the PodModel to find all podcasts with the specified authorId

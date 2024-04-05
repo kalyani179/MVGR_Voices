@@ -9,7 +9,7 @@ import { UserContext } from '../../../App';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
-const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState }) => {
+const TrendingPodPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => {
   const { userAuth } = useContext(UserContext);
   const [likesCount, setLikesCount] = useState(selectedSong?.activity?.total_likes || 0);
   const [isLiked, setIsLiked] = useState(false);
@@ -55,34 +55,24 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
       console.error(error);
     }
   };
+ 
 
   const nextTrack = () => {
-    let songsInCategory = [];
-    if (pageState !== 'home') {
-      songsInCategory = songs.filter(song => song.category.toLowerCase() === pageState);
-    } else {
-      songsInCategory = songs;
+    if (selectedSong !== null && songs && songs.length > 0) {
+        const selectedIndex = songs.findIndex(song => song._id === selectedSong._id);
+      const nextIndex = (selectedIndex + 1) % songs.length;
+      setSelectedSongIndex(nextIndex);
     }
-
-    const selectedIndexInCategory = songsInCategory.indexOf(selectedSong);
-    const nextIndexInCategory = (selectedIndexInCategory + 1) % songsInCategory.length;
-    const nextSong = songsInCategory[nextIndexInCategory];
-    setSelectedSongIndex(songs.indexOf(nextSong));
   };
-
+  
   const previousTrack = () => {
-    let songsInCategory = [];
-    if (pageState !== 'home') {
-      songsInCategory = songs.filter(song => song.category.toLowerCase() === pageState);
-    } else {
-      songsInCategory = songs;
+    if (selectedSong !== null && songs && songs.length > 0) {
+        const selectedIndex = songs.findIndex(song => song._id === selectedSong._id);
+      const previousIndex = (selectedIndex - 1 + songs.length) % songs.length;
+      setSelectedSongIndex(previousIndex);
     }
-
-    const selectedIndexInCategory = songsInCategory.indexOf(selectedSong);
-    const prevIndexInCategory = (selectedIndexInCategory - 1 + songsInCategory.length) % songsInCategory.length;
-    const prevSong = songsInCategory[prevIndexInCategory];
-    setSelectedSongIndex(songs.indexOf(prevSong));
   };
+  
 
   const closeMusicPlayer = () => {
     setSelectedSongIndex(null); 
@@ -98,8 +88,9 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
               <div className="flex flex-col md:gap-1">
                 <p className="md:text-xl text-sm text-headingColor font-medium">{selectedSong.name}</p>
                 <div className='flex md:gap-1 md:mb-3 '>
-                  <img src={selectedSong.author.personal_info.profile_img}  className='sm:hidden md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
-                  <Link to={`/user/${selectedSong.author.personal_info.username}`} className='md:mx-1 sm:text-sm md:text-base text-black underline'>@{selectedSong.author.personal_info.username}</Link>
+
+                    <img src={selectedSong.author.personal_info?.profile_img || 'default_profile_img_url'} className='sm:hidden md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
+                    <Link to={`/user/${selectedSong.author?.personal_info?.username}`} className='md:mx-1 sm:text-sm md:text-base text-black underline'>@{selectedSong.author?.personal_info?.username}</Link>
                 </div>
                 <div className=" md:hidden flex items-center gap-1 md:-mt-2 md:mx-2">
                     <button onClick={handleLikeClick} className={`md:w-10 md:h-10 sm:w-6 sm:h-6 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>
@@ -138,4 +129,4 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
   );
 };
 
-export default PodcastPlayer;
+export default TrendingPodPlayer;

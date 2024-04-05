@@ -89,11 +89,11 @@ const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => 
               <p className="text-xl text-headingColor font-medium">{selectedSong.name}</p>
               <div className='flex gap-1 mb-3'>
               {selectedSong.author && selectedSong.author.personal_info && (
-    <>
-      <img src={selectedSong.author.personal_info.profile_img} className='w-6 h-6 flex-none rounded-full' alt="User Profile" />
-      <Link to={`/user/${selectedSong.author.personal_info.username}`} className='mx-1 text-black underline'>@{selectedSong.author.personal_info.username}</Link>
-    </>
-  )}
+                <>
+                  <img src={selectedSong.author.personal_info.profile_img} className='w-6 h-6 flex-none rounded-full' alt="User Profile" />
+                  <Link to={`/user/${selectedSong.author.personal_info.username}`} className='mx-1 text-black underline'>@{selectedSong.author.personal_info.username}</Link>
+                </>
+              )}
               </div>
             </div> 
             
