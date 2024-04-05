@@ -44,12 +44,14 @@ const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => 
 
     try {
       const newIsLiked = !isLiked;
+      setIsLiked(newIsLiked);
+      !isLiked ? ++selectedSong.activity.total_likes : --selectedSong.activity.total_likes;
       const response = await axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/like-podcast', { _id: selectedSong._id, isLiked: newIsLiked }, {
         headers: {
           Authorization: `Bearer ${userAuth.access_token}`
         }
       });
-      setIsLiked(newIsLiked);
+      //setIsLiked(newIsLiked);
       setLikesCount(response.data?.podcast?.activity?.total_likes || 0);
     } catch (error) {
       console.error(error);

@@ -49,8 +49,8 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
           Authorization: `Bearer ${userAuth.access_token}`
         }
       });
-      setIsLiked(newIsLiked);
-      setLikesCount(response.data?.podcast?.activity?.total_likes || 0);
+      //setIsLiked(newIsLiked);
+      setLikesCount(response.data?.podcast?.activity?.total_likes||0);
     } catch (error) {
       console.error(error);
     }
