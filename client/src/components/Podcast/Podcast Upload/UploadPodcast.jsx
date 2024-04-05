@@ -250,7 +250,7 @@ const UploadPodcast = () => {
         },
   
         (error) => {
-         console.log(error);
+          console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {

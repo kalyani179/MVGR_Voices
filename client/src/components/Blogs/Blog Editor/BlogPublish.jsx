@@ -169,7 +169,7 @@ const BlogPublish = () => {
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 >
-                <option>Select Category</option>
+                <option value="">Select Category</option>
                 {categories.map((category, index) => (
                 <option key={index} value={category}>{category}</option>
                 ))}

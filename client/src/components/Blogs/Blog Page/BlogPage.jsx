@@ -124,6 +124,7 @@ const BlogPage = () => {
                             similarBlogs !== null && similarBlogs.length ? 
                             <>
                                 <h1 className="text-2xl mt-14 mb-10 font-medium">Similar Blogs</h1>
+                                <div className="flex flex-wrap gap-x-24 gap-y-5"> 
                                 {
                                     similarBlogs.map((blog,i)=>{
                                         let {author:{personal_info}} = blog;
@@ -132,6 +133,7 @@ const BlogPage = () => {
                                         </Animation>
                                     })
                                 }
+                                </div>
                             </>
                             :
                             ""
