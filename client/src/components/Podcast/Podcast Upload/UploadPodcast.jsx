@@ -1,103 +1,81 @@
-import React,{useState,useContext} from 'react'
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { UserContext } from '../../../App.jsx';
-
-import {
-  ref,
-  getDownloadURL,
-  uploadBytesResumable,
-  deleteObject,
-} from "firebase/storage";
-import {storage} from  "../../../common/firebase.jsx"
+import { ref, getDownloadURL, uploadBytesResumable, deleteObject } from "firebase/storage";
+import { storage } from "../../../common/firebase.jsx";
 import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
 const UploadPodcast = () => {
-    //const [name, setName]=useState()
-    //const [description, setDescription]=useState()
     const { userAuth: { access_token } } = useContext(UserContext);
-    const [isImageLoading,setIsImageLoading]=useState(false);
-    const [songImageCover,setSongImageCover]=useState(null);
-    const [imageUploadProgress,setImageUploadProgress]=useState(0);
-
-    const [isAudioLoading,setIsAudioLoading]=useState(false);
-    const [audioImageCover,setAudioImageCover]=useState(null);
-    const [audioUploadProgress,setAudioUploadProgress]=useState(0);
+    const navigate = useNavigate();
+    const [isImageLoading, setIsImageLoading] = useState(false);
+    const [songImageCover, setSongImageCover] = useState(null);
+    const [imageUploadProgress, setImageUploadProgress] = useState(0);
+    const [isAudioLoading, setIsAudioLoading] = useState(false);
+    const [audioImageCover, setAudioImageCover] = useState(null);
+    const [audioUploadProgress, setAudioUploadProgress] = useState(0);
     const [songName, setSongName] = useState("");
     const [songDescription, setSongDescription] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
-    
     const categories = [
-      "Business",
-      "Religion/Culture",
-      "History",
-      "Education",
-      "Health",
-      "Comedy",
-      "News",
-      "Science",
-      "Development",
-      "Sports",
-      "Crime",
-      "Horror"
+        "Business", "Religion/Culture", "History", "Education", "Health", "Comedy",
+        "News", "Science", "Development", "Sports", "Crime", "Horror"
     ];
-    
 
     const handleUpload = (e) => {
-      e.preventDefault();
+        e.preventDefault();
+        // Check if required fields are empty
+        if (!access_token) {
+            return toast.error("Access token not found");
+        }
 
-      // Check if required fields are empty
-       // Check if access token is available
-    if (!access_token) {
-      return toast.error("Access token not found");
-    }
+        if (!songName) {
+            return toast.error("Please provide a name for the podcast");
+        }
 
-    if (!songName) {
-      return toast.error("Please provide a name for the podcast");
-    }
+        if (!songDescription) {
+            return toast.error("Please provide a description for the podcast");
+        }
 
-    if (!songDescription) {
-      return toast.error("Please provide a description for the podcast");
-    }
+        if (!songImageCover) {
+            return toast.error("Please upload an image for the podcast");
+        }
 
-    if (!songImageCover) {
-      return toast.error("Please upload an image for the podcast");
-    }
+        if (!audioImageCover) {
+            return toast.error("Please upload an audio file for the podcast");
+        }
 
-    if (!audioImageCover) {
-      return toast.error("Please upload an audio file for the podcast");
-    }
+        if (!selectedCategory) {
+            return toast.error("Please select a category for the podcast");
+        }
 
-    if (!selectedCategory) {
-      return toast.error("Please select a category for the podcast");
-    }
-    const headers = {
-        Authorization: `Bearer ${access_token}`,
-    };
-      axios
-        .post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/save', {
-          name: songName,
-          description: songDescription,
-          imageURL: songImageCover,
-          songURL: audioImageCover,
-          category: selectedCategory,
-        }, {
-          headers: headers,
-        })
-        .then((result) => {
-          console.log(result);
-          // Add any further logic you need after successful upload
-        })
-        .catch((err) => console.log(err));
-    
-      // Reset state after successful upload
-      setSongName('');
-      setSongDescription('');
-      setIsAudioLoading(false);
-      setIsImageLoading(false);
-      setAudioImageCover(null);
-      setSongImageCover(null);
-     // setSelectedCategory('');
+        let loadingToast = toast.loading("publishing...");
+        const headers = { Authorization: `Bearer ${access_token}` };
+        axios.post(process.env.REACT_APP_SERVER_DOMAIN + '/api/pod/save', {
+            name: songName,
+            description: songDescription,
+            imageURL: songImageCover,
+            songURL: audioImageCover,
+            category: selectedCategory,
+        }, { headers: headers })
+            .then((result) => {
+              toast.dismiss(loadingToast);
+              toast.success("Podcast Published Successfully..!");
+              setTimeout(()=>{
+                  navigate("/podcasts");
+              },500);
+            })
+            .catch((err) => console.log(err));
+
+        // Reset state after successful upload
+        setSongName('');
+        setSongDescription('');
+        setIsAudioLoading(false);
+        setIsImageLoading(false);
+        setAudioImageCover(null);
+        setSongImageCover(null);
     };
     
     const deleteImageObject = (url,isImage) => {

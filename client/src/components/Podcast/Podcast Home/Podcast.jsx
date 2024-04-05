@@ -240,7 +240,7 @@ const Podcast = () => {
               exit={{ opacity: 0, y: 50 }}
               className="fixed left-0 right-0 bottom-0 z-50 bg-cardOverlay backdrop-blur-md"
             >
-              {selectedPodcast && (
+              {
                 // Conditionally rendering PodcastPlayer or TrendingPodPlayer based on isTrendingPodcard
                 isTrendingPodcard ? (
                   <TrendingPodPlayer
@@ -256,7 +256,7 @@ const Podcast = () => {
                     pageState={pageState}
                   />
                 )
-              )}
+              }
             </motion.div>
           )}
          

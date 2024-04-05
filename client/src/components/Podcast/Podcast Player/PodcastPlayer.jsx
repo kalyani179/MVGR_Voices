@@ -97,9 +97,9 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
             <div className="flex items-center justify-center md:gap-3 ">
               <div className="flex flex-col md:gap-1">
                 <p className="md:text-xl text-sm text-headingColor font-medium">{selectedSong.name}</p>
-                <div className='flex md:gap-1 md:mb-3 '>
-                  <img src={selectedSong.author.personal_info.profile_img}  className='sm:hidden md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
-                  <Link to={`/user/${selectedSong.author.personal_info.username}`} className='md:mx-1 sm:text-sm md:text-base text-black underline'>@{selectedSong.author.personal_info.username}</Link>
+                <div className='flex md:gap-1 md:mb-3 sm:hidden'>
+                  <img src={selectedSong.author.personal_info.profile_img}  className=' md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
+                  <Link to={`/user/${selectedSong.author.personal_info.username}`} className=' md:mx-1 sm:text-sm md:text-base text-black underline'>@{selectedSong.author.personal_info.username}</Link>
                 </div>
                 <div className=" md:hidden flex items-center gap-1 md:-mt-2 md:mx-2">
                     <button onClick={handleLikeClick} className={`md:w-10 md:h-10 sm:w-6 sm:h-6 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>

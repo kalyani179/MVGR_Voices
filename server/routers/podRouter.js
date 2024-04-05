@@ -216,10 +216,10 @@ router.post("/play-podcast", verifyJWT, async(req, res) => {
         }
 
         // Check if the current user is the author of the podcast
-        if (podcast.author.toString() === userId) {
-            // If the current user is the author, do not increment play count
-            return res.status(200).json({ success: true, podcast });
-        }
+        // if (podcast.author.toString() === userId) {
+        //     // If the current user is the author, do not increment play count
+        //     return res.status(200).json({ success: true, podcast });
+        // }
 
         // Increment play count in PodcastSchema
         const updatedPodcast = await PodModel.findByIdAndUpdate(
@@ -231,10 +231,7 @@ router.post("/play-podcast", verifyJWT, async(req, res) => {
             podcast.author, { $inc: { "account_info.total_plays": 1 } }
         );
 
-        // Increment total plays count in UserSchema of the current user
-        await UserModel.findByIdAndUpdate(
-            userId, { $inc: { "account_info.total_plays": 1 } }
-        );
+
 
         return res.status(200).json({ success: true, podcast: updatedPodcast });
     } catch (error) {
