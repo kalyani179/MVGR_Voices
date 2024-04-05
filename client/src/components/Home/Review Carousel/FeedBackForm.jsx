@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Zoom } from 'react-awesome-reveal';
+import { Fade, Zoom } from 'react-awesome-reveal';
 import { toast } from 'react-hot-toast';
 
 const FeedbackForm = () => {
@@ -54,9 +54,11 @@ const FeedbackForm = () => {
     };
 
     return (
+        <>
+        <div className={`${clicked ? "show" : "hidden"} z-50`}>
         <Zoom>
-        <div className={`${clicked ? "show" : "hidden"} mx-auto bg-cool-black/95 p-8 rounded-md duration-500 absolute left-5 -bottom-5`}>
-        <button onClick={()=>setClicked(!clicked)}><i className="fi fi-bs-cross-small text-lg text-white absolute top-3.5 right-4"></i></button>
+        <div className={`mx-auto bg-cool-black p-8 rounded-md absolute left-5 -bottom-5`}>
+        <button onClick={()=>setClicked(!clicked)}><i className="fi fi-bs-cross-small text-lg text-white/90 absolute top-3.5 right-4"></i></button>
             <h4 className="font-medium text-center text-xl text-primary">Feedback Form</h4>
             <form onSubmit={handleSubmit} className="space-y-4 mt-5">
                 <div className="flex flex-col">
@@ -84,12 +86,16 @@ const FeedbackForm = () => {
             </form>
         
         </div>
+        </Zoom>
+        </div>
+        <Zoom>
         <div>
-            <button className="sticky" onClick={()=>setClicked(!clicked)}>
-                        <i className="fi fi-ss-star text-primary text-2xl z-50"></i>
+            <button className="sticky z-50" onClick={()=>setClicked(!clicked)}>
+                        <i className="fi fi-ss-star text-gold text-2xl z-50"></i>
             </button>
         </div>
         </Zoom>
+        </>
     );
 }
 

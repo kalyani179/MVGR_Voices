@@ -52,7 +52,8 @@ module.exports = {
         'icons' : '#999999',
         'primary' : '#e86f6f',
         'blue':'#002D62',
-        'green':"#32CD32"
+        'green':"#32CD32",
+        "gold" : "#ebb30c"
       },
       dark:{
         'cool-white':'#1C1C1C',

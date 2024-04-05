@@ -10,7 +10,7 @@ import PageNotFound from './pages/404Page';
 import UserProfilePage from './pages/UserProfilePage';
 import EmailVerification from './components/Authentication/EmailVerification';
 import BlogPage from './components/Blogs/Blog Page/BlogPage';
-import SideNav from './components/Settings/SideNav';
+import SideNav from './common/SideNav';
 import ChangePassword from './components/Settings/ChangePassword';
 import EditProfile from './components/Settings/EditProfile';
 import ManageBlogs from './components/Dashboard/ManageBlogs';

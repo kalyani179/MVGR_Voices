@@ -87,11 +87,11 @@ const Body = () => {
                 <ReviewCarousel />
             </div>
                 
-            <div className="fixed left-11 bottom-11">
+            <div className="fixed z-50 left-11 bottom-11">
                 <FeedbackForm />
             </div>
 
-            <div className="bg-cool-black">
+            <div className="z-10 bg-cool-black">
                 <Footer />
             </div>
 
