@@ -1,12 +1,14 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Fade, Zoom } from 'react-awesome-reveal';
+import React, { useContext, useState } from 'react';
+import { Zoom } from 'react-awesome-reveal';
 import { toast } from 'react-hot-toast';
+import { UserContext } from '../../../App';
 
 const FeedbackForm = () => {
     const [title, setTitle] = useState('');
     const [stars, setStars] = useState(0);
     const [review, setReview] = useState('');
+    let {userAuth:{username}} = useContext(UserContext);
 
     const [clicked,setClicked] = useState(false);
 
@@ -26,6 +28,7 @@ const FeedbackForm = () => {
         let loadingToast = toast.loading("submitting feedback...")
         // Prepare feedback data
         const feedbackData = {
+            username:username,
             title: title,
             stars: stars,
             review: review
@@ -36,6 +39,7 @@ const FeedbackForm = () => {
             setTitle('');
             setStars(0);
             setReview('');
+            setClicked(false);
             e.target.removeAttribute('disabled');
             toast.dismiss(loadingToast);
             toast.success("Feedback Submitted Succesfully!");
@@ -46,6 +50,7 @@ const FeedbackForm = () => {
             setTitle('');
             setStars(0);
             setReview('');
+            setClicked(false);
             e.target.removeAttribute('disabled');
             toast.dismiss(loadingToast);
             toast.error("Error submitting feedback:"+error);

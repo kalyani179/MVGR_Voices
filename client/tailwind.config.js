@@ -32,6 +32,7 @@ module.exports = {
       fontFamily: {
         inter: ["'Inter'", "sans-serif"],
         gelasio: ["'Gelasio'", "serif"],
+        lato:["'Lato'","sans-serif"],
         merriweather:["'Merriweather'","serif"]
       },
   },
