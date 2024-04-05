@@ -23,12 +23,15 @@ const PodcastStats = ({stats}) => {
 }
 
 const ManagePublishedPodcastCard = ({podcast,onClick}) => {
-  const handleClick = () => {
+  const handleClick = (e) => {
+    if (e.target.tagName.toLowerCase() === 'button') {
+      return;
+    }
     console.log("Clicked Podcast ID:", podcast._id); // Log the podcast_id
     onClick(podcast);
   };
   
-  const { imageURL, name, publishedAt, activity,podcast_id } = podcast;
+  const { imageURL, name, publishedAt, activity} = podcast;
   const { userAuth: { access_token } } = useContext(UserContext);
   const [showStat, setShowStat] = useState(false);
   return (

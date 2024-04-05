@@ -60,7 +60,27 @@ const ManagePodcasts = () => {
         }
     }, [access_token, podcasts, query]);
 
-    const handlePodcastClick = (podcast) => {
+    const handlePodcastClick = async(podcast) => {
+        const headers = {
+            Authorization: `Bearer ${access_token}`,
+          };
+        
+          try {
+            // Make an HTTP POST request to increment play count
+            const response = await axios.post(
+              `${process.env.REACT_APP_SERVER_DOMAIN}/api/pod/play-podcast`, 
+              { podcastId: podcast._id }, // Pass the selected podcast's ID
+              { headers: headers }
+            );
+        
+            // Log success message or handle response as needed
+            console.log('Play count incremented:', response.data);
+          } catch (error) {
+            // Handle errors
+            console.error('Error incrementing play count:', error);
+            // Display an error message to the user
+            //toast.error('Failed to increment play count.');
+          }
         console.log("Selected Podcast ID:", podcast._id);
         setSelectedPodcast(podcast);
     };

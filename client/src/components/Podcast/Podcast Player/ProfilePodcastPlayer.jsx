@@ -83,35 +83,37 @@ const ProfilePodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => 
     <div className="w-full relative flex items-center gap-4 p-4">
       {selectedSong && (
         <>
-          <img src={selectedSong.imageURL} alt={selectedSong.name} className="w-40 h-20 rounded-md object-cover" />
-          <div className="flex items-center justify-center gap-3">
-            <div className="flex flex-col gap-1">
-              <p className="text-xl text-headingColor font-medium">{selectedSong.name}</p>
-              <div className='flex gap-1 mb-3'>
-              {selectedSong.author && selectedSong.author.personal_info && (
-    <>
-      <img src={selectedSong.author.personal_info.profile_img} className='w-6 h-6 flex-none rounded-full' alt="User Profile" />
-      <Link to={`/user/${selectedSong.author.personal_info.username}`} className='mx-1 text-black underline'>@{selectedSong.author.personal_info.username}</Link>
-    </>
-  )}
+          <img src={selectedSong.imageURL} alt={selectedSong.name} className=" md:w-40 md:h-20 w-12 h-12 rounded-md object-cover" />
+          <div className="flex items-center justify-center md:gap-3 ">
+            <div className="flex flex-col md:gap-1">
+              <p className="md:text-xl text-sm text-headingColor font-medium">{selectedSong.name}</p>
+              <div className='flex md:gap-1 md:mb-3 sm:hidden '>
+
+                  <img src={selectedSong.author.personal_info?.profile_img } className='sm:hidden md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
+                  <Link to={`/user/${selectedSong.author?.personal_info?.username}`} className='md:mx-1 sm:text-sm md:text-base text-black underline'>@{selectedSong.author?.personal_info?.username}</Link>
               </div>
-            </div> 
-            
-            </div>
-          
-          
+              <div className=" md:hidden flex items-center gap-1 md:-mt-2 md:mx-2">
+                  <button onClick={handleLikeClick} className={`md:w-10 md:h-10 sm:w-6 sm:h-6 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>
+                    <i className={`fi ${isLiked ? 'fi-sr-heart text-red' : 'fi-rr-heart'} mt-1`}></i>  
+                  </button>
+                  <p className="md:tex-xl sm:text-l text-dark-grey">{likesCount}</p>
+              </div>
+            </div>             
+          </div>            
         </>
       )}
-      <div className="flex-1">
+      
+      <div className="md:flex-1 sm:flex-auto">
         <AudioPlayer
           src={selectedSong?.songURL}
           autoPlay={true}
           showSkipControls={true}
           onClickNext={nextTrack}
           onClickPrevious={previousTrack}
+          className="w-full sm:w-auto" 
         />
       </div>
-      <div className="flex items-center gap-1 -mt-2 mx-2">
+      <div className="flex items-center gap-1 md:-mt-2 md:mx-2 sm:hidden">
               <button onClick={handleLikeClick} className={`w-10 h-10 rounded-full flex items-center justify-center ${isLiked ? 'bg-red/20 text-red' : 'bg-grey/80'}`}>
                 <i className={`fi ${isLiked ? 'fi-sr-heart text-red' : 'fi-rr-heart'} mt-1`}></i>  
               </button>

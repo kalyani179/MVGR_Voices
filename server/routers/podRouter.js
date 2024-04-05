@@ -83,18 +83,20 @@ router.post("/search-podcasts-count", async(req, res) => {
 
 
 
-
-
-
 router.get('/top-podcards', async(req, res) => {
     try {
-        const topPodcards = await PodModel.find().sort({ 'activity.total_likes': -1 }).limit(3); // Assuming likes is the field representing likes count
+        const topPodcards = await PodModel.find()
+            .sort({ 'activity.total_likes': -1 })
+            .limit(3)
+            .populate("author", "personal_info.profile_img personal_info.username -_id");
+
         res.json(topPodcards);
     } catch (error) {
         console.error('Error fetching top podcards:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 const getAllPodcastsByAuthorId = async(authorId) => {
     try {
         // Query the PodModel to find all podcasts with the specified authorId
@@ -214,10 +216,10 @@ router.post("/play-podcast", verifyJWT, async(req, res) => {
         }
 
         // Check if the current user is the author of the podcast
-        if (podcast.author.toString() === userId) {
-            // If the current user is the author, do not increment play count
-            return res.status(200).json({ success: true, podcast });
-        }
+        // if (podcast.author.toString() === userId) {
+        //     // If the current user is the author, do not increment play count
+        //     return res.status(200).json({ success: true, podcast });
+        // }
 
         // Increment play count in PodcastSchema
         const updatedPodcast = await PodModel.findByIdAndUpdate(
@@ -229,10 +231,7 @@ router.post("/play-podcast", verifyJWT, async(req, res) => {
             podcast.author, { $inc: { "account_info.total_plays": 1 } }
         );
 
-        // Increment total plays count in UserSchema of the current user
-        await UserModel.findByIdAndUpdate(
-            userId, { $inc: { "account_info.total_plays": 1 } }
-        );
+
 
         return res.status(200).json({ success: true, podcast: updatedPodcast });
     } catch (error) {
