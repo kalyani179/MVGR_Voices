@@ -85,17 +85,17 @@ const ChangePassword = () => {
         <Animation>
         <Toaster />
         
-        <div className="flex-col md:ml-48 h-screen gap-10">
-        <div>
+        <div className="flex-col md:mt-16">
+        <div className="md:ml-48 md:pl-2">
         <Marquee speed={"40"} direction="right">
-            <div className="">
+            <div className="mt-2">
                 <h1 className="text-lg tracking-wide font text-primary font-inter">Note : Please Make Sure that your new password is atleast 6 characters long !</h1>
             </div>
         </Marquee> 
         </div>
-        <div className="center gap-28">
-        <div className="w-[30%]">
-            <Lottie animationData={changePassword} />
+        <div className="center gap-28 md:mt-10">
+        <div className="w-[25%]">
+            <Lottie animationData={changePassword} speed={2}/>
         </div>
         
         <form className="flex flex-col gap-5 items-center justify-center">
