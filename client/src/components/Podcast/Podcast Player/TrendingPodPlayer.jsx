@@ -49,7 +49,7 @@ const TrendingPodPlayer = ({ selectedSong, songs, setSelectedSongIndex }) => {
           Authorization: `Bearer ${userAuth.access_token}`
         }
       });
-      setIsLiked(newIsLiked);
+      //setIsLiked(newIsLiked);
       setLikesCount(response.data?.podcast?.activity?.total_likes || 0);
     } catch (error) {
       console.error(error);
