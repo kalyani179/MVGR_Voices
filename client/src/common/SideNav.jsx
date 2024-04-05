@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { ThemeContext, UserContext } from '../../App'
-import Navbar from '../Home/Navbar/Navbar';
+import { ThemeContext, UserContext } from '../App'
+import Navbar from '../components/Home/Navbar/Navbar';
 
 
 const SideNav = () => {

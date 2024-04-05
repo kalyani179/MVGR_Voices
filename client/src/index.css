@@ -224,7 +224,6 @@ body::-webkit-scrollbar{
 }
 
 .bg-wave1 {
-    z-index: 10;
     opacity: 1;
     bottom: 0;
     animation: animate 15s linear infinite; /* Adjust duration for a slower wave */
