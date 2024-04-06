@@ -4,18 +4,27 @@ import { getDate, getFullDate } from '../../../common/Date';
 
 const TrendingPodcard = ({ data ,index,onClick }) => {
     const [isHovered, setIsHovered] = useState(false);
-
+    const [playButtonHovered, setPlayButtonHovered] = useState(false);
     return (
-        <div className="flex gap-5 mb-8 cursor-pointer" onClick={() => onClick(data)}  >
+        <div className="flex gap-5 mb-8 cursor-pointer"  >
             <h1 className="blog-index text-primary/30">{index<10 ? (index+1) : index}</h1>
-            <div className="aspect-square w-72 h-[370px] bg-white shadow hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out" onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+            <div className="aspect-square w-72 h-[370px] bg-white shadow hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out" 
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => {
+                setIsHovered(false);
+                setPlayButtonHovered(false);
+              }}
+           >
         {isHovered && (
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-primary  rounded-full w-12 h-12 flex items-center justify-center focus:outline-none"
-          onClick={onClick}
+          className={`absolute top-1/2 right-4 transform -translate-y-1/2 rounded-full w-10 h-10 flex items-center justify-center focus:outline-none ${
+            playButtonHovered ? 'bg-primary' : 'bg-black/40'
+          }`}
+          onMouseEnter={() => setPlayButtonHovered(true)}
+          onMouseLeave={() => setPlayButtonHovered(false)}
+          onClick={() => onClick(data)}
         >
-          <i className="fi fi-rr-play text-white"></i>
+          <i class="fi fi-ss-play text-white mt-1"></i>
         </button>
       )}
             <img className="aspect-square w-72 h-56 object-center object-cover" src={data.imageURL} alt="" />
