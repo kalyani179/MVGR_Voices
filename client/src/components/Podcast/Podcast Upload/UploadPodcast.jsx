@@ -96,19 +96,27 @@ const UploadPodcast = () => {
     return (
       <div className="bg-cool-white">
       <div className="center flex-col gap-8 h-screen">
-        <h1 className="font-medium text-primary/90 text-2xl tracking-wide">Upload Your Podcast and Let Your Voice Be Heard!</h1>
+        <h1 className="font-medium text-primary/90 sm:text-center sm:text-base md:text-2xl tracking-wide">Upload Your Podcast and Let Your Voice Be Heard!</h1>
         <div className='flex flex-col items-center bg-white justify-start p-6 rounded h-3/4 w-3/4'>
-        <div className="flex w-full mb-4">
+        <div className=" sm:flex-col flex w-full mb-4">
           <input
             type="text"
             placeholder="Podcast Name"
+
+            className="sm:mb-4 sm:w-full w-1/2 p-3 rounded-md text-base font-semibold placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+
             className="w-1/2 p-3 rounded-md text-base font-medium placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
           />
           {/* Dropdown menu for category filtering */}
           <select
+
+            className="select-category sm:w-full w-1/2 p-3 rounded-md text-base font-semibold outline-none shadow-sm border border-gray-300 bg-transparent"
+
             className="select-category w-1/2 p-3 rounded-md text-base font-medium outline-none shadow-sm border border-gray-300 bg-transparent"
+
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -119,10 +127,10 @@ const UploadPodcast = () => {
           </select>
         </div>
   
-      <div className='flex mb-4 w-full h-full'>
+      <div className='sm:flex-col flex mb-4 w-full h-full'>
       <Toaster />
           <div className='bg-card backdrop-blur-md w-full h-full rounded-md border-2 border-dotted border-gray-300
-            cursor-pointer self-start mr-2'>
+            cursor-pointer self-start mr-2 sm:mb-4'>
               
               {isImageLoading && <FileLoader progress={imageUploadProgress} />}
               {!isImageLoading &&(
@@ -130,16 +138,16 @@ const UploadPodcast = () => {
                 {!songImageCover ?( <FileUploader updateState={setSongImageCover}
                 setProgress ={setImageUploadProgress} isLoading={setIsImageLoading} isImage={true}
                 />):(
-                  <div className="relative w-full h-full overflow-hidden rounded-md">
+                  <div className=" relative w-full h-full overflow-hidden rounded-md">
                   <img
                     src={songImageCover}
                     alt=""
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover "
                     
                   />
                   <button
                         type="button"
-                        className="absolute bottom-3 right-3 p-3 rounded-full bg-red text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
+                        className="absolute bottom-3 right-3 p-3 rounded-full bg-red sm:text-base md:text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                         onClick={() => {
                           deleteImageObject(songImageCover, true);
                         }}
@@ -164,7 +172,7 @@ const UploadPodcast = () => {
                   <audio src={audioImageCover} controls ></audio>
                   <button
                         type="button"
-                        className="absolute bottom-3 right-3 p-3 rounded-full bg-red text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
+                        className="absolute bottom-3 right-3 p-3 rounded-full bg-red sm:text-base md:text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                         onClick={() => {
                           deleteImageObject(audioImageCover, true);
                         }}
