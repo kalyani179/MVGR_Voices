@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR /app
+
+ENV REACT_APP_SERVER_DOMAIN=http://localhost:3001
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

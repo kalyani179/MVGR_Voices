@@ -15,7 +15,7 @@ import interactionRouter from "./routers/interactionRouter.js";
 import feedbackRouter from "./routers/feedbackRouter.js";
 
 const server = express();
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 3001;
 
 mongoose.connect(process.env.DB_LOCATION, { autoIndex: true });
 
@@ -34,5 +34,5 @@ server.use("/",interactionRouter);
 server.use("/",feedbackRouter);
 
 server.listen(PORT, () => {
-    console.log("Server is listening on port 3000");
+    console.log("Server is listening on port 3001");
 })
