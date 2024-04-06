@@ -65,12 +65,12 @@ const ContactForm = () => {
         })
     }
     return (
-        <form className="bg-white opacity-90 flex flex-col gap-3 rounded-xl shadow-2xl p-10">
+        <form className="bg-white opacity-90 flex flex-col gap-3 rounded-xl shadow-2xl p-10 sm:p-7">
             <Toaster />
             <div className="flex justify-start items-center">
                 <i className={`fas fa-user absolute ${isFullNameFocused || inputFullNameValue ? 'text-primary' : ''}`}></i>
                 <h6  className={`absolute pl-7 transition-transform duration-300 ease-in-out transform ${isFullNameFocused  || inputFullNameValue ? '-translate-y-7 text-primary font-medium' : 'translate-y-0'}`}>Full Name</h6>
-                <input onClick={translateFullName} onBlur={()=>setFullNameTranslated(false)} onChange={handleChange} className={`auth-input ${isFullNameFocused || inputFullNameValue ? "border-b-primary" : ""}`} type="text" name="fullname" value={inputFullNameValue}/>
+                <input onClick={translateFullName} onBlur={()=>setFullNameTranslated(false)} onChange={handleChange} className={`auth-input  ${isFullNameFocused || inputFullNameValue ? "border-b-primary" : ""}`} type="text" name="fullname" value={inputFullNameValue}/>
             </div>
             <div className="flex justify-start items-center">
                 <i className={`fas fa-envelope absolute ${isEmailFocused || inputEmailValue ? 'text-primary' : ''}`}></i>
@@ -83,7 +83,7 @@ const ContactForm = () => {
                 <textarea onClick={translateMessage} onBlur={()=>setMessageTranslated(false)} onChange={handleMessageChange} className={`resize-none bg-transparent w-full auth-input overflow-hidden text-area-input overflow-y-scroll ${isMessageFocused || inputMessageValue ? "border-b-primary" : ""}`} value={inputMessageValue}>
                 </textarea>
             </div>
-            <button onClick={handleSubmit} type="submit" className={`btn-purple ${theme==="light" ? "font-medium" : "font-bold"} w-80 rounded-md`}>Send Message</button>
+            <button onClick={handleSubmit} type="submit" className={`btn-purple ${theme==="light" ? "font-medium" : "font-bold"}  rounded-md`}>Send Message</button>
                 
             
         </form>
