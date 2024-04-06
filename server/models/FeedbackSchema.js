@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const feedbackSchema = mongoose.Schema({
+    username:{
+        type:String
+    },
     title : {
         type:String,
         required:true

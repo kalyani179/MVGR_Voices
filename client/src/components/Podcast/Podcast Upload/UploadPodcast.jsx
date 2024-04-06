@@ -102,13 +102,21 @@ const UploadPodcast = () => {
           <input
             type="text"
             placeholder="Podcast Name"
+
             className="sm:mb-4 sm:w-full w-1/2 p-3 rounded-md text-base font-semibold placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+
+            className="w-1/2 p-3 rounded-md text-base font-medium placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
           />
           {/* Dropdown menu for category filtering */}
           <select
+
             className="select-category sm:w-full w-1/2 p-3 rounded-md text-base font-semibold outline-none shadow-sm border border-gray-300 bg-transparent"
+
+            className="select-category w-1/2 p-3 rounded-md text-base font-medium outline-none shadow-sm border border-gray-300 bg-transparent"
+
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -182,7 +190,7 @@ const UploadPodcast = () => {
         <input
             type="text"
             placeholder='Description'
-            className='w-full p-3 rounded-md text-base font-semibold placeholder:font-medium 
+            className='w-full p-3 rounded-md text-base font-medium placeholder:font-medium 
             text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mb-4'
            // onChange={(e)=>setDescription(e.target.value)}
             onChange={(e) => setSongDescription(e.target.value)}
@@ -199,7 +207,7 @@ const UploadPodcast = () => {
   const FileLoader = ({ progress }) => {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center">
-        <p className="text-xl font-semibold text-textColor">
+        <p className="text-xl font-medium text-textColor">
           {Math.round(progress) > 0 && <>{`${Math.round(progress)}%`}</>}
         </p>
         <div className="loader-container">
@@ -228,7 +236,7 @@ const UploadPodcast = () => {
         },
   
         (error) => {
-         console.log(error);
+          console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
@@ -241,7 +249,7 @@ const UploadPodcast = () => {
     };
     return(
       <label>
-        <div className='flex flex-col items-center justify-center h-full'>
+        <div className='flex flex-col items-center justify-center h-full font-inter'>
           <div className='flex flex-col justify-center items-center cursor-pointer'>
             <p className='font-bold text-2xl'> <BiCloudUpload /></p>
             <p className='text-lg'>Click to upload {isImage ?"an image":"an audio"}</p>

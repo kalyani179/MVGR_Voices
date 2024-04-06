@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Animation from '../../common/Animation';
 import {toast,Toaster} from "react-hot-toast";
 import axios from 'axios';
 import { UserContext } from '../../App';
 import Marquee from 'react-fast-marquee';
+import changePassword from "../../assets/animations/changePassword.json";
+import Lottie from 'lottie-react';
 
 const ChangePassword = () => {
     let {userAuth:{access_token}} = useContext(UserContext);
@@ -22,7 +24,7 @@ const ChangePassword = () => {
 
     const [inputCurrentPassword,setInputCurrentPassword] = useState('');
     const [inputNewPassword,setInputNewPassword] = useState('');
-    const [data,setData] = useState({currentPassword : "",newPassword:""})
+    const [data,setData] = useState({currentPassword : "",newPassword:""});
 
     const handleChange = (e) => {
         const {name,value} = e.target;
@@ -38,8 +40,13 @@ const ChangePassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         let formData = data;
+        console.log(data);
+        console.log(formData.currentPassword,formData.newPassword);
         if(!formData.currentPassword.length || !formData.newPassword.length){
-            return toast.error("Please Fill All The Inputs!")
+            setInputCurrentPassword('');
+            setInputNewPassword('');
+            setData({ currentPassword: '', newPassword: '' });
+            return toast.error("Please Fill All The Inputs!");
         }
         e.target.setAttribute("disabled",true);
         let loadingToast = toast.loading("Updating...");
@@ -52,30 +59,46 @@ const ChangePassword = () => {
         .then(()=>{
             toast.dismiss(loadingToast);
             setInputCurrentPassword('');
-            setInputNewPassword('')
+            setInputNewPassword('');
+            setData({ currentPassword: '', newPassword: '' });
             e.target.removeAttribute("disabled");
             return toast.success("Password Updated Successfully!");
         })
         .catch(({response})=> {
             setInputCurrentPassword('');
-            setInputNewPassword('')
+            setInputNewPassword('');
+            setData({ currentPassword: '', newPassword: '' });
             toast.dismiss(loadingToast);
             e.target.removeAttribute("disabled");
             return toast.error(response.data.error);
         })
+        
     }
+
+    useEffect(() => {
+        // Code inside this block runs after 'data' state has been updated
+        console.log("Updated data:", data);
+    }, [data]); // useEffect runs whenever 'data' state changes
+
 
     return (
         <Animation>
         <Toaster />
         
-        <div className="h-screen flex flex-col justify-center gap-5 md:-mt-12 -mb-1 md:ml-48 items-center">
+        <div className="flex-col md:mt-16">
+        <div className="md:ml-48 md:pl-2">
         <Marquee speed={"40"} direction="right">
-            <div className="">
+            <div className="mt-2">
                 <h1 className="text-lg tracking-wide font text-primary font-inter">Note : Please Make Sure that your new password is atleast 6 characters long !</h1>
             </div>
-        </Marquee>
-        <form className="h-cover flex flex-col gap-5 items-center mt-10 justify-center">
+        </Marquee> 
+        </div>
+        <div className="center gap-28 md:mt-10">
+        <div className="w-[25%]">
+            <Lottie animationData={changePassword} speed={2}/>
+        </div>
+        
+        <form className="flex flex-col gap-5 items-center justify-center">
             {/* <h1 className="sm:hidden text-xl font-medium text-primary">Change Password</h1> */}
             <div className="py-8 w-full md:max-w-[400px] flex flex-col justify-center items-center">
                 <div className='flex justify-start items-center'>
@@ -94,6 +117,8 @@ const ChangePassword = () => {
             </div>
             
         </form>
+        </div>
+      
         </div>
         </Animation>
     

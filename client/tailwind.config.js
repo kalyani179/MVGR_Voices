@@ -32,6 +32,7 @@ module.exports = {
       fontFamily: {
         inter: ["'Inter'", "sans-serif"],
         gelasio: ["'Gelasio'", "serif"],
+        lato:["'Lato'","sans-serif"],
         merriweather:["'Merriweather'","serif"]
       },
   },
@@ -68,7 +69,8 @@ module.exports = {
         'purple': '#582C8E',
         'icons' : '#999999',
         'primary' : '#e86f6f',
-        'darkBlack' : '#000'
+        'darkBlack' : '#000',
+        "gold" : "#ebb30c"
       }
     })
   ],
