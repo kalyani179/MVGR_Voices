@@ -10,22 +10,30 @@ const PodCard = ({ data, onClick }) => {
   } = data;
 
   const [isHovered, setIsHovered] = useState(false);
+  const [playButtonHovered, setPlayButtonHovered] = useState(false);
 
   return (
     <div
-      className="bg-white shadow flex gap-8 items-center border-b border-grey pb-5 mb-4 hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out relative"
+      className={`${isHovered ? 'bg-white/40' : 'bg-white'} shadow flex gap-8 items-center border-b border-grey pb-5 mb-4 hover:transform hover:shadow-2xl hover:shadow-black/50 transition duration-300 ease-in-out relative`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setPlayButtonHovered(false);
+      }}
     >
       {isHovered && (
         <button
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-primary  rounded-full w-12 h-12 flex items-center justify-center focus:outline-none"
+          className={`absolute top-1/2 right-4 transform -translate-y-1/2 rounded-full w-10 h-10 flex items-center justify-center focus:outline-none ${
+            playButtonHovered ? 'bg-primary' : 'bg-black/40'
+          }`}
+          onMouseEnter={() => setPlayButtonHovered(true)}
+          onMouseLeave={() => setPlayButtonHovered(false)}
           onClick={onClick}
         >
-          <i className="fi fi-rr-play text-white"></i>
+          <i class="fi fi-ss-play text-white mt-1"></i>
         </button>
       )}
-      <div className="aspect-square w-72 h-[350px] bg-white cursor-pointer" onClick={onClick}>
+      <div className="aspect-square w-72 h-[350px] bg-white cursor-pointer" >
         <img className="aspect-square w-72 h-56 object-center object-cover" src={imageURL} alt={name} />
         <div className="py-5 p-4 bg-white">
           <div className="flex justify-between">
