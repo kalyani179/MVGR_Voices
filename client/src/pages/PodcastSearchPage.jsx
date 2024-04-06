@@ -93,7 +93,7 @@ const PodcastsSearchPage = () => {
     }
 
     return (
-        <section className="h-cover bg-cool-white flex justify-center gap-5">
+        <section className="min-h-screen bg-cool-white flex justify-center gap-5">
             <div className={`w-full ${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
                 <InPageNavigation
                     routes={[`search results for ${query}`, "Accounts Matched"]}
