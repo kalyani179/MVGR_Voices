@@ -75,7 +75,10 @@ const BlogPage = () => {
     const handleSignInError = () => {
         navigate("/blogs");
         setTimeout(() => {
-            return toast.error("Please sign in to see the blog!");
+            return toast.error("Please sign in to see the blog!", {style: {
+            border:"1px solid #e86f6f",
+            fontSize: "19px"
+            },icon:"🥺"},);
         }, 1000);
     };
 

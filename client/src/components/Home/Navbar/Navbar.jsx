@@ -91,10 +91,10 @@ const Navbar = ({home=1,activeLink="Home"}) => {
     <Toaster 
       toastOptions={{
           success:{
-              duration: 2000
+              duration: 2500
           },
           error: {
-              duration: 1500
+              duration: 2500
           }
       }}
     />

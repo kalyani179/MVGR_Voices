@@ -169,7 +169,6 @@ const Podcast = () => {
                   <SyncLoader color="#f59a9a" margin={6} />
                 </div>
               ) :
-                        
                             trendingPodcards && trendingPodcards.length > 0  ? 
                             
                             (trendingPodcards.map((podcard, index) => (
@@ -179,7 +178,7 @@ const Podcast = () => {
                             ))
                           ) :
                           (<NoDataMessage message={"No Podcasts Published"}/>
-                           
+                        
                     )}
 
                 </div>
@@ -265,7 +264,7 @@ const Podcast = () => {
               }
             </motion.div>
           )}
-         
+      
                           
         </div>
       </section>
