@@ -46,12 +46,7 @@ const Podcast = () => {
   
   }, []);
 
-  useEffect(() => {
-    // Simulate fetching data
-    setTimeout(() => {
-        setTrendingPodcards([]); // Set trendingPodcards to an empty array after fetching data
-    }, 2000);
-}, []);
+
 
   const handleTrendingPodcardClick = async (podcardData) => {
     if (!userAuth || !userAuth.username) {
@@ -239,7 +234,7 @@ const Podcast = () => {
                   <div className="center w-full">
                             <SyncLoader color="#f59a9a" margin={6} />
                   </div>
-                : !trendingPodcards.length  ? (
+                : trendingPodcards.length  ? (
           trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
                   <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
