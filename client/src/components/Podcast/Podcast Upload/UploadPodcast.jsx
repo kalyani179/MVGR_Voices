@@ -102,13 +102,13 @@ const UploadPodcast = () => {
           <input
             type="text"
             placeholder="Podcast Name"
-            className="sm:mb-4 sm:w-full w-1/2 p-3 rounded-md text-base font-semibold placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
+            className="sm:mb-4 sm:w-full w-1/2 p-3 rounded-md text-base font-medium placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
           />
           {/* Dropdown menu for category filtering */}
           <select
-            className="select-category sm:w-full w-1/2 p-3 rounded-md text-base font-semibold outline-none shadow-sm border border-gray-300 bg-transparent"
+            className="select-category sm:w-full w-1/2 p-3 rounded-md text-base font-medium outline-none shadow-sm border border-gray-300 bg-transparent"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >

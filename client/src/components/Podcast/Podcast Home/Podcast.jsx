@@ -174,22 +174,7 @@ const Podcast = () => {
                 <div className="center w-full p-5">
                     <NoDataMessage message={"No Trending Podcards Found"} />
                 </div>
-
-              ) :
-                            trendingPodcards && trendingPodcards.length > 0  ? 
-                            
-                            (trendingPodcards.map((podcard, index) => (
-                              <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
-                                  <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
-                              </Animation>
-                            ))
-                          ) :
-                          (<NoDataMessage message={"No Podcasts Published"}/>
-                        
-                    )}
-
-      
-
+            )}
 
                 </div>
               </div>
@@ -274,7 +259,7 @@ const Podcast = () => {
               }
             </motion.div>
           )}
-      
+    
                           
         </div>
       </section>
