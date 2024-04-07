@@ -77,8 +77,8 @@ const BlogPage = () => {
         setTimeout(() => {
             return toast.error("Please sign in to see the blog!", {style: {
             border:"1px solid #e86f6f",
-            fontSize: "19px"
-            },icon:"🥺"},);
+            fontSize: "17px"
+            }});
         }, 1000);
     };
 

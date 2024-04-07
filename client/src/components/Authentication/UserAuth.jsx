@@ -84,7 +84,7 @@ const UserAuth = ({type,close,open}) => {
                 // window.location.reload(); // To make animation
                 setTimeout(()=>{
                     toast.remove(loadingSignin);
-                    toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully");
+                    toast.success("User Signed "+type[type.length-2]+type[type.length-1]+" Succesfully..!");
                 },500)
             }   
             setTimeout(()=>{
@@ -144,7 +144,7 @@ const UserAuth = ({type,close,open}) => {
             console.log(user);
         })
         .catch(err=>{
-            return toast.error("There is some error in signin with google");
+            return toast.error("There is some error in signin with google!");
             // return console.log(err);
         })
     }

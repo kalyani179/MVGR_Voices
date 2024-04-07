@@ -49,7 +49,10 @@ const Podcast = () => {
   
   const handleTrendingPodcardClick = async (podcardData) => {
     if (!userAuth || !userAuth.username) {
-      toast.error('Please sign in to listen to the podcast!');
+      toast.error('Please sign in to listen the podcast!', {style: {
+        border:"1px solid #e86f6f",
+        fontSize: "17px"
+        }});
       return;
     }
     const headers = {
@@ -85,7 +88,10 @@ const Podcast = () => {
 
   const handleSongClick = async(songIndex) => {
     if (!userAuth || !userAuth.username) {
-      toast.error('Please sign in to listen to the podcast!');
+      toast.error('Please sign in to listen the podcast!', {style: {
+        border:"1px solid #e86f6f",
+        fontSize: "17px"
+      }});
       return;
   }
 
