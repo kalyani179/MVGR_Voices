@@ -176,7 +176,7 @@ const Podcast = () => {
                             <SyncLoader color="#f59a9a" margin={6} />
                     </div>
                 : trendingPodcards.length > 0 ? (
-          trendingPodcards.map((podcard, index) => (
+              trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
                   <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
               </Animation>
@@ -235,7 +235,7 @@ const Podcast = () => {
                             <SyncLoader color="#f59a9a" margin={6} />
                   </div>
                 : trendingPodcards.length  ? (
-          trendingPodcards.map((podcard, index) => (
+              trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
                   <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
               </Animation>
