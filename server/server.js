@@ -6,7 +6,7 @@ import cors from "cors";
 // Routers
 import userAuthentication from "./routers/userAuthRouter.js";
 import blogsRouter from "./routers/blogsRouter.js";
-import podRouter from "./routers/podRouter.js";
+import podcastRouter from "./routers/podcastRouter.js";
 import settingsRouter from "./routers/settingsRouter.js";
 import dashboardRouter from "./routers/dashboardRouter.js";
 import contactRouter from "./routers/contactRouter.js";
@@ -25,7 +25,7 @@ server.use(express.json());
 server.use(cors({ origin: "*" }));
 server.use("/", userAuthentication);
 server.use("/", blogsRouter);
-server.use("/api/pod/", podRouter);
+server.use("/api/pod/", podcastRouter);
 server.use("/", settingsRouter);
 server.use("/", dashboardRouter);
 server.use("/", contactRouter);
