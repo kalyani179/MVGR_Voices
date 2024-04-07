@@ -28,7 +28,7 @@ const Podcast = () => {
   const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(false); 
  
-  const [trendingPodcards, setTrendingPodcards] = useState([]);
+  const [trendingPodcards, setTrendingPodcards] = useState(null);
   const { userAuth } = useContext(UserContext);
   const {searchBoxVisibility} = useContext(SearchContext);
   const [selectedPodcast, setSelectedPodcast] = useState(null);
@@ -46,7 +46,13 @@ const Podcast = () => {
   
   }, []);
 
-  
+  useEffect(() => {
+    // Simulate fetching data
+    setTimeout(() => {
+        setTrendingPodcards([]); // Set trendingPodcards to an empty array after fetching data
+    }, 2000);
+}, []);
+
   const handleTrendingPodcardClick = async (podcardData) => {
     if (!userAuth || !userAuth.username) {
       toast.error('Please sign in to listen the podcast!', {style: {
@@ -170,7 +176,11 @@ const Podcast = () => {
                   Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
                 <div className="flex justify-around">
-                {trendingPodcards && trendingPodcards.length > 0 ? (
+                {trendingPodcards ===null ? 
+                  <div className="center w-full">
+                            <SyncLoader color="#f59a9a" margin={6} />
+                    </div>
+                : trendingPodcards.length > 0 ? (
           trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
                   <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
@@ -225,7 +235,11 @@ const Podcast = () => {
               )}
             </div>
             <div >
-                {trendingPodcards && trendingPodcards.length > 0 ? (
+                {trendingPodcards === null ? 
+                  <div className="center w-full">
+                            <SyncLoader color="#f59a9a" margin={6} />
+                  </div>
+                : !trendingPodcards.length  ? (
           trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
                   <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />

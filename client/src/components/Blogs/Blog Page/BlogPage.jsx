@@ -12,6 +12,7 @@ import BlogContent from './BlogContent';
 import CommentsContainer, { fetchComments } from './CommentsContainer';
 import { ThemeContext, UserContext } from '../../../App';
 import toast from 'react-hot-toast';
+import {ClipLoader } from "react-spinners";
 
 export const blogStructure = {
     title:'',
@@ -92,7 +93,9 @@ const BlogPage = () => {
     return (
         <Animation>
             {
-                loading ? <Loader /> :
+                loading ? 
+                <Loader />
+                :
                 <BlogContext.Provider value={{blog,setBlog,isLiked,setIsLiked,isCommentsVisible,setCommentsVisible,totalParentCommentsLoaded,setTotalParentCommentsLoaded}}>
                     <CommentsContainer />
                     <div className="max-w-[900px] mx-auto block py-10 px-[5vw]">
