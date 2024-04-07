@@ -24,6 +24,7 @@ const PodcastsSearchPage = () => {
     const { userAuth } = useContext(UserContext);
     const { userAuth: { access_token } } = useContext(UserContext);
     const {searchBoxVisibility} = useContext(SearchContext);
+    const [loading, setLoading] = useState(true); 
     let navigate = useNavigate();
     const searchPodcasts = ({ page = 1, create_new_arr = false }) => {
 
@@ -42,6 +43,7 @@ const PodcastsSearchPage = () => {
                     create_new_arr
                 });
                 setPodcasts(formattedData);
+                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -63,6 +65,7 @@ const PodcastsSearchPage = () => {
 
     const resetState = () => {
         setPodcasts({ results: [] }); // Clear previous search results
+        setLoading(true);
         setUsers(null);
         setSelectedCategory(null); // Reset selected category
     }
@@ -100,7 +103,7 @@ const PodcastsSearchPage = () => {
                     defaultHidden={["Accounts Matched"]}
                 >
                     <>
-                        {podcasts === null ? (
+                        {loading ? (
                             <div className="center">
                                 <SyncLoader color="#f59a9a" margin={4} size={13} />
                             </div>
