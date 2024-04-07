@@ -27,7 +27,7 @@ const TrendingPodcard = ({ data ,index,onClick }) => {
           <i class="fi fi-ss-play text-white mt-1"></i>
         </button>
       )}
-            <img className="aspect-square w-72 h-56 object-center object-cover" src={data.imageURL} alt="" />
+            <img className={`${isHovered ? 'bg-black/5' : 'bg-white'} aspect-square w-72 h-56 object-center object-cover`} src={data.imageURL} alt="" />
             <div className="py-5 p-4 bg-white">
                 <div className="flex justify-between">
                     <p className="text-dark-grey/90 font-gelasion">{getFullDate(data.publishedAt)}</p>

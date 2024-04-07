@@ -90,12 +90,12 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
 
   return (
     <div className="w-full flex items-center justify-between gap-3 overflow-hidden bg-white">
-      <div className="w-full relative flex items-center gap-4 p-4">
+      <div className=" w-full relative flex items-center gap-4 p-4">
         {selectedSong && (
           <>
-            <img src={selectedSong.imageURL} alt={selectedSong.name} className=" md:w-40 md:h-20 w-12 h-12 rounded-md object-cover" />
-            <div className="flex items-center justify-center md:gap-3 ">
-              <div className="flex flex-col md:gap-1">
+            <img src={selectedSong.imageURL} alt={selectedSong.name} className="sm:hidden md:w-40 md:h-20 w-12 h-12 rounded-md object-cover" />
+            <div className=" sm:hidden flex items-center justify-center md:gap-3 ">
+              <div className="flex md:flex-col md:gap-1">
                 <p className="md:text-xl text-sm text-headingColor font-medium">{selectedSong.name}</p>
                 <div className='flex md:gap-1 md:mb-3 sm:hidden'>
                   <img src={selectedSong.author.personal_info.profile_img}  className=' md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />

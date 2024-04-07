@@ -164,24 +164,19 @@ const Podcast = () => {
                   Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
                 <div className="flex justify-around">
-                  {loading ? (
-                <div className="center">
-                  <SyncLoader color="#f59a9a" margin={6} />
+                { 
+                trendingPodcards && trendingPodcards.length > 0 ? (
+          trendingPodcards.map((podcard, index) => (
+              <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
+                  <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
+              </Animation>
+          ))
+            ) : (
+                <div className="center w-full p-5">
+                    <NoDataMessage message={"No Trending Podcards Found"} />
                 </div>
-              ) :
-                        
-                            trendingPodcards && trendingPodcards.length > 0  ? 
-                            
-                            (trendingPodcards.map((podcard, index) => (
-                              <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
-                                  <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
-                              </Animation>
-                            ))
-                          ) :
-                          (<NoDataMessage message={"No Podcasts Published"}/>
-                           
-                    )}
-
+            )} 
+                    
                 </div>
               </div>
         <div className={`${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
@@ -208,6 +203,7 @@ const Podcast = () => {
             defaultHidden={["trending podcasts"]}
           >
             <div className=" ">
+              
               {loading ? (
                 <div className="center">
                   <SyncLoader color="#f59a9a" margin={6} />
@@ -279,6 +275,7 @@ const Podcast = () => {
 export const SongContainer = ({ data, onSongClick, pageState }) => {
   return (
     <div className="w-full flex gap-8 justify-start items-center flex-wrap ">
+      
       {data.map((song, i) => (
         <PodCard key={song._id} data={song} onClick={() => onSongClick(i)} />
       ))}
