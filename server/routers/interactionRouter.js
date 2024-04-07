@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import {likeBlog, isBlogLiked, addComment, getBlogComments, getReplies, deleteComment } from "../controllers/interactionController.js";
+import { likeBlog, isBlogLiked, addComment, getBlogComments, getReplies, deleteComment } from "../controllers/interactionController.js";
 import verifyJWT from "../utilities/userVerification.js";
 
 

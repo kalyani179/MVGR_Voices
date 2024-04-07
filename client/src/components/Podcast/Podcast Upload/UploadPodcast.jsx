@@ -97,26 +97,18 @@ const UploadPodcast = () => {
       <div className="bg-cool-white">
       <div className="center flex-col gap-8 h-screen">
         <h1 className="font-medium text-primary/90 sm:text-center sm:text-base md:text-2xl tracking-wide">Upload Your Podcast and Let Your Voice Be Heard!</h1>
-        <div className='flex flex-col items-center bg-white justify-start p-6 rounded h-3/4 w-3/4'>
+        <div className='flex flex-col items-center bg-white justify-start p-6 rounded md:h-3/4 md:w-3/4 '>
         <div className=" sm:flex-col flex w-full mb-4">
           <input
             type="text"
             placeholder="Podcast Name"
-
             className="sm:mb-4 sm:w-full w-1/2 p-3 rounded-md text-base font-semibold placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
-
-            className="w-1/2 p-3 rounded-md text-base font-medium placeholder:font-medium text-textColor outline-none shadow-sm border border-gray-300 bg-transparent mr-2"
-
             value={songName}
             onChange={(e) => setSongName(e.target.value)}
           />
           {/* Dropdown menu for category filtering */}
           <select
-
             className="select-category sm:w-full w-1/2 p-3 rounded-md text-base font-semibold outline-none shadow-sm border border-gray-300 bg-transparent"
-
-            className="select-category w-1/2 p-3 rounded-md text-base font-medium outline-none shadow-sm border border-gray-300 bg-transparent"
-
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -126,10 +118,9 @@ const UploadPodcast = () => {
             ))}
           </select>
         </div>
-  
-      <div className='sm:flex-col flex mb-4 w-full h-full'>
+      <div className='sm:flex-col flex mb-4 w-full md:h-60'>
       <Toaster />
-          <div className='bg-card backdrop-blur-md w-full h-full rounded-md border-2 border-dotted border-gray-300
+          <div className='bg-card backdrop-blur-md w-full md:h-full rounded-md border-2 border-dotted border-gray-300
             cursor-pointer self-start mr-2 sm:mb-4'>
               
               {isImageLoading && <FileLoader progress={imageUploadProgress} />}
@@ -138,11 +129,11 @@ const UploadPodcast = () => {
                 {!songImageCover ?( <FileUploader updateState={setSongImageCover}
                 setProgress ={setImageUploadProgress} isLoading={setIsImageLoading} isImage={true}
                 />):(
-                  <div className=" relative w-full h-full overflow-hidden rounded-md">
+                  <div className=" relative w-full md:h-full overflow-hidden rounded-md">
                   <img
                     src={songImageCover}
                     alt=""
-                    className="w-full h-full object-cover "
+                    className="w-full sm:h-40  md:h-full object-cover "
                     
                   />
                   <button

@@ -164,10 +164,17 @@ const Podcast = () => {
                   Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
                 <div className="flex justify-around">
-                  {loading ? (
-                <div className="center">
-                  <SyncLoader color="#f59a9a" margin={6} />
+                {trendingPodcards && trendingPodcards.length > 0 ? (
+          trendingPodcards.map((podcard, index) => (
+              <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
+                  <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
+              </Animation>
+          ))
+            ) : (
+                <div className="center w-full p-5">
+                    <NoDataMessage message={"No Trending Podcards Found"} />
                 </div>
+
               ) :
                             trendingPodcards && trendingPodcards.length > 0  ? 
                             
@@ -180,6 +187,9 @@ const Podcast = () => {
                           (<NoDataMessage message={"No Podcasts Published"}/>
                         
                     )}
+
+      
+
 
                 </div>
               </div>

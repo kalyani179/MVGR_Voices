@@ -170,4 +170,4 @@ const deleteComment = (req, res) => {
     })
 }
 
-export {likeBlog, isBlogLiked, addComment, getBlogComments, getReplies, deleteComment}
+export { likeBlog, isBlogLiked, addComment, getBlogComments, getReplies, deleteComment }
