@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_SERVER_DOMAIN+"/";
+const baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 
 // Assuming this is your existing code to fetch all podcasts in the frontend
 export const getAllSongs = async() => {
     try {
-        const response = await axios.get(`${baseURL}api/pod/getAll`);
+        const response = await axios.get(`${baseURL}/api/pod/getAll`);
         return response.data.podcasts; // Ensure to access response.data.podcasts
     } catch (error) {
         console.error('Error fetching all podcasts:', error);
@@ -16,7 +16,7 @@ export const getAllSongs = async() => {
 
 export const fetchTopPodcards = async() => {
     try {
-        const res = await axios.get(`${baseURL}api/pod/top-podcards`);
+        const res = await axios.get(`${baseURL}/api/pod/top-podcards`);
         return res.data;
     } catch (error) {
         console.error("Error fetching top podcards:", error);
@@ -25,7 +25,7 @@ export const fetchTopPodcards = async() => {
 };
 export const fetchUserPodcards = async(token) => {
     try {
-        const res = await axios.get(`${baseURL}api/pod/user-podcasts`, {
+        const res = await axios.get(`${baseURL}/api/pod/user-podcasts`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -41,7 +41,7 @@ export const fetchUserPodcards = async(token) => {
 
 export const saveNewSong = async(data) => {
     try {
-        const res = axios.post(`${baseURL}api/pod/save`, {...data });
+        const res = axios.post(`${baseURL}/api/pod/save`, {...data });
         return (await res).data.podcast;
     } catch (error) {
         console.error("Error in saveNewSong:", error.response);
@@ -51,7 +51,7 @@ export const saveNewSong = async(data) => {
 
 export const deleteSongById = async(id) => {
     try {
-        const res = axios.delete(`${baseURL}api/songs/delete/${id}`);
+        const res = axios.delete(`${baseURL}/api/songs/delete/${id}`);
         return res;
     } catch (error) {
         return null;
