@@ -94,8 +94,8 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
         {selectedSong && (
           <>
             <img src={selectedSong.imageURL} alt={selectedSong.name} className="sm:hidden md:w-40 md:h-20 w-12 h-12 rounded-md object-cover" />
-            <div className=" sm:hidden flex items-center justify-center md:gap-3 ">
-              <div className="flex md:flex-col md:gap-1">
+            <div className="  flex items-center justify-center md:gap-3 ">
+              <div className="flex flex-col md:gap-1">
                 <p className="md:text-xl text-sm text-headingColor font-medium">{selectedSong.name}</p>
                 <div className='flex md:gap-1 md:mb-3 sm:hidden'>
                   <img src={selectedSong.author.personal_info.profile_img}  className=' md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
@@ -128,9 +128,9 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
                 </button>
                 <p className="tex-xl text-dark-grey">{likesCount}</p>
         </div>
-        <div className="h-full flex flex-col gap-3 -mt-20">
+        <div className="h-full flex flex-col md:gap-3 md:-mt-20 sm:ml-auto">
           <motion.i whileTap={{ scale: 0.8 }} onClick={closeMusicPlayer}>
-            <IoMdClose className="text-textColor hover:text-headingColor text-xl cursor-pointer" />
+            <IoMdClose className="text-textColor hover:text-headingColor text-xl cursor-pointer sm:ml-auto" />
           </motion.i>
         </div> 
       </div>

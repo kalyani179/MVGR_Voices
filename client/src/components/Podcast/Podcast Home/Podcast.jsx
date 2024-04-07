@@ -20,13 +20,12 @@ import NoDataMessage from "../../../common/NoDataMessage";
 
 import TrendingPodPlayer from "../Podcast Player/TrendingPodPlayer";
 
-
 const Podcast = () => {
   const [allSongs, setAllSongs] = useState([]);
   const [selectedSongIndex, setSelectedSongIndex] = useState(null);
   const [pageState, setPageState] = useState("home");
   const { theme } = useContext(ThemeContext);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(true); 
  
   const [trendingPodcards, setTrendingPodcards] = useState(null);
   const { userAuth } = useContext(UserContext);
@@ -38,6 +37,7 @@ const Podcast = () => {
     // Fetch all songs
     getAllSongs().then((data) => {
       setAllSongs(data || []);
+      setLoading(false);
     });
     // Fetch top podcards  
       fetchTopPodcards().then((data)=>{
@@ -285,10 +285,11 @@ const Podcast = () => {
   );
 };
 
-export const SongContainer = ({ data, onSongClick, pageState }) => {
+export const SongContainer = ({ data, onSongClick, pageState }) => { 
   return (
     <div className="w-full flex gap-8 justify-start items-center flex-wrap ">
-      {data.map((song, i) => (
+      {
+        data.map((song, i) => (
         <PodCard key={song._id} data={song} onClick={() => onSongClick(i)} />
       ))}
     </div>
