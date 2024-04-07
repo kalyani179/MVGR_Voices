@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3000/";
+const baseURL = "http://localhost:3001/";
 
 
 // Assuming this is your existing code to fetch all podcasts in the frontend
