@@ -20,7 +20,7 @@ export const fetchTopPodcards = async() => {
         return res.data;
     } catch (error) {
         console.error("Error fetching top podcards:", error);
-        return [];
+        return null;
     }
 };
 export const fetchUserPodcards = async(token) => {

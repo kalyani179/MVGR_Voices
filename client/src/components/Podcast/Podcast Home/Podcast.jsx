@@ -27,7 +27,8 @@ const Podcast = () => {
   const { theme } = useContext(ThemeContext);
   const [loading, setLoading] = useState(true); 
  
-  const [trendingPodcards, setTrendingPodcards] = useState(null);
+  const [trendingPodcards, setTrendingPodcards] = useState([]);
+  const [trendingLoading,setTrendingLoading] = useState(true);
   const { userAuth } = useContext(UserContext);
   const {searchBoxVisibility} = useContext(SearchContext);
   const [selectedPodcast, setSelectedPodcast] = useState(null);
@@ -37,11 +38,12 @@ const Podcast = () => {
     // Fetch all songs
     getAllSongs().then((data) => {
       setAllSongs(data || []);
-      setLoading(false);
+      if(data) setLoading(false);
     });
     // Fetch top podcards  
       fetchTopPodcards().then((data)=>{
-        setTrendingPodcards(data);
+        setTrendingPodcards(data || []);
+        if(data) setTrendingLoading(false);
       });
   
   }, []);
@@ -141,11 +143,11 @@ const Podcast = () => {
       await new Promise(resolve => setTimeout(resolve, 300));
       const data = await getAllSongs();
       setAllSongs(data ||[]);
+      if(data) setLoading(false);
     } catch (error) {
-      console.error("Error fetching songs:", error);
-    } finally {
       setLoading(false);
-    }
+      console.error("Error fetching songs:", error);
+    } 
   };
 
   let categories = [
@@ -171,11 +173,12 @@ const Podcast = () => {
                   Trending <i className="fi fi-rr-arrow-trend-up text-primary"></i>
                 </h1>
                 <div className="flex justify-around">
-                {trendingPodcards ===null ? 
+                {
+                  trendingLoading ? 
                   <div className="center w-full">
                             <SyncLoader color="#f59a9a" margin={6} />
-                    </div>
-                : trendingPodcards.length > 0 ? (
+                  </div>
+                : trendingPodcards.length ? (
               trendingPodcards.map((podcard, index) => (
               <Animation transition={{ duration: 1, delay: index * 0.1 }} key={podcard._id}>
                   <TrendingPodcard data={podcard} index={index} onClick={handleTrendingPodcardClick} />
@@ -230,7 +233,7 @@ const Podcast = () => {
               )}
             </div>
             <div >
-                {trendingPodcards === null ? 
+                {trendingLoading ? 
                   <div className="center w-full">
                             <SyncLoader color="#f59a9a" margin={6} />
                   </div>
