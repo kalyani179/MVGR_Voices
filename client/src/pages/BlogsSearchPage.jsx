@@ -78,7 +78,7 @@ const BlogsSearchPage = () => {
                 <div>
                     {blogs === null ? (
                         <div className="center">
-                            <SyncLoader color="#f59a9a" margin={4} size={13} />
+                            <SyncLoader color="#f59a9a" margin={6} size={13} />
                         </div>
                     ) : !blogs.results.length ? (
                         <NoDataMessage message={"No Blogs Published"} />

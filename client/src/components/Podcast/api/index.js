@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+const baseURL = process.env.REACT_APP_SERVER_DOMAIN+"/";
 
 
 // Assuming this is your existing code to fetch all podcasts in the frontend

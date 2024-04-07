@@ -97,7 +97,7 @@ const PodcastPlayer = ({ selectedSong, songs, setSelectedSongIndex, pageState })
               <div className="sm:ml-4 sm:items-left sm:mt-4 flex md:items-center md:justify-center md:gap-3 ">
                 <div className=" sm:flex-row flex flex-col md:gap-1 sm:gap-3">
                   <p className="md:text-xl text-sm text-headingColor font-medium">{selectedSong.name}</p>
-                  <div className='flex md:gap-1 md:mb-3 sm:hidden'>
+                  <div className='flex md:gap-1 md:mb-3'>
                     <img src={selectedSong.author.personal_info.profile_img}  className=' md:w-6 md:h-6 w-4 h-4 flex-none rounded-full' alt="User Profile" />
                     <Link to={`/user/${selectedSong.author.personal_info.username}`} className=' md:mx-1 sm:text-sm md:text-base text-black underline'>@{selectedSong.author.personal_info.username}</Link>
                   </div>
