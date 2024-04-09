@@ -16,7 +16,7 @@ const MiddleSection = (props) => {
                 <Lottie animationData={contact}/>
             </div>
             : props.index===3?
-            <div className="w-[35%] md:absolute md:rotate-5 right-0 md:-mr-32 md:ml-3 md:-mt-28 sm:w-[100%]">
+            <div className="w-[35%] md:absolute md:rotate-5 right-0 md:-mr-24 md:-mt-28 sm:w-[100%]">
                 <Lottie animationData={subscribe}/>
             </div>
             :

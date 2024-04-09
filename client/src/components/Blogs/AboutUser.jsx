@@ -4,9 +4,9 @@ import { getFullDate } from '../../common/Date';
 
 const AboutUser = ({className,bio,social_links,joinedAt}) => {
     return (
-        <div className={"md-w-[90%] md:mt-7 "+className}>
+        <div className={"md-w-[90%] "+className}>
             <p className="text-lg leading-7">{bio.length ? bio : "Nothing to read here"}</p>
-            <div className="flex gap-x-7 gap-y-2 flex-wrap my-7 items-center text-dark-grey">
+            <div className="flex gap-x-7 gap-y-2 flex-wrap my-2 items-center text-dark-grey">
                 {
                     Object.keys(social_links).map((key)=>{
                         let link = social_links[key];
@@ -18,7 +18,7 @@ const AboutUser = ({className,bio,social_links,joinedAt}) => {
                     })
                 }
             </div>
-            <p className="text-lg leading-7 text-dark-grey">Joined on {getFullDate(joinedAt)}</p>
+            <p className="text-lg text-dark-grey">Joined on {getFullDate(joinedAt)}</p>
         </div>
     )
 }
