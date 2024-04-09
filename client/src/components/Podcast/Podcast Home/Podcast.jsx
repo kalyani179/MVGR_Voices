@@ -38,7 +38,7 @@ const Podcast = () => {
     // Fetch all songs
     getAllSongs().then((data) => {
       setAllSongs(data || []);
-      if(data) setLoading(false);
+      if(data || data===null) setLoading(false);
     });
     // Fetch top podcards  
       fetchTopPodcards().then((data)=>{
@@ -163,7 +163,7 @@ const Podcast = () => {
   ];
 
   // Filter songs based on the selected category
-  const filteredSongs = allSongs.filter(song => pageState === "home" || song.category.toLowerCase() === pageState) ||[];
+  const filteredSongs = allSongs.filter(song => pageState === "home" || song.category.toLowerCase() === pageState) || [];
 
   return (
     <Animation>
@@ -193,7 +193,7 @@ const Podcast = () => {
                 </div>
               </div>
         <div className={`${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
-          <h1 className="font-medium text-primary tracking-wide text-xl mb-8">
+          <h1 className="font-medium text-primary tracking-wide text-xl sm:text-lg mb-8">
             Categories
           </h1>
           <div className="flex gap-3 flex-wrap">
@@ -220,7 +220,7 @@ const Podcast = () => {
                 <div className="center">
                   <SyncLoader color="#f59a9a" margin={6} />
                 </div>
-              ) : filteredSongs.length > 0 ? (
+              ) : filteredSongs.length ? (
                 <SongContainer
                   data={filteredSongs}
                   onSongClick={handleSongClick}
