@@ -3,6 +3,7 @@ import {Zoom, AttentionSeeker } from "react-awesome-reveal";
 import { ThemeContext } from '../../../App';
 import Lottie from 'lottie-react';
 import contact from "../../../assets/animations/contact.json";
+import subscribe from "../../../assets/animations/subscribe.json";
 import blogs from "../../../assets/animations/blogs.json";
 const MiddleSection = (props) => {
     let {theme} = useContext(ThemeContext);
@@ -13,6 +14,10 @@ const MiddleSection = (props) => {
             props.index===2 ?
             <div className="w-[27%] md:absolute md:rotate-2 md:-ml-16 md:-mt-20 z-0 mx-auto sm:w-[100%]">
                 <Lottie animationData={contact}/>
+            </div>
+            : props.index===3?
+            <div className="w-[35%] md:absolute md:rotate-5 right-0 md:-mr-32 md:ml-3 md:-mt-28 sm:w-[100%]">
+                <Lottie animationData={subscribe}/>
             </div>
             :
             <img
@@ -37,7 +42,7 @@ const MiddleSection = (props) => {
             <Zoom>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-6xl tracking-wide uppercase font-merriweather font-semibold mb-4 md:mb-8 leading-normal text-primary">{props.title}</h1>
             </Zoom>
-            <p className="text-sm md:text-base lg:text-xl xl:text-xl tracking-wide w-full md:w-[90.5%] lg:w-[90.5%]">{props.description}</p>
+            <p className="text-xs md:text-base lg:text-xl xl:text-xl tracking-wide w-full md:w-[90.5%] lg:w-[90.5%]">{props.description}</p>
         </div>
 
         </div>

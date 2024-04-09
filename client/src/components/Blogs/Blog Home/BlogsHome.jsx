@@ -132,7 +132,7 @@ const BlogsHome = () => {
 
              {/* categories */}
                 <div className={`${searchBoxVisibility?"sm:mt-14 duration-500" : "duration-500"}`}>
-                    <h1 className="font-medium text-primary tracking-wide text-xl mb-8">
+                    <h1 className="font-medium text-primary tracking-wide text-xl sm:text-lg mb-8">
                         Categories
                     </h1>
                     <div className="flex gap-3 flex-wrap">

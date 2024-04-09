@@ -22,7 +22,7 @@ const InPageNavigation = ({manageBlogs=false,managePodcasts=false,routes,default
                     routes.map((route,index)=>{
                         return(
                             <button key={index} 
-                            onClick={()=>{setActiveTab(index)}} className={`p-4 px-5 capitalize text-xl sm:text-base tracking-wide  ${activeTab===index ? "text-primary font-medium border-b-2 border-primary" : "text-dark-grey"} ${defaultHidden.includes(route) ? "md:hidden":""}`}>{route}</button>
+                            onClick={()=>{setActiveTab(index)}} className={`p-4 px-5 capitalize text-xl sm:text-lg tracking-wide  ${activeTab===index ? "text-primary font-medium border-b-2 border-primary" : "text-dark-grey"} ${defaultHidden.includes(route) ? "md:hidden":""}`}>{route}</button>
                         )
                     })
                 }
