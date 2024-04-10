@@ -2,9 +2,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
+
 import React, { useContext, useState } from 'react'
 import axios from "axios";
 import { ThemeContext } from "../../../App";
+
 
 const ReviewCarousel = () => {
   const [data, setData] = useState([]);
@@ -15,10 +17,14 @@ const ReviewCarousel = () => {
   }).catch(error => {
     console.log(error);
   })
+ 
     const settings = {
+        autoplay: true,
+        autoplaySpeed: 2000, // Adjust the speed as needed
+        pauseOnHover: true,
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 2000,
         slidesToScroll: 1,
         responsive: [
           {
