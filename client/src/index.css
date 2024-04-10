@@ -213,9 +213,14 @@ body::-webkit-scrollbar{
 
 .slick-slide > div {
     margin: 0 15px;
-    padding: 10px;
+    padding: 8px;
 } 
-
+@media (max-width:768px) {
+    .slick-slide > div {
+        margin: 0 2px;
+        padding: 2px;
+    } 
+}
 /*Footer styles*/
 
 .bg-wave {

@@ -54,7 +54,7 @@ const ReviewCarousel = () => {
                 {data.map((d,i) => (
                 <div key={i} className={`flex items-center justify-center ${theme==="light"?"text-white":"text-black"} rounded-xl`}>
                     <div className="flex gap-10 p-4 flex-col items-center justify-center">
-                    <p className="text-2xl font-medium font-merriweather tracking-wider">{d.title}</p>
+                    <p className="text-2xl font-medium font-merriweather text-center tracking-wider">{d.title}</p>
                     <div className="flex gap-3">
                     {Array.from({ length: d.stars }).map((_, index) => (
                                 <i key={index} className="fi fi-ss-star text-primary text-xl"></i>
