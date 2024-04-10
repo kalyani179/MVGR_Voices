@@ -20,7 +20,24 @@ const UploadPodcast = () => {
     const [songDescription, setSongDescription] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const categories = [
-        "Social Meadia", "History", "Education", "Health", "Comedy", "Development", "Sports", "Crime", "Motivation"
+      "Social Media",
+      "Health",
+      "Education",
+      "Motivation",
+      "Crime",
+      "Sports",
+      "Comedy",
+      "History",
+      "Business",
+      "Science",
+      "News & Politics",
+      "Development",
+      "Technology",
+      "Relationships",
+      "Entertainment",
+      "Arts & Culture",
+      "Fiction",
+      "Lifestyle"
     ];
 
     const handleUpload = (e) => {

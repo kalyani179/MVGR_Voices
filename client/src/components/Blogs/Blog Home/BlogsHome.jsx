@@ -25,11 +25,20 @@ const BlogsHome = () => {
         "Social Media",
         "Finances",
         "Travel",
-        "Cooking",
         "Photography",
         "Technology",
         "Interviews",
-        "Motivation"
+        "Motivation",
+        "Sports",
+        "Health & Fitness",
+        "Gaming",
+        "News",
+        "Lifestyle",
+        "Business",
+        "Food",
+        "Entertainment",
+        "Environment",
+        "Art & Design"
     ];
 
     const fetchLatestBlogs = ({page = 1}) => {
@@ -138,7 +147,7 @@ const BlogsHome = () => {
                     <div className="flex gap-3 flex-wrap">
                         {categories.map((category, index) => {
                             return (
-                                <button onClick={loadBlogByCategory} className={`tag ${pageState===category.toLowerCase() ? theme==="light" ?  "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium" : ""}`} key={index}>
+                                <button onClick={loadBlogByCategory} className={`tag ${index>=9 ? "sm:hidden" : ""} ${pageState===category.toLowerCase() ? theme==="light" ?  "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium" : ""}`} key={index}>
                                 {category}
                                 </button>
                             );

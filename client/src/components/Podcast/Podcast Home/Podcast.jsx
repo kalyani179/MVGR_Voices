@@ -153,13 +153,22 @@ const Podcast = () => {
   let categories = [
     "Social Media",
     "Health",
-    "Education",  
+    "Education",
     "Motivation",
     "Crime",
     "Sports",
-    "Development",
     "Comedy",
-    "History"  
+    "History",
+    "Business",
+    "Science",
+    "News & Politics",
+    "Development",
+    "Technology",
+    "Relationships",
+    "Entertainment",
+    "Arts & Culture",
+    "Fiction",
+    "Lifestyle"
   ];
 
   // Filter songs based on the selected category

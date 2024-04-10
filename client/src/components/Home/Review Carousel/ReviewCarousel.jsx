@@ -60,7 +60,7 @@ const ReviewCarousel = () => {
                                 <i key={index} className="fi fi-ss-star text-primary text-xl"></i>
                     ))}
                     </div>
-                    <p className="tracking-wider text-base leading-7 text-white font-normal font-lato">{d.review}</p>
+                    <p className={`tracking-wider text-base leading-7 ${theme==="light" ? "text-white" : "text-black"} font-normal font-lato`}>{d.review}</p>
                     </div>
                 </div>
                 ))}
