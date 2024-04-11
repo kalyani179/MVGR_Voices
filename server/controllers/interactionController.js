@@ -6,7 +6,7 @@ const likeBlog = async(req, res) => {
     let user_id = req.user;
     let { _id, isLiked } = req.body;
     let incrementVal = !isLiked ? 1 : -1;
-    Blog.findOneAndUpdate({ _id }, { $inc: { "activity.total_likes": incrementVal } })
+    Blog.findOneAndUpdate({ _id }, { $inc: { "activity.total_likes": incrementVal },$push: { likes: user_id }  })
         .then(blog => {
             if (!isLiked) {
                 let like = new Notification({

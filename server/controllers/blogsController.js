@@ -199,5 +199,4 @@ const getBlog = (req, res) => {
 }
 
 
-
 export { latestBlogs, allLatestBlogsCount, trendingBlogs, searchBlogs, searchBlogsCount, searchUsers, getProfile, createBlog, getBlog };
