@@ -29,11 +29,20 @@ const BlogPublish = () => {
         "Social Media",
         "Finances",
         "Travel",
-        "Cooking",
         "Photography",
         "Technology",
         "Interviews",
-        "Motivation"
+        "Motivation",
+        "Sports",
+        "Health & Fitness",
+        "Gaming",
+        "News",
+        "Lifestyle",
+        "Business",
+        "Food",
+        "Entertainment",
+        "Environment",
+        "Art & Design"
     ];
 
     const handleCloseEvent = () =>{

@@ -44,7 +44,9 @@ jspm_packages/
 /node_modules
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
-
+mvgr-voices-client.tar
+mvgr-voices-server.tar
+mvgr-voices-docker-images.zip
 # TypeScript cache
 *.tsbuildinfo
 

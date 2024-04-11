@@ -206,7 +206,7 @@ const Navbar = ({home=1,activeLink="Home"}) => {
                       Links.map((link)=>(
                         <li key={link.name} className="md:ml-8 md:my-0 my-7 sm:my-10">
                           <h4
-                              className={`hover:border-b-2 leading-relaxed text-[22px] ${theme==="light" ? home===1 ? "text-white" : "text-dark-grey" : "text-black/60"} hover:border-b-primary duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
+                              className={`hover:border-b-2 leading-relaxed text-[22px] ${theme==="light" ? home===1 ? "text-white" : "text-dark-grey" :home===1 ? "text-black": "text-black/60"} hover:border-b-primary duration-500 tracking-wide font-inter cursor-pointer border-b-2 ${
                                 activeLink === link.name ? theme==="light" ? "border-primary" : "border-primary" : "border-transparent"}`}
                               onClick={()=> handleLinkClick({link})}
                             >{link.name}</h4>
