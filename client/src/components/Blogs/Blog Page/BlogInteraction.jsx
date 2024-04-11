@@ -14,7 +14,7 @@ const BlogInteraction = () => {
     setIsLiked(newIsLiked);
     newIsLiked ? ++total_likes : --total_likes;
     setBlog({...blog,activity:{...activity,total_likes}});
-    axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/like-blog",{_id,newIsLiked},{
+    axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/like-blog",{_id,isLiked:newIsLiked},{
       headers:{
         'Authorization' : `Bearer ${access_token}`
       }})
