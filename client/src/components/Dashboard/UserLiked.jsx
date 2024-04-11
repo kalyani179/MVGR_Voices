@@ -148,7 +148,7 @@ return (
                             </Animation>
                         ))}
                     </div> :
-                    <NoDataMessage message="No Liked Podcasts" />
+                    <NoDataMessage message="No Liked Blogs" />
                 }
                 
             </InPageNavigation>
