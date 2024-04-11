@@ -98,7 +98,7 @@ const UserLiked = () => {
                 <input type="search" className="w-full bg-grey p-4 pl-16 sm:pl-10 pr-6 rounded-full placeholder:text-dark-grey focus:bg-white" placeholder="Search Podcasts"
                 />
                 <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-4 md:pointer-events-none md:left-6 text-lg text-dark-grey"></i>
-        </div> */}
+        </div>  */}
 
             <InPageNavigation userLiked={true} routes = {["Liked Podcasts","Liked Blogs"]}>
             {
