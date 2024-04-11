@@ -96,7 +96,6 @@ const userLikedBlogs = (req, res) => {
 
     Blog.find({ 'likes': user_id, title: new RegExp(query, 'i') })
         .populate('author', 'personal_info.profile_img personal_info.username -_id') // Populate author field with selected fields
-        
         .then(blogs => {
             console.log("Retrieved Blogs:", blogs);
             return res.status(200).json({ blogs });

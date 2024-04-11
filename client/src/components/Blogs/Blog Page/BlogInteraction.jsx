@@ -10,10 +10,11 @@ const BlogInteraction = () => {
   let {userAuth:{username,access_token}} = useContext(UserContext);
   const handleLikeButton = () =>{
     if(!access_token) return toast.error("Please SigIn to like the blog!!");
-    setIsLiked(!isLiked);
-    !isLiked ? ++total_likes : --total_likes;
+    const newIsLiked = !isLiked;
+    setIsLiked(newIsLiked);
+    newIsLiked ? ++total_likes : --total_likes;
     setBlog({...blog,activity:{...activity,total_likes}});
-    axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/like-blog",{_id,isLiked},{
+    axios.post(process.env.REACT_APP_SERVER_DOMAIN+"/like-blog",{_id,newIsLiked},{
       headers:{
         'Authorization' : `Bearer ${access_token}`
       }})
