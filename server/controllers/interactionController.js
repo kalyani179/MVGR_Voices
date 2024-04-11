@@ -19,13 +19,23 @@ const likeBlog = async(req, res) => {
                     return res.status(200).json({ isLiked: true });
                 })
             } else {
-                Notification.findOneAndDelete({ user: user_id, blog: _id, type: "like" })
-                    .then(data => {
-                        return res.status(200).jso({ isLiked: false });
-                    })
-                    .catch(err => {
-                        return res.status(500).json({ error: err.message });
-                    })
+                Blog.findOneAndUpdate(
+                    { _id },
+                    { $inc: { "activity.total_likes": incrementVal }, $pull: { likes: user_id } },
+                    { new: true }
+                )
+                .then(updatedBlog => {
+                    Notification.findOneAndDelete({ user: user_id, blog: _id, type: "like" })
+                        .then(data => {
+                            return res.status(200).json({ isLiked: false });
+                        })
+                        .catch(err => {
+                            return res.status(500).json({ error: err.message });
+                        });
+                })
+                .catch(err => {
+                    return res.status(500).json({ error: err.message });
+                });
             }
         })
 }
