@@ -27,6 +27,7 @@ import ResetPassword from './components/Authentication/ResetPassword';
 import ManagePodcasts from './components/Dashboard/ManagePodcasts';
 //import PodcastPlayer from './components/Podcast/Podcast Player/PodcastPlayer';
 import Noitifications from './components/Dashboard/Noitifications';
+import UserLiked from './components/Dashboard/UserLiked';
 
 
 export const UserContext = createContext({});
@@ -83,6 +84,7 @@ const App = () => {
                     <Route path="podcasts" element={<ManagePodcasts/>}/>
                     <Route path="blogs" element={<ManageBlogs />}/>  
                     <Route path="notifications" element={<Noitifications />}/>    
+                    <Route path="liked" element={<UserLiked />}/> 
               </Route>
               <Route path="/feedback" element={<FeedbackForm />} />
           </Routes>

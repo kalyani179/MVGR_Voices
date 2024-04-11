@@ -163,8 +163,12 @@ const Podcast = () => {
     "Science",
     "News & Politics",
     "Development",
-    "Comedy",
-    "History" 
+    "Technology",
+    "Entertainment",
+    "Arts & Culture",
+    "Fiction",
+    "Lifestyle",
+    "Stories"
   ];
 
   // Filter songs based on the selected category

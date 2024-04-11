@@ -72,7 +72,23 @@ const userUploadedPodcastsCount = (req, res) => {
             res.status(500).json({ error: error.message });
         });
 };
+const userLikedPodcasts = (req, res) => {
+    const user_id = req.user;
+    const { query } = req.body;
 
+
+    PodModel.find({ likes: user_id, name: new RegExp(query, 'i') })
+        .populate('author', 'personal_info.profile_img personal_info.username -_id')
+
+    .sort({ publishedAt: -1 })
+        .then(podcasts => {
+            console.log("Retrieved Podcasts:", podcasts);
+            return res.status(200).json({ podcasts });
+        })
+        .catch(error => {
+            return res.status(500).json({ error: error.message });
+        });
+};
 
 const deleteBlog = (req, res) => {
     let user_id = req.user;
@@ -88,7 +104,7 @@ const deleteBlog = (req, res) => {
         .catch(err => {
             return res.status(500).json({ error: err.message });
         })
-}
+};
 const deletePodcast = (req, res) => {
     let user_id = req.user;
     let { _id } = req.body;
@@ -116,4 +132,4 @@ const deletePodcast = (req, res) => {
         })
 };
 
-export { userWrittenBlogs, userWrittenBlogsCount, deleteBlog, userUploadedPodcasts, userUploadedPodcastsCount, deletePodcast };
+export { userWrittenBlogs, userWrittenBlogsCount, deleteBlog, userUploadedPodcasts, userUploadedPodcastsCount, deletePodcast, userLikedPodcasts };
