@@ -159,7 +159,8 @@ const Podcast = () => {
     "Sports",
     "Development",
     "Comedy",
-    "History"  
+    "History",
+    "Stories"  
   ];
 
   // Filter songs based on the selected category
