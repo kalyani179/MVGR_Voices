@@ -76,8 +76,8 @@ const SideNav = () => {
                             Write
                         </NavLink>
                         <NavLink to="/dashboard/liked" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">
-                             <i class="fas fa-heart sidebar-icon"></i>
-                            Liked
+                        <i class="fi fi-rr-heart sidebar-icon"></i>
+                            Favourites
                         </NavLink>
 
                         <NavLink to="/dashboard/notifications" onClick={(e) => setPageState(e.target.innerText)} className="sidebar-link">

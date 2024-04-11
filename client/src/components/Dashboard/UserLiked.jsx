@@ -90,15 +90,31 @@ const UserLiked = () => {
         console.log("Selected Podcast ID:", podcast._id);
         setSelectedPodcast(podcast);
     };
-
+    const handleSearch = (e) => {
+        let searchQuery = e.target.value;
+        setQuery(searchQuery);
+        if(e.keyCode === 13 && searchQuery.length) {
+            setBlogs(null);
+            setPodcasts(null);
+        }
+    }
+    const handleChange = (e) => {
+        if(!e.target.value.length){
+            setQuery("");
+            setBlogs(null);
+            setPodcasts(null);
+        }
+    }
   return (
     <Animation>
         <div className="md:ml-56 mt-24 sm:ml-5">
-        {/* <div className="relative sm:mt-5 md:mt-8 mb-10">
-                <input type="search" className="w-full bg-grey p-4 pl-16 sm:pl-10 pr-6 rounded-full placeholder:text-dark-grey focus:bg-white" placeholder="Search Podcasts"
+        <div className="relative sm:mt-5 md:mt-8 mb-10">
+                <input type="search" className="w-full bg-grey p-4 pl-16 sm:pl-10 pr-6 rounded-full placeholder:text-dark-grey focus:bg-white" placeholder="Search Favourites"
+                    onChange={handleChange}
+                    onKeyDown={handleSearch}
                 />
                 <i className="fi fi-rr-search absolute right-[10%] top-1/2 sm:-translate-y-1/2 md:top-4 md:pointer-events-none md:left-6 text-lg text-dark-grey"></i>
-        </div>  */}
+        </div> */}
 
             <InPageNavigation userLiked={true} routes = {["Liked Podcasts","Liked Blogs"]}>
             {
