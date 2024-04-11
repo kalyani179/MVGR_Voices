@@ -11,6 +11,8 @@ import admin from "firebase-admin";
 import {getAuth} from "firebase-admin/auth";
 import serviceAccountKey from "../utilities/mvgr-voices-firebase-adminsdk-r95ai-dee2c54534.json" assert { type: "json" };
 
+let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex for email
+let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/; // regex for password
 
 admin.initializeApp({
     credential : admin.credential.cert(serviceAccountKey)
@@ -37,6 +39,15 @@ const formatDatatoSend = (user) => {
 export const signup = async(req, res) =>{
     try{
         let {fullname,email,password} = req.body;
+        if(fullname.length<3){
+            return res.status(403).json({"error" : "Fullname must be atleast 3 letters long!"});
+        }if(!email.length){
+            return res.status(403).json({"error" : "Please Enter the Email!"});
+        }if(!emailRegex.test(email)){
+            return res.status(403).json({"error" : "Email is invalid!"});
+        }if(!passwordRegex.test(password)){
+            return res.status(403).json({"error" : "Password should be 6 to 20 characters long with a numeric, 1 lowercase, 1 uppercase letters!"});
+        }
         let exist = await User.findOne({"personal_info.email":email});
         if(exist){
             if(exist.personal_info.verified === true){
