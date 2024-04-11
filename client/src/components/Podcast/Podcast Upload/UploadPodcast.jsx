@@ -33,12 +33,13 @@ const UploadPodcast = () => {
       "News & Politics",
       "Development",
       "Technology",
-      "Relationships",
       "Entertainment",
       "Arts & Culture",
       "Fiction",
-      "Lifestyle"
+      "Lifestyle",
+      "Stories"
     ];
+
 
     const handleUpload = (e) => {
         e.preventDefault();
