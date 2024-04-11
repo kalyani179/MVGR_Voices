@@ -5,39 +5,34 @@ import Comment from "../models/CommentSchema.js";
 const likeBlog = async(req, res) => {
     let user_id = req.user;
     let { _id, isLiked } = req.body;
-    let incrementVal = !isLiked ? 1 : -1;
-    Blog.findOneAndUpdate({ _id }, { $inc: { "activity.total_likes": incrementVal },$push: { likes: user_id }  })
-        .then(blog => {
-            if (!isLiked) {
-                let like = new Notification({
-                    type: "like",
-                    blog: _id,
-                    notification_for: blog.author,
-                    user: user_id
-                })
-                like.save().then(notification => {
-                    return res.status(200).json({ isLiked: true });
-                })
-            } else {
-                Blog.findOneAndUpdate(
-                    { _id },
-                    { $inc: { "activity.total_likes": incrementVal }, $pull: { likes: user_id } },
-                    { new: true }
-                )
-                .then(updatedBlog => {
-                    Notification.findOneAndDelete({ user: user_id, blog: _id, type: "like" })
-                        .then(data => {
-                            return res.status(200).json({ isLiked: false });
-                        })
-                        .catch(err => {
-                            return res.status(500).json({ error: err.message });
-                        });
-                })
-                .catch(err => {
-                    return res.status(500).json({ error: err.message });
-                });
-            }
-        })
+    let incrementVal = isLiked ? 1 : -1;
+    let blog;
+    try{
+        if (isLiked) {
+            blog = await  Blog.findOneAndUpdate({ _id }, { $inc: { "activity.total_likes": incrementVal },$push: { likes: user_id }  })
+            
+            let like = new Notification({
+                type: "like",
+                blog: _id,
+                notification_for: blog.author,
+                user: user_id
+            })
+            like.save().then(notification => {
+                return res.status(200).json({ isLiked: true });
+            })
+        } else {
+            blog = await Blog.findOneAndUpdate(
+                { _id },
+                { $inc: { "activity.total_likes": incrementVal }, $pull: { likes: user_id } }
+            )
+            
+            await Notification.findOneAndDelete({ user: user_id, blog: _id, type: "like" })
+
+        }
+    }catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+    
 }
 const isBlogLiked = async(req, res) => {
     let user_id = req.user;
