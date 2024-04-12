@@ -168,7 +168,8 @@ const Podcast = () => {
     "Arts & Culture",
     "Fiction",
     "Lifestyle",
-    "Stories"
+    "Stories",
+    "Music"
   ];
 
   // Filter songs based on the selected category
@@ -210,7 +211,7 @@ const Podcast = () => {
               <button
                 key={index}
                 onClick={loadPodcastByCategory}
-                className={`tag ${pageState === category.toLowerCase() ? 
+                className={`tag ${index>=9 ? "sm:hidden" : ""} ${pageState === category.toLowerCase() ? 
                   (theme === "light" ? "bg-primary text-white font-medium" : "bg-primary text-darkBlack font-medium") : ""}`}
               >
                 {category}

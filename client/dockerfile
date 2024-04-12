@@ -2,6 +2,7 @@ FROM node:alpine
 
 WORKDIR /app
 
+# ENV REACT_APP_SERVER_DOMAIN=http://93.127.198.128:3001
 ENV REACT_APP_SERVER_DOMAIN=http://localhost:3001
 
 COPY package*.json ./
