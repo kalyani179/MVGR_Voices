@@ -107,19 +107,16 @@ const UserAuth = ({type,close,open}) => {
         let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex for email
         let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/; // regex for password
         // console.log(inputEmailValue.length,inputPasswordValue.length,inputNameValue.length)
-        if(!inputNameValue.length){
-            return toast.error("Fullname must be atleast 3 letters long!")
+        if(type==="signup" && inputNameValue.length<3){
+            return toast.error("Fullname must be atleast 3 letters long!");
         }
-        if(!inputEmailValue.length){
+        else if(!inputEmailValue.length){
             return toast.error("Please Enter the Email!");
         }else if(!emailRegex.test(inputEmailValue)){
             return toast.error("Email is invalid!")
         }
-        else if(!passwordRegex.test(inputPasswordValue)){
+        else if(type==="signup" && !passwordRegex.test(inputPasswordValue)){
             return toast.error("Password should be 6 to 20 characters long with a numeric, 1 lowercase, 1 uppercase letters!");
-        }
-        else if(type==="signup" && inputNameValue.length<3){
-            return toast.error("Fullname must be atleast 3 letters long!");
         }
         else{
             let formData = data;

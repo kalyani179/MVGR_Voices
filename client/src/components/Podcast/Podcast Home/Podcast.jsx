@@ -168,8 +168,7 @@ const Podcast = () => {
     "Arts & Culture",
     "Fiction",
     "Lifestyle",
-    "Stories",
-    "Music"
+    "Stories"
   ];
 
   // Filter songs based on the selected category
