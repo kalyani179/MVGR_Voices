@@ -177,7 +177,7 @@ export const forgotPassword = async (req,res) => {
                     pass: process.env.PASSWORD
                 }
             })
-            let link = `http://localhost:3001/reset-password/${user._id}/${token}`
+            let link = `${process.env.REACT_APP_CLIENT_DOMAIN}/reset-password/${user._id}/${token}`
             await transporter.sendMail({
                 from:process.env.EMAIL, //sender mail
                 to:email, //reciever mail
