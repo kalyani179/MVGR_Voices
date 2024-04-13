@@ -89,7 +89,13 @@ const searchBlogsCount = async(req, res) => {
 
 const searchUsers = async(req, res) => {
     let { query } = req.body;
-    User.find({ "personal_info.username": new RegExp(query, 'i') })
+    User.find({ 
+        "personal_info.username": new RegExp(query, 'i'),
+        $or: [ // Use $or operator to specify multiple conditions
+            { "personal_info.verified": true }, // Verified is true
+            { "google_auth": true } // Google auth is true
+        ]
+    })
         .limit(50)
         .select("personal_info.fullname personal_info.username personal_info.profile_img")
         .then(users => {
