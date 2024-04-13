@@ -86,6 +86,9 @@ const EditProfile = () => {
             formData[key] = value;
         }
         let {username,bio,youtube,facebook,twitter,github,instagram,website} = formData;
+        if (username.includes(' ')) {
+            return toast.error("Username should not contain spaces!");
+        }
         if(username.length < 3){
             return toast.error("Username should be atleast 3 letters long!");
         }
