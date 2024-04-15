@@ -104,6 +104,9 @@ const UserAuth = ({type,close,open}) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        if(type==="signup"){
+            return toast.error("Please continue with Google to sign up!");
+        }
         let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // regex for email
         let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/; // regex for password
         // console.log(inputEmailValue.length,inputPasswordValue.length,inputNameValue.length)
