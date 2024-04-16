@@ -44,7 +44,7 @@ const Body = () => {
                 <div className={`absolute inset-0 ${theme === "light" ? "background" : "background"}`}>
                     <Navbar />
                     <div className="center flex-col gap-8 sm:gap-2 md:mt-11 sm:mt-6">
-                        <h1 className={`text-2xl md:text-5xl lg:text-6xl xl:text-6xl ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-32 tracking-wider text-center`}>
+                        <h1 className={`text-2xl md:text-5xl lg:text-6xl xl:text-6xl ${theme === "light" ? "text-white" : "text-black"} font-extrabold mt-5 md:mt-20 lg:mt-28 xl:mt-36 tracking-wider text-center`}>
                             Welcome to <span className="text-2xl md:text-5xl lg:text-6xl xl:text-6xl font-extrabold ml-2 text-primary tracking-normal">MVGR VOICES</span>
                         </h1>
                         <p className={`text-base sm:text-xs md:text-lg lg:text-xl ${theme === "light" ? "text-white" : "text-black"} font-semibold tracking-widest uppercase text-center opacity-80`}>
