@@ -27,7 +27,7 @@ const BlogsHome = () => {
         "Travel",
         "Photography",
         "Technology",
-        "Interviews",
+        "Placements",
         "Motivation",
         "Sports",
         "Health & Fitness",

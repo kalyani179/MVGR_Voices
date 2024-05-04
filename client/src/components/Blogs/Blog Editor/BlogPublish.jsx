@@ -31,7 +31,7 @@ const BlogPublish = () => {
         "Travel",
         "Photography",
         "Technology",
-        "Interviews",
+        "Placements",
         "Motivation",
         "Sports",
         "Health & Fitness",
