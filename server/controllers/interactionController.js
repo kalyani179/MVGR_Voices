@@ -93,11 +93,9 @@ const addComment = async(req, res) => {
 }
 const getBlogComments = async(req, res) => {
     let { blog_id, skip } = req.body;
-    let maxLimit = 5;
     Comment.find({ blog_id, isReply: false })
         .populate("commented_by", "personal_info.username personal_info.fullname personal_info.profile_img")
         .skip(skip)
-        .limit(maxLimit)
         .sort({ "commentedAt": -1 })
         .then(comment => {
             console.log(comment, skip, blog_id);
@@ -111,12 +109,10 @@ const getBlogComments = async(req, res) => {
 
 const getReplies = async(req, res) => {
     let { _id, skip } = req.body;
-    let maxLimit = 5;
     Comment.findOne({ _id })
         .populate({
             path: "children",
             option: {
-                limit: maxLimit,
                 skip: skip,
                 sort: { "commentAt": -1 }
             },
