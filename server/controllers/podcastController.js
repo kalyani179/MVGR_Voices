@@ -136,7 +136,7 @@ const getOnePodcast = async (req, res) => {
 
 const getAllPodcasts = async (req, res) => {
     try {
-        const podcasts = await PodModel.find({}).populate("author", "personal_info.profile_img personal_info.username -_id");
+        const podcasts = await PodModel.find({}).populate("author", "personal_info.profile_img personal_info.username -_id").sort({ "publishedAt": -1 });
         if (podcasts.length > 0) {
             return res.status(200).json({ success: true, podcasts: podcasts });
         } else {
