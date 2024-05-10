@@ -104,7 +104,7 @@ const BlogPage = () => {
                             <h2>{title}</h2>
                             <div className="flex sm:flex-col justify-between my-8">
                                 <div className="flex gap-5 items-start">
-                                    <img src={profile_img} className="w-12 h-12 rounded-full object-contain" alt="profile" />
+                                    <img src={profile_img} className="w-12 h-12 rounded-full" alt="profile" />
                                     <p className="capitalize">
                                         {fullname}
                                         <br />
