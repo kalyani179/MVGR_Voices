@@ -2,7 +2,7 @@
 
 **Technologies Used:** React, Tailwind CSS, Express.js, Node.js, MongoDB, Firebase, Chatbot 
 
-**Visit the platform:** <a href="http://mvgrvoices.onrender.com" target="_blank">mvgrvoices.onrender.com</a> 🌐
+**Visit the Website:** <a href="http://mvgrvoices.onrender.com" target="_blank">mvgrvoices.onrender.com</a> 🌐
 
 MVGR Voices is a dynamic online platform designed to encourage students to freely express their ideas through their voices, whether spoken or written 🎙️📝. The platform supports content creation and sharing through podcasts and blogs, fostering a vibrant community for students.
 
