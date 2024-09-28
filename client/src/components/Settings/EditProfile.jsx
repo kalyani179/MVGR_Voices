@@ -187,7 +187,7 @@ const EditProfile = () => {
                                     let link = social_links[key];
                                     return (
                                         <div>
-                                        <InputBox type="text" key={i} value={link} name={key} placeholder="https://" icon={`key ${key!=="webiste" ?"fi-brands-"+key : "fi-rr-globe"}`}/>
+                                        <InputBox type="text" key={i} value={link} name={key} placeholder="https://" icon={`key ${key!=="website" ?"fi-brands-"+key : "fi-rr-globe"}`}/>
                                         </div>
                                     )
                                 })

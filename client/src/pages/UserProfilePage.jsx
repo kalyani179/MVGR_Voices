@@ -4,7 +4,7 @@ import axios from 'axios'
 import Animation from '../common/Animation'
 import { motion } from "framer-motion";
 import { ThemeContext, UserContext } from '../App'
-import AboutUser from '../components/Blogs/AboutUser'
+import AboutUser from '../components/Settings/AboutUser'
 import FilterPaginationData from '../common/FilterPaginationData'
 import InPageNavigation from '../common/InPageNavigation'
 import BlogPostCard from '../components/Blogs/Blog Home/HomeBlogPostCard';
