@@ -75,7 +75,7 @@ const FeedbackForm = () => {
                     <div id="stars" className="flex gap-3">
                         {[1, 2, 3, 4, 5].map((rating, i) => (
                             <span key={i} onClick={() => handleStarClick(rating)} className="cursor-pointer">
-                                {rating <= stars ? <i className="fas fa-star text-yellow-500 text-2xl"></i> : <i className="far fa-star text-2xl"></i>}
+                                {rating <= stars ? <i className="fa-solid fa-star text-yellow-500 text-2xl"></i> : <i className="fa-regular fa-star text-2xl"></i>}
                             </span>
                         ))}
                     </div>
